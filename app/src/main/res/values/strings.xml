@@ -1,0 +1,9 @@
+<resources>
+  <string name="app_name">Android Template</string>
+  <string name="add_favorite_city">Add Favorite City</string>
+  <string name="add_a_city">Add a city</string>
+  <string name="weather">Weather</string>
+  <string name="search_for_city">Search for city</string>
+  <string name="min_temp">Min temp: %1$d°</string>
+  <string name="max_temp">Max temp: %1$d°</string>
+</resources>
