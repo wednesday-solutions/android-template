@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,10 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.wednesday.template.R
 import com.wednesday.template.adapter.WeatherAdapter
 import com.wednesday.template.model.Status
-import com.wednesday.template.model.Weather
 import com.wednesday.template.viewmodel.WeatherViewModel
 import kotlinx.android.synthetic.main.fragment_weather.*
-import kotlinx.android.synthetic.main.partial_toolbar.*
 
 class WeatherFragment: Fragment() {
   private lateinit var viewModel: WeatherViewModel
@@ -27,7 +24,7 @@ class WeatherFragment: Fragment() {
   }
 
   private val weatherAdapter: WeatherAdapter by lazy {
-    WeatherAdapter(context!!, emptyList<Weather>().toMutableList())
+    WeatherAdapter(context!!, mutableListOf())
   }
 
   override fun onCreateView(
@@ -51,9 +48,7 @@ class WeatherFragment: Fragment() {
     weatherRecyclerView.addItemDecoration(dividerItemDecoration)
 
     weatherRecyclerView.adapter = weatherAdapter
-    viewModel = ViewModelProvider(
-      this,
-      ViewModelProvider.AndroidViewModelFactory.getInstance(activity!!.application)).get(WeatherViewModel::class.java)
+    viewModel = ViewModelProvider(this).get(WeatherViewModel::class.java)
     viewModel.weatherLiveData.observe(this, Observer{ weathersResource ->
       when(weathersResource.status) {
         Status.Success -> {

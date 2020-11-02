@@ -1,6 +1,8 @@
 package com.wednesday.template.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -50,15 +52,23 @@ class CitiesFragment: Fragment(), DIAware, CitySelected {
     databaseDao.getObservableFavoriteCities().observe(this@CitiesFragment, Observer { cities ->
       citiesAdapter.setFavoriteCities(cities)
     })
-    searchCityEditText.setOnKeyListener{ _, _, event ->
-      if(event.action == KeyEvent.ACTION_DOWN) {
-        activity?.let { hideKeyboard(it) }
-        fetchCities(searchCityEditText.text.toString())
-        true
-      } else {
-        false
+    searchCityEditText.addTextChangedListener(object : TextWatcher {
+      override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
       }
-    }
+
+      override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        if (s.isNullOrBlank()) {
+          citiesRecyclerView.visibility = View.GONE
+        } else {
+          fetchCities(s.toString())
+        }
+      }
+
+      override fun afterTextChanged(s: Editable?) {
+      }
+
+    })
 
     val linearLayoutManager = LinearLayoutManager(context)
     citiesRecyclerView.layoutManager = linearLayoutManager
@@ -66,13 +76,23 @@ class CitiesFragment: Fragment(), DIAware, CitySelected {
   }
 
   private fun fetchCities(searchText: String) {
-    val rootView = view as ConstraintLayout
-    addProgressIndicator(context!!, rootView)
+    showLoading(true)
 
     viewLifecycleOwner.lifecycleScope.launch {
       val cities = apiService.searchCities(searchText)
-      removeProgressIndicator(rootView)
       citiesAdapter.resetDataSource(cities)
+      showLoading(false)
+    }
+  }
+
+  private fun showLoading(loading: Boolean) {
+    val rootView = searchCityResultHolder
+    if (loading) {
+      citiesRecyclerView.visibility = View.GONE
+      addProgressIndicator(context!!, rootView)
+    } else {
+      removeProgressIndicator(rootView)
+      citiesRecyclerView.visibility = View.VISIBLE
     }
   }
 
