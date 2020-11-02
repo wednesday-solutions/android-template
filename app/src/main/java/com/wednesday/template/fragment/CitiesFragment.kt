@@ -3,11 +3,9 @@ package com.wednesday.template.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -19,7 +17,6 @@ import com.wednesday.template.database.DatabaseDao
 import com.wednesday.template.model.City
 import com.wednesday.template.network.WeatherApiService
 import com.wednesday.template.util.addProgressIndicator
-import com.wednesday.template.util.hideKeyboard
 import com.wednesday.template.util.removeProgressIndicator
 import kotlinx.android.synthetic.main.fragment_cities.*
 import kotlinx.coroutines.launch
@@ -49,7 +46,7 @@ class CitiesFragment: Fragment(), DIAware, CitySelected {
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
 
-    databaseDao.getObservableFavoriteCities().observe(this@CitiesFragment, Observer { cities ->
+    databaseDao.getObservableFavoriteCities().observe(viewLifecycleOwner, Observer { cities ->
       citiesAdapter.setFavoriteCities(cities)
     })
     searchCityEditText.addTextChangedListener(object : TextWatcher {
@@ -89,7 +86,7 @@ class CitiesFragment: Fragment(), DIAware, CitySelected {
     val rootView = searchCityResultHolder
     if (loading) {
       citiesRecyclerView.visibility = View.GONE
-      addProgressIndicator(context!!, rootView)
+      addProgressIndicator(requireContext(), rootView)
     } else {
       removeProgressIndicator(rootView)
       citiesRecyclerView.visibility = View.VISIBLE

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,7 +17,7 @@ import com.wednesday.template.viewmodel.WeatherViewModel
 import kotlinx.android.synthetic.main.fragment_weather.*
 
 class WeatherFragment: Fragment() {
-  private lateinit var viewModel: WeatherViewModel
+  private val viewModel: WeatherViewModel by viewModels()
   private var callback: WeatherLoading? = null
 
   interface WeatherLoading {
@@ -24,7 +25,7 @@ class WeatherFragment: Fragment() {
   }
 
   private val weatherAdapter: WeatherAdapter by lazy {
-    WeatherAdapter(context!!, mutableListOf())
+    WeatherAdapter(requireContext(), mutableListOf())
   }
 
   override fun onCreateView(
@@ -48,8 +49,7 @@ class WeatherFragment: Fragment() {
     weatherRecyclerView.addItemDecoration(dividerItemDecoration)
 
     weatherRecyclerView.adapter = weatherAdapter
-    viewModel = ViewModelProvider(this).get(WeatherViewModel::class.java)
-    viewModel.weatherLiveData.observe(this, Observer{ weathersResource ->
+    viewModel.weatherLiveData.observe(viewLifecycleOwner, Observer{ weathersResource ->
       when(weathersResource.status) {
         Status.Success -> {
           callback?.showLoadingIndicator(false)
