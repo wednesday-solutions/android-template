@@ -26,59 +26,62 @@ import org.kodein.di.DIAware
 import org.kodein.di.android.x.di
 import org.kodein.di.instance
 
-class CitiesFragment: Fragment(), DIAware, CitySelected {
+class CitiesFragment : Fragment(), DIAware, CitySelected {
 
-  override val di: DI by di()
-  private val apiService: WeatherApiService by instance("apiService")
-  private val databaseDao: DatabaseDao by instance("databaseDao")
+    override val di: DI by di()
+    private val apiService: WeatherApiService by instance("apiService")
+    private val databaseDao: DatabaseDao by instance("databaseDao")
 
-  private val citiesAdapter: CitiesAdapter by lazy {
-    CitiesAdapter(this)
-  }
-
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_cities, container, false)
-  }
-
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
-
-    databaseDao.getObservableFavoriteCities().observe(this@CitiesFragment, Observer { cities ->
-      citiesAdapter.setFavoriteCities(cities)
-    })
-    searchCityEditText.setOnKeyListener{ _, _, event ->
-      if(event.action == KeyEvent.ACTION_DOWN) {
-        activity?.let { hideKeyboard(it) }
-        fetchCities(searchCityEditText.text.toString())
-        true
-      } else {
-        false
-      }
+    private val citiesAdapter: CitiesAdapter by lazy {
+        CitiesAdapter(this)
     }
 
-    val linearLayoutManager = LinearLayoutManager(context)
-    citiesRecyclerView.layoutManager = linearLayoutManager
-    citiesRecyclerView.adapter = citiesAdapter
-  }
-
-  private fun fetchCities(searchText: String) {
-    val rootView = view as ConstraintLayout
-    addProgressIndicator(context!!, rootView)
-
-    viewLifecycleOwner.lifecycleScope.launch {
-      val cities = apiService.searchCities(searchText)
-      removeProgressIndicator(rootView)
-      citiesAdapter.resetDataSource(cities)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_cities, container, false)
     }
-  }
 
-  override fun onCitySelected(city: City) {
-    viewLifecycleOwner.lifecycleScope.launch {
-      databaseDao.markCityAsFavorite(city)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        databaseDao.getObservableFavoriteCities().observe(
+            this@CitiesFragment,
+            Observer { cities ->
+                citiesAdapter.setFavoriteCities(cities)
+            }
+        )
+        searchCityEditText.setOnKeyListener { _, _, event ->
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                activity?.let { hideKeyboard(it) }
+                fetchCities(searchCityEditText.text.toString())
+                true
+            } else {
+                false
+            }
+        }
+
+        val linearLayoutManager = LinearLayoutManager(context)
+        citiesRecyclerView.layoutManager = linearLayoutManager
+        citiesRecyclerView.adapter = citiesAdapter
     }
-  }
+
+    private fun fetchCities(searchText: String) {
+        val rootView = view as ConstraintLayout
+        addProgressIndicator(context!!, rootView)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val cities = apiService.searchCities(searchText)
+            removeProgressIndicator(rootView)
+            citiesAdapter.resetDataSource(cities)
+        }
+    }
+
+    override fun onCitySelected(city: City) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            databaseDao.markCityAsFavorite(city)
+        }
+    }
 }

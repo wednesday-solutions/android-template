@@ -10,22 +10,23 @@ import kotlinx.android.synthetic.main.activity_weather.*
 import kotlinx.android.synthetic.main.partial_toolbar.*
 
 class WeatherActivity : BaseActivity(), WeatherFragment.WeatherLoading {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_weather)
-    supportActionBar?.title = getString(R.string.weather)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_weather)
+        supportActionBar?.title = getString(R.string.weather)
 
-    addFavoriteWeatherActionButton.setOnClickListener { _ ->
-      startActivity(CitiesActivity.newInstance(this))
+        addFavoriteWeatherActionButton.setOnClickListener { _ ->
+            startActivity(CitiesActivity.newInstance(this))
+        }
     }
-  }
 
-  override fun onAttachFragment(fragment: Fragment) {
-    if (fragment is WeatherFragment) {
-      fragment.setWeatherLoadingDelegate(this)
+    override fun onAttachFragment(fragment: Fragment) {
+        if (fragment is WeatherFragment) {
+            fragment.setWeatherLoadingDelegate(this)
+        }
     }
-  }
-  override fun showLoadingIndicator(showLoading: Boolean) {
-    toolbarProgressIndicator.visibility = if (showLoading) View.VISIBLE else View.INVISIBLE
-  }
+
+    override fun showLoadingIndicator(showLoading: Boolean) {
+        toolbarProgressIndicator.visibility = if (showLoading) View.VISIBLE else View.INVISIBLE
+    }
 }

@@ -8,15 +8,15 @@ import com.wednesday.template.activity.base.BaseUpActivity
 
 class CitiesActivity : BaseUpActivity() {
 
-  companion object {
-    fun newInstance(context: Context): Intent {
-      return Intent(context, CitiesActivity::class.java)
+    companion object {
+        fun newInstance(context: Context): Intent {
+            return Intent(context, CitiesActivity::class.java)
+        }
     }
-  }
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_cities)
-    supportActionBar?.title = getString(R.string.add_a_city)
-  }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_cities)
+        supportActionBar?.title = getString(R.string.add_a_city)
+    }
 }

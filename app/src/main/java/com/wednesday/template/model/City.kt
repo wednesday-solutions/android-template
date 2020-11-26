@@ -6,12 +6,12 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "favorite_cities")
 data class City(
-  @PrimaryKey
-  val woeid: Int,
+    @PrimaryKey
+    val woeid: Int,
 
-  @SerializedName("title")
-  val title: String,
+    @SerializedName("title")
+    val title: String,
 
-  @SerializedName("location_type")
-  val locationType: String
+    @SerializedName("location_type")
+    val locationType: String
 )
