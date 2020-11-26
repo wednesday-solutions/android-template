@@ -1,0 +1,54 @@
+name: CI
+
+on: [pull_request]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Run Lint
+        run: bash ./gradlew lintDebug
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: lint-results
+          path: app/build/reports/lint-results-debug.html
+          if-no-files-found: ignore
+
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Unit Tests
+        run: bash ./gradlew test
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: test-results
+          path: app/build/reports/tests/testDebugUnitTest/
+          if-no-files-found: ignore
