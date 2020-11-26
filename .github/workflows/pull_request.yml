@@ -28,7 +28,7 @@ jobs:
       if: failure()
       with:
         name: lint-results
-        path: app/build/reports/lint-results-debug.html
+        path: app/build/reports/lint-results-*
         if-no-files-found: ignore
   
   test:
@@ -55,3 +55,22 @@ jobs:
         name: test-results
         path: app/build/reports/tests/testDebugUnitTest/
         if-no-files-found: ignore
+  
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    - name: Restore Cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+    - name: Build
+      run: bash ./gradlew buildDebug -x test
