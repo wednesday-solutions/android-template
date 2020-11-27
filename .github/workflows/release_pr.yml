@@ -1,0 +1,96 @@
+name: Release CI
+
+on:
+  pull_request:
+    branches:
+      - 'release/**'
+    branches-ignore:
+      - 'release/beta'
+      - 'release/prod'
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Run Lint
+        run: bash ./gradlew lintDebug
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: lint-results
+          path: app/build/reports/lint-results-debug.html
+          if-no-files-found: ignore
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Setup Java JDK
+        uses: actions/setup-java@v1.4.3
+        with:
+          java-version: 11
+      - name: Build
+        run: bash ./gradlew assembleDebug -x test
+
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Unit Tests
+        run: bash ./gradlew test
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: test-results
+          path: app/build/reports/tests/testDebugUnitTest/
+          if-no-files-found: ignore
+
+  ui_test:
+    runs-on: macos-latest
+    needs: [lint]
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: run tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: ./gradlew connectedAndroidTest

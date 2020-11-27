@@ -1,0 +1,154 @@
+name: Release Beta
+on:
+  push:
+    branches:
+      - 'release/beta'
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Run Lint
+        run: bash ./gradlew lintDebug
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: lint-results
+          path: app/build/reports/lint-results-debug.html
+          if-no-files-found: ignore
+
+  unit_tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v1
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Unit tests
+        run: bash ./gradlew test
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: test-results
+          path: app/build/reports/tests/testDebugUnitTest/
+          if-no-files-found: ignore
+
+  ui_tests_setup:
+    name: Build APKs
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Assemble App Debug APK
+        run: bash ./gradlew assembleDebug --stacktrace
+      - name: Upload app debug APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Assemble Android Instrumentation Tests
+        run: bash ./gradlew assembleDebugAndroidTest
+      - name: Upload Android Test APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-debug-androidTest
+          path: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+
+  ui_tests:
+    name: UI Test
+    runs-on: ubuntu-latest
+    needs: [ui_tests_setup]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Download app APK
+        uses: actions/download-artifact@v1
+        with:
+          name: app-debug
+      - name: Download Android Test APK
+        uses: actions/download-artifact@v1
+        with:
+          name: app-debug-androidTest
+      - name: Login to Google Cloud
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCLOUD_AUTH }}
+      - name: Firebase Test Lab
+        run: gcloud firebase test android run \
+          --type instrumentation \
+          --app app-debug/app-debug.apk \
+          --test app-debug-androidTest/app-debug-androidTest.apk \
+          --device model=Pixel2,version=29,orientation=portrait
+
+  distribute:
+    name: Upload to App Distirbution
+    runs-on: ubuntu-latest
+    needs: [unit_tests,ui_tests]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Assemble App Release APK
+        run: bash ./gradlew assembleRelease --stacktrace
+      - name: Upload app release APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release
+          path: app/build/outputs/apk/release/app-release-unsigned.apk
+      - name: Upload to App Distirbution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: Testers
+          file: app/build/outputs/apk/release/app-release-unsigned.apk

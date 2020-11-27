@@ -1,0 +1,178 @@
+name: Release Prod
+on:
+  push:
+    branches:
+      - 'release/prod'
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Run Lint
+        run: bash ./gradlew lintDebug
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: lint-results
+          path: app/build/reports/lint-results-debug.html
+          if-no-files-found: ignore
+
+  unit_tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v1
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Unit tests
+        run: bash ./gradlew test
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: test-results
+          path: app/build/reports/tests/testDebugUnitTest/
+          if-no-files-found: ignore
+
+  ui_tests_setup:
+    name: Build APKs
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Assemble App Debug APK
+        run: bash ./gradlew assembleDebug --stacktrace
+      - name: Upload app debug APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Assemble Android Instrumentation Tests
+        run: bash ./gradlew assembleDebugAndroidTest
+      - name: Upload Android Test APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-debug-androidTest
+          path: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+
+  ui_tests:
+    name: UI Test
+    runs-on: ubuntu-latest
+    needs: [ui_tests_setup]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Download app APK
+        uses: actions/download-artifact@v1
+        with:
+          name: app-debug
+      - name: Download Android Test APK
+        uses: actions/download-artifact@v1
+        with:
+          name: app-debug-androidTest
+      - name: Login to Google Cloud
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCLOUD_AUTH }}
+      - name: Firebase Test Lab
+        run: gcloud firebase test android run \
+          --type instrumentation \
+          --app app-debug/app-debug.apk \
+          --test app-debug-androidTest/app-debug-androidTest.apk \
+          --device model=Pixel2,version=29,orientation=portrait
+
+  sign_release:
+    name: Sign Release
+    runs-on: ubuntu-latest
+    needs: [unit_tests,ui_tests]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Assemble Release AppBundle
+        run: bash ./gradlew bundleRelease --stacktrace
+      - name: Upload app release APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release
+          path: app/build/outputs/bundle/release/app-release.aab
+      - name: Sign Android release
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+      - name: Upload Signed AppBundle
+        uses: actions/upload-artifact@v2
+        with:
+          name: signed-app-bundle
+          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+  release:
+    name: Release to Play Store
+    runs-on: ubuntu-latest
+    needs: [sign_release]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Get AppBundle
+        uses: actions/download-artifact@v2
+        with:
+          name: signed-app-bundle
+      - name: Release to Play Store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_ACCOUNT_KEY }}
+          packageName: com.wednesday.template
+          releaseFiles: signed-app-bundle/signed-app-bundle.aab
+          track: internal
