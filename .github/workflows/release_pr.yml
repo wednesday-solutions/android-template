@@ -4,9 +4,6 @@ on:
   pull_request:
     branches:
       - 'release/**'
-    branches-ignore:
-      - 'release/beta'
-      - 'release/prod'
 
 jobs:
   lint:
