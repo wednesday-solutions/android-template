@@ -20,6 +20,10 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+      - name: Add google-services.json
+        env:
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
+        run: echo $FIREBASE_CONFIG > app/google-services.json
       - name: Run Lint
         run: bash ./gradlew lint
       - name: Upload Results
@@ -45,6 +49,10 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+      - name: Add google-services.json
+        env:
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
+        run: echo $FIREBASE_CONFIG > app/google-services.json
       - name: Unit tests
         run: bash ./gradlew testBetaRelease
       - name: Upload Results
@@ -75,6 +83,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Add google-services.json
+        env:
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
+        run: echo $FIREBASE_CONFIG > app/google-services.json
       - name: Assemble App Debug APK
         run: bash ./gradlew assembleBetaDebug --stacktrace
       - name: Upload app debug APK
@@ -137,6 +149,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Add google-services.json
+        env:
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
+        run: echo $FIREBASE_CONFIG > app/google-services.json
       - name: Assemble App Release APK
         run: bash ./gradlew assembleBetaRelease --stacktrace
       - name: Upload app release APK
