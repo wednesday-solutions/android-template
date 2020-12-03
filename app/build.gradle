@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 
 android {
   compileSdkVersion 29
@@ -93,5 +94,8 @@ dependencies {
   implementation "com.google.android.material:material:$rootProject.materialVersion"
 
   implementation 'org.kodein.di:kodein-di-framework-android-x:7.1.0'
+
+  implementation platform('com.google.firebase:firebase-bom:26.1.0')
+  implementation 'com.google.firebase:firebase-analytics-ktx'
 
 }
