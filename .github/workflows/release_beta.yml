@@ -95,7 +95,7 @@ jobs:
           name: app-beta-debug
           path: app/build/outputs/apk/beta/debug/app-beta-debug.apk
       - name: Assemble Android Instrumentation Tests
-        run: bash ./gradlew assembleDebugAndroidTest
+        run: bash ./gradlew assembleBetaDebugAndroidTest
       - name: Upload Android Test APK
         uses: actions/upload-artifact@v1
         with:
@@ -116,23 +116,19 @@ jobs:
       - name: Download Android Test APK
         uses: actions/download-artifact@v1
         with:
-          name: app-debug-androidTest
+          name: app-beta-debug-androidTest
       - name: Login to Google Cloud
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@master
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCLOUD_AUTH }}
       - name: Firebase Test Lab
-        run: gcloud firebase test android run \
-          --type instrumentation \
-          --app app-beta-debug/app-beta-debug.apk \
-          --test app-beta-debug-androidTest/app-beta-debug-androidTest.apk \
-          --device model=Pixel2,version=29,orientation=portrait
+        run: gcloud firebase test android run --type instrumentation --app app-beta-debug/app-beta-debug.apk --test app-beta-debug-androidTest/app-beta-debug-androidTest.apk --device model=Pixel2,version=29
 
   distribute:
     name: Upload to App Distirbution
     runs-on: ubuntu-latest
-    needs: [unit_tests,ui_tests]
+    needs: [unit_tests]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
