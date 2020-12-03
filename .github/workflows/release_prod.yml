@@ -21,13 +21,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Run Lint
-        run: bash ./gradlew lintDebug
+        run: bash ./gradlew lint
       - name: Upload Results
         uses: actions/upload-artifact@v2
-        if: failure()
         with:
           name: lint-results
-          path: app/build/reports/lint-results-debug.html
+          path: app/build/reports/lint-results.html
           if-no-files-found: ignore
 
   unit_tests:
@@ -47,13 +46,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Unit tests
-        run: bash ./gradlew test
+        run: bash ./gradlew testProdRelease
       - name: Upload Results
         uses: actions/upload-artifact@v2
         if: failure()
         with:
-          name: test-results
-          path: app/build/reports/tests/testDebugUnitTest/
+          name: prod-release-test-results
+          path: app/build/reports/tests/testProdReleaseUnitTest/
           if-no-files-found: ignore
 
   ui_tests_setup:
@@ -77,19 +76,19 @@ jobs:
         with:
           java-version: 11
       - name: Assemble App Debug APK
-        run: bash ./gradlew assembleDebug --stacktrace
+        run: bash ./gradlew assembleProdDebug --stacktrace
       - name: Upload app debug APK
         uses: actions/upload-artifact@v1
         with:
-          name: app-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: app-prod-debug
+          path: app/build/outputs/apk/prod/debug/app-prod-debug.apk
       - name: Assemble Android Instrumentation Tests
         run: bash ./gradlew assembleDebugAndroidTest
       - name: Upload Android Test APK
         uses: actions/upload-artifact@v1
         with:
-          name: app-debug-androidTest
-          path: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+          name: app-prod-debug-androidTest
+          path: app/build/outputs/apk/androidTest/prod/debug/app-prod-debug-androidTest.apk
 
   ui_tests:
     name: UI Test
@@ -101,11 +100,11 @@ jobs:
       - name: Download app APK
         uses: actions/download-artifact@v1
         with:
-          name: app-debug
+          name: app-prod-debug
       - name: Download Android Test APK
         uses: actions/download-artifact@v1
         with:
-          name: app-debug-androidTest
+          name: app-prod-debug-androidTest
       - name: Login to Google Cloud
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
@@ -114,8 +113,8 @@ jobs:
       - name: Firebase Test Lab
         run: gcloud firebase test android run \
           --type instrumentation \
-          --app app-debug/app-debug.apk \
-          --test app-debug-androidTest/app-debug-androidTest.apk \
+          --app app-prod-debug/app-prod-debug.apk \
+          --test app-prod-debug-androidTest/app-prod-debug-androidTest.apk \
           --device model=Pixel2,version=29,orientation=portrait
 
   sign_release:
@@ -139,16 +138,17 @@ jobs:
         with:
           java-version: 11
       - name: Assemble Release AppBundle
-        run: bash ./gradlew bundleRelease --stacktrace
+        run: bash ./gradlew bundleProdRelease --stacktrace
       - name: Upload app release APK
         uses: actions/upload-artifact@v1
         with:
-          name: app-release
-          path: app/build/outputs/bundle/release/app-release.aab
+          name: app-prod-release
+          path: app/build/outputs/bundle/prodRelease/app-prod-release.aab
       - name: Sign Android release
         uses: r0adkll/sign-android-release@v1
+        id: sign_app
         with:
-          releaseDirectory: app/build/outputs/bundle/release
+          releaseDirectory: app/build/outputs/bundle/prodRelease
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}

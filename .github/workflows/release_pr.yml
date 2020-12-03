@@ -25,13 +25,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Run Lint
-        run: bash ./gradlew lintDebug
+        run: bash ./gradlew lint
       - name: Upload Results
         uses: actions/upload-artifact@v2
-        if: failure()
         with:
           name: lint-results
-          path: app/build/reports/lint-results-debug.html
+          path: app/build/reports/lint-results.html
           if-no-files-found: ignore
 
   build:
@@ -55,7 +54,7 @@ jobs:
         with:
           java-version: 11
       - name: Build
-        run: bash ./gradlew assembleDebug -x test
+        run: bash ./gradlew buildBetaDebug -x test
 
   test:
     name: Unit Tests
@@ -74,13 +73,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Unit Tests
-        run: bash ./gradlew test
+        run: bash ./gradlew testBetaDebug
       - name: Upload Results
         uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: test-results
-          path: app/build/reports/tests/testDebugUnitTest/
+          path: app/build/reports/tests/testBetaDebugUnitTest/
           if-no-files-found: ignore
 
   ui_test:
