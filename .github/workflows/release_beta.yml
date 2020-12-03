@@ -118,7 +118,7 @@ jobs:
         with:
           name: app-beta-debug-androidTest
       - name: Login to Google Cloud
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@master
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCLOUD_AUTH }}
