@@ -128,7 +128,7 @@ jobs:
   distribute:
     name: Upload to App Distirbution
     runs-on: ubuntu-latest
-    needs: [unit_tests,ui_tests]
+    needs: [unit_tests]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
