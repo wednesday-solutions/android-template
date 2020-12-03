@@ -123,11 +123,7 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCLOUD_AUTH }}
       - name: Firebase Test Lab
-        run: gcloud firebase test android run \
-          --type instrumentation \
-          --app app-beta-debug/app-beta-debug.apk \
-          --test app-beta-debug-androidTest/app-beta-debug-androidTest.apk \
-          --device model=Pixel2,version=29,orientation=portrait
+        run: gcloud firebase test android run --type instrumentation --app ./app/build/outputs/apk/beta/debug/app-beta-debug.apk --test ./app/build/outputs/apk/androidTest/beta/debug/app-beta-debug-androidTest.apk --device model=Pixel2,version=29
 
   distribute:
     name: Upload to App Distirbution
