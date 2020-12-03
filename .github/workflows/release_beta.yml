@@ -116,7 +116,7 @@ jobs:
       - name: Download Android Test APK
         uses: actions/download-artifact@v1
         with:
-          name: app-debug-androidTest
+          name: app-beta-debug-androidTest
       - name: Login to Google Cloud
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
