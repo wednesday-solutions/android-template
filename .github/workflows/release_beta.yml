@@ -95,7 +95,7 @@ jobs:
           name: app-beta-debug
           path: app/build/outputs/apk/beta/debug/app-beta-debug.apk
       - name: Assemble Android Instrumentation Tests
-        run: bash ./gradlew assembleDebugAndroidTest
+        run: bash ./gradlew assembleBetaDebugAndroidTest
       - name: Upload Android Test APK
         uses: actions/upload-artifact@v1
         with:
