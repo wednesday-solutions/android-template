@@ -1,0 +1,183 @@
+name: Release Beta
+on:
+  push:
+    branches:
+      - 'release/beta'
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Add google-services.json
+        env:
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
+        run: echo $FIREBASE_CONFIG > app/google-services.json
+      - name: Run Lint
+        run: bash ./gradlew lint
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: lint-results
+          path: app/build/reports/lint-results.html
+          if-no-files-found: ignore
+
+  unit_tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v1
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Add google-services.json
+        env:
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
+        run: echo $FIREBASE_CONFIG > app/google-services.json
+      - name: Unit tests
+        run: bash ./gradlew testBetaRelease
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: beta-release-test-results
+          path: app/build/reports/tests/testBetaReleaseUnitTest/
+          if-no-files-found: ignore
+
+  ui_tests_setup:
+    name: Build APKs
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Add google-services.json
+        env:
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
+        run: echo $FIREBASE_CONFIG > app/google-services.json
+      - name: Assemble App Debug APK
+        run: bash ./gradlew assembleBetaDebug --stacktrace
+      - name: Upload app debug APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-beta-debug
+          path: app/build/outputs/apk/beta/debug/app-beta-debug.apk
+      - name: Assemble Android Instrumentation Tests
+        run: bash ./gradlew assembleDebugAndroidTest
+      - name: Upload Android Test APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-beta-debug-androidTest
+          path: app/build/outputs/apk/androidTest/beta/debug/app-beta-debug-androidTest.apk
+
+  ui_tests:
+    name: UI Test
+    runs-on: ubuntu-latest
+    needs: [ui_tests_setup]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Download app APK
+        uses: actions/download-artifact@v1
+        with:
+          name: app-beta-debug
+      - name: Download Android Test APK
+        uses: actions/download-artifact@v1
+        with:
+          name: app-debug-androidTest
+      - name: Login to Google Cloud
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCLOUD_AUTH }}
+      - name: Firebase Test Lab
+        run: gcloud firebase test android run \
+          --type instrumentation \
+          --app app-beta-debug/app-beta-debug.apk \
+          --test app-beta-debug-androidTest/app-beta-debug-androidTest.apk \
+          --device model=Pixel2,version=29,orientation=portrait
+
+  distribute:
+    name: Upload to App Distirbution
+    runs-on: ubuntu-latest
+    needs: [unit_tests,ui_tests]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Add google-services.json
+        env:
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
+        run: echo $FIREBASE_CONFIG > app/google-services.json
+      - name: Assemble App Release APK
+        run: bash ./gradlew assembleBetaRelease --stacktrace
+      - name: Upload app release APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release
+          path: app/build/outputs/apk/beta/release/app-beta-release-unsigned.apk
+      - name: Sign Android release
+        id: sign_app
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/apk/beta/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+      - name: Upload Signed Apk
+        uses: actions/upload-artifact@v2
+        with:
+          name: signed-beta-apk
+          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+      - name: Upload to App Distirbution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_BETA_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: testers
+          file: ${{steps.sign_app.outputs.signedReleaseFile}}
