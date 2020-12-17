@@ -8,11 +8,6 @@
     <h1 align="left">Android Template
     </h1>
   </p>
-
-  <p>
-An enterprise react template application showcasing - Testing strategies, Global state management, middleware support, a network layer, component library integration, localization, PWA support, route configuration, lazy loading, and Continuous integration & deployment.
-  </p>
-
   ___
 
 
