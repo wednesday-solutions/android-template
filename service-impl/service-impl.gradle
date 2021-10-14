@@ -18,6 +18,7 @@ dependencies {
     implementation ext.coroutines.core
 
     implementation ext.room.runtime
+    implementation ext.room.ktx
 
     implementation ext.retrofit.core
     implementation ext.retrofit.serialization

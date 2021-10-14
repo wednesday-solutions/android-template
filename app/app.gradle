@@ -43,13 +43,15 @@ android {
 
 dependencies {
   implementation project(":service-di")
+  implementation project(":repo-di")
 
   def ext = rootProject.ext
 
   implementation ext.koin.core
   implementation ext.koin.android
 
-
+  implementation ext.logging.timber
+  
   implementation fileTree(dir: "libs", include: ["*.jar"])
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation 'androidx.core:core-ktx:1.1.0'

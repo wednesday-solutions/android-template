@@ -15,6 +15,7 @@ dependencies {
     implementation ext.koin.android
 
     implementation ext.room.runtime
+    implementation ext.room.ktx
 
     implementation ext.retrofit.core
 }

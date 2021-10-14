@@ -3,9 +3,16 @@ include ':app',
         ':service',
         ':service-impl',
         ':service-di',
-        ':service-entity'
+        ':service-entity',
+        ':repo',
+        ':repo-impl',
+        ':repo-di',
+        ':domain',
+        ':domain-impl',
+        ':domain-di',
+        ':domain-entity'
 
 rootProject.children.each {
     it.buildFileName = it.name + ".gradle"
 }
-
+include ':domain-entity'

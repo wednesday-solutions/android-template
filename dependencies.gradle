@@ -15,7 +15,8 @@ ext {
     roomVersion = "2.3.0"
 
     room = [
-            runtime: "androidx.room:room-runtime:$roomVersion"
+            runtime: "androidx.room:room-runtime:$roomVersion",
+            ktx: "androidx.room:room-ktx:$roomVersion"
     ]
 
     kotlin = [

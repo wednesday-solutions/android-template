@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.wednesday.template.R
 import com.wednesday.template.adapter.CitiesAdapter
 import com.wednesday.template.adapter.CitySelected
-import com.wednesday.template.service_impl.weather.room.DatabaseDao
+import com.wednesday.template.service.weather.room.DatabaseDao
 import com.wednesday.template.model.City
 import com.wednesday.template.service.WeatherApiService
 import com.wednesday.template.util.addProgressIndicator
@@ -30,7 +30,7 @@ class CitiesFragment: Fragment(), DIAware, CitySelected {
 
   override val di: DI by di()
   private val apiService: com.wednesday.template.service.WeatherApiService by instance("apiService")
-  private val databaseDao: com.wednesday.template.service_impl.weather.room.DatabaseDao by instance("databaseDao")
+  private val databaseDao: com.wednesday.template.service.weather.room.DatabaseDao by instance("databaseDao")
 
   private val citiesAdapter: CitiesAdapter by lazy {
     CitiesAdapter(this)
