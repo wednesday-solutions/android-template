@@ -1,2 +1,11 @@
-include ':app'
 rootProject.name = "Android Template"
+include ':app',
+        ':service',
+        ':service-impl',
+        ':service-di',
+        ':service-entity'
+
+rootProject.children.each {
+    it.buildFileName = it.name + ".gradle"
+}
+

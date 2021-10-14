@@ -4,10 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.wednesday.template.database.DatabaseDao
+import com.wednesday.template.service_impl.weather.room.DatabaseDao
 import com.wednesday.template.model.Resource
 import com.wednesday.template.model.Weather
-import com.wednesday.template.network.WeatherApiService
+import com.wednesday.template.service.WeatherApiService
 import kotlinx.coroutines.launch
 import org.kodein.di.DIAware
 import org.kodein.di.android.x.di
@@ -16,8 +16,8 @@ import org.kodein.di.instance
 class WeatherViewModel(application: Application): AndroidViewModel(application), DIAware {
 
   override val di by di()
-  private val databaseDao: DatabaseDao by instance("databaseDao")
-  private val apiService: WeatherApiService by instance("apiService")
+  private val databaseDao: com.wednesday.template.service_impl.weather.room.DatabaseDao by instance("databaseDao")
+  private val apiService: com.wednesday.template.service.WeatherApiService by instance("apiService")
   val weatherLiveData: MutableLiveData<Resource<List<Weather>>>
 
   init {

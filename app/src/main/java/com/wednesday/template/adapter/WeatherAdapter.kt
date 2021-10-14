@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.wednesday.template.R
 import com.wednesday.template.model.Weather
-import kotlin.math.roundToInt
 
 class WeatherAdapter(val context: Context, var weatherDataSource: MutableList<Weather>): RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
 

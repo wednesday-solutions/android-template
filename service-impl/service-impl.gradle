@@ -1,0 +1,34 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+apply from: "$rootProject.projectDir/android.gradle"
+apply from: "$rootProject.projectDir/lint.gradle"
+
+dependencies {
+
+    implementation project(':service-entity')
+    implementation project(':service')
+
+    def ext = rootProject.ext
+    implementation ext.kotlin.stdLib
+    implementation ext.kotlin.serialization
+
+    implementation ext.coroutines.core
+
+    implementation ext.room.runtime
+
+    implementation ext.retrofit.core
+    implementation ext.retrofit.serialization
+    implementation ext.retrofit.logging
+
+    implementation ext.logging.timber
+
+    androidTestImplementation ext.test.androidxTestCore
+    androidTestImplementation ext.test.androidxTestRunner
+    androidTestImplementation ext.test.androidxTestRules
+    androidTestImplementation ext.test.androidxExt
+    androidTestImplementation ext.test.kotlinTest
+    androidTestImplementation ext.test.flowTest
+}
