@@ -1,10 +1,10 @@
 package com.wednesday.template.repo.weather
 
 import com.wednesday.template.domain.weather.City
-import com.wednesday.template.service.weather.WeatherLocalService
+import com.wednesday.template.service.WeatherLocalService
+import com.wednesday.template.service.weather.WeatherLocalServiceImpl
 import com.wednesday.template.service.weather.WeatherRemoteService
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
@@ -23,7 +23,7 @@ class WeatherRepositoryImpl(
             .let { domainCityMapper.mapRemoteCity(it) }
     }
 
-    override suspend fun getFavouriteCitiesFlow(): Flow<List<City>> {
+    override fun getFavouriteCitiesFlow(): Flow<List<City>> {
         Timber.tag(TAG).d("getFavouriteCitiesFlow")
         return weatherLocalService
             .getFavoriteCitiesFlow()

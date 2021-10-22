@@ -10,9 +10,14 @@ include ':app',
         ':domain',
         ':domain-impl',
         ':domain-di',
-        ':domain-entity'
+        ':domain-entity',
+        ':interactor',
+        ':interactor-di',
+        ':interactor-impl',
+        ':presentation',
+        ':presentation-di',
+        ':presentation-entity'
 
 rootProject.children.each {
     it.buildFileName = it.name + ".gradle"
 }
-include ':domain-entity'

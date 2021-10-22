@@ -7,7 +7,7 @@ interface WeatherRepository {
 
     suspend fun searchCities(searchTerm: String): List<City>
 
-    suspend fun getFavouriteCitiesFlow(): Flow<List<City>>
+    fun getFavouriteCitiesFlow(): Flow<List<City>>
 
     suspend fun setCityAsFavourite(city: City)
 

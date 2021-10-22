@@ -1,0 +1,22 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+apply from: "$rootProject.projectDir/android.gradle"
+
+dependencies {
+    implementation project(":interactor")
+    implementation project(":presentation-entity")
+    implementation project(":domain")
+    implementation project(":domain-entity")
+
+    def ext = rootProject.ext
+    implementation ext.kotlin.stdLib
+
+    implementation ext.coroutines.core
+
+    implementation ext.androidx.coreKtx
+
+    implementation ext.logging.timber
+}

@@ -3,7 +3,7 @@ package com.wednesday.template.service
 import com.wednesday.template.service.base.getRetrofit
 import com.wednesday.template.service.base.getRoomDatabase
 import com.wednesday.template.service.room.AndroidTemplateDatabase
-import com.wednesday.template.service.weather.WeatherLocalService
+import com.wednesday.template.service.weather.WeatherLocalServiceImpl
 import com.wednesday.template.service.weather.WeatherRemoteService
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -18,10 +18,10 @@ val serviceModule = module {
 
     // Weather
     single { getWeatherRemoteService(get()) }
-    single { getWeatherLocalService(get()) }
+    single<WeatherLocalService> { getWeatherLocalService(get()) }
 }
 
-fun getWeatherLocalService(database: AndroidTemplateDatabase): WeatherLocalService {
+fun getWeatherLocalService(database: AndroidTemplateDatabase): WeatherLocalServiceImpl {
     return database.databaseDao()
 }
 

@@ -44,6 +44,9 @@ android {
 dependencies {
   implementation project(":service-di")
   implementation project(":repo-di")
+  implementation project(":domain-di")
+  implementation project(":interactor-di")
+  implementation project(":presentation-di")
 
   def ext = rootProject.ext
 

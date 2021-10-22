@@ -1,0 +1,15 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+apply from: "$rootProject.projectDir/android.gradle"
+
+dependencies {
+    implementation project(":interactor")
+    implementation project(":interactor-impl")
+
+    def ext = rootProject.ext
+
+    implementation ext.koin.core
+}
