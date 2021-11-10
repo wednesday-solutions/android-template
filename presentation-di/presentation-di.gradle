@@ -4,6 +4,7 @@ plugins {
 }
 
 apply from: "$rootProject.projectDir/android.gradle"
+apply from: "$rootProject.projectDir/lint.gradle"
 
 dependencies {
     implementation project(":presentation")
