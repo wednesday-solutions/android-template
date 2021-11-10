@@ -65,6 +65,7 @@ dependencies {
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
   implementation "androidx.recyclerview:recyclerview:1.1.0"
   implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc02"
+  implementation 'androidx.fragment:fragment-ktx:1.2.5'
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coreRoutineVersion"
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coreRoutineVersion"
 
