@@ -49,7 +49,10 @@ ext {
             lifecycleLiveDataCore: "androidx.lifecycle:lifecycle-livedata-core:$lifecycleVersion",
             lifecycleLiveDataKtx:  "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
             lifecycleViewModelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
-            lifecycleViewModel:    "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
+            lifecycleViewModel:    "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion",
+            navigationFragment   : "androidx.navigation:navigation-fragment-ktx:$navVersion",
+            navigationUi         : "androidx.navigation:navigation-ui-ktx:$navVersion"
+
     ]
 
     retrofit = [

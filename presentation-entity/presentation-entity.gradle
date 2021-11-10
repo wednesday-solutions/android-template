@@ -12,4 +12,6 @@ dependencies {
     def ext = rootProject.ext
     implementation ext.kotlin.stdLib
     implementation ext.androidx.coreKtx
+
+    implementation ext.androidx.appCompat
 }
