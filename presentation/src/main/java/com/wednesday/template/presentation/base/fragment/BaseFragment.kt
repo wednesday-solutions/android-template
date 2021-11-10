@@ -22,7 +22,7 @@ abstract class BaseFragment<
     SCREEN : Screen,
     SCREEN_STATE : ScreenState,
     VM : BaseViewModel<SCREEN, SCREEN_STATE>
-    > : Fragment(),KoinComponent {
+    > : Fragment(), KoinComponent {
 
     abstract val viewModel: VM
 

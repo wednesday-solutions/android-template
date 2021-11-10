@@ -1,9 +1,9 @@
 package com.wednesday.template.presentation.base.list.viewholder
 
-import kotlinx.coroutines.channels.Channel
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.UIListUIText
 import com.wednesday.template.presentation.databinding.ItemListTextBinding
+import kotlinx.coroutines.channels.Channel
 
 class UIListUITextViewHolder(private val binding: ItemListTextBinding) :
     BaseViewHolder<UIListUIText>(binding) {

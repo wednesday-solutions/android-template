@@ -2,9 +2,9 @@ package com.wednesday.template.presentation.base.list.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import kotlinx.coroutines.channels.Channel
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.UIListItemBase
+import kotlinx.coroutines.channels.Channel
 
 abstract class BaseViewHolder<T : UIListItemBase>(
     viewBinding: ViewBinding

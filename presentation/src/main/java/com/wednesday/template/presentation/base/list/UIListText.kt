@@ -1,6 +1,5 @@
 package com.wednesday.template.presentation.base.list
 
-import com.wednesday.template.presentation.base.list.UIListItemBase
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
