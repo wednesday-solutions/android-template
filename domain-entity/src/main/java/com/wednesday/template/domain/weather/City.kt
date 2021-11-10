@@ -5,4 +5,3 @@ data class City(
     val title: String,
     val locationType: String
 )
-

@@ -16,4 +16,3 @@ val repoModule = module {
 
     single<WeatherRepository> { WeatherRepositoryImpl(get(), get(), get(), get()) }
 }
-

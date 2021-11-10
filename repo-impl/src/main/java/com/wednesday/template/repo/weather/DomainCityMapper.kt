@@ -34,5 +34,4 @@ class DomainCityMapperImpl : DomainCityMapper {
     companion object {
         private const val TAG = "DomainCityMapperImpl"
     }
-
 }

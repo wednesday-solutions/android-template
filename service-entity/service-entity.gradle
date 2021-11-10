@@ -13,7 +13,7 @@ dependencies {
 
     implementation ext.kotlin.stdLib
     implementation ext.kotlin.serialization
-    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
     implementation ext.room.runtime
     implementation ext.room.ktx
 }

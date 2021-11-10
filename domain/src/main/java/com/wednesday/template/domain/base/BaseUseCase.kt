@@ -12,4 +12,3 @@ interface BaseUseCase<IN, OUT> {
 
     fun invokeInternal(param: IN): OUT
 }
-

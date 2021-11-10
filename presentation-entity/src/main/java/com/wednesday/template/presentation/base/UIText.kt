@@ -7,4 +7,4 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 value class UIText(
     val text: String
-): Parcelable
+) : Parcelable

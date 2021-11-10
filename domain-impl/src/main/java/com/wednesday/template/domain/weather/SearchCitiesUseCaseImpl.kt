@@ -5,10 +5,10 @@ import timber.log.Timber
 
 class SearchCitiesUseCaseImpl(
     private val weatherRepository: WeatherRepository
-): SearchCitiesUseCase {
+) : SearchCitiesUseCase {
 
     override suspend fun invokeInternal(param: String): List<City> {
-       Timber.tag(TAG).d("invokeInternal: param = $param")
+        Timber.tag(TAG).d("invokeInternal: param = $param")
         return weatherRepository.searchCities(param)
     }
 

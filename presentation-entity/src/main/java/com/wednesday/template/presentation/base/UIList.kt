@@ -7,5 +7,3 @@ import kotlinx.parcelize.Parcelize
 data class UIList(
     val items: List<UIListItemBase> = listOf()
 ) : Parcelable
-
-

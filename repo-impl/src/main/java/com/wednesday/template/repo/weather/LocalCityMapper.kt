@@ -21,5 +21,4 @@ class LocalCityMapperImpl : LocalCityMapper {
     companion object {
         private const val TAG = "LocalCityMapperImpl"
     }
-
 }

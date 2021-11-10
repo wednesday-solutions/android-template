@@ -2,13 +2,11 @@ package com.wednesday.template.repo.weather
 
 import com.wednesday.template.domain.weather.City
 import com.wednesday.template.service.WeatherLocalService
-import com.wednesday.template.service.weather.WeatherLocalServiceImpl
 import com.wednesday.template.service.weather.WeatherRemoteService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
-
 
 class WeatherRepositoryImpl(
     private val weatherRemoteService: WeatherRemoteService,

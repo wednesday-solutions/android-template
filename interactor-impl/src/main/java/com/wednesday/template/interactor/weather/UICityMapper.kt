@@ -34,5 +34,4 @@ class UICityMapperImpl : UICityMapper {
     companion object {
         private const val TAG = "UICityMapperImpl"
     }
-
 }
