@@ -3,92 +3,99 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-  compileSdkVersion 29
-  buildToolsVersion "29.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
 
-  defaultConfig {
-    applicationId "com.wednesday.template"
-    minSdkVersion 16
-    targetSdkVersion 29
-    versionCode 1
-    versionName "1.0"
+    defaultConfig {
+        applicationId "com.wednesday.template"
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
 
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-    javaCompileOptions {
-      annotationProcessorOptions {
-        arguments = [
-          "room.incremental":"true",
-          "room.schemaLocation":"$projectDir/schemas".toString(),]
-      }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.incremental"   : "true",
+                        "room.schemaLocation": "$projectDir/schemas".toString(),]
+            }
+        }
     }
-  }
 
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
-  }
 
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_1_8.toString()
-  }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
-  implementation project(":service-di")
-  implementation project(":repo-di")
-  implementation project(":domain-di")
-  implementation project(":interactor-di")
-  implementation project(":presentation-di")
 
-  def ext = rootProject.ext
+    implementation project(":service-di")
+    implementation project(":repo-di")
+    implementation project(":domain-di")
+    implementation project(":interactor-di")
+    implementation project(":presentation-di")
 
-  implementation ext.koin.core
-  implementation ext.koin.android
+    def ext = rootProject.ext
 
-  implementation ext.logging.timber
-  
-  implementation fileTree(dir: "libs", include: ["*.jar"])
-  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'androidx.core:core-ktx:1.7.0'
-  implementation 'androidx.appcompat:appcompat:1.3.1'
-  implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
-  testImplementation 'junit:junit:4.12'
-  androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-  implementation "androidx.recyclerview:recyclerview:1.1.0"
-  implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc02"
-  implementation 'androidx.fragment:fragment-ktx:1.2.5'
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coreRoutineVersion"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coreRoutineVersion"
+    //koin
+    implementation ext.koin.core
+    implementation ext.koin.android
 
-  implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
-  implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
-  implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
-  implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    //logging
+    implementation ext.logging.timber
 
-  implementation "androidx.room:room-runtime:$rootProject.roomVersion"
-  kapt "androidx.room:room-compiler:$rootProject.roomVersion"
-  implementation "androidx.room:room-ktx:$rootProject.roomVersion"
-  androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation ext.kotlin.stdLib
+    implementation ext.androidx.coreKtx
+    implementation ext.androidx.appCompat
 
-  implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.archLifecycleVersion"
-  kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
-  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.archLifecycleVersion"
-  implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.archLifecycleVersion"
-  implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.archLifecycleVersion"
+    //coroutines
+    implementation ext.coroutines.core
+    implementation ext.coroutines.android
 
-  androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
+    //ui
+    implementation ext.android.material
+    implementation ext.androidx.constraintLayout
+    implementation ext.androidx.recyclerView
+    implementation ext.androidx.recyclerViewSelection
+    implementation ext.androidx.fragment
 
-  implementation "com.google.android.material:material:$rootProject.materialVersion"
+    //retrofit
+    implementation ext.retrofit.core
+    implementation ext.retrofit.gson
 
-  implementation 'org.kodein.di:kodein-di-framework-android-x:7.1.0'
+    //room
+    implementation ext.room.runtime
+    kapt ext.room.compiler
+    implementation ext.room.ktx
 
+    implementation ext.okhttp.okhttp
+    implementation ext.kodein.kodein
+    implementation ext.gson.gson
+
+    //lifecycle
+    kapt ext.androidx.lifecycleCompiler
+    implementation ext.androidx.lifecycleLiveDataKtx
+    implementation ext.androidx.lifecycleViewModelKtx
+    implementation ext.androidx.lifecycleRuntimeKtx
+
+    //testing
+    testImplementation ext.test.junit
+    androidTestImplementation ext.test.androidxExt
+    androidTestImplementation ext.test.androidxCoreTesting
+    androidTestImplementation ext.test.androidxRoomTesting
 }
