@@ -6,7 +6,6 @@ import com.wednesday.template.service.weather.WeatherRemoteService
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
-
 import org.junit.Assert.*
 import org.mockito.Mockito
 import org.mockito.kotlin.mock
@@ -14,12 +13,10 @@ import org.mockito.kotlin.mock
 class WeatherRepositoryImplTest {
 
     private lateinit var weatherRepositoryImpl: WeatherRepositoryImpl
-
     private lateinit var weatherRemoteService: WeatherRemoteService
     private lateinit var weatherLocalService: WeatherLocalService
     private lateinit var domainCityMapper:DomainCityMapper
     private lateinit var localCityMapper: LocalCityMapper
-
 
     @Before
     fun setUp() {
@@ -27,7 +24,6 @@ class WeatherRepositoryImplTest {
         weatherLocalService = mock()
         domainCityMapper = mock()
         localCityMapper = mock()
-
         weatherRepositoryImpl = WeatherRepositoryImpl(weatherRemoteService,weatherLocalService
             ,domainCityMapper,localCityMapper)
     }
@@ -41,7 +37,7 @@ class WeatherRepositoryImplTest {
     @Test
     fun `Search City By Full Name Returns The City`() = runBlocking{
         Mockito.`when`(weatherRemoteService.searchCities("Pune"))
-            .thenReturn(listOf<RemoteCity>(RemoteCity(1,"Pune","City")))
+            .thenReturn(listOf(RemoteCity(1,"Pune","City")))
         assertEquals(listOf(RemoteCity(1,"Pune","City")),weatherRemoteService.searchCities("Pune"))
     }
 
@@ -49,12 +45,12 @@ class WeatherRepositoryImplTest {
     fun `Search City By Half Name Should Return List Of Cites Starting From Given Characters`() =
         runBlocking{
          Mockito.`when`(weatherRemoteService.searchCities("De"))
-             .thenReturn(listOf<RemoteCity>(
+             .thenReturn(listOf(
                  RemoteCity(1,"Delhi","City"),
                  RemoteCity(2,"Dehradun","City"),
                  RemoteCity(3,"Devprayag","City")))
 
-            assertEquals(listOf<RemoteCity>(
+            assertEquals(listOf(
                 RemoteCity(1,"Delhi","City"),
                 RemoteCity(2,"Dehradun","City"),
                 RemoteCity(3,"Devprayag","City")),weatherRemoteService.searchCities("De"))
@@ -62,7 +58,14 @@ class WeatherRepositoryImplTest {
 
     @Test
     fun `Search City Without Alphabets Returns Empty List`() = runBlocking {
-        Mockito.`when`(weatherRemoteService.searchCities("87878")).thenReturn(listOf<RemoteCity>())
+        Mockito.`when`(weatherRemoteService.searchCities("87878")).thenReturn(listOf())
         assertEquals(listOf<RemoteCity>(),weatherRemoteService.searchCities("87878"))
     }
+
+    @Test
+    fun `Search City With Misspelled Alphabets Returns Empty List`() = runBlocking{
+        Mockito.`when`(weatherRemoteService.searchCities("Mumvai")).thenReturn(listOf())
+        assertEquals(listOf<RemoteCity>(),weatherRemoteService.searchCities("Mumvai"))
+    }
+
 }
