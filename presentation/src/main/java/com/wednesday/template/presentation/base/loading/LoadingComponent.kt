@@ -2,6 +2,7 @@ package com.wednesday.template.presentation.base.loading
 
 import android.view.View
 import com.wednesday.template.presentation.R
+import kudosfinance.android.kudosui.R
 import com.wednesday.template.presentation.base.component.StatefulComponent
 import com.wednesday.template.presentation.base.extensions.setVisible
 

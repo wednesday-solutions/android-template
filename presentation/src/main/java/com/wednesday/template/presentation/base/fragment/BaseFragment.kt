@@ -10,10 +10,9 @@ import androidx.viewbinding.ViewBinding
 import com.wednesday.template.presentation.base.component.Component
 import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.navigation.NavigatorImpl
-import com.wednesday.template.presentation.base.screen.Screen
 import com.wednesday.template.presentation.base.state.ScreenState
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
-import org.koin.core.component.KoinComponent
+import kudosfinance.android.kudosui.screen.Screen
 
 typealias BindingProvider<B> = (LayoutInflater, ViewGroup?, Boolean) -> B
 
@@ -22,7 +21,7 @@ abstract class BaseFragment<
     SCREEN : Screen,
     SCREEN_STATE : ScreenState,
     VM : BaseViewModel<SCREEN, SCREEN_STATE>
-    > : Fragment(), KoinComponent {
+    > : Fragment() {
 
     abstract val viewModel: VM
 

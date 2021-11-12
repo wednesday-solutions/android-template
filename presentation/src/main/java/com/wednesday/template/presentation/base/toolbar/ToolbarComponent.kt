@@ -5,10 +5,12 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.UIToolbar
-import com.wednesday.template.presentation.base.asString
+import kudosfinance.android.kudosui.R
 import com.wednesday.template.presentation.base.component.StatefulComponent
-import com.wednesday.template.presentation.base.getString
+import kudosfinance.android.kudosui.internal.entity.common.UIToolbar
+import kudosfinance.android.kudosui.internal.entity.common.asString
 
 class ToolbarComponent(
     private val fragment: Fragment,
@@ -17,7 +19,7 @@ class ToolbarComponent(
             fragment.activity?.onBackPressed()
         }
     },
-    private val onMenuClicked: (() -> Unit)? = null
+    private val onExitClicked: (() -> Unit)? = null
 ) : StatefulComponent<UIToolbar>() {
 
     override fun bindInternal(view: View) = Unit
@@ -25,8 +27,8 @@ class ToolbarComponent(
     override fun setDataInternal(newData: UIToolbar) {
         (fragment.activity as? AppCompatActivity)?.apply {
             supportActionBar?.setDisplayHomeAsUpEnabled(newData.hasBackButton)
-            title = fragment.getString(newData.title)
-            newData.menuTitle?.let {
+            title = newData.title.asString(this)
+            if (newData.exitButtonEnabled) {
                 invalidateOptionsMenu()
             }
         }
@@ -36,16 +38,17 @@ class ToolbarComponent(
 
     fun onCreateOptionsMenu(menu: Menu) {
         val currentData = currentData
-        currentData?.menuTitle?.let {
-            menu.add(0, MENU_ITEM_ID, Menu.NONE, it.asString(fragment.requireContext()))
+        if (currentData?.exitButtonEnabled == true) {
+            val menuItemWithIcon =
+                menu.add(0, MENU_ITEM_ID, Menu.NONE, "Exit")
+            menuItemWithIcon.setIcon(R.drawable.ic_close)
             val menuItem = menu.findItem(MENU_ITEM_ID)
             menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-            menuItem.isEnabled = currentData.menuButtonEnabled
         }
     }
 
     fun onOptionsItemSelected(itemId: Int) = when (itemId) {
-        MENU_ITEM_ID -> onMenuClicked?.invoke()
+        MENU_ITEM_ID -> onExitClicked?.invoke()
         else -> onBackClicked()
     }
 

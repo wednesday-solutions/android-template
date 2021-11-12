@@ -2,10 +2,10 @@ package com.wednesday.template.presentation.base.list
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.channels.Channel
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.renderer.ListItemRenderer
 import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder
-import kotlinx.coroutines.channels.Channel
 import java.lang.Exception
 import kotlin.reflect.KClass
 

@@ -7,10 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wednesday.template.presentation.R
-import com.wednesday.template.presentation.base.component.StatefulComponent
-import com.wednesday.template.presentation.base.intent.Intent
-import com.wednesday.template.presentation.base.intent.IntentHandler
-import com.wednesday.template.presentation.base.list.renderer.ListItemRenderer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
@@ -19,6 +15,10 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.wednesday.template.presentation.base.component.StatefulComponent
+import com.wednesday.template.presentation.base.intent.Intent
+import com.wednesday.template.presentation.base.intent.IntentHandler
+import com.wednesday.template.presentation.base.list.renderer.ListItemRenderer
 import kotlin.reflect.KClass
 
 internal open class BaseListComponent<T, I : Intent>(

@@ -2,26 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
-android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+apply from: "$rootProject.projectDir/android.gradle"
 
+android {
     defaultConfig {
-        applicationId "com.wednesday.template"
-        minSdkVersion 16
-        targetSdkVersion 29
+        applicationId "com.armdroid.sample"
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [
-                        "room.incremental"   : "true",
-                        "room.schemaLocation": "$projectDir/schemas".toString(),]
-            }
-        }
     }
 
     buildTypes {
@@ -30,72 +17,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
 }
 
 dependencies {
-
-    implementation project(":service-di")
-    implementation project(":repo-di")
-    implementation project(":domain-di")
-    implementation project(":interactor-di")
-    implementation project(":presentation-di")
+    implementation project(':presentation')
+//    implementation project(':navigation')
+    implementation project(':presentation-di')
+//    implementation project(':navigation-di')
+    implementation project(':interactor-di')
+    implementation project(':domain-di')
+    implementation project(':repo-di')
+    implementation project(':service-di')
 
     def ext = rootProject.ext
+    implementation ext.kotlin.stdLib
 
-    //koin
     implementation ext.koin.core
     implementation ext.koin.android
 
-    //logging
-    implementation ext.logging.timber
-
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation ext.kotlin.stdLib
-    implementation ext.androidx.coreKtx
-    implementation ext.androidx.appCompat
-
-    //coroutines
-    implementation ext.coroutines.core
-    implementation ext.coroutines.android
-
-    //ui
     implementation ext.android.material
-    implementation ext.androidx.constraintLayout
-    implementation ext.androidx.recyclerView
-    implementation ext.androidx.recyclerViewSelection
-    implementation ext.androidx.fragment
-
-    //retrofit
-    implementation ext.retrofit.core
-    implementation ext.retrofit.gson
-
-    //room
-    implementation ext.room.runtime
-    kapt ext.room.compiler
-    implementation ext.room.ktx
-
-    implementation ext.okhttp.okhttp
-    implementation ext.kodein.kodein
-    implementation ext.gson.gson
-
-    //lifecycle
-    kapt ext.androidx.lifecycleCompiler
-    implementation ext.androidx.lifecycleLiveDataKtx
-    implementation ext.androidx.lifecycleViewModelKtx
-    implementation ext.androidx.lifecycleRuntimeKtx
-
-    //testing
-    testImplementation ext.test.junit
-    androidTestImplementation ext.test.androidxExt
-    androidTestImplementation ext.test.androidxCoreTesting
-    androidTestImplementation ext.test.androidxRoomTesting
 }

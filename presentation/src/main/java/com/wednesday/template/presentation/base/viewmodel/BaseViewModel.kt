@@ -8,15 +8,12 @@ import androidx.lifecycle.ViewModel
 import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.navigation.Navigator
-import com.wednesday.template.presentation.base.screen.Screen
 import com.wednesday.template.presentation.base.state.ScreenState
 import com.wednesday.template.presentation.base.state.StateOwner
 import com.wednesday.template.presentation.base.state.statefulLiveData
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState> :
-    ViewModel(), KoinComponent, StateOwner {
+    ViewModel(), StateOwner {
 
     abstract fun getDefaultScreenState(): STATE
 

@@ -1,6 +1,5 @@
-package kudosfinance.android.kudosui.internal.base.coroutine
+package com.wednesday.template.presentation.base.coroutine
 
-import com.wednesday.template.presentation.base.coroutine.CoroutineContextController
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

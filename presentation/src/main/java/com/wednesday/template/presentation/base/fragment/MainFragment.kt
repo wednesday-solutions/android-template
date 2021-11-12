@@ -9,10 +9,10 @@ import androidx.annotation.CallSuper
 import androidx.viewbinding.ViewBinding
 import com.wednesday.template.presentation.base.component.StatefulComponent
 import com.wednesday.template.presentation.base.loading.LoadingComponent
-import com.wednesday.template.presentation.base.screen.Screen
 import com.wednesday.template.presentation.base.state.MainScreenState
 import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
+import kudosfinance.android.kudosui.screen.Screen
 
 abstract class MainFragment<
     BINDING : ViewBinding,
