@@ -16,7 +16,11 @@ include ':app',
         ':interactor-impl',
         ':presentation',
         ':presentation-di',
-        ':presentation-entity'
+        ':presentation-entity',
+        ':navigation',
+        ':navigation-di',
+        ':navigation-impl'
+
 
 rootProject.children.each {
     it.buildFileName = it.name + ".gradle"

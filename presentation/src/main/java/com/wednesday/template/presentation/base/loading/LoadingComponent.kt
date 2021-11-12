@@ -4,7 +4,6 @@ import android.view.View
 import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.component.StatefulComponent
 import com.wednesday.template.presentation.base.extensions.setVisible
-import kudosfinance.android.kudosui.R
 
 class LoadingComponent : StatefulComponent<Boolean>() {
 

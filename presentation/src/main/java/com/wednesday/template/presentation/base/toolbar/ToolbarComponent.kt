@@ -7,10 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.UIToolbar
+import com.wednesday.template.presentation.base.asString
 import com.wednesday.template.presentation.base.component.StatefulComponent
-import kudosfinance.android.kudosui.R
-import kudosfinance.android.kudosui.internal.entity.common.UIToolbar
-import kudosfinance.android.kudosui.internal.entity.common.asString
 
 class ToolbarComponent(
     private val fragment: Fragment,
@@ -28,7 +26,7 @@ class ToolbarComponent(
         (fragment.activity as? AppCompatActivity)?.apply {
             supportActionBar?.setDisplayHomeAsUpEnabled(newData.hasBackButton)
             title = newData.title.asString(this)
-            if (newData.exitButtonEnabled) {
+            if (newData.menuTitle != null) {
                 invalidateOptionsMenu()
             }
         }
@@ -38,10 +36,10 @@ class ToolbarComponent(
 
     fun onCreateOptionsMenu(menu: Menu) {
         val currentData = currentData
-        if (currentData?.exitButtonEnabled == true) {
+        if (currentData?.menuButtonEnabled == true) {
+            // todo Add menu item
             val menuItemWithIcon =
-                menu.add(0, MENU_ITEM_ID, Menu.NONE, "Exit")
-            menuItemWithIcon.setIcon(R.drawable.ic_close)
+                menu.add(0, MENU_ITEM_ID, Menu.NONE, "")
             val menuItem = menu.findItem(MENU_ITEM_ID)
             menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
         }

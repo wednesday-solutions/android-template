@@ -1,0 +1,23 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+apply from: "$rootProject.projectDir/android.gradle"
+
+dependencies {
+    implementation project(':presentation-entity')
+    implementation project(':navigation')
+
+    def ext = rootProject.ext
+    implementation ext.kotlin.stdLib
+
+    implementation ext.androidx.appCompat
+    implementation ext.androidx.navigationUi
+    implementation ext.androidx.navigationFragment
+
+    testImplementation ext.test.androidxTestCore
+    testImplementation ext.test.androidxExt
+    testImplementation ext.test.kotlinTest
+    testImplementation ext.test.mockito
+}

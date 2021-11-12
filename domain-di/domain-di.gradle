@@ -8,6 +8,7 @@ apply from: "$rootProject.projectDir/lint.gradle"
 
 dependencies {
     implementation project(":domain")
+    implementation project(":repo")
     implementation project(":domain-impl")
 
     def ext = rootProject.ext

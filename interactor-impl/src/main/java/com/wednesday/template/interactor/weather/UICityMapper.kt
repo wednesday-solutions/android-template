@@ -17,8 +17,10 @@ class UICityMapperImpl : UICityMapper {
         Timber.tag(TAG).d("map: from = $from")
         return UICity(
             cityId = from.id,
-            title = UIText(from.title),
-            locationType = UIText(from.locationType)
+            title = from.title,
+            locationType = from.locationType,
+            displayTitle = UIText { block(from.title) },
+            displayLocationType = UIText { block(from.locationType) }
         )
     }
 
@@ -26,8 +28,8 @@ class UICityMapperImpl : UICityMapper {
         Timber.tag(TAG).d("mapUICity: from = $from")
         return City(
             id = from.cityId,
-            title = from.title.text,
-            locationType = from.title.text
+            title = from.title,
+            locationType = from.locationType
         )
     }
 
