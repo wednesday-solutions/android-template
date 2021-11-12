@@ -1,7 +1,7 @@
 package com.wednesday.template.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.wednesday.template.presentation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

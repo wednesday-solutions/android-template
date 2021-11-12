@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.UIToolbar
-import kudosfinance.android.kudosui.R
 import com.wednesday.template.presentation.base.component.StatefulComponent
+import kudosfinance.android.kudosui.R
 import kudosfinance.android.kudosui.internal.entity.common.UIToolbar
 import kudosfinance.android.kudosui.internal.entity.common.asString
 

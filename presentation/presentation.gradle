@@ -9,8 +9,8 @@ apply from: "$rootProject.projectDir/android.gradle"
 apply from: "$rootProject.projectDir/lint.gradle"
 
 android {
-    viewBinding {
-        enabled true
+    buildFeatures {
+        viewBinding true
     }
 }
 
