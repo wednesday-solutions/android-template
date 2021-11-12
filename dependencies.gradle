@@ -15,47 +15,55 @@ ext {
     roomVersion = "2.3.0"
 
     room = [
-            runtime: "androidx.room:room-runtime:$roomVersion",
-            ktx: "androidx.room:room-ktx:$roomVersion"
+            runtime : "androidx.room:room-runtime:$roomVersion",
+            ktx     : "androidx.room:room-ktx:$roomVersion",
+            compiler: "androidx.room:room-compiler:$roomVersion"
     ]
 
     kotlin = [
-            stdLib:         "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
-            serialization:  "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
+            stdLib       : "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+            serialization: "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
     ]
 
     coroutines = [
-            core:    "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
+            core   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
             android: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     ]
 
     koin = [
-            core:        "io.insert-koin:koin-core:$koinVersion",
-            android:     "io.insert-koin:koin-android:$koinVersion",
+            core       : "io.insert-koin:koin-core:$koinVersion",
+            android    : "io.insert-koin:koin-android:$koinVersion",
             workManager: "io.insert-koin:koin-androidx-workmanager:$koinVersion",
-            test:        "io.insert-koin:koin-test:$koinVersion"
+            test       : "io.insert-koin:koin-test:$koinVersion"
     ]
 
     android = [
-            material:     "com.google.android.material:material:1.4.0"
+            material: "com.google.android.material:material:1.4.0"
     ]
 
     androidx = [
-            coreKtx:               "androidx.core:core-ktx:$coreVersion",
-            fragment:              "androidx.fragment:fragment:$fragmentVersion",
-            appCompat:             "androidx.appcompat:appcompat:1.3.0",
-            constraintLayout:      "androidx.constraintlayout:constraintlayout:2.0.4",
-            recyclerView:          "androidx.recyclerview:recyclerview:1.2.1",
+            coreKtx              : "androidx.core:core-ktx:$coreVersion",
+            fragment             : "androidx.fragment:fragment:$fragmentVersion",
+            appCompat            : "androidx.appcompat:appcompat:1.3.0",
+            constraintLayout     : "androidx.constraintlayout:constraintlayout:2.0.4",
+            recyclerView         : "androidx.recyclerview:recyclerview:1.2.1",
+            lifecycleCompiler    : "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion",
+            recyclerViewSelection: "androidx.recyclerview:recyclerview-selection:1.2.0-alpha01",
             lifecycleLiveDataCore: "androidx.lifecycle:lifecycle-livedata-core:$lifecycleVersion",
-            lifecycleLiveDataKtx:  "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
+            lifecycleLiveDataKtx : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
             lifecycleViewModelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
-            lifecycleViewModel:    "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
+            lifecycleViewModel   : "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion",
+            lifecycleRuntimeKtx  : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion",
+            navigationFragment   : "androidx.navigation:navigation-fragment-ktx:$navVersion",
+            navigationUi         : "androidx.navigation:navigation-ui-ktx:$navVersion"
+
     ]
 
     retrofit = [
-            core:          "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            core         : "com.squareup.retrofit2:retrofit:$retrofitVersion",
             serialization: "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0",
-            logging:       'com.squareup.okhttp3:logging-interceptor:4.9.0'
+            logging      : 'com.squareup.okhttp3:logging-interceptor:4.9.0',
+            gson         : "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     ]
 
     cicerone = [
@@ -67,19 +75,32 @@ ext {
     ]
 
     test = [
-            androidxTestCore:   "androidx.test:runner:1.3.0",
-            androidxTestRunner: "androidx.test:runner:1.3.0",
-            androidxTestRules:  "androidx.test:rules:1.3.0",
-            androidxExt:        "androidx.test.ext:junit:1.1.2",
+            androidxTestCore   : "androidx.test:runner:1.3.0",
+            androidxTestRunner : "androidx.test:runner:1.3.0",
+            androidxTestRules  : "androidx.test:rules:1.3.0",
+            androidxExt        : "androidx.test.ext:junit:1.1.2",
+            androidxCoreTesting: "androidx.arch.core:core-testing:2.1.0",
+            androidxRoomTesting: "androidx.room:room-testing:2.2.5",
 
-            coroutines:         "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion",
-            flowTest:           "app.cash.turbine:turbine:0.6.0",
-            kotlinTest:         "org.jetbrains.kotlin:kotlin-test:$kotlinVersion",
-            mockito:            "org.mockito.kotlin:mockito-kotlin:3.2.0"
+            junit              : 'junit:junit:4.13.2',
+            coroutines         : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion",
+            flowTest           : "app.cash.turbine:turbine:0.6.0",
+            kotlinTest         : "org.jetbrains.kotlin:kotlin-test:$kotlinVersion",
+            mockito            : "org.mockito.kotlin:mockito-kotlin:3.2.0"
     ]
 
     ui = [
             segmentedButton: "com.github.addisonelliott:SegmentedButton:3.1.9",
-            stickyHeaders: "org.zakariya.stickyheaders:stickyheaders:0.7.11"
+            stickyHeaders  : "org.zakariya.stickyheaders:stickyheaders:0.7.11"
+    ]
+
+    okhttp = [
+            okhttp: 'com.squareup.okhttp3:logging-interceptor:4.9.2'
+    ]
+    kodein = [
+            kodein: 'org.kodein.di:kodein-di-framework-android-x:7.1.0'
+    ]
+    gson = [
+            gson: "com.google.code.gson:gson:2.8.6"
     ]
 }

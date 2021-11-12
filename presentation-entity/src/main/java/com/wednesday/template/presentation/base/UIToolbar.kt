@@ -7,5 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class UIToolbar(
     val title: UIText,
     val hasBackButton: Boolean,
-    val menuTitle: UIText?
+    val menuTitle: UIText?,
+    val menuButtonEnabled: Boolean = true
 ) : Parcelable
