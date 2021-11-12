@@ -20,4 +20,5 @@ dependencies {
 
     implementation ext.logging.timber
     implementation ext.test.junit
+    implementation ext.test.mockito
 }
