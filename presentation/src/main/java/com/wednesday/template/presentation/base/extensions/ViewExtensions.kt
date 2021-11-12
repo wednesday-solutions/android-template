@@ -3,8 +3,7 @@ package com.wednesday.template.presentation.base.extensions
 import android.view.View
 import android.widget.TextView
 import com.wednesday.template.presentation.base.UIText
-import kudosfinance.android.kudosui.internal.entity.common.UIText
-import kudosfinance.android.kudosui.internal.entity.common.asString
+import com.wednesday.template.presentation.base.asString
 
 internal fun View.show() {
     visibility = View.VISIBLE
@@ -23,5 +22,5 @@ internal fun View.setVisible(visible: Boolean) {
 }
 
 internal fun TextView.setUIText(uiText: UIText) {
-    text = uiText.asString(context)
+    text = uiText.asString()
 }

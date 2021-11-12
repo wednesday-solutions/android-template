@@ -7,13 +7,15 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.intent.Intent
-import com.wednesday.template.presentation.base.navigation.Navigator
-import com.wednesday.template.presentation.base.state.ScreenState
 import com.wednesday.template.presentation.base.state.StateOwner
 import com.wednesday.template.presentation.base.state.statefulLiveData
+import com.wednesday.template.presentation.screen.Screen
+import com.wednesday.template.presentation.screen.ScreenState
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState> :
-    ViewModel(), StateOwner {
+    ViewModel(), KoinComponent, StateOwner {
 
     abstract fun getDefaultScreenState(): STATE
 
@@ -29,7 +31,6 @@ abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState> :
     val screenResultState: LiveData<Bundle?> = _screenResultState
 
     lateinit var args: SCREEN
-    lateinit var navigator: Navigator
 
     private var recreateFlag: Unit? = null
 

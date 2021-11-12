@@ -3,6 +3,7 @@ package com.wednesday.template.service
 import com.wednesday.template.service.base.getRetrofit
 import com.wednesday.template.service.base.getRoomDatabase
 import com.wednesday.template.service.room.AndroidTemplateDatabase
+import com.wednesday.template.service.weather.WeatherLocalService
 import com.wednesday.template.service.weather.WeatherLocalServiceImpl
 import com.wednesday.template.service.weather.WeatherRemoteService
 import org.koin.dsl.module

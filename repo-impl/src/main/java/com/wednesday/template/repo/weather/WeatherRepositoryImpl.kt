@@ -1,7 +1,7 @@
 package com.wednesday.template.repo.weather
 
 import com.wednesday.template.domain.weather.City
-import com.wednesday.template.service.WeatherLocalService
+import com.wednesday.template.service.weather.WeatherLocalService
 import com.wednesday.template.service.weather.WeatherRemoteService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

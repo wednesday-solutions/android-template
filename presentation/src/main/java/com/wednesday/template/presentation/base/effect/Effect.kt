@@ -2,7 +2,7 @@ package com.wednesday.template.presentation.base.effect
 
 import android.view.View
 import com.wednesday.template.presentation.base.UIText
-import kudosfinance.android.kudosui.internal.entity.datetime.UIDate
+import com.wednesday.template.presentation.datetime.UIDate
 
 interface Effect
 

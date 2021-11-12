@@ -9,10 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.wednesday.template.presentation.base.component.Component
 import com.wednesday.template.presentation.base.effect.Effect
-import com.wednesday.template.presentation.base.navigation.NavigatorImpl
-import com.wednesday.template.presentation.base.state.ScreenState
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
-import kudosfinance.android.kudosui.screen.Screen
+import com.wednesday.template.presentation.screen.Screen
+import com.wednesday.template.presentation.screen.ScreenState
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 typealias BindingProvider<B> = (LayoutInflater, ViewGroup?, Boolean) -> B
 
@@ -49,7 +50,6 @@ abstract class BaseFragment<
         super.onCreate(savedInstanceState)
         args = arguments?.get("key_args") as SCREEN
         viewModel.args = args
-        viewModel.navigator = NavigatorImpl(this)
         viewModel.onCreate(savedInstanceState)
     }
 
@@ -124,5 +124,9 @@ abstract class BaseFragment<
             "Effect of type $effect is not handled by ${this.javaClass.name}." +
                 " If you want to handle this intent then add support in when clause"
         )
+    }
+
+    protected inline fun <reified VM : BaseViewModel<SCREEN, SCREEN_STATE>> navViewModel() {
+        viewModel<VM> { parametersOf(this) }
     }
 }

@@ -27,10 +27,8 @@ dependencies {
     implementation ext.android.material
 
     implementation ext.logging.timber
-    implementation ext.kotlin.stdLib
     implementation ext.coroutines.core
     implementation ext.coroutines.android
-    implementation ext.kotlin.serialization
     implementation ext.androidx.appCompat
     implementation ext.androidx.coreKtx
     implementation ext.androidx.fragment

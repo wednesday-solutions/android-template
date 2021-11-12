@@ -13,4 +13,7 @@ dependencies {
     implementation ext.kotlin.stdLib
 
     implementation ext.coroutines.core
+    implementation ext.retrofit.core
+    implementation ext.retrofit.serialization
+    implementation ext.retrofit.logging
 }

@@ -23,7 +23,7 @@ dependencies {
     implementation project(':presentation')
 //    implementation project(':navigation')
     implementation project(':presentation-di')
-//    implementation project(':navigation-di')
+    implementation project(':navigation-di')
     implementation project(':interactor-di')
     implementation project(':domain-di')
     implementation project(':repo-di')
@@ -36,4 +36,6 @@ dependencies {
     implementation ext.koin.android
 
     implementation ext.android.material
+
+    implementation ext.logging.timber
 }
