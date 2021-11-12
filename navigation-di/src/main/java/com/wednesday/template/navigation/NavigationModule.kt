@@ -6,5 +6,4 @@ import org.koin.dsl.module
 val navigationModule = module {
 
     factory<Navigator> { (fragment: Fragment) -> NavigatorImpl(fragment) }
-
 }

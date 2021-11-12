@@ -5,7 +5,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.base.asString
 import com.wednesday.template.presentation.base.component.StatefulComponent

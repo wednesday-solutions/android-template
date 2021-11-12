@@ -18,11 +18,11 @@ import org.koin.core.parameter.parametersOf
 typealias BindingProvider<B> = (LayoutInflater, ViewGroup?, Boolean) -> B
 
 abstract class BaseFragment<
-        BINDING : ViewBinding,
-        SCREEN : Screen,
-        SCREEN_STATE : ScreenState,
-        VM : BaseViewModel<SCREEN, SCREEN_STATE>
-        > : Fragment() {
+    BINDING : ViewBinding,
+    SCREEN : Screen,
+    SCREEN_STATE : ScreenState,
+    VM : BaseViewModel<SCREEN, SCREEN_STATE>
+    > : Fragment() {
 
     abstract val viewModel: VM
 
@@ -122,7 +122,7 @@ abstract class BaseFragment<
     protected fun unhandledEffect(effect: Effect) {
         throw IllegalStateException(
             "Effect of type $effect is not handled by ${this.javaClass.name}." +
-                    " If you want to handle this intent then add support in when clause"
+                " If you want to handle this intent then add support in when clause"
         )
     }
 

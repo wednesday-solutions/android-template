@@ -1,6 +1,5 @@
 package com.wednesday.template.service.weather
 
-import com.wednesday.template.service.weather.LocalCity
 import kotlinx.coroutines.flow.Flow
 
 interface WeatherLocalService {

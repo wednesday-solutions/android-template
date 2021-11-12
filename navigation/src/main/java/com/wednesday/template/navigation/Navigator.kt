@@ -7,5 +7,4 @@ interface Navigator {
     fun navigateTo(screen: Screen)
 
     fun back()
-
 }

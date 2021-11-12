@@ -73,7 +73,7 @@ abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState> :
     protected fun unhandledIntent(intent: Intent) {
         throw IllegalStateException(
             "Intent of type $intent is not handled by ${this.javaClass.name}." +
-                    " If you want to handle this intent then add support in when clause"
+                " If you want to handle this intent then add support in when clause"
         )
     }
 

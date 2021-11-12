@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.annotation.NavigationRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
@@ -36,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 //            bundleOf("key_args" to screen)
 //        )
 //    }
-
 
     private fun NavGraph.setup(
         navController: NavController,
