@@ -1,14 +1,16 @@
 package com.wednesday.template.repo.weather
 
+import com.wednesday.template.domain.weather.City
 import com.wednesday.template.service.WeatherLocalService
 import com.wednesday.template.service.weather.RemoteCity
 import com.wednesday.template.service.weather.WeatherRemoteService
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import org.junit.Assert.*
 import org.mockito.Mockito
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class WeatherRepositoryImplTest {
 
@@ -33,45 +35,96 @@ class WeatherRepositoryImplTest {
     @Test
     fun `Given city name is empty, When searchCities, Then weatherRemoteService searchCity returns null`() =
         runBlocking {
-            Mockito.`when`(weatherRemoteService.searchCities("")).thenReturn(null)
-            assertEquals(null,weatherRepository.searchCities(""))
+            // Given
+            val city = ""
+            Mockito.`when`(weatherRemoteService.searchCities("")).thenReturn(listOf())
+
+            // When
+            val result = weatherRepositoryImpl.searchCities(city)
+
+            // Then
+            assertEquals(listOf<City>(),result)
         }
 
     @Test
-    fun `Given city name, When searchCities, Then weatherRemoteService searchCity returns list of RemoteCity`() =
+    fun `Given city name, When searchCities, Then weatherRemoteService searchCity returns list of City`() =
         runBlocking {
-            Mockito.`when`(weatherRemoteService.searchCities("Pune"))
+            // Given
+            val city = "Pune"
+            whenever(weatherRemoteService.searchCities(city))
                 .thenReturn(listOf(RemoteCity(1,"Pune","City")))
-            assertEquals(listOf(RemoteCity(1,"Pune","City")),weatherRepository.searchCities("Pune"))
+            whenever(domainCityMapper.mapRemoteCity(listOf(RemoteCity(1,"Pune","City"))))
+                .thenReturn(listOf(City(1,"Pune","City")))
+
+            // When
+            val result = weatherRepositoryImpl.searchCities(city)
+
+            // Then
+            assertEquals(listOf(City(1,"Pune","City")),result)
         }
 
     @Test
-    fun `Given city half name,When searchCities,Then weatherRemoteService searchCity returns list of RemoteCity`() =
+    fun `Given city half name,When searchCities,Then weatherRemoteService searchCity returns list of City matching name`() =
         runBlocking {
-            Mockito.`when`(weatherRemoteService.searchCities("De"))
-                .thenReturn(listOf(
-                    RemoteCity(1,"Delhi","City"),
-                    RemoteCity(2,"Dehradun","City"),
-                    RemoteCity(3,"Devprayag","City")))
 
-            assertEquals(listOf(
+            // Given
+            val city = "De"
+            val returnSearch = listOf(
                 RemoteCity(1,"Delhi","City"),
                 RemoteCity(2,"Dehradun","City"),
-                RemoteCity(3,"Devprayag","City")),weatherRemoteService.searchCities("De"))
+                RemoteCity(3,"Devprayag","City"))
+            val expectedResult = listOf(
+                City(1,"Delhi","City"),
+                City(2,"Dehradun","City"),
+                City(3,"Devprayag","City"))
+
+            whenever(weatherRemoteService.searchCities(city))
+                .thenReturn(returnSearch)
+            whenever(domainCityMapper.mapRemoteCity(returnSearch))
+                .thenReturn(expectedResult)
+
+            // When
+            val givenResult = weatherRepositoryImpl.searchCities(city)
+
+            // Then
+            assertEquals(expectedResult,givenResult)
         }
 
 
 
     @Test
-    fun `Search City Without Alphabets Returns Empty List`() = runBlocking {
-        Mockito.`when`(weatherRemoteService.searchCities("87878")).thenReturn(listOf())
-        assertEquals(listOf<RemoteCity>(),weatherRemoteService.searchCities("87878"))
+    fun `Given search contains non alphabetic value, When searchCities, Then return empty list`() =
+        runBlocking {
+            // Given
+            val city = "87878"
+            val searchResult = listOf<RemoteCity>()
+            val expectedResult = listOf<City>()
+
+            whenever(weatherRemoteService.searchCities(city)).thenReturn(searchResult)
+            whenever(domainCityMapper.mapRemoteCity(searchResult)).thenReturn(expectedResult)
+
+            // When
+            val givenResult = weatherRepositoryImpl.searchCities(city)
+
+            // Then
+            assertEquals(expectedResult,givenResult)
     }
 
     @Test
-    fun `Search City With Misspelled Alphabets Returns Empty List`() = runBlocking{
-        Mockito.`when`(weatherRemoteService.searchCities("Mumvai")).thenReturn(listOf())
-        assertEquals(listOf<RemoteCity>(),weatherRemoteService.searchCities("Mumvai"))
-    }
+    fun `Given city named misspelled, When searchCities, Then return empty list`() =
+        runBlocking{
+            // Given
+            val city = "Mumvai"
+            val searchResult = listOf<RemoteCity>()
+            val expectedResult = listOf<City>()
 
+            whenever(weatherRemoteService.searchCities(city)).thenReturn(searchResult)
+            whenever(domainCityMapper.mapRemoteCity(searchResult)).thenReturn(expectedResult)
+
+            // When
+            val givenResult = weatherRepositoryImpl.searchCities(city)
+
+            //Then
+            assertEquals(expectedResult,givenResult)
+    }
 }
