@@ -17,6 +17,7 @@ android {
 dependencies {
     implementation project(':presentation-entity')
     implementation project(':interactor')
+    implementation project(':resources')
 
     def ext = rootProject.ext
     implementation ext.kotlin.stdLib
