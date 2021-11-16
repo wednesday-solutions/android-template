@@ -19,7 +19,8 @@ include ':app',
         ':presentation-entity',
         ':navigation',
         ':navigation-di',
-        ':navigation-impl'
+        ':navigation-impl',
+        ':resources'
 
 
 rootProject.children.each {
