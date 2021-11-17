@@ -18,6 +18,7 @@ dependencies {
     implementation project(':presentation-entity')
     implementation project(':interactor')
     implementation project(':resources')
+    implementation project(':navigation')
 
     def ext = rootProject.ext
     implementation ext.kotlin.stdLib
