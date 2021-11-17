@@ -26,7 +26,10 @@ android {
 
 dependencies {
 
+
     def ext = rootProject.ext
+
+    implementation ext.androidx.legacy
 
     implementation ext.androidx.appCompat
     implementation ext.androidx.coreKtx

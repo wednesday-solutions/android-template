@@ -11,7 +11,7 @@ ext {
     androidxTestVersion = "1.4.0"
     realmVersion = "10.7.1"
     retrofitVersion = "2.9.0"
-    navVersion = "2.3.5"
+    navVersion = "2.3.0"
     roomVersion = "2.3.0"
 
     room = [
@@ -55,7 +55,8 @@ ext {
             lifecycleViewModel   : "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion",
             lifecycleRuntimeKtx  : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion",
             navigationFragment   : "androidx.navigation:navigation-fragment-ktx:$navVersion",
-            navigationUi         : "androidx.navigation:navigation-ui-ktx:$navVersion"
+            navigationUi         : "androidx.navigation:navigation-ui-ktx:$navVersion",
+            legacy               : "androidx.legacy:legacy-support-v4:1.0.0"
 
     ]
 
