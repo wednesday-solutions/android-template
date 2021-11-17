@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.wednesday.template.presentation.weather.search.SearchFragmentScreen
 import com.wednesday.template.resources.R as Re
 import com.wednesday.template.resources.databinding.ActivityMainBinding
 
@@ -33,14 +34,11 @@ class MainActivity : AppCompatActivity() {
             R.navigation.nav_main
         )
 
-        val searchFragmentScreen =
-            com.wednesday.template.presentation.weather.search.SearchFragmentScreen
-
-
+        val searchFragmentScreen = SearchFragmentScreen
 
         graph.setup(
             controller,
-            Re.layout.fragment_search,
+            R.id.searchFragment,
             bundleOf("key_args" to searchFragmentScreen)
         )
     }
