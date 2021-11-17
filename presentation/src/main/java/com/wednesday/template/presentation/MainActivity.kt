@@ -5,13 +5,11 @@ import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.annotation.NavigationRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.wednesday.template.presentation.screen.SearchFragmentScreen
 import com.wednesday.template.resources.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -32,13 +30,13 @@ class MainActivity : AppCompatActivity() {
             R.navigation.nav_main
         )
 
-        val searchFragmentScreen = SearchFragmentScreen()
+//        val searchFragmentScreen = SearchFragmentScreen()
 
-        graph.setup(
-            controller,
-            R.layout.fragment_search,
-            bundleOf("key_args" to searchFragmentScreen)
-        )
+//        graph.setup(
+//            controller,
+//            R.layout.fragment_search,
+//            bundleOf("key_args" to searchFragmentScreen)
+//        )
     }
 
     private fun NavGraph.setup(
