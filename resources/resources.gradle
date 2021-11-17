@@ -17,8 +17,7 @@ android {
             res.srcDirs = [
                     'src/main/res',
                     'src/main/activity',
-                    'src/main/fragment',
-                    'src/main/navigation'
+                    'src/main/fragment'
             ]
         }
     }
