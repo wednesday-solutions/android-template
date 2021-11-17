@@ -16,6 +16,7 @@ import com.wednesday.template.resources.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    // Checking
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
