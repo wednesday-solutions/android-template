@@ -2,7 +2,6 @@ package com.wednesday.template.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.IdRes
 import androidx.annotation.NavigationRes
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +12,6 @@ import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.wednesday.template.presentation.weather.search.SearchFragmentScreen
-import com.wednesday.template.resources.R as Re
 import com.wednesday.template.resources.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
