@@ -12,4 +12,5 @@ dependencies {
     def ext = rootProject.ext
 
     implementation ext.koin.core
+    implementation ext.koin.android
 }

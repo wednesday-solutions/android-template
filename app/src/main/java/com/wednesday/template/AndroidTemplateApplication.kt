@@ -4,6 +4,7 @@ import android.app.Application
 import com.wednesday.template.domain.domainModule
 import com.wednesday.template.interactor.interactorModule
 import com.wednesday.template.navigation.navigationModule
+import com.wednesday.template.presentation.searchViewModel
 import com.wednesday.template.repo.repoModule
 import com.wednesday.template.service.serviceModule
 import org.koin.android.ext.koin.androidContext
@@ -26,7 +27,8 @@ class AndroidTemplateApplication : Application() {
                 repoModule,
                 domainModule,
                 interactorModule,
-                navigationModule
+                navigationModule,
+                searchViewModel
             )
         }
     }
