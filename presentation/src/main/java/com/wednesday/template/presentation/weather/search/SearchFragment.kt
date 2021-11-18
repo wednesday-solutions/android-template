@@ -12,7 +12,7 @@ import org.koin.android.ext.android.inject
 
 class SearchFragment : Fragment() {
 
-    private var _binding:FragmentSearchBinding = null!!
+    private lateinit var _binding:FragmentSearchBinding
     private val binding get() = _binding
 
     private val viewModel by inject<SearchFragmentViewModel>()
