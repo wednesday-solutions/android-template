@@ -12,7 +12,7 @@ import org.koin.android.ext.android.inject
 
 class SearchFragment : Fragment() {
 
-    private lateinit var _binding:FragmentSearchBinding
+    private lateinit var _binding: FragmentSearchBinding
     private val binding get() = _binding
 
     private val viewModel by inject<SearchFragmentViewModel>()
@@ -23,7 +23,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentSearchBinding.inflate(inflater,container,false)
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -34,20 +34,16 @@ class SearchFragment : Fragment() {
 
     private fun setOnClickListener(binding: FragmentSearchBinding) = with(binding) {
 
-        searchEditText.addTextChangedListener(object :TextWatcher{
+        searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
             }
 
             override fun afterTextChanged(name: Editable?) {
                 viewModel.searchCity(name.toString())
             }
-
         })
-
     }
 }

@@ -10,10 +10,10 @@ class SearchFragmentViewModel(
     private val searchCityInteractor: SearchCityInteractor
 ) : ViewModel() {
 
-    fun searchCity(city:String){
+    fun searchCity(city: String) {
         viewModelScope.launch {
             val cityList = searchCityInteractor.searchCity(city)
-            Log.d("$$$$$$$$$$$$",cityList.toString())
+            Log.d("$$$$$$$$$$$$", cityList.toString())
         }
     }
 }
