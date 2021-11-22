@@ -2,33 +2,45 @@ package com.wednesday.template.presentation.weather.search
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
-import androidx.annotation.CallSuper
-import androidx.fragment.app.viewModels
+import android.util.Log
 import com.wednesday.template.presentation.base.effect.Effect
-import com.wednesday.template.presentation.base.fragment.BaseFragment
 import com.wednesday.template.presentation.base.fragment.BindingProvider
-import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
-import com.wednesday.template.presentation.screen.Screen
-import com.wednesday.template.presentation.screen.ScreenState
+import com.wednesday.template.presentation.base.fragment.MainFragment
+import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
 import com.wednesday.template.resources.databinding.FragmentSearchBinding
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
+import timber.log.Timber
 
-class SearchFragment<
-        SCREEN_STATE:ScreenState> : BaseFragment<FragmentSearchBinding,
+class SearchFragment : MainFragment<FragmentSearchBinding,
         SearchFragmentScreen,
-        SCREEN_STATE,
-        BaseViewModel<SearchFragmentScreen,SCREEN_STATE>>()
+        SearchFragmentScreenState,
+        SearchFragmentViewModel>()
 {
+    override val toolbarComponent: ToolbarComponent = ToolbarComponent(this)
 
-    val vm:SearchFragmentViewModel by viewModels()
+    override val viewModel: SearchFragmentViewModel by stateViewModel()
 
-    @CallSuper
+    override val bindingProvider: BindingProvider<FragmentSearchBinding> = FragmentSearchBinding::inflate
+
     override fun onViewCreated(binding: FragmentSearchBinding) {
         super.onViewCreated(binding)
 
         setOnClickListener(binding)
+        liveDataObserver()
+    }
+
+    private fun liveDataObserver() {
+        viewModel.result.observe(viewLifecycleOwner,{
+            Log.d("$$$$$$$$$$$4",viewModel.result.value.toString())
+        })
+    }
+
+    override fun onEffect(effect: Effect) {
+
+    }
+
+    override fun onState(screenState: SearchFragmentScreenState) {
+        super.onState(screenState)
 
     }
 
@@ -44,7 +56,8 @@ class SearchFragment<
             }
 
             override fun afterTextChanged(name: Editable?) {
-                vm.searchCity(name.toString())
+                viewModel.onIntent(SearchScreenIntent.SearchCities(name.toString()))
+
             }
 
         })
@@ -53,16 +66,4 @@ class SearchFragment<
 
 
 
-    override fun onEffect(effect: Effect) {
-
-    }
-
-    override fun onState(screenState: SCREEN_STATE) {
-
-    }
-
-    override val viewModel: BaseViewModel<SearchFragmentScreen, SCREEN_STATE> by viewModels()
-
-    override val bindingProvider: BindingProvider<FragmentSearchBinding>
-        get() = TODO("Not yet implemented")
 }
