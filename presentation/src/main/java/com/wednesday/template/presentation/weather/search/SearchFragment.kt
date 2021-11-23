@@ -1,7 +1,5 @@
 package com.wednesday.template.presentation.weather.search
 
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.core.widget.addTextChangedListener
 import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.effect.Effect
@@ -13,9 +11,9 @@ import com.wednesday.template.resources.databinding.FragmentSearchBinding
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class SearchFragment : MainFragment<FragmentSearchBinding,
-        SearchFragmentScreen,
-        SearchFragmentScreenState,
-        SearchFragmentViewModel>() {
+    SearchFragmentScreen,
+    SearchFragmentScreenState,
+    SearchFragmentViewModel>() {
     override val toolbarComponent: ToolbarComponent = ToolbarComponent(this)
 
     override val viewModel: SearchFragmentViewModel by stateViewModel()
@@ -35,7 +33,6 @@ class SearchFragment : MainFragment<FragmentSearchBinding,
     }
 
     override fun onEffect(effect: Effect) {
-
     }
 
     override fun onState(screenState: SearchFragmentScreenState) {
@@ -48,8 +45,5 @@ class SearchFragment : MainFragment<FragmentSearchBinding,
         searchEditText.addTextChangedListener {
             it?.let { viewModel.onIntent(SearchScreenIntent.SearchCities(it.toString())) }
         }
-
     }
-
-
 }

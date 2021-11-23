@@ -19,7 +19,6 @@ class SearchFragmentViewModel(
     }
 
     override fun onCreate(fromRecreate: Boolean) {
-
     }
 
     override fun onIntent(intent: SearchScreenIntent) {
@@ -37,6 +36,4 @@ class SearchFragmentViewModel(
             }
         }
     }
-
-
 }

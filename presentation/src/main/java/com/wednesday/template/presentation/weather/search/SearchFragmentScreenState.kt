@@ -10,4 +10,4 @@ data class SearchFragmentScreenState(
     override val toolbar: UIToolbar,
     override val showLoading: Boolean,
     val searchList: UIList = UIList()
-) :MainScreenState
+) : MainScreenState
