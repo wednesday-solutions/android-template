@@ -2,15 +2,15 @@ package com.wednesday.template.presentation.weather.search
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import androidx.core.view.KeyEventDispatcher
+import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.fragment.BindingProvider
 import com.wednesday.template.presentation.base.fragment.MainFragment
+import com.wednesday.template.presentation.base.list.ListComponent
+import com.wednesday.template.presentation.base.list.UIList
 import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
 import com.wednesday.template.resources.databinding.FragmentSearchBinding
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
-import timber.log.Timber
 
 class SearchFragment : MainFragment<FragmentSearchBinding,
         SearchFragmentScreen,
@@ -23,11 +23,15 @@ class SearchFragment : MainFragment<FragmentSearchBinding,
 
     override val bindingProvider: BindingProvider<FragmentSearchBinding> = FragmentSearchBinding::inflate
 
+    private val listComponent by component {
+        ListComponent(listViewModel = viewModel,recyclerViewId = R.id.searchRecyclerView){
+            addRenderer(UICityListRenderer())
+        }
+    }
 
     override fun onViewCreated(binding: FragmentSearchBinding) {
         super.onViewCreated(binding)
-
-        setOnClickListener(binding)
+        textWatcher(binding)
     }
 
     override fun onEffect(effect: Effect) {
@@ -36,10 +40,9 @@ class SearchFragment : MainFragment<FragmentSearchBinding,
 
     override fun onState(screenState: SearchFragmentScreenState) {
         super.onState(screenState)
-
     }
 
-    private fun setOnClickListener(binding: FragmentSearchBinding) = with(binding) {
+    private fun textWatcher(binding: FragmentSearchBinding) = with(binding) {
 
         searchEditText.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

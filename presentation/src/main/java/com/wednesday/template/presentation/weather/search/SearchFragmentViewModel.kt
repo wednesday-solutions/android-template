@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.base.UIListItemBase
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.base.intent.IntentHandler
@@ -20,7 +21,7 @@ class SearchFragmentViewModel(
     val result:MutableLiveData<UIList> = MutableLiveData()
 
     override fun getDefaultScreenState(): SearchFragmentScreenState {
-        return SearchFragmentScreenState(UIToolbar(UIText(),true, UIText()),false)
+        return SearchFragmentScreenState(UIToolbar(UIText(),true, UIText()),false, UIList())
     }
 
     override fun onCreate(fromRecreate: Boolean) {
@@ -30,9 +31,14 @@ class SearchFragmentViewModel(
         when(intent) {
             is SearchScreenIntent.SearchCities -> {
                 viewModelScope.launch {
-                    result.value = searchCityInteractor.search(intent.city)
                     setState {
-                        copy(showLoading=true,searchList = result.value!!)
+                        copy(showLoading=true)
+                    }
+                    result.value = searchCityInteractor.search(intent.city)
+                    if (result.value != null){
+                        setState {
+                            copy(showLoading = false,searchList = result.value!!)
+                        }
                     }
                 }
             }
