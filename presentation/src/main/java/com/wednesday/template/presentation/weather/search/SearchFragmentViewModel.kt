@@ -32,12 +32,8 @@ class SearchFragmentViewModel(
                 .map { it.trim() }
                 .debounce(1000)
                 .collect {
-                    if (it.isNotBlank()){
-                        val result = searchCityInteractor.search(it)
-                        setState {
-                            copy(showLoading = false, searchList = result)
-                        }
-                    }
+                    val result = searchCityInteractor.search(it)
+                    setState { copy(showLoading = false, searchList = result) }
                 }
         }
     }
