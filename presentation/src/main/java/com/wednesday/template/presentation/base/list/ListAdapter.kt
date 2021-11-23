@@ -2,6 +2,7 @@ package com.wednesday.template.presentation.base.list
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.wednesday.template.presentation.base.UIListItemBase
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.renderer.ListItemRenderer
 import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder

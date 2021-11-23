@@ -2,6 +2,7 @@ package com.wednesday.template.presentation.base.list
 
 import androidx.lifecycle.ViewModel
 import com.wednesday.template.presentation.R
+import com.wednesday.template.presentation.base.UIListItemBase
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.list.renderer.ListItemRenderer
