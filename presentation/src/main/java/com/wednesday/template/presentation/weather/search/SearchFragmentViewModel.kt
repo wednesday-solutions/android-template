@@ -11,7 +11,10 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class SearchFragmentViewModel(
@@ -27,19 +30,17 @@ class SearchFragmentViewModel(
 
     @FlowPreview
     override fun onCreate(fromRecreate: Boolean) {
-        viewModelScope.launch {
             mutableStateFlow
+                .debounce(500)
                 .map { it.trim() }
-                .debounce(1000)
-                .collect {
-                    if (it.isNotBlank()){
-                        val result = searchCityInteractor.search(it)
-                        setState {
-                            copy(showLoading = false, searchList = result)
-                        }
+                .filter { it.isNotBlank() }
+                .onEach {
+                    val result = searchCityInteractor.search(it)
+                    setState {
+                        copy(showLoading = false, searchList = result)
                     }
                 }
-        }
+                .launchIn(viewModelScope)
     }
 
     override fun onIntent(intent: SearchScreenIntent) {
