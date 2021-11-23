@@ -40,6 +40,7 @@ class SearchFragment : MainFragment<FragmentSearchBinding,
 
     override fun onState(screenState: SearchFragmentScreenState) {
         super.onState(screenState)
+        listComponent.setData(screenState.searchList)
     }
 
     private fun textWatcher(binding: FragmentSearchBinding) = with(binding) {
