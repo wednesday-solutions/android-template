@@ -7,6 +7,11 @@ import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class SearchFragmentViewModel(
@@ -14,11 +19,27 @@ class SearchFragmentViewModel(
 ) : BaseViewModel<SearchFragmentScreen, SearchFragmentScreenState>(),
     IntentHandler<SearchScreenIntent> {
 
+    private val mutableStateFlow: MutableStateFlow<String> = MutableStateFlow("")
+
     override fun getDefaultScreenState(): SearchFragmentScreenState {
         return SearchFragmentScreenState(UIToolbar(UIText(), true, UIText()), false, UIList())
     }
 
+    @FlowPreview
     override fun onCreate(fromRecreate: Boolean) {
+        viewModelScope.launch {
+            mutableStateFlow
+                .map { it.trim() }
+                .debounce(1000)
+                .collect {
+                    if (it.isNotBlank()){
+                        val result = searchCityInteractor.search(it)
+                        setState {
+                            copy(showLoading = false, searchList = result)
+                        }
+                    }
+                }
+        }
     }
 
     override fun onIntent(intent: SearchScreenIntent) {
@@ -28,10 +49,7 @@ class SearchFragmentViewModel(
                     setState {
                         copy(showLoading = true)
                     }
-                    val result = searchCityInteractor.search(intent.city)
-                    setState {
-                        copy(showLoading = false, searchList = result)
-                    }
+                    mutableStateFlow.value = intent.city
                 }
             }
         }
