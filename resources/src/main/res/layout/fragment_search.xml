@@ -7,6 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
+
     <EditText
         android:id="@+id/searchEditText"
         android:hint="@string/search_bar"
@@ -28,5 +29,12 @@
         app:layout_constraintTop_toBottomOf="@id/searchEditText"
         tools:listitem="@layout/item_list_text" />
 
+    <include
+        layout="@layout/component_loading"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

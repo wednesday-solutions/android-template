@@ -32,8 +32,8 @@ class SearchFragmentViewModel(
                 viewModelScope.launch {
                     result.value = searchCityInteractor.search(intent.city)
                     setState {
-                    copy(showLoading=true)
-                }
+                        copy(showLoading=true,searchList = result.value!!)
+                    }
                 }
             }
         }

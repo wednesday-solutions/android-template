@@ -3,6 +3,7 @@ package com.wednesday.template.presentation.weather.search
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import androidx.core.view.KeyEventDispatcher
 import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.fragment.BindingProvider
 import com.wednesday.template.presentation.base.fragment.MainFragment
@@ -22,17 +23,11 @@ class SearchFragment : MainFragment<FragmentSearchBinding,
 
     override val bindingProvider: BindingProvider<FragmentSearchBinding> = FragmentSearchBinding::inflate
 
+
     override fun onViewCreated(binding: FragmentSearchBinding) {
         super.onViewCreated(binding)
 
         setOnClickListener(binding)
-        liveDataObserver()
-    }
-
-    private fun liveDataObserver() {
-        viewModel.result.observe(viewLifecycleOwner,{
-            Log.d("$$$$$$$$$$$4",viewModel.result.value.toString())
-        })
     }
 
     override fun onEffect(effect: Effect) {
