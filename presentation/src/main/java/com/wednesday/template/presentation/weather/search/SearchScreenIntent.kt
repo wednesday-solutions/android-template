@@ -7,4 +7,11 @@ sealed interface SearchScreenIntent : Intent {
     data class SearchCities(
         val city: String
     ) : SearchScreenIntent
+
+    data class SearchCitiesModel(
+        val woeid: Int,
+        val title: String,
+        val locationType: String,
+        val latitude:String
+    ) : SearchScreenIntent
 }
