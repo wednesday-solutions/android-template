@@ -29,6 +29,7 @@ class SearchFragment : MainFragment< FragmentSearchBinding,
 
     override fun onViewCreated(binding: FragmentSearchBinding) {
         super.onViewCreated(binding)
+
         addTextListener(binding)
     }
 

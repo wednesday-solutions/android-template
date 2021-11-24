@@ -9,12 +9,18 @@ import kotlinx.coroutines.channels.Channel
 class UICityListViewHolder(private val binding: CityItemListBinding) :
     BaseViewHolder<UICity>(binding) {
 
-    override fun onSetupIntents(intentChannel: Channel<Intent>) {
+    override fun onSetupIntents(intentChannel: Channel<Intent>) = with(binding) {
+        addCityImageButtonListItem.setOnClickListener {
+
+        }
     }
 
     override fun onBindInternal() = binding.run {
         compareAndSet({ title }) {
             cityTextViewListItem.text = it
+        }
+        compareAndSet({latitude}){
+            latitudeTextViewListItem.text = it
         }
     }
 }

@@ -20,7 +20,8 @@ class UICityMapperImpl : UICityMapper {
             title = from.title,
             locationType = from.locationType,
             displayTitle = UIText { block(from.title) },
-            displayLocationType = UIText { block(from.locationType) }
+            displayLocationType = UIText { block(from.locationType) },
+            latitude = from.latitude
         )
     }
 
@@ -29,7 +30,8 @@ class UICityMapperImpl : UICityMapper {
         return City(
             id = from.cityId,
             title = from.title,
-            locationType = from.locationType
+            locationType = from.locationType,
+            latitude = from.latitude
         )
     }
 

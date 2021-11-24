@@ -1,11 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.textview.MaterialTextView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cityTextViewListItem"
-    android:layout_marginHorizontal="@dimen/default_margin"
-    android:paddingVertical="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/TextAppearance.MaterialComponents.Subtitle1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:text = "City Name" />
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/cityTextViewListItem"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/default_margin"
+        android:paddingVertical="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="City Name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/latitudeTextViewListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="latitude"
+        android:textColor="@color/cardview_shadow_start_color"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:textSize="12sp"
+        android:layout_marginHorizontal="@dimen/default_margin"
+        android:paddingVertical="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityTextViewListItem" />
+
+    <ImageButton
+        android:id="@+id/addCityImageButtonListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/latitudeTextViewListItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cityTextViewListItem"
+        android:contentDescription="@string/add_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

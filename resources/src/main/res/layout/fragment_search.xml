@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchEditText"
-        tools:listitem="@layout/item_list_text" />
+        tools:listitem="@layout/city_item_list" />
 
     <include
         layout="@layout/component_loading"
