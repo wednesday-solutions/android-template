@@ -4,5 +4,5 @@ data class City(
     val id: Int,
     val title: String,
     val locationType: String,
-    val latitude:String
+    val latitude: String
 )
