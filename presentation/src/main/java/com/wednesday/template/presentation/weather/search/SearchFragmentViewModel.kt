@@ -16,22 +16,24 @@ import kotlinx.coroutines.flow.onEach
 
 class SearchFragmentViewModel(
     private val searchCityInteractor: SearchCityInteractor
-) : BaseViewModel<SearchFragmentScreen, SearchFragmentScreenState>(),
+) : BaseViewModel<SearchFragmentScreen, SearchScreenState>(),
     IntentHandler<SearchScreenIntent> {
 
-    private val mutableStateFlow: MutableStateFlow<String> = MutableStateFlow("")
+    private val searchCityResponseMutableStateFlow: MutableStateFlow<String> = MutableStateFlow("")
 
-    override fun getDefaultScreenState(): SearchFragmentScreenState {
-        return SearchFragmentScreenState(UIToolbar(UIText(), true, UIText()), false, UIList())
+    override fun getDefaultScreenState(): SearchScreenState {
+        return SearchScreenState(UIToolbar(UIText(), true, UIText()), false, UIList())
     }
 
     @FlowPreview
     override fun onCreate(fromRecreate: Boolean) {
-            mutableStateFlow
+            searchCityResponseMutableStateFlow
                 .debounce(500)
                 .map { it.trim() }
-                .filter { it.isNotBlank() }
                 .onEach {
+                    setState {
+                        copy(showLoading = true)
+                    }
                     val result = searchCityInteractor.search(it)
                     setState {
                         copy(showLoading = false, searchList = result)
@@ -44,10 +46,7 @@ class SearchFragmentViewModel(
         when (intent) {
             is SearchScreenIntent.SearchCities -> {
                 viewModelScope.launch {
-                    setState {
-                        copy(showLoading = true)
-                    }
-                    mutableStateFlow.value = intent.city
+                    searchCityResponseMutableStateFlow.value = intent.city
                 }
             }
         }

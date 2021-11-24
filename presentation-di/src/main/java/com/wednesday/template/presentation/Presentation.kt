@@ -4,7 +4,7 @@ import com.wednesday.template.presentation.weather.search.SearchFragmentViewMode
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val searchViewModel = module {
+val viewModelModule = module {
     viewModel {
         SearchFragmentViewModel(get())
     }

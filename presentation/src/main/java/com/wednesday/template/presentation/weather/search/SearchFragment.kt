@@ -10,10 +10,10 @@ import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
 import com.wednesday.template.resources.databinding.FragmentSearchBinding
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
-class SearchFragment : MainFragment<FragmentSearchBinding,
+class SearchFragment : MainFragment< FragmentSearchBinding,
     SearchFragmentScreen,
-    SearchFragmentScreenState,
-    SearchFragmentViewModel>() {
+    SearchScreenState,
+    SearchFragmentViewModel >() {
     override val toolbarComponent: ToolbarComponent = ToolbarComponent(this)
 
     override val viewModel: SearchFragmentViewModel by stateViewModel()
@@ -29,18 +29,18 @@ class SearchFragment : MainFragment<FragmentSearchBinding,
 
     override fun onViewCreated(binding: FragmentSearchBinding) {
         super.onViewCreated(binding)
-        textWatcher(binding)
+        addTextListener(binding)
     }
 
     override fun onEffect(effect: Effect) {
     }
 
-    override fun onState(screenState: SearchFragmentScreenState) {
+    override fun onState(screenState: SearchScreenState) {
         super.onState(screenState)
         listComponent.setData(screenState.searchList)
     }
 
-    private fun textWatcher(binding: FragmentSearchBinding) = with(binding) {
+    private fun addTextListener(binding: FragmentSearchBinding) = with(binding) {
 
         searchEditText.addTextChangedListener {
             it?.let { viewModel.onIntent(SearchScreenIntent.SearchCities(it.toString())) }

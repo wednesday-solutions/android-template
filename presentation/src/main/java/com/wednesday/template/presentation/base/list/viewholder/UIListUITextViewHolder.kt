@@ -3,7 +3,6 @@ package com.wednesday.template.presentation.base.list.viewholder
 import com.wednesday.template.presentation.base.asString
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.UIListUIText
-// import com.wednesday.template.presentation.databinding.ItemListTextBinding
 import com.wednesday.template.resources.databinding.ItemListTextBinding
 import kotlinx.coroutines.channels.Channel
 

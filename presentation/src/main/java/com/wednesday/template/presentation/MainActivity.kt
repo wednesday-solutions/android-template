@@ -15,8 +15,7 @@ import com.wednesday.template.presentation.weather.search.SearchFragmentScreen
 import com.wednesday.template.resources.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
-    // Checking
+    
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,12 +32,12 @@ class MainActivity : AppCompatActivity() {
             R.navigation.nav_main
         )
 
-        val searchFragmentScreen = SearchFragmentScreen
+        val startScreen = SearchFragmentScreen
 
         graph.setup(
             controller,
             R.id.searchFragment,
-            bundleOf("key_args" to searchFragmentScreen)
+            bundleOf("key_args" to startScreen)
         )
     }
 

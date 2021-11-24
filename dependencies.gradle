@@ -56,8 +56,6 @@ ext {
             lifecycleRuntimeKtx  : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion",
             navigationFragment   : "androidx.navigation:navigation-fragment-ktx:$navVersion",
             navigationUi         : "androidx.navigation:navigation-ui-ktx:$navVersion",
-            legacy               : "androidx.legacy:legacy-support-v4:1.0.0"
-
     ]
 
     retrofit = [
