@@ -15,7 +15,6 @@ import com.wednesday.template.presentation.weather.search.SearchFragmentScreen
 import com.wednesday.template.resources.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

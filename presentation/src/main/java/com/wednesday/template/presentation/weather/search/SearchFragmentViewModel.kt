@@ -1,23 +1,17 @@
 package com.wednesday.template.presentation.weather.search
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
-import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
 import com.wednesday.template.presentation.weather.UICity
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import timber.log.Timber
 
 class SearchFragmentViewModel(
     private val searchCityInteractor: SearchCityInteractor,
@@ -55,14 +49,12 @@ class SearchFragmentViewModel(
                     searchCityResponseMutableStateFlow.value = intent.city
                 }
             }
-            is SearchScreenIntent.SearchCitiesModel ->{
+            is SearchScreenIntent.SearchCitiesModel -> {
                 viewModelScope.launch {
-                    val value = UICity(intent.woeid,intent.title, UIText(),intent.locationType,UIText(),intent.latitude)
+                    val value = UICity(intent.woeid, intent.title, UIText(), intent.locationType, UIText(), intent.latitude)
                     favouriteWeatherInteractor.setCityFavourite(value)
                 }
             }
         }
     }
-
-
 }

@@ -1,6 +1,5 @@
 package com.wednesday.template.presentation.weather.search
 
-import androidx.lifecycle.LifecycleCoroutineScope
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder
 import com.wednesday.template.presentation.weather.UICity
@@ -12,16 +11,16 @@ class UICityListViewHolder(private val binding: CityItemListBinding) :
 
     override fun onSetupIntents(intentChannel: Channel<Intent>) = with(binding) {
         addCityImageButtonListItem.setOnClickListener {
-            val value = SearchScreenIntent.SearchCitiesModel(item.cityId,item.title,item.locationType,item.latitude)
+            val value = SearchScreenIntent.SearchCitiesModel(item.cityId, item.title, item.locationType, item.latitude)
             intentChannel.trySend(value)
         }
     }
 
     override fun onBindInternal() = binding.run {
-        compareAndSet({ title }) {
+        compareAndSet( {  title } ) {
             cityTextViewListItem.text = it
         }
-        compareAndSet({latitude}){
+        compareAndSet( { latitude } ) {
             latitudeTextViewListItem.text = it
         }
     }
