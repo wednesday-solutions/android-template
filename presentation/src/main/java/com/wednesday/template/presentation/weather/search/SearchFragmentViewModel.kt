@@ -18,30 +18,30 @@ class SearchFragmentViewModel(
     private val favouriteWeatherInteractor: FavouriteWeatherInteractor
 ) : BaseViewModel<SearchFragmentScreen, SearchScreenState>(),
     IntentHandler<SearchScreenIntent> {
-
+    
     private val searchCityResponseMutableStateFlow: MutableStateFlow<String> = MutableStateFlow("")
-
+    
     override fun getDefaultScreenState(): SearchScreenState {
         return SearchScreenState(UIToolbar(UIText(), true, UIText()), false, UIList())
     }
-
+    
     @FlowPreview
     override fun onCreate(fromRecreate: Boolean) {
-            searchCityResponseMutableStateFlow
-                .debounce(500)
-                .map { it.trim() }
-                .onEach {
-                    setState {
-                        copy(showLoading = true)
-                    }
-                    val result = searchCityInteractor.search(it)
-                    setState {
-                        copy(showLoading = false, searchList = result)
-                    }
+        searchCityResponseMutableStateFlow
+            .debounce(500)
+            .map { it.trim() }
+            .onEach {
+                setState {
+                    copy(showLoading = true)
                 }
-                .launchIn(viewModelScope)
+                val result = searchCityInteractor.search(it)
+                setState {
+                    copy(showLoading = false, searchList = result)
+                }
+            }
+            .launchIn(viewModelScope)
     }
-
+    
     override fun onIntent(intent: SearchScreenIntent) {
         when (intent) {
             is SearchScreenIntent.SearchCities -> {
@@ -51,7 +51,14 @@ class SearchFragmentViewModel(
             }
             is SearchScreenIntent.SearchCitiesModel -> {
                 viewModelScope.launch {
-                    val value = UICity(intent.woeid, intent.title, UIText(), intent.locationType, UIText(), intent.latitude)
+                    val value = UICity(
+                        intent.woeid,
+                        intent.title,
+                        UIText(),
+                        intent.locationType,
+                        UIText(),
+                        intent.latitude
+                    )
                     favouriteWeatherInteractor.setCityFavourite(value)
                 }
             }
