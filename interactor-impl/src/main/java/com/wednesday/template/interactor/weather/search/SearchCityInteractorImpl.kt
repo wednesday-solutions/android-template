@@ -11,6 +11,8 @@ import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.weather.UICity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.zip
 import timber.log.Timber
 
@@ -26,6 +28,10 @@ class SearchCityInteractorImpl(
     override val searchResultsFlow: Flow<UIList> = favouriteCitiesFlowUseCase(Unit)
         .zip(searchResultStateFlow) { favoriteCites, searchResults ->
             citySearchResultMapper.map(favoriteCites, searchResults)
+        }.flowOn(coroutineContextController.dispatcherDefault)
+        .catch {
+            // todo handle error
+            emit(UIList())
         }
 
     override suspend fun search(term: String): Unit = coroutineContextController.switchToDefault {
