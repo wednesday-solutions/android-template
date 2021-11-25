@@ -9,13 +9,10 @@ import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.presentation.base.UIList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.zip
 import timber.log.Timber
 
 class SearchCityInteractorImpl(
