@@ -12,12 +12,7 @@ class UICityListViewHolder(private val binding: CityItemListBinding) :
 
     override fun onSetupIntents(intentChannel: Channel<Intent>) = with(binding) {
         addCityImageButtonListItem.setOnClickListener {
-            val value = SearchScreenIntent.SearchCitiesModel(
-                item.cityId,
-                item.title,
-                item.locationType,
-                item.latitude
-            )
+            val value = SearchScreenIntent.SearchCitiesModel(item)
             intentChannel.trySend(value)
             addCityImageButtonListItem.setBackgroundResource(R.drawable.heart_enable)
         }

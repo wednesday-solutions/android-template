@@ -1,6 +1,7 @@
 package com.wednesday.template.presentation.weather.search
 
 import com.wednesday.template.presentation.base.intent.Intent
+import com.wednesday.template.presentation.weather.UICity
 
 sealed interface SearchScreenIntent : Intent {
 
@@ -9,9 +10,6 @@ sealed interface SearchScreenIntent : Intent {
     ) : SearchScreenIntent
 
     data class SearchCitiesModel(
-        val woeid: Int,
-        val title: String,
-        val locationType: String,
-        val latitude: String
+        val city: UICity
     ) : SearchScreenIntent
 }

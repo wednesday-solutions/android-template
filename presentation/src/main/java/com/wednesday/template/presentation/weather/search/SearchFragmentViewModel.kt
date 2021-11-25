@@ -8,7 +8,6 @@ import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
-import com.wednesday.template.presentation.weather.UICity
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
@@ -31,6 +30,13 @@ class SearchFragmentViewModel(
 
     @FlowPreview
     override fun onCreate(fromRecreate: Boolean) {
+
+        searchCityInteractor.searchResultsFlow.onEach {
+            setState {
+                copy(showLoading = false, searchList = it)
+            }
+        }.launchIn(viewModelScope)
+
         searchCityResponseMutableStateFlow
             .debounce(500)
             .map { it.trim() }
@@ -44,10 +50,7 @@ class SearchFragmentViewModel(
                 setState {
                     copy(showLoading = true)
                 }
-                val result = searchCityInteractor.search(it)
-                setState {
-                    copy(showLoading = false, searchList = result)
-                }
+                searchCityInteractor.search(it)
             }
             .launchIn(viewModelScope)
     }
@@ -61,15 +64,7 @@ class SearchFragmentViewModel(
             }
             is SearchScreenIntent.SearchCitiesModel -> {
                 viewModelScope.launch {
-                    val value = UICity(
-                        intent.woeid,
-                        intent.title,
-                        UIText(),
-                        intent.locationType,
-                        UIText(),
-                        intent.latitude
-                    )
-                    favouriteWeatherInteractor.setCityFavourite(value)
+                    favouriteWeatherInteractor.setCityFavourite(intent.city)
                 }
             }
         }

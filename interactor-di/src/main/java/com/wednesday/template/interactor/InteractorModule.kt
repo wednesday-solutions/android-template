@@ -8,6 +8,8 @@ import com.wednesday.template.interactor.weather.UICityMapper
 import com.wednesday.template.interactor.weather.UICityMapperImpl
 import com.wednesday.template.interactor.weather.favourite.FavouriteWeatherInteractorImpl
 import com.wednesday.template.interactor.weather.search.SearchCityInteractorImpl
+import com.wednesday.template.interactor.weather.search.UICitySearchResultsMapper
+import com.wednesday.template.interactor.weather.search.UICitySearchResultsMapperImpl
 import org.koin.dsl.module
 
 val interactorModule = module {
@@ -16,7 +18,9 @@ val interactorModule = module {
     // Weather
     single<UICityMapper> { UICityMapperImpl() }
 
+    single<UICitySearchResultsMapper> { UICitySearchResultsMapperImpl(get()) }
+
     factory<FavouriteWeatherInteractor> { FavouriteWeatherInteractorImpl(get(), get(), get(), get(), get()) }
 
-    factory<SearchCityInteractor> { SearchCityInteractorImpl(get(), get(), get()) }
+    factory<SearchCityInteractor> { SearchCityInteractorImpl(get(), get(), get(), get()) }
 }
