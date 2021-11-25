@@ -16,30 +16,30 @@ import com.wednesday.template.resources.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         displayFragment()
         setContentView(binding.root)
     }
-    
+
     @SuppressLint("ResourceType")
     private fun displayFragment() {
         val (graph, controller) = getNavGraphWithController(
             binding.mainNavHostFragment.id,
             R.navigation.nav_main
         )
-        
+
         val startScreen = SearchFragmentScreen
-        
+
         graph.setup(
             controller,
             R.id.searchFragment,
             bundleOf("key_args" to startScreen)
         )
     }
-    
+
     private fun NavGraph.setup(
         navController: NavController,
         startDestId: Int,
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             navController.graph = this
         }
     }
-    
+
     private fun FragmentActivity.getNavGraphWithController(
         @IdRes navHostFragmentId: Int,
         @NavigationRes navGraphId: Int
@@ -62,10 +62,10 @@ class MainActivity : AppCompatActivity() {
         val navController = navHost.findNavController()
         val navInflater = navController.navInflater
         val graph = navInflater.inflate(navGraphId)
-        
+
         return NavGraphWithController(graph, navController)
     }
-    
+
     private data class NavGraphWithController(
         val graph: NavGraph,
         val controller: NavController

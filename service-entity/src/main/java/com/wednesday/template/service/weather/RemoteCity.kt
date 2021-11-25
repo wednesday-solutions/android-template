@@ -15,5 +15,5 @@ data class RemoteCity(
     val locationType: String,
 
     @SerialName("latt_long")
-    val latitude:String
+    val latitude: String
 )

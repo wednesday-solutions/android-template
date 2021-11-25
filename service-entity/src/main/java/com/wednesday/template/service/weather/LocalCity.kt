@@ -9,5 +9,5 @@ data class LocalCity(
     val woeid: Int,
     val title: String,
     val locationType: String,
-    val latitude:String
+    val latitude: String
 )

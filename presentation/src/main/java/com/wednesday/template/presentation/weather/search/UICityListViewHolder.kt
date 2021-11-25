@@ -8,7 +8,7 @@ import kotlinx.coroutines.channels.Channel
 
 class UICityListViewHolder(private val binding: CityItemListBinding) :
     BaseViewHolder<UICity>(binding) {
-    
+
     override fun onSetupIntents(intentChannel: Channel<Intent>) = with(binding) {
         addCityImageButtonListItem.setOnClickListener {
             val value = SearchScreenIntent.SearchCitiesModel(
@@ -20,7 +20,7 @@ class UICityListViewHolder(private val binding: CityItemListBinding) :
             intentChannel.trySend(value)
         }
     }
-    
+
     override fun onBindInternal() = binding.run {
         compareAndSet({ title }) {
             cityTextViewListItem.text = it
