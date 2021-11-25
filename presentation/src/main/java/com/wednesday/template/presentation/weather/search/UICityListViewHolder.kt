@@ -1,5 +1,6 @@
 package com.wednesday.template.presentation.weather.search
 
+import com.wednesday.template.resources.R
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder
 import com.wednesday.template.presentation.weather.UICity
@@ -18,6 +19,7 @@ class UICityListViewHolder(private val binding: CityItemListBinding) :
                 item.latitude
             )
             intentChannel.trySend(value)
+            addCityImageButtonListItem.setBackgroundResource(R.drawable.heart_enable)
         }
     }
 

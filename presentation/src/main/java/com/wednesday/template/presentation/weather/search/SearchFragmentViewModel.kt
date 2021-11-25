@@ -32,7 +32,7 @@ class SearchFragmentViewModel(
     @FlowPreview
     override fun onCreate(fromRecreate: Boolean) {
         searchCityResponseMutableStateFlow
-            .debounce(300)
+            .debounce(500)
             .map { it.trim() }
             .onEach {
 
