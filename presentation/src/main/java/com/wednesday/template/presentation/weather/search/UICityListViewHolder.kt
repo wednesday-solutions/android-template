@@ -1,9 +1,9 @@
 package com.wednesday.template.presentation.weather.search
 
-import com.wednesday.template.resources.R
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder
 import com.wednesday.template.presentation.weather.UICity
+import com.wednesday.template.resources.R
 import com.wednesday.template.resources.databinding.CityItemListBinding
 import kotlinx.coroutines.channels.Channel
 
