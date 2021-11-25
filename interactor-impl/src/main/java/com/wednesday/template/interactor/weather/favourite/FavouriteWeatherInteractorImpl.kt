@@ -42,7 +42,7 @@ class FavouriteWeatherInteractorImpl(
         Timber.tag(TAG).d("getFavouriteCitiesFlow")
         return getFavouriteCitiesFlowUseCase(Unit)
             .distinctUntilChanged()
-            .map { uiCityMapper.map(it) }
+            .map { uiCityMapper.mapFavouriteCity(it) }
             .onEach { Timber.tag(TAG).d("getFavouriteCitiesFlow: emit = $it") }
             .flowOn(coroutineContextController.dispatcherDefault)
     }

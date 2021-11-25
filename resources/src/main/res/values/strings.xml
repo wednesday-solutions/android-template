@@ -2,5 +2,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_bar">Search Bar</string>
-    <string name="add_button">add button</string>
+    <string name="search">Search</string>
+    <string name="enter_city_name">Enter City Name</string>
+    <string name="search_title">Search</string>
 </resources>

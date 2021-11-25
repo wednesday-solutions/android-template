@@ -3,6 +3,7 @@ package com.wednesday.template.presentation.weather.search
 import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.interactor.weather.SearchCityInteractor
+import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
@@ -25,7 +26,15 @@ class SearchFragmentViewModel(
     private val searchCityResponseMutableStateFlow: MutableStateFlow<String> = MutableStateFlow("")
 
     override fun getDefaultScreenState(): SearchScreenState {
-        return SearchScreenState(UIToolbar(UIText(), true, UIText()), false, UIList())
+        return SearchScreenState(
+            toolbar = UIToolbar(
+                title = UIText { block("Search") },
+                hasBackButton = true,
+                menuTitle = null
+            ),
+            showLoading = false,
+            searchList = UIList()
+        )
     }
 
     @FlowPreview
@@ -62,9 +71,13 @@ class SearchFragmentViewModel(
                     searchCityResponseMutableStateFlow.value = intent.city
                 }
             }
-            is SearchScreenIntent.SearchCitiesModel -> {
+            is SearchScreenIntent.ToggleFavourite -> {
                 viewModelScope.launch {
-                    favouriteWeatherInteractor.setCityFavourite(intent.city)
+                    if (intent.city.isFavourite) {
+                        favouriteWeatherInteractor.removeCityFavourite(intent.city)
+                    } else {
+                        favouriteWeatherInteractor.setCityFavourite(intent.city)
+                    }
                 }
             }
         }

@@ -5,6 +5,8 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.material.appbar.MaterialToolbar
+import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.base.asString
 import com.wednesday.template.presentation.base.component.StatefulComponent
@@ -19,7 +21,14 @@ class ToolbarComponent(
     private val onExitClicked: (() -> Unit)? = null
 ) : StatefulComponent<UIToolbar>() {
 
-    override fun bindInternal(view: View) = Unit
+    override fun bindInternal(view: View) {
+        (fragment.activity as? AppCompatActivity)?.apply {
+            val toolbar: MaterialToolbar? = findViewById(R.id.toolbar)
+            if (toolbar != null) {
+                setSupportActionBar(toolbar)
+            }
+        }
+    }
 
     override fun setDataInternal(newData: UIToolbar) {
         (fragment.activity as? AppCompatActivity)?.apply {

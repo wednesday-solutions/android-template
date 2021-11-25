@@ -1,5 +1,6 @@
 package com.wednesday.template.presentation.weather.search
 
+import androidx.core.content.ContextCompat
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder
 import com.wednesday.template.presentation.weather.UICity
@@ -11,19 +12,29 @@ class UICityListViewHolder(private val binding: CityItemListBinding) :
     BaseViewHolder<UICity>(binding) {
 
     override fun onSetupIntents(intentChannel: Channel<Intent>) = with(binding) {
-        addCityImageButtonListItem.setOnClickListener {
-            val value = SearchScreenIntent.SearchCitiesModel(item)
+        imageViewFavourite.setOnClickListener {
+            val value = SearchScreenIntent.ToggleFavourite(item)
             intentChannel.trySend(value)
-            addCityImageButtonListItem.setBackgroundResource(R.drawable.heart_enable)
+//            addCityImageButtonListItem.setBackgroundResource(R.drawable.heart_enable)
         }
     }
 
     override fun onBindInternal() = binding.run {
+
         compareAndSet({ title }) {
             cityTextViewListItem.text = it
         }
+
         compareAndSet({ latitude }) {
             latitudeTextViewListItem.text = it
+        }
+
+        compareAndSet({ isFavourite }) {
+            val drawable = ContextCompat.getDrawable(
+                root.context,
+                if (it) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+            )
+            imageViewFavourite.setImageDrawable(drawable)
         }
     }
 }

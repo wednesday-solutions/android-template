@@ -9,6 +9,10 @@ import timber.log.Timber
 interface UICityMapper : Mapper2<City, Boolean, UICity> {
 
     fun mapUICity(from: UICity): City
+
+    fun mapFavouriteCity(from: City): UICity
+
+    fun mapFavouriteCity(from: List<City>): List<UICity> = from.map(::mapFavouriteCity)
 }
 
 class UICityMapperImpl : UICityMapper {
@@ -33,6 +37,19 @@ class UICityMapperImpl : UICityMapper {
             title = from.title,
             locationType = from.locationType,
             latitude = from.latitude
+        )
+    }
+
+    override fun mapFavouriteCity(from: City): UICity {
+        Timber.tag(TAG).d("mapFavouriteCity() called with: from = $from")
+        return UICity(
+            cityId = from.id,
+            title = from.title,
+            locationType = from.locationType,
+            displayTitle = UIText { block(from.title) },
+            displayLocationType = UIText { block(from.locationType) },
+            latitude = from.latitude,
+            isFavourite = true
         )
     }
 

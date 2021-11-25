@@ -9,7 +9,7 @@ sealed interface SearchScreenIntent : Intent {
         val city: String
     ) : SearchScreenIntent
 
-    data class SearchCitiesModel(
+    data class ToggleFavourite(
         val city: UICity
     ) : SearchScreenIntent
 }

@@ -8,9 +8,13 @@ import com.wednesday.template.interactor.base.CoroutineContextController
 import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.presentation.base.UIList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.zip
 import timber.log.Timber
 
@@ -21,15 +25,18 @@ class SearchCityInteractorImpl(
     private val coroutineContextController: CoroutineContextController
 ) : SearchCityInteractor {
 
-    private val searchResultStateFlow = MutableStateFlow<List<City>>(listOf())
+    private val searchResultStateFlow = MutableSharedFlow<List<City>>()
 
     override val searchResultsFlow: Flow<UIList> = favouriteCitiesFlowUseCase(Unit)
-        .zip(searchResultStateFlow) { favoriteCites, searchResults ->
+        .combine(searchResultStateFlow) { favoriteCites, searchResults ->
             citySearchResultMapper.map(favoriteCites, searchResults)
-        }.flowOn(coroutineContextController.dispatcherDefault)
+        }
+        .onEach {
+            Timber.tag(TAG).d("searchResultsFlow: emit = $it")
+        }
+        .flowOn(coroutineContextController.dispatcherDefault)
         .catch {
             // todo handle error
-            emit(UIList())
         }
 
     override suspend fun search(term: String): Unit = coroutineContextController.switchToDefault {
