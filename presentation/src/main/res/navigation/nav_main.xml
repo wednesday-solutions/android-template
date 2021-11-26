@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_main"
-    app:startDestination="@id/searchFragment">
+    app:startDestination="@id/startFragment">
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.wednesday.template.presentation.weather.search.SearchFragment"
@@ -10,5 +10,9 @@
     <fragment
         android:id="@+id/startFragment"
         android:name="com.wednesday.template.presentation.weather.start.StartFragment"
-        android:label="StartFragment" />
+        android:label="StartFragment" >
+        <action
+            android:id="@+id/action_startFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
 </navigation>

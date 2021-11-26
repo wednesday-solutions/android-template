@@ -8,6 +8,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class StartScreenState(
     override val toolbar: UIToolbar,
-    override val showLoading: Boolean,
-    val favoriteCitiesList: UIList = UIList()
+    override val showLoading: Boolean
 ) : MainScreenState
