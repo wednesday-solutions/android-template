@@ -1,9 +1,10 @@
-package com.wednesday.template.presentation.weather.search
+package com.wednesday.template.presentation.weather.search.list
 
 import androidx.core.content.ContextCompat
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder
 import com.wednesday.template.presentation.weather.UICity
+import com.wednesday.template.presentation.weather.search.SearchScreenIntent
 import com.wednesday.template.resources.R
 import com.wednesday.template.resources.databinding.CityItemListBinding
 import kotlinx.coroutines.channels.Channel
@@ -15,7 +16,6 @@ class UICityListViewHolder(private val binding: CityItemListBinding) :
         imageViewFavourite.setOnClickListener {
             val value = SearchScreenIntent.ToggleFavourite(item)
             intentChannel.trySend(value)
-//            addCityImageButtonListItem.setBackgroundResource(R.drawable.heart_enable)
         }
     }
 

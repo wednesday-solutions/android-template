@@ -3,6 +3,8 @@ package com.wednesday.template.presentation.weather.search
 import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.interactor.weather.SearchCityInteractor
+import com.wednesday.template.navigation.Navigator
+import com.wednesday.template.navigation.search.SearchNavigator
 import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
@@ -18,7 +20,8 @@ import kotlinx.coroutines.launch
 
 class SearchFragmentViewModel(
     private val searchCityInteractor: SearchCityInteractor,
-    private val favouriteWeatherInteractor: FavouriteWeatherInteractor
+    private val favouriteWeatherInteractor: FavouriteWeatherInteractor,
+    private val navigator: SearchNavigator,
 ) : BaseViewModel<SearchFragmentScreen, SearchScreenState>(),
     IntentHandler<SearchScreenIntent> {
 
@@ -79,6 +82,7 @@ class SearchFragmentViewModel(
                     }
                 }
             }
+            SearchScreenIntent.Back -> navigator.back()
         }
     }
 }

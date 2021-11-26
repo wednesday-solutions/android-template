@@ -12,4 +12,6 @@ sealed interface SearchScreenIntent : Intent {
     data class ToggleFavourite(
         val city: UICity
     ) : SearchScreenIntent
+
+    object Back: SearchScreenIntent
 }

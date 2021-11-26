@@ -12,6 +12,7 @@ import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
 import com.wednesday.template.presentation.screen.Screen
 import com.wednesday.template.presentation.screen.ScreenState
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -126,7 +127,7 @@ abstract class BaseFragment<
         )
     }
 
-    protected inline fun <reified VM : BaseViewModel<SCREEN, SCREEN_STATE>> navViewModel() {
-        viewModel<VM> { parametersOf(this) }
+    protected inline fun <reified VM : BaseViewModel<SCREEN, SCREEN_STATE>> navViewModel(): Lazy<VM> {
+        return viewModel { parametersOf(this) }
     }
 }

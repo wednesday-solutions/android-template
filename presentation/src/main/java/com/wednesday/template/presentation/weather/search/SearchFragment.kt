@@ -7,6 +7,7 @@ import com.wednesday.template.presentation.base.fragment.BindingProvider
 import com.wednesday.template.presentation.base.fragment.MainFragment
 import com.wednesday.template.presentation.base.list.ListComponent
 import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
+import com.wednesday.template.presentation.weather.search.list.UICityListRenderer
 import com.wednesday.template.resources.databinding.FragmentSearchBinding
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
@@ -14,9 +15,11 @@ class SearchFragment : MainFragment< FragmentSearchBinding,
     SearchFragmentScreen,
     SearchScreenState,
     SearchFragmentViewModel >() {
-    override val toolbarComponent: ToolbarComponent = ToolbarComponent(this)
+    override val toolbarComponent: ToolbarComponent = ToolbarComponent(this, onBackClicked = {
+        viewModel.onIntent(SearchScreenIntent.Back)
+    })
 
-    override val viewModel: SearchFragmentViewModel by stateViewModel()
+    override val viewModel: SearchFragmentViewModel by navViewModel()
 
     override val bindingProvider: BindingProvider<FragmentSearchBinding> =
         FragmentSearchBinding::inflate

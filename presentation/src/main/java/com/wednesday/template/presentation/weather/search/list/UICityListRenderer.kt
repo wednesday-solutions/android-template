@@ -1,4 +1,4 @@
-package com.wednesday.template.presentation.weather.search
+package com.wednesday.template.presentation.weather.search.list
 
 import android.view.ViewGroup
 import com.wednesday.template.presentation.base.list.renderer.ListItemRenderer
