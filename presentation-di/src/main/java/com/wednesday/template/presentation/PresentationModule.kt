@@ -11,7 +11,7 @@ val presentationModule = module {
     viewModel { (fragment: Fragment) ->
         SearchFragmentViewModel(get(), get(), get { parametersOf(fragment) })
     }
-    viewModel{ (fragment: Fragment) ->
-        StartScreenViewModel(get(), get { parametersOf(fragment)})
+    viewModel { (fragment: Fragment) ->
+        StartScreenViewModel(get(), get { parametersOf(fragment) })
     }
 }

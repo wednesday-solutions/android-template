@@ -11,7 +11,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.wednesday.template.presentation.weather.search.SearchFragmentScreen
 import com.wednesday.template.presentation.weather.start.StartFragmentScreen
 import com.wednesday.template.resources.databinding.ActivityMainBinding
 

@@ -5,7 +5,7 @@ import com.wednesday.template.presentation.base.UIText
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class FavoriteCity(
+data class UIFavoriteCity(
     val cityId: Int,
     val title: String,
     val displayTitle: UIText,
@@ -13,5 +13,5 @@ data class FavoriteCity(
     val displayLocationType: UIText,
     val latitude: String,
     val isFavourite: Boolean,
-    val current_temp:String
-): UIListItemBase(id = "UICity $cityId")
+    val currentTemp: String
+) : UIListItemBase(id = "UICity $cityId")
