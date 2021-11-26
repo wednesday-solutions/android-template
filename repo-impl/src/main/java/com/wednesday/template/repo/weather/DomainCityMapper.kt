@@ -18,7 +18,8 @@ class DomainCityMapperImpl : DomainCityMapper {
         return City(
             id = from.woeid,
             title = from.title,
-            locationType = from.locationType
+            locationType = from.locationType,
+            latitude = from.latitude
         )
     }
 
@@ -27,7 +28,8 @@ class DomainCityMapperImpl : DomainCityMapper {
         return City(
             id = from.woeid,
             title = from.title,
-            locationType = from.locationType
+            locationType = from.locationType,
+            latitude = from.latitude
         )
     }
 

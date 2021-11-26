@@ -14,7 +14,8 @@ class LocalCityMapperImpl : LocalCityMapper {
         return LocalCity(
             woeid = from.id,
             title = from.title,
-            locationType = from.locationType
+            locationType = from.locationType,
+            latitude = from.latitude
         )
     }
 

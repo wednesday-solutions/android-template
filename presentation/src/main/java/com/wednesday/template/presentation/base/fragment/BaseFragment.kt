@@ -126,7 +126,7 @@ abstract class BaseFragment<
         )
     }
 
-    protected inline fun <reified VM : BaseViewModel<SCREEN, SCREEN_STATE>> navViewModel() {
-        viewModel<VM> { parametersOf(this) }
+    protected inline fun <reified VM : BaseViewModel<SCREEN, SCREEN_STATE>> navViewModel(): Lazy<VM> {
+        return viewModel { parametersOf(this) }
     }
 }

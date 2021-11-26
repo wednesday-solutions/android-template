@@ -1,39 +1,44 @@
 package com.wednesday.template.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.annotation.NavigationRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.wednesday.template.presentation.weather.search.SearchFragmentScreen
 import com.wednesday.template.resources.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        displayFragment()
         setContentView(binding.root)
     }
 
-//    private fun displayFragment() {
-//        val (graph, controller) = getNavGraphWithController(
-//            binding.mainNavHostFragment.id,
-//            1
-//        )
-//
-//        graph.setup(
-//            controller,
-//            // todo add home destination id
-//            1,
-//            bundleOf("key_args" to screen)
-//        )
-//    }
+    @SuppressLint("ResourceType")
+    private fun displayFragment() {
+        val (graph, controller) = getNavGraphWithController(
+            binding.mainNavHostFragment.id,
+            R.navigation.nav_main
+        )
+
+        val startScreen = SearchFragmentScreen
+
+        graph.setup(
+            controller,
+            R.id.searchFragment,
+            bundleOf("key_args" to startScreen)
+        )
+    }
 
     private fun NavGraph.setup(
         navController: NavController,

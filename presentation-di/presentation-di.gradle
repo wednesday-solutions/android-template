@@ -8,8 +8,11 @@ apply from: "$rootProject.projectDir/lint.gradle"
 
 dependencies {
     implementation project(":presentation")
+    implementation project(":interactor")
+    implementation project(":navigation")
 
     def ext = rootProject.ext
 
     implementation ext.koin.core
+    implementation ext.koin.android
 }

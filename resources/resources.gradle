@@ -26,6 +26,7 @@ android {
 
 dependencies {
 
+
     def ext = rootProject.ext
 
     implementation ext.androidx.appCompat

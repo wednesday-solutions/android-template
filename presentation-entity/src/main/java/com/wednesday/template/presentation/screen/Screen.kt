@@ -5,6 +5,6 @@ import androidx.annotation.IdRes
 
 sealed class Screen(@IdRes val id: Int) : Parcelable
 
-sealed class MainScreen(
+abstract class MainScreen(
     @IdRes id: Int
 ) : Screen(id = id)

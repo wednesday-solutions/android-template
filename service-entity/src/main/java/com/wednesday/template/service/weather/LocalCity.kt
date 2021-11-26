@@ -8,5 +8,6 @@ data class LocalCity(
     @PrimaryKey
     val woeid: Int,
     val title: String,
-    val locationType: String
+    val locationType: String,
+    val latitude: String
 )
