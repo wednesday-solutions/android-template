@@ -3,7 +3,6 @@ package com.wednesday.template.presentation.weather.search
 import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.interactor.weather.SearchCityInteractor
-import com.wednesday.template.navigation.Navigator
 import com.wednesday.template.navigation.search.SearchNavigator
 import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIText

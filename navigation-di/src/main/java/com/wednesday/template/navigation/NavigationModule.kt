@@ -11,10 +11,12 @@ val navigationModule = module {
     factory<Navigator> { (fragment: Fragment) -> NavigatorImpl(fragment) }
 
     factory<SearchNavigator> { (fragment: Fragment) ->
-        SearchNavigatorImpl(get {
-            parametersOf(
-                fragment
-            )
-        })
+        SearchNavigatorImpl(
+            get {
+                parametersOf(
+                    fragment
+                )
+            }
+        )
     }
 }

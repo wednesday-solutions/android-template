@@ -13,5 +13,5 @@ sealed interface SearchScreenIntent : Intent {
         val city: UICity
     ) : SearchScreenIntent
 
-    object Back: SearchScreenIntent
+    object Back : SearchScreenIntent
 }
