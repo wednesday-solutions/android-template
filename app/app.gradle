@@ -6,7 +6,7 @@ apply from: "$rootProject.projectDir/android.gradle"
 
 android {
     defaultConfig {
-        applicationId "com.armdroid.sample"
+        applicationId "com.wednesday.template"
         versionCode 1
         versionName "1.0"
     }
