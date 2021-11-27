@@ -23,7 +23,7 @@ class ToolbarComponent(
 ) : StatefulComponent<UIToolbar>() {
 
     override fun bindInternal(view: View) {
-        (fragment.activity as? AppCompatActivity)?.apply {
+        (fragment.requireActivity() as? AppCompatActivity)?.apply {
             val toolbar: MaterialToolbar? = findViewById(R.id.toolbar)
             if (toolbar != null) {
                 setSupportActionBar(toolbar)
@@ -32,7 +32,7 @@ class ToolbarComponent(
     }
 
     override fun setDataInternal(newData: UIToolbar) {
-        (fragment.activity as? AppCompatActivity)?.apply {
+        (fragment.requireActivity() as? AppCompatActivity)?.apply {
             supportActionBar?.setDisplayHomeAsUpEnabled(newData.hasBackButton)
             title = newData.title.asString()
             if (newData.menuIcon != null) {

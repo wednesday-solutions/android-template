@@ -3,7 +3,7 @@ package com.wednesday.template.service.weather
 import com.wednesday.template.service.RemoteDateSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.util.*
+import java.util.Date
 
 @Serializable
 data class RemoteConsolidatedWeather(

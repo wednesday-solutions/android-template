@@ -5,7 +5,7 @@ import timber.log.Timber
 
 class FetchFavouriteCitiesWeatherUseCaseImpl(
     private val weatherRepository: WeatherRepository
-): FetchFavouriteCitiesWeatherUseCase {
+) : FetchFavouriteCitiesWeatherUseCase {
 
     override suspend fun invokeInternal(param: Unit) {
         Timber.tag(TAG).d("invokeInternal() called with: param = $param")

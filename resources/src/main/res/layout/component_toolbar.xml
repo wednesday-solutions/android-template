@@ -9,10 +9,9 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
-        app:titleTextColor="?colorOnPrimary"
         android:layout_width="match_parent"
         style="@style/Widget.MaterialComponents.Toolbar"
-        app:navigationIconTint="?colorOnPrimary"
+        app:navigationIconTint="?android:attr/textColorPrimary"
         android:layout_height="?attr/actionBarSize">
 
     </com.google.android.material.appbar.MaterialToolbar>

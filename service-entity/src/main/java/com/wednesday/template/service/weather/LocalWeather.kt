@@ -4,17 +4,18 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
 import java.util.Date
 
 @Entity(
     tableName = "local_weather",
-    foreignKeys = [ForeignKey(
-        entity = LocalCity::class,
-        parentColumns = arrayOf("woeid"),
-        childColumns = arrayOf("cityWoeid"),
-        onDelete = CASCADE
-    )],
+    foreignKeys = [
+        ForeignKey(
+            entity = LocalCity::class,
+            parentColumns = arrayOf("woeid"),
+            childColumns = arrayOf("cityWoeid"),
+            onDelete = CASCADE
+        )
+    ],
 )
 data class LocalWeather(
     @PrimaryKey(autoGenerate = true)

@@ -17,7 +17,7 @@ internal fun UIText.asString(): String {
     return blocks.fold("") { acc, next -> acc + next.string(lazyContext) }
 }
 
-private fun UIText.Block.string(lazyContext: Lazy<Context>) = when(this) {
+private fun UIText.Block.string(lazyContext: Lazy<Context>) = when (this) {
     is Raw -> text
     is RawFormatted -> text.format(arg1, arg2, arg3)
     is Resource -> resId.asString(lazyContext)

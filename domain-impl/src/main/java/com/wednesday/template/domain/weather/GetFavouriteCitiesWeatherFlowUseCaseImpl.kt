@@ -7,7 +7,7 @@ import timber.log.Timber
 
 class GetFavouriteCitiesWeatherFlowUseCaseImpl(
     private val weatherRepository: WeatherRepository
-): GetFavouriteCitiesWeatherFlowUseCase {
+) : GetFavouriteCitiesWeatherFlowUseCase {
 
     override fun invokeInternal(param: Unit): Flow<List<Weather>> {
         Timber.tag(TAG).d("invokeInternal() called with: param = $param")

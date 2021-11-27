@@ -9,11 +9,7 @@ import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
-import com.wednesday.template.presentation.weather.UICity
 import com.wednesday.template.presentation.weather.search.SearchScreen
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

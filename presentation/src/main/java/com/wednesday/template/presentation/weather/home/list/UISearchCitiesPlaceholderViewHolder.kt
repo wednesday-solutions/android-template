@@ -23,5 +23,4 @@ class UISearchCitiesPlaceholderViewHolder(private val binding: ItemSearchCityPla
             textViewPlaceholder.setUIText(it)
         }
     }
-
 }

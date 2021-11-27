@@ -7,4 +7,4 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class UISearchCitiesPlaceholder(
     val text: UIText
-): UIListItemBase("UISearchCitiesPlaceholder")
+) : UIListItemBase("UISearchCitiesPlaceholder")

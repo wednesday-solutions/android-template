@@ -5,16 +5,16 @@ import com.wednesday.template.presentation.base.fragment.BindingProvider
 import com.wednesday.template.presentation.base.fragment.MainFragment
 import com.wednesday.template.presentation.base.list.ListComponent
 import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
-import com.wednesday.template.presentation.weather.home.list.UIWeatherRenderer
 import com.wednesday.template.presentation.weather.home.list.UISearchCitiesPlaceholderRenderer
+import com.wednesday.template.presentation.weather.home.list.UIWeatherRenderer
 import com.wednesday.template.resources.R
 import com.wednesday.template.resources.databinding.FragmentStartBinding
 
 class HomeFragment : MainFragment<
-        FragmentStartBinding,
-        HomeScreen,
-        HomeScreenState,
-        HomeViewModel>() {
+    FragmentStartBinding,
+    HomeScreen,
+    HomeScreenState,
+    HomeViewModel>() {
 
     override val toolbarComponent: ToolbarComponent = ToolbarComponent(this) {
         viewModel.onIntent(HomeScreenIntent.Search)

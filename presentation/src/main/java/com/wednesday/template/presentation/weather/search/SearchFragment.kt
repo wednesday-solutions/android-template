@@ -14,6 +14,7 @@ class SearchFragment : MainFragment< FragmentSearchBinding,
     SearchScreen,
     SearchScreenState,
     SearchFragmentViewModel >() {
+
     override val toolbarComponent: ToolbarComponent = ToolbarComponent(this, onBackClicked = {
         viewModel.onIntent(SearchScreenIntent.Back)
     })

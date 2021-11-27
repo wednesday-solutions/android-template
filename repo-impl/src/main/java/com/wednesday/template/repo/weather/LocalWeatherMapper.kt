@@ -7,11 +7,11 @@ import com.wednesday.template.service.weather.LocalWeather
 import com.wednesday.template.service.weather.RemoteWeather
 import timber.log.Timber
 
-interface LocalWeatherMapper: Mapper2<RemoteWeather, Int, LocalWeather>
+interface LocalWeatherMapper : Mapper2<RemoteWeather, Int, LocalWeather>
 
 class LocalWeatherMapperImpl(
     private val dateRepo: DateRepo
-): LocalWeatherMapper {
+) : LocalWeatherMapper {
 
     override fun map(from1: RemoteWeather, from2: Int): LocalWeather {
         Timber.tag(TAG).d("map() called with: from1 = $from1, from2 = $from2")

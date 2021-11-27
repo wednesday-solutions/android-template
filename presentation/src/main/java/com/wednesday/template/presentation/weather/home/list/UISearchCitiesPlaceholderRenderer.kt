@@ -14,4 +14,3 @@ class UISearchCitiesPlaceholderRenderer : ListItemRenderer<UISearchCitiesPlaceho
         )
     }
 }
-

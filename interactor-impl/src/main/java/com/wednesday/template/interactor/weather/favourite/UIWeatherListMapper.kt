@@ -25,9 +25,11 @@ class UIWeatherListMapperImpl : UIWeatherListMapper {
         }
 
         if (weatherList.isEmpty()) {
-            return UIList(UISearchCitiesPlaceholder(
-                text = UIText { block(R.string.search_cities_to_add_to_fav) }
-            ))
+            return UIList(
+                UISearchCitiesPlaceholder(
+                    text = UIText { block(R.string.search_cities_to_add_to_fav) }
+                )
+            )
         }
 
         return UIList(weatherList)

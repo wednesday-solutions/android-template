@@ -2,7 +2,6 @@ package com.wednesday.template.presentation.base
 
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
-import androidx.annotation.IdRes
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

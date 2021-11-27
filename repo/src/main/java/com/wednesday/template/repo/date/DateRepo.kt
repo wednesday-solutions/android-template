@@ -6,7 +6,7 @@ import com.wednesday.template.domain.date.JavaDate
 import com.wednesday.template.domain.date.Time
 import com.wednesday.template.domain.date.TimePeriod
 
-interface DateRepo  {
+interface DateRepo {
 
     val timeComparator: Comparator<Time>
 
@@ -66,7 +66,7 @@ interface DateRepo  {
 
     fun mapTime(date: JavaDate): Time
 
-    fun datesInBetween(start: Date, end: Date): List<Date> //end is exclusive
+    fun datesInBetween(start: Date, end: Date): List<Date> // end is exclusive
 
     fun parseJavaDate(date: String, format: String): JavaDate
 }
