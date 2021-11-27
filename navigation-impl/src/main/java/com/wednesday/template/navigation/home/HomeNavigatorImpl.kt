@@ -1,13 +1,13 @@
-package com.wednesday.template.navigation.start
+package com.wednesday.template.navigation.home
 
 import com.wednesday.template.navigation.Navigator
 import com.wednesday.template.presentation.screen.Screen
 
-class StartNavigatorImpl(
+class HomeNavigatorImpl(
     private val navigator: Navigator
-) : StartNavigator {
+) : HomeNavigator {
 
-    override fun onSearchClick(screen: Screen) {
+    override fun navigateTo(screen: Screen) {
         navigator.navigateTo(screen)
     }
 }

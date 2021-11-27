@@ -34,4 +34,6 @@ dependencies {
     androidTestImplementation ext.test.androidxExt
     androidTestImplementation ext.test.kotlinTest
     androidTestImplementation ext.test.flowTest
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 }

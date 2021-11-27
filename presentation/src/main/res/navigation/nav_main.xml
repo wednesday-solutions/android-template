@@ -9,7 +9,7 @@
         android:label="SearchFragment" />
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.wednesday.template.presentation.weather.start.StartFragment"
+        android:name="com.wednesday.template.presentation.weather.home.HomeFragment"
         android:label="StartFragment" >
         <action
             android:id="@+id/action_startFragment_to_searchFragment"

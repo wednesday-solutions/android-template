@@ -1,8 +1,8 @@
-package com.wednesday.template.presentation.weather.start
+package com.wednesday.template.presentation.weather.search
 
 import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.screen.MainScreen
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-object StartFragmentScreen : MainScreen(R.id.startFragment)
+object SearchScreen : MainScreen(R.id.searchFragment)

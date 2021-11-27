@@ -11,6 +11,7 @@ dependencies {
     implementation project(":presentation-entity")
     implementation project(":domain")
     implementation project(":domain-entity")
+    implementation project(":resources")
 
     def ext = rootProject.ext
     implementation ext.kotlin.stdLib

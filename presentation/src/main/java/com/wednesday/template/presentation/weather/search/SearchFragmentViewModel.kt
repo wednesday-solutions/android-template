@@ -21,7 +21,7 @@ class SearchFragmentViewModel(
     private val searchCityInteractor: SearchCityInteractor,
     private val favouriteWeatherInteractor: FavouriteWeatherInteractor,
     private val navigator: SearchNavigator,
-) : BaseViewModel<SearchFragmentScreen, SearchScreenState>(),
+) : BaseViewModel<SearchScreen, SearchScreenState>(),
     IntentHandler<SearchScreenIntent> {
 
     private val searchCityResponseMutableStateFlow: MutableStateFlow<String> = MutableStateFlow("")
@@ -31,7 +31,7 @@ class SearchFragmentViewModel(
             toolbar = UIToolbar(
                 title = UIText { block("Search") },
                 hasBackButton = true,
-                menuTitle = null
+                menuIcon = null
             ),
             showLoading = false,
             searchList = UIList()

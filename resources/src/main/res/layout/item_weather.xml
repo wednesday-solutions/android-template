@@ -8,6 +8,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/cityName"
+        style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -16,10 +17,19 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/cityTemp"
+        style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Temp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/nestedRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
