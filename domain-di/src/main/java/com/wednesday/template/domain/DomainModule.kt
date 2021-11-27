@@ -1,7 +1,11 @@
 package com.wednesday.template.domain
 
+import com.wednesday.template.domain.weather.FetchFavouriteCitiesWeatherUseCase
+import com.wednesday.template.domain.weather.FetchFavouriteCitiesWeatherUseCaseImpl
 import com.wednesday.template.domain.weather.GetFavouriteCitiesFlowUseCase
 import com.wednesday.template.domain.weather.GetFavouriteCitiesFlowUseCaseImpl
+import com.wednesday.template.domain.weather.GetFavouriteCitiesWeatherFlowUseCase
+import com.wednesday.template.domain.weather.GetFavouriteCitiesWeatherFlowUseCaseImpl
 import com.wednesday.template.domain.weather.RemoveCityFavouriteUseCase
 import com.wednesday.template.domain.weather.RemoveCityFavouriteUseCaseImpl
 import com.wednesday.template.domain.weather.SearchCitiesUseCase
@@ -19,4 +23,8 @@ val domainModule = module {
     single<RemoveCityFavouriteUseCase> { RemoveCityFavouriteUseCaseImpl(get()) }
 
     single<SearchCitiesUseCase> { SearchCitiesUseCaseImpl(get()) }
+
+    single<GetFavouriteCitiesWeatherFlowUseCase> { GetFavouriteCitiesWeatherFlowUseCaseImpl(get()) }
+
+    single<FetchFavouriteCitiesWeatherUseCase> { FetchFavouriteCitiesWeatherUseCaseImpl(get()) }
 }

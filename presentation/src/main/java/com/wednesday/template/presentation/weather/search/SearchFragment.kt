@@ -11,9 +11,10 @@ import com.wednesday.template.presentation.weather.search.list.UICityListRendere
 import com.wednesday.template.resources.databinding.FragmentSearchBinding
 
 class SearchFragment : MainFragment< FragmentSearchBinding,
-    SearchFragmentScreen,
+    SearchScreen,
     SearchScreenState,
     SearchFragmentViewModel >() {
+
     override val toolbarComponent: ToolbarComponent = ToolbarComponent(this, onBackClicked = {
         viewModel.onIntent(SearchScreenIntent.Back)
     })

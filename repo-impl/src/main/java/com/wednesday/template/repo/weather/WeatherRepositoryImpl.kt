@@ -1,8 +1,13 @@
 package com.wednesday.template.repo.weather
 
 import com.wednesday.template.domain.weather.City
+import com.wednesday.template.domain.weather.Weather
+import com.wednesday.template.repo.date.DateRepo
 import com.wednesday.template.service.weather.WeatherLocalService
 import com.wednesday.template.service.weather.WeatherRemoteService
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -12,7 +17,10 @@ class WeatherRepositoryImpl(
     private val weatherRemoteService: WeatherRemoteService,
     private val weatherLocalService: WeatherLocalService,
     private val domainCityMapper: DomainCityMapper,
-    private val localCityMapper: LocalCityMapper
+    private val localCityMapper: LocalCityMapper,
+    private val localWeatherMapper: LocalWeatherMapper,
+    private val domainWeatherMapper: DomainWeatherMapper,
+    private val dateRepo: DateRepo
 ) : WeatherRepository {
 
     override suspend fun searchCities(searchTerm: String): List<City> {
@@ -29,6 +37,11 @@ class WeatherRepositoryImpl(
             .onEach { Timber.tag(TAG).d("getFavouriteCitiesFlow: emit = $it") }
     }
 
+    override suspend fun getFavouriteCitiesList(): List<City> {
+        Timber.tag(TAG).d("getFavouriteCitiesList() called")
+        return weatherLocalService.getFavoriteCities().let(domainCityMapper::map)
+    }
+
     override suspend fun setCityAsFavourite(city: City) {
         Timber.tag(TAG).d("setCityAsFavourite: city = $city")
         weatherLocalService.markCityAsFavorite(localCityMapper.map(city))
@@ -37,6 +50,37 @@ class WeatherRepositoryImpl(
     override suspend fun removeCityAsFavourite(city: City) {
         Timber.tag(TAG).d("removeCityAsFavourite: city = $city")
         weatherLocalService.deleteFavoriteCity(localCityMapper.map(city))
+    }
+
+    override suspend fun fetchWeatherForFavouriteCities(): Unit = coroutineScope {
+        Timber.tag(TAG).d("fetchWeatherForFavouriteCities() called")
+        val todayDate = dateRepo.todayDate()
+        weatherLocalService.getFavoriteCities().map {
+            async {
+                val localWeather = weatherLocalService.getLocalWeather(it.woeid)
+                val localWeatherDate = localWeather?.date?.let { date -> dateRepo.mapDate(date) }
+                if (localWeatherDate != todayDate) {
+                    weatherRemoteService.weatherForCity(it.woeid).let { remoteWeather ->
+                        weatherLocalService.addLocalWeather(localWeatherMapper.map(remoteWeather, it.woeid))
+                    }
+                }
+            }
+        }.awaitAll()
+    }
+
+    override fun getFavouriteCitiesWeatherList(): List<Weather> {
+        Timber.tag(TAG).d("getFavouriteCitiesWeatherList() called")
+        return weatherLocalService
+            .getFavouriteCitiesWeatherList()
+            .let(domainWeatherMapper::map)
+    }
+
+    override fun getFavouriteCitiesWeatherFlow(): Flow<List<Weather>> {
+        Timber.tag(TAG).d("getFavouriteCitiesWeatherFlow() called")
+        return weatherLocalService
+            .getFavouriteCitiesWeatherFlow()
+            .map { domainWeatherMapper.map(it) }
+            .onEach { Timber.tag(TAG).d("getFavouriteCitiesWeatherFlow: emit = $it") }
     }
 
     companion object {

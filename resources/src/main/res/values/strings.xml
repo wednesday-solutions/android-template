@@ -5,4 +5,5 @@
     <string name="search">Search</string>
     <string name="enter_city_name">Enter City Name</string>
     <string name="search_title">Search</string>
+    <string name="search_cities_to_add_to_fav">Your favourite cities will appear here. Search cities and add them as favourite.</string>
 </resources>

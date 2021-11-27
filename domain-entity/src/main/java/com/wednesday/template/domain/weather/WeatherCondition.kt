@@ -1,7 +1,7 @@
 package com.wednesday.template.domain.weather
 
 enum class WeatherCondition {
-    snow,
+    SNOW,
     sleet,
     hail,
     thunderstorm,
@@ -16,7 +16,7 @@ enum class WeatherCondition {
     companion object {
         fun weatherConditionFromAbbreviation(abbreviation: String): WeatherCondition {
             return when (abbreviation) {
-                "sn" -> snow
+                "sn" -> SNOW
                 "sl" -> sleet
                 "h" -> hail
                 "t" -> thunderstorm

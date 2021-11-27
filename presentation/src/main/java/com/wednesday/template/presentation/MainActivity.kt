@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.wednesday.template.presentation.weather.search.SearchFragmentScreen
+import com.wednesday.template.presentation.weather.home.HomeScreen
 import com.wednesday.template.resources.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -31,11 +31,11 @@ class MainActivity : AppCompatActivity() {
             R.navigation.nav_main
         )
 
-        val startScreen = SearchFragmentScreen
+        val startScreen = HomeScreen
 
         graph.setup(
             controller,
-            R.id.searchFragment,
+            R.id.startFragment,
             bundleOf("key_args" to startScreen)
         )
     }

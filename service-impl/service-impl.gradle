@@ -7,6 +7,16 @@ plugins {
 apply from: "$rootProject.projectDir/android.gradle"
 apply from: "$rootProject.projectDir/lint.gradle"
 
+android {
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
 dependencies {
 
     implementation project(':service-entity')
@@ -34,4 +44,6 @@ dependencies {
     androidTestImplementation ext.test.androidxExt
     androidTestImplementation ext.test.kotlinTest
     androidTestImplementation ext.test.flowTest
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 }

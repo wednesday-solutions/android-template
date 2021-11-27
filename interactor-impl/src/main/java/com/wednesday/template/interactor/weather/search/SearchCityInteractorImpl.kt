@@ -33,7 +33,7 @@ class SearchCityInteractorImpl(
         }
         .flowOn(coroutineContextController.dispatcherDefault)
         .catch {
-            // todo handle error
+            emit(UIList())
         }
 
     override suspend fun search(term: String): Unit = coroutineContextController.switchToDefault {

@@ -21,4 +21,16 @@ interface WeatherLocalServiceImpl : WeatherLocalService {
 
     @Delete
     override suspend fun deleteFavoriteCity(city: LocalCity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    override suspend fun addLocalWeather(weather: LocalWeather)
+
+    @Query("Select * from local_weather WHERE cityWoeid=:woeid")
+    override suspend fun getLocalWeather(woeid: Int): LocalWeather?
+
+    @Query("Select * from favorite_cities INNER JOIN local_weather ON local_weather.cityWoeid=favorite_cities.woeid")
+    override fun getFavouriteCitiesWeatherList(): List<LocalCityWithWeather>
+
+    @Query("Select * from favorite_cities INNER JOIN local_weather ON local_weather.cityWoeid=favorite_cities.woeid")
+    override fun getFavouriteCitiesWeatherFlow(): Flow<List<LocalCityWithWeather>>
 }

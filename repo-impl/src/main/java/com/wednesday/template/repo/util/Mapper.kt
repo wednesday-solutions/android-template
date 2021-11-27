@@ -1,4 +1,4 @@
-package com.wednesday.template.repo.util.mapper
+package com.wednesday.template.repo.util
 
 interface Mapper<FROM, TO> {
 
