@@ -2,7 +2,6 @@ package com.wednesday.template.service.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import com.wednesday.template.service.DateConverter
 import com.wednesday.template.service.weather.LocalCity

@@ -6,7 +6,8 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 object RemoteDateSerializer : KSerializer<Date> {
     private val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -14,7 +15,6 @@ object RemoteDateSerializer : KSerializer<Date> {
     override val descriptor = PrimitiveSerialDescriptor("RemoteDateSerializer", PrimitiveKind.STRING)
 
     override fun deserialize(decoder: Decoder): Date {
-        format.timeZone = TimeZone.getTimeZone("UTC")
         return format.parse(decoder.decodeString())!!
     }
 
