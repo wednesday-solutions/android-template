@@ -24,8 +24,6 @@ interface DateRepo {
 
     fun format(time: Time, format: String): String
 
-    fun getEpochDay(date: Date): Long
-
     fun convertToLong(date: Date): Long
 
     fun convertToLong(dateTime: DateTime): Long

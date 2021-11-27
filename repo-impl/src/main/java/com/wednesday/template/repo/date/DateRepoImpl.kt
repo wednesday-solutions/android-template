@@ -7,7 +7,6 @@ import com.wednesday.template.domain.date.JavaDate
 import com.wednesday.template.domain.date.Time
 import com.wednesday.template.domain.date.TimePeriod
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.Calendar
 import kotlin.Comparator
 
@@ -49,11 +48,6 @@ class DateRepoImpl : DateRepo {
     override fun format(time: Time, format: String): String {
         val javaDate = mapTime(time)
         return SimpleDateFormat(format).format(javaDate)
-    }
-
-    override fun getEpochDay(date: Date): Long {
-        val localDate = LocalDate.of(date.year, date.month + 1, date.dayOfMonth)
-        return localDate.toEpochDay()
     }
 
     override fun convertToLong(date: Date) = mapDate(date).time
