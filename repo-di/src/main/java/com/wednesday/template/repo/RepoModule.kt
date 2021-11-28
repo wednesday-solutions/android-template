@@ -21,6 +21,8 @@ val repoModule = module {
 
     single<LocalDayWeatherMapper> { LocalDayWeatherMapperImpl() }
 
+    single<DomainDayWeatherMapper> { DomainDayWeatherMapperImpl(get()) }
+
     single<WeatherRepository> {
         WeatherRepositoryImpl(
             get(), get(), get(), get(), get(), get(),

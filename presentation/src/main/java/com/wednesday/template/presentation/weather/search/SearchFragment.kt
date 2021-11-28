@@ -13,13 +13,13 @@ import com.wednesday.template.resources.databinding.FragmentSearchBinding
 class SearchFragment : MainFragment< FragmentSearchBinding,
     SearchScreen,
     SearchScreenState,
-    SearchFragmentViewModel >() {
+    SearchViewModel >() {
 
     override val toolbarComponent: ToolbarComponent = ToolbarComponent(this, onBackClicked = {
         viewModel.onIntent(SearchScreenIntent.Back)
     })
 
-    override val viewModel: SearchFragmentViewModel by navViewModel()
+    override val viewModel: SearchViewModel by navViewModel()
 
     override val bindingProvider: BindingProvider<FragmentSearchBinding> =
         FragmentSearchBinding::inflate

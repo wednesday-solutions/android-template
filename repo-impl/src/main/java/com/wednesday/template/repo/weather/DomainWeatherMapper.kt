@@ -10,7 +10,7 @@ import timber.log.Timber
 interface DomainWeatherMapper : Mapper<LocalCityWithWeather, Weather>
 
 class DomainWeatherMapperImpl(
-    private val dateRepo: DateRepo
+    private val dayWeatherMapper: DomainDayWeatherMapper
 ) : DomainWeatherMapper {
 
     override fun map(from: LocalCityWithWeather): Weather {
@@ -18,14 +18,9 @@ class DomainWeatherMapperImpl(
         return Weather(
             title = from.weather.title,
             woeid = from.city.woeid,
-            minTemp = from.dayWeather.first().minTemp,
-            maxTemp = from.dayWeather.first().maxTemp,
-            temp = from.dayWeather.first().temp,
-            date = from.dayWeather.first().date.toDate()
+            dayWeatherList = dayWeatherMapper.map(from.dayWeather)
         )
     }
-
-    private fun JavaDate.toDate() = dateRepo.mapDate(this)
 
     companion object {
         private const val TAG = "DomainWeatherMapperImpl"

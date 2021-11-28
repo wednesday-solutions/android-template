@@ -34,7 +34,7 @@ class ToolbarComponent(
     override fun setDataInternal(newData: UIToolbar) {
         (fragment.requireActivity() as? AppCompatActivity)?.apply {
             supportActionBar?.setDisplayHomeAsUpEnabled(newData.hasBackButton)
-            title = newData.title.asString()
+            supportActionBar?.title = newData.title.asString()
             if (newData.menuIcon != null) {
                 invalidateOptionsMenu()
             }
