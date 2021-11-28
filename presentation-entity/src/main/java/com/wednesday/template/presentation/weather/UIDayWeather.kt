@@ -5,10 +5,9 @@ import com.wednesday.template.presentation.base.UIText
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UIWeather(
+data class UIDayWeather(
     val cityId: Int,
-    val title: UIText,
     val currentTemp: UIText,
     val minMaxTemp: UIText,
-    val dayWeatherList: List<UIListItemBase>
-) : UIListItemBase(id = "UICity $cityId")
+    val date: UIText
+) : UIListItemBase(id = "UICity $cityId $date")

@@ -19,6 +19,7 @@ class WeatherRepositoryImpl(
     private val domainCityMapper: DomainCityMapper,
     private val localCityMapper: LocalCityMapper,
     private val localWeatherMapper: LocalWeatherMapper,
+    private val localDayWeatherMapper: LocalDayWeatherMapper,
     private val domainWeatherMapper: DomainWeatherMapper,
     private val dateRepo: DateRepo
 ) : WeatherRepository {
@@ -57,12 +58,18 @@ class WeatherRepositoryImpl(
         val todayDate = dateRepo.todayDate()
         weatherLocalService.getFavoriteCities().map {
             async {
-                val localWeather = weatherLocalService.getLocalWeather(it.woeid)
-                val localWeatherDate = localWeather?.date?.let { date -> dateRepo.mapDate(date) }
-                if (localWeatherDate != todayDate) {
-                    weatherRemoteService.weatherForCity(it.woeid).let { remoteWeather ->
-                        weatherLocalService.addLocalWeather(localWeatherMapper.map(remoteWeather, it.woeid))
-                    }
+                val dayWeatherList = weatherLocalService.getLocalDayWeather(woeid = it.woeid)
+                val isWeatherListStale =
+                    dayWeatherList.find { dateRepo.mapDate(it.date) == todayDate } == null
+
+                if (dayWeatherList.isEmpty() || isWeatherListStale) {
+                    val remoteWeather = weatherRemoteService.weatherForCity(it.woeid)
+
+                    weatherLocalService.deleteCurrentAndAddNewWeatherData(
+                        woeid = it.woeid,
+                        weather = localWeatherMapper.map(remoteWeather, it.woeid),
+                        weatherList = localDayWeatherMapper.map(remoteWeather, it.woeid)
+                    )
                 }
             }
         }.awaitAll()

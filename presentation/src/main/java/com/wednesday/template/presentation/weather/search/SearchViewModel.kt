@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-class SearchFragmentViewModel(
+class SearchViewModel(
     private val searchCityInteractor: SearchCityInteractor,
     private val favouriteWeatherInteractor: FavouriteWeatherInteractor,
     private val navigator: SearchNavigator,

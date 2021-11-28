@@ -22,7 +22,7 @@ class HomeViewModel(
     override fun getDefaultScreenState(): HomeScreenState {
         return HomeScreenState(
             toolbar = UIToolbar(
-                title = UIText { block("Search") },
+                title = UIText { block("Weather") },
                 hasBackButton = false,
                 menuIcon = R.drawable.ic_search,
             ),

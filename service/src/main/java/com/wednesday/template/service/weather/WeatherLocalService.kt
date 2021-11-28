@@ -16,6 +16,20 @@ interface WeatherLocalService {
 
     suspend fun getLocalWeather(woeid: Int): LocalWeather?
 
+    suspend fun getLocalDayWeather(woeid: Int): List<LocalDayWeather>
+
+    suspend fun addLocalDayWeather(weatherList: LocalDayWeather)
+
+    suspend fun deleteLocalDayWeather(woeid: Int)
+
+    suspend fun deleteLocalWeather(woeid: Int)
+
+    suspend fun deleteCurrentAndAddNewWeatherData(
+        woeid: Int,
+        weather: LocalWeather,
+        weatherList: List<LocalDayWeather>
+    )
+
     fun getFavouriteCitiesWeatherList(): List<LocalCityWithWeather>
 
     fun getFavouriteCitiesWeatherFlow(): Flow<List<LocalCityWithWeather>>

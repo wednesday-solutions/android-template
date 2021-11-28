@@ -1,5 +1,9 @@
 package com.wednesday.template.domain
 
+import com.wednesday.template.domain.base.datetime.ConvertDateToLongUseCase
+import com.wednesday.template.domain.base.datetime.ConvertDateToLongUseCaseImpl
+import com.wednesday.template.domain.base.datetime.FormatDateUseCase
+import com.wednesday.template.domain.base.datetime.FormatDateUseCaseImpl
 import com.wednesday.template.domain.weather.FetchFavouriteCitiesWeatherUseCase
 import com.wednesday.template.domain.weather.FetchFavouriteCitiesWeatherUseCaseImpl
 import com.wednesday.template.domain.weather.GetFavouriteCitiesFlowUseCase
@@ -15,6 +19,12 @@ import com.wednesday.template.domain.weather.SetCityFavouriteUseCaseImpl
 import org.koin.dsl.module
 
 val domainModule = module {
+
+    // Date Time
+    single<ConvertDateToLongUseCase> { ConvertDateToLongUseCaseImpl(get()) }
+
+    single<FormatDateUseCase> { FormatDateUseCaseImpl(get()) }
+
     // Weather
     single<GetFavouriteCitiesFlowUseCase> { GetFavouriteCitiesFlowUseCaseImpl(get()) }
 
