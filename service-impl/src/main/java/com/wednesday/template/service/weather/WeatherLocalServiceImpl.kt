@@ -1,10 +1,6 @@
 package com.wednesday.template.service.weather
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -24,6 +20,34 @@ interface WeatherLocalServiceImpl : WeatherLocalService {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     override suspend fun addLocalWeather(weather: LocalWeather)
+
+    @Query("delete from local_weather where cityWoeid=:woeid")
+    override suspend fun deleteLocalWeather(woeid: Int)
+
+    @Query("Select * from local_day_weather WHERE cityWoeid=:woeid")
+    override suspend fun getLocalDayWeather(woeid: Int): List<LocalDayWeather>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    override suspend fun addLocalDayWeather(weatherList: LocalDayWeather)
+
+    @Query("delete from local_day_weather where cityWoeid=:woeid")
+    override suspend fun deleteLocalDayWeather(woeid: Int)
+
+    @Transaction
+    override suspend fun deleteCurrentAndAddNewWeatherData(
+        woeid: Int,
+        weather: LocalWeather,
+        weatherList: List<LocalDayWeather>
+    ) {
+        deleteLocalWeather(woeid)
+        deleteLocalDayWeather(woeid)
+
+        addLocalWeather(weather)
+        weatherList.forEach {
+            addLocalDayWeather(it)
+        }
+
+    }
 
     @Query("Select * from local_weather WHERE cityWoeid=:woeid")
     override suspend fun getLocalWeather(woeid: Int): LocalWeather?

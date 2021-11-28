@@ -5,8 +5,8 @@ import com.wednesday.template.domain.date.Date
 data class Weather(
     val title: String,
     val woeid: Int,
-    val minTemp: Double,
-    val maxTemp: Double,
-    val temp: Double,
+    val minTemp: Int,
+    val maxTemp: Int,
+    val temp: Int,
     val date: Date
 )

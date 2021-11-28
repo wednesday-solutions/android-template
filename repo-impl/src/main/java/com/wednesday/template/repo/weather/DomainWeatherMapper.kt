@@ -18,10 +18,10 @@ class DomainWeatherMapperImpl(
         return Weather(
             title = from.weather.title,
             woeid = from.city.woeid,
-            minTemp = from.weather.minTemp,
-            maxTemp = from.weather.maxTemp,
-            temp = from.weather.temp,
-            date = from.weather.date.toDate()
+            minTemp = from.dayWeather.first().minTemp,
+            maxTemp = from.dayWeather.first().maxTemp,
+            temp = from.dayWeather.first().temp,
+            date = from.dayWeather.first().date.toDate()
         )
     }
 

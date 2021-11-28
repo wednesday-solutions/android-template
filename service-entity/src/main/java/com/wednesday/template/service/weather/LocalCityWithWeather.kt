@@ -7,5 +7,7 @@ data class LocalCityWithWeather(
     @Embedded
     val city: LocalCity,
     @Relation(parentColumn = "woeid", entityColumn = "cityWoeid")
-    val weather: LocalWeather
+    val weather: LocalWeather,
+    @Relation(parentColumn = "woeid", entityColumn = "cityWoeid")
+    val dayWeather: List<LocalDayWeather>
 )
