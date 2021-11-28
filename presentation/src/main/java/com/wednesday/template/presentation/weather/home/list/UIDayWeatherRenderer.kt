@@ -14,4 +14,3 @@ class UIDayWeatherRenderer : ListItemRenderer<UIDayWeather>() {
         )
     }
 }
-

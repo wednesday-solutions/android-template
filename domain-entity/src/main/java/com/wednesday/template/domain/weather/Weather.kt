@@ -5,4 +5,3 @@ data class Weather(
     val woeid: Int,
     val dayWeatherList: List<DayWeather>
 )
-

@@ -21,4 +21,3 @@ data class LocalWeather(
     val cityWoeid: Int,
     val title: String,
 )
-

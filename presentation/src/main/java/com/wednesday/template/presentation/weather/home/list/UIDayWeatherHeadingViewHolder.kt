@@ -19,5 +19,4 @@ class UIDayWeatherHeadingViewHolder(
             binding.textViewHeading.setUIText(it)
         }
     }
-
 }

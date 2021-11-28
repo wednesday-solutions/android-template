@@ -3,7 +3,7 @@ package com.wednesday.template.service.weather
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import java.util.*
+import java.util.Date
 
 @Entity(
     tableName = "local_day_weather",

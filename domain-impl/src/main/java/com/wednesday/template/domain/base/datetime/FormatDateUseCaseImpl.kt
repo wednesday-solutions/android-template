@@ -6,7 +6,7 @@ import timber.log.Timber
 
 class FormatDateUseCaseImpl(
     private val dateRepo: DateRepo
-): FormatDateUseCase {
+) : FormatDateUseCase {
 
     override fun invoke(param: Pair<Date, String>): String {
         Timber.tag(TAG).d("invoke: param = $param")

@@ -6,7 +6,7 @@ import timber.log.Timber
 
 class ConvertDateToLongUseCaseImpl(
     private val dateRepo: DateRepo
-): ConvertDateToLongUseCase {
+) : ConvertDateToLongUseCase {
 
     override fun invoke(param: Date): Long {
         Timber.tag(TAG).d("invoke: param = $param")

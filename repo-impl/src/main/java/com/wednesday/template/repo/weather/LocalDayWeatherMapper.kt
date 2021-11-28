@@ -5,13 +5,13 @@ import com.wednesday.template.service.weather.LocalDayWeather
 import com.wednesday.template.service.weather.RemoteWeather
 import timber.log.Timber
 
-interface LocalDayWeatherMapper: Mapper2<RemoteWeather, Int, List<LocalDayWeather>>
+interface LocalDayWeatherMapper : Mapper2<RemoteWeather, Int, List<LocalDayWeather>>
 
-class LocalDayWeatherMapperImpl: LocalDayWeatherMapper {
+class LocalDayWeatherMapperImpl : LocalDayWeatherMapper {
 
     override fun map(from1: RemoteWeather, from2: Int): List<LocalDayWeather> {
         Timber.tag(TAG).d("map() called with: from1 = $from1, from2 = $from2")
-        return from1.consolidatedWeathers.map { 
+        return from1.consolidatedWeathers.map {
             LocalDayWeather(
                 cityWoeid = from2,
                 temp = it.theTemp.toInt(),

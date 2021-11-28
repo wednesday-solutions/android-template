@@ -12,4 +12,3 @@ data class UIWeather(
     val minMaxTemp: UIText,
     val dayWeatherList: List<UIListItemBase>
 ) : UIListItemBase(id = "UICity $cityId")
-

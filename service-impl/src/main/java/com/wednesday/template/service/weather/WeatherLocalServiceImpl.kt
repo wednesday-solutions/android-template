@@ -1,6 +1,11 @@
 package com.wednesday.template.service.weather
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -46,7 +51,6 @@ interface WeatherLocalServiceImpl : WeatherLocalService {
         weatherList.forEach {
             addLocalDayWeather(it)
         }
-
     }
 
     @Query("Select * from local_weather WHERE cityWoeid=:woeid")

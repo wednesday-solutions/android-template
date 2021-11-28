@@ -20,7 +20,5 @@ class UIDayWeatherViewHolder(private val binding: ItemDayWeatherBinding) : BaseV
         compareAndSet({ currentTemp }) {
             textViewDayWeatherTemp.setUIText(it)
         }
-
     }
-
 }

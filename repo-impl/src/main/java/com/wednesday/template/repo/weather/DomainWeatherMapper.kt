@@ -1,8 +1,6 @@
 package com.wednesday.template.repo.weather
 
-import com.wednesday.template.domain.date.JavaDate
 import com.wednesday.template.domain.weather.Weather
-import com.wednesday.template.repo.date.DateRepo
 import com.wednesday.template.repo.util.Mapper
 import com.wednesday.template.service.weather.LocalCityWithWeather
 import timber.log.Timber

@@ -7,12 +7,10 @@ import com.wednesday.template.interactor_impl.R
 import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIListItemBase
 import com.wednesday.template.presentation.base.UIText
-import com.wednesday.template.presentation.weather.UIDayWeather
 import com.wednesday.template.presentation.weather.UIDayWeatherHeading
 import com.wednesday.template.presentation.weather.UISearchCitiesPlaceholder
 import com.wednesday.template.presentation.weather.UIWeather
 import timber.log.Timber
-import kotlin.math.min
 
 interface UIWeatherListMapper : Mapper<List<Weather>, UIList>
 
@@ -27,32 +25,32 @@ class UIWeatherListMapperImpl(
             .sortedBy { it.title }
             .map {
 
-            val currentWeather = it.dayWeatherList.firstOrNull { dayWeather -> dayWeather.isToday }
-                ?: it.dayWeatherList.first()
+                val currentWeather = it.dayWeatherList.firstOrNull { dayWeather -> dayWeather.isToday }
+                    ?: it.dayWeatherList.first()
 
-            val dayWeatherList = mutableListOf<UIListItemBase>()
+                val dayWeatherList = mutableListOf<UIListItemBase>()
 
-            dayWeatherList.add(
-                UIDayWeatherHeading(
-                    text = UIText { block(R.string.forecast) }
+                dayWeatherList.add(
+                    UIDayWeatherHeading(
+                        text = UIText { block(R.string.forecast) }
+                    )
                 )
-            )
 
-            dayWeatherList.addAll(
-                it.dayWeatherList
-                    .filter { dayWeather -> !dayWeather.isToday }
-                    .sortedBy { dayWeather -> uiDateMapper.map(dayWeather.date).timeAsLong }
-                    .map { dayWeather -> dayWeatherMapper.map(dayWeather, it.woeid) }
-            )
+                dayWeatherList.addAll(
+                    it.dayWeatherList
+                        .filter { dayWeather -> !dayWeather.isToday }
+                        .sortedBy { dayWeather -> uiDateMapper.map(dayWeather.date).timeAsLong }
+                        .map { dayWeather -> dayWeatherMapper.map(dayWeather, it.woeid) }
+                )
 
-            UIWeather(
-                cityId = it.woeid,
-                title = UIText { block(it.title) },
-                currentTemp = UIText { block("${currentWeather.temp} °C") },
-                minMaxTemp = UIText { block("${currentWeather.minTemp} - ${currentWeather.maxTemp} °C") },
-                dayWeatherList = dayWeatherList
-            )
-        }
+                UIWeather(
+                    cityId = it.woeid,
+                    title = UIText { block(it.title) },
+                    currentTemp = UIText { block("${currentWeather.temp} °C") },
+                    minMaxTemp = UIText { block("${currentWeather.minTemp} - ${currentWeather.maxTemp} °C") },
+                    dayWeatherList = dayWeatherList
+                )
+            }
 
         if (weatherList.isEmpty()) {
             return UIList(

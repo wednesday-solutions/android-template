@@ -5,13 +5,12 @@ import com.wednesday.template.repo.date.DateRepo
 import com.wednesday.template.repo.util.Mapper
 import com.wednesday.template.service.weather.LocalDayWeather
 import timber.log.Timber
-import kotlin.math.min
 
-interface DomainDayWeatherMapper: Mapper<LocalDayWeather, DayWeather>
+interface DomainDayWeatherMapper : Mapper<LocalDayWeather, DayWeather>
 
 class DomainDayWeatherMapperImpl(
     private val dateRepo: DateRepo
-): DomainDayWeatherMapper {
+) : DomainDayWeatherMapper {
 
     override fun map(from: LocalDayWeather): DayWeather {
         Timber.tag(TAG).d("map: from = $from")
@@ -22,7 +21,7 @@ class DomainDayWeatherMapperImpl(
             minTemp = from.minTemp,
             maxTemp = from.maxTemp,
             temp = from.temp,
-            date =date,
+            date = date,
             isToday = date == dateRepo.todayDate()
         )
     }

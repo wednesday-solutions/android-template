@@ -1,9 +1,6 @@
 package com.wednesday.template.repo.weather
 
-import com.wednesday.template.domain.date.JavaDate
-import com.wednesday.template.repo.date.DateRepo
 import com.wednesday.template.repo.util.Mapper2
-import com.wednesday.template.service.weather.LocalDayWeather
 import com.wednesday.template.service.weather.LocalWeather
 import com.wednesday.template.service.weather.RemoteWeather
 import timber.log.Timber
@@ -25,4 +22,3 @@ class LocalWeatherMapperImpl : LocalWeatherMapper {
         private const val TAG = "LocalWeatherMapperImpl"
     }
 }
-

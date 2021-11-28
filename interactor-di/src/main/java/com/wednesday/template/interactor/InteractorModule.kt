@@ -8,7 +8,11 @@ import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.interactor.weather.UICityMapper
 import com.wednesday.template.interactor.weather.UICityMapperImpl
-import com.wednesday.template.interactor.weather.favourite.*
+import com.wednesday.template.interactor.weather.favourite.FavouriteWeatherInteractorImpl
+import com.wednesday.template.interactor.weather.favourite.UIDayWeatherMapper
+import com.wednesday.template.interactor.weather.favourite.UIDayWeatherMapperImpl
+import com.wednesday.template.interactor.weather.favourite.UIWeatherListMapper
+import com.wednesday.template.interactor.weather.favourite.UIWeatherListMapperImpl
 import com.wednesday.template.interactor.weather.search.SearchCityInteractorImpl
 import com.wednesday.template.interactor.weather.search.UICitySearchResultsMapper
 import com.wednesday.template.interactor.weather.search.UICitySearchResultsMapperImpl

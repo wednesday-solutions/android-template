@@ -6,11 +6,11 @@ import com.wednesday.template.interactor.base.Mapper
 import com.wednesday.template.presentation.datetime.UIDate
 import timber.log.Timber
 
-interface UIDateMapper: Mapper<Date, UIDate>
+interface UIDateMapper : Mapper<Date, UIDate>
 
 class UIDateMapperImpl(
     private val convertDateToLongUseCase: ConvertDateToLongUseCase
-): UIDateMapper {
+) : UIDateMapper {
 
     override fun map(from: Date): UIDate {
         Timber.tag(TAG).d("map: from = $from")
