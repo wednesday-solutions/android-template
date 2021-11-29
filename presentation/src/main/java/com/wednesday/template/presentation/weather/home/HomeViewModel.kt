@@ -15,8 +15,7 @@ import kotlinx.coroutines.flow.onEach
 
 class HomeViewModel(
     private val favouriteWeatherInteractor: FavouriteWeatherInteractor,
-    private val navigator: HomeNavigator
-) : BaseViewModel<HomeScreen, HomeScreenState>(),
+) : BaseViewModel<HomeScreen, HomeScreenState, HomeNavigator>(),
     IntentHandler<HomeScreenIntent> {
 
     override fun getDefaultScreenState(): HomeScreenState {

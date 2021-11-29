@@ -6,7 +6,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.wednesday.template.presentation.screen.Screen
 
-class NavigatorImpl(private val fragment: Fragment) : Navigator {
+class BaseNavigatorImpl(private val fragment: Fragment) : BaseNavigator {
 
     override fun navigateTo(screen: Screen) {
         screen.navigate()

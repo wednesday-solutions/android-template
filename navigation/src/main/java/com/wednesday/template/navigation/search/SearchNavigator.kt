@@ -1,6 +1,8 @@
 package com.wednesday.template.navigation.search
 
-interface SearchNavigator {
+import com.wednesday.template.navigation.Navigator
+
+interface SearchNavigator : Navigator {
 
     fun back()
 }

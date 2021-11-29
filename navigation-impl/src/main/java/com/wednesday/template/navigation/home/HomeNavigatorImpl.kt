@@ -1,13 +1,18 @@
 package com.wednesday.template.navigation.home
 
-import com.wednesday.template.navigation.Navigator
+import android.util.Log
+import com.wednesday.template.navigation.BaseNavigator
 import com.wednesday.template.presentation.screen.Screen
 
 class HomeNavigatorImpl(
-    private val navigator: Navigator
+    private val baseNavigator: BaseNavigator
 ) : HomeNavigator {
 
+    init {
+        Log.d("HomeNavigatorImpl", "navViewModel init $this")
+    }
+
     override fun navigateTo(screen: Screen) {
-        navigator.navigateTo(screen)
+        baseNavigator.navigateTo(screen)
     }
 }

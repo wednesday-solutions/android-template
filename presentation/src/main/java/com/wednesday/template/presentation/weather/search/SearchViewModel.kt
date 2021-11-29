@@ -20,8 +20,7 @@ import kotlinx.coroutines.launch
 class SearchViewModel(
     private val searchCityInteractor: SearchCityInteractor,
     private val favouriteWeatherInteractor: FavouriteWeatherInteractor,
-    private val navigator: SearchNavigator,
-) : BaseViewModel<SearchScreen, SearchScreenState>(),
+) : BaseViewModel<SearchScreen, SearchScreenState, SearchNavigator>(),
     IntentHandler<SearchScreenIntent> {
 
     private val searchCityResponseMutableStateFlow: MutableStateFlow<String> = MutableStateFlow("")

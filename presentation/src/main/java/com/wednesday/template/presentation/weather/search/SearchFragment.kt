@@ -1,6 +1,7 @@
 package com.wednesday.template.presentation.weather.search
 
 import androidx.core.widget.addTextChangedListener
+import com.wednesday.template.navigation.search.SearchNavigator
 import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.fragment.BindingProvider
@@ -9,17 +10,21 @@ import com.wednesday.template.presentation.base.list.ListComponent
 import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
 import com.wednesday.template.presentation.weather.search.list.UICityListRenderer
 import com.wednesday.template.resources.databinding.FragmentSearchBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchFragment : MainFragment< FragmentSearchBinding,
+class SearchFragment : MainFragment<FragmentSearchBinding,
     SearchScreen,
     SearchScreenState,
-    SearchViewModel >() {
+    SearchNavigator,
+    SearchViewModel>() {
 
     override val toolbarComponent: ToolbarComponent = ToolbarComponent(this, onBackClicked = {
         viewModel.onIntent(SearchScreenIntent.Back)
     })
 
-    override val viewModel: SearchViewModel by navViewModel()
+    override val viewModel: SearchViewModel by viewModel()
+
+    override val navigator: SearchNavigator by navigator()
 
     override val bindingProvider: BindingProvider<FragmentSearchBinding> =
         FragmentSearchBinding::inflate

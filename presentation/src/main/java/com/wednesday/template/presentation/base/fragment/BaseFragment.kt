@@ -1,5 +1,6 @@
 package com.wednesday.template.presentation.base.fragment
 
+import android.content.ComponentCallbacks
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,14 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.wednesday.template.navigation.Navigator
 import com.wednesday.template.presentation.base.component.Component
 import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
 import com.wednesday.template.presentation.screen.Screen
 import com.wednesday.template.presentation.screen.ScreenState
+import org.koin.android.ext.android.get
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -21,10 +25,13 @@ abstract class BaseFragment<
     BINDING : ViewBinding,
     SCREEN : Screen,
     SCREEN_STATE : ScreenState,
-    VM : BaseViewModel<SCREEN, SCREEN_STATE>
+    NAV : Navigator,
+    VM : BaseViewModel<SCREEN, SCREEN_STATE, NAV>
     > : Fragment() {
 
     abstract val viewModel: VM
+
+    abstract val navigator: NAV
 
     protected lateinit var args: SCREEN
 
@@ -50,7 +57,7 @@ abstract class BaseFragment<
         super.onCreate(savedInstanceState)
         args = arguments?.get("key_args") as SCREEN
         viewModel.args = args
-        viewModel.onCreate(savedInstanceState)
+        viewModel.onCreate(savedInstanceState, navigator)
     }
 
     override fun onResume() {
@@ -126,7 +133,7 @@ abstract class BaseFragment<
         )
     }
 
-    protected inline fun <reified VM : BaseViewModel<SCREEN, SCREEN_STATE>> navViewModel(): Lazy<VM> {
-        return viewModel { parametersOf(this) }
+    protected inline fun <reified NAV : Navigator> ComponentCallbacks.navigator(): Lazy<NAV> {
+        return inject { parametersOf(this) }
     }
 }

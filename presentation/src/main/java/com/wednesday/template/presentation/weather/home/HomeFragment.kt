@@ -1,5 +1,6 @@
 package com.wednesday.template.presentation.weather.home
 
+import com.wednesday.template.navigation.home.HomeNavigator
 import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.fragment.BindingProvider
 import com.wednesday.template.presentation.base.fragment.MainFragment
@@ -9,18 +10,22 @@ import com.wednesday.template.presentation.weather.home.list.UISearchCitiesPlace
 import com.wednesday.template.presentation.weather.home.list.UIWeatherRenderer
 import com.wednesday.template.resources.R
 import com.wednesday.template.resources.databinding.FragmentStartBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : MainFragment<
     FragmentStartBinding,
     HomeScreen,
     HomeScreenState,
+    HomeNavigator,
     HomeViewModel>() {
 
     override val toolbarComponent: ToolbarComponent = ToolbarComponent(this) {
         viewModel.onIntent(HomeScreenIntent.Search)
     }
 
-    override val viewModel: HomeViewModel by navViewModel()
+    override val viewModel: HomeViewModel by viewModel()
+
+    override val navigator: HomeNavigator by navigator()
 
     override val bindingProvider: BindingProvider<FragmentStartBinding> =
         FragmentStartBinding::inflate
