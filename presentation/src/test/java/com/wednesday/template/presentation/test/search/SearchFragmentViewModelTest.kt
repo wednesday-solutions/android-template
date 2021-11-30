@@ -30,17 +30,17 @@ abstract class BaseViewModelTest {
 
 //    @get:Rule
 //    val coroutinesDispatcherRule = CoroutineDispatcherRule()
-    
+
     @ExperimentalCoroutinesApi
     val testDispatcher = TestCoroutineDispatcher()
-    
+
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
-    
+
     abstract fun before()
-    
+
     abstract fun after()
-    
+
     @Before
     fun internalBefore() {
         val testModule = module {
@@ -51,31 +51,31 @@ abstract class BaseViewModelTest {
         }
         before()
     }
-    
+
     @After
     fun internalAfter() {
         after()
         stopKoin()
     }
-    
+
     protected fun <T> mockObserver() = mock<Observer<T?>>()
 }
 
-class SearchFragmentViewModelTest:BaseViewModelTest(){
-    
+class SearchFragmentViewModelTest : BaseViewModelTest() {
+
     private lateinit var searchCityInteractor: SearchCityInteractor
     private lateinit var favouriteWeatherInteractor: FavouriteWeatherInteractor
     private lateinit var navigator: SearchNavigator
-    private lateinit var searchFragmentViewModel :SearchFragmentViewModel
-    
+    private lateinit var searchFragmentViewModel: SearchFragmentViewModel
+
     @ExperimentalCoroutinesApi
     override fun before() {
         Dispatchers.setMain(testDispatcher)
-    
+
         searchCityInteractor = mock()
         favouriteWeatherInteractor = mock()
         navigator = mock()
-    
+
         searchFragmentViewModel =
             SearchFragmentViewModel(
                 searchCityInteractor,
@@ -83,23 +83,23 @@ class SearchFragmentViewModelTest:BaseViewModelTest(){
                 navigator
             )
     }
-    
+
     @ExperimentalCoroutinesApi
     override fun after() {
-    
+
         Dispatchers.resetMain()
         testDispatcher.cleanupTestCoroutines()
     }
-    
+
     @ExperimentalCoroutinesApi
     @Test
-    fun `Given the city name, When searchCityInteractor is called, Then verify one call to search `() = runBlockingTest{
-        //Given
+    fun `Given the city name, When searchCityInteractor is called, Then verify one call to search `() = runBlockingTest {
+        // Given
         val city = "Pune"
         whenever(searchCityInteractor.search(city)).thenReturn(Unit)
-        //When
+        // When
         searchFragmentViewModel.onIntent(SearchScreenIntent.SearchCities(city))
-        //Then
+        // Then
         verify(searchCityInteractor, times(1)).search(city)
     }
 }
