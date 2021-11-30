@@ -6,18 +6,16 @@ import com.wednesday.template.presentation.base.BaseViewModelTest
 import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
-import com.wednesday.template.presentation.weather.UICity
-import com.wednesday.template.presentation.weather.home.HomeScreenIntent
 import com.wednesday.template.presentation.weather.home.HomeScreenState
 import com.wednesday.template.presentation.weather.home.HomeViewModel
-import com.wednesday.template.presentation.weather.search.SearchScreen
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
-import org.mockito.kotlin.*
-import java.util.*
-import kotlin.random.Random
+import org.mockito.kotlin.times
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verifyZeroInteractions
 import kotlin.test.assertEquals
 
 class HomeViewModelTest : BaseViewModelTest() {
@@ -35,7 +33,6 @@ class HomeViewModelTest : BaseViewModelTest() {
     }
 
     override fun after() = Unit
-
 
     @Test
     fun `Given _, When getDefaultScreenState, Then it returns correct state`() {
