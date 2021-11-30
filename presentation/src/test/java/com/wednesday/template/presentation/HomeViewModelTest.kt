@@ -11,11 +11,11 @@ import com.wednesday.template.presentation.weather.home.HomeViewModel
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
+import org.mockito.kotlin.mock
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
-import org.mockito.kotlin.whenever
-import org.mockito.kotlin.mock
 import org.mockito.kotlin.verifyZeroInteractions
+import org.mockito.kotlin.whenever
 import kotlin.test.assertEquals
 
 class HomeViewModelTest : BaseViewModelTest() {
