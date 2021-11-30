@@ -42,4 +42,10 @@ dependencies {
     implementation ext.androidx.lifecycleViewModelKtx
     implementation ext.androidx.navigationFragment
     implementation ext.androidx.navigationUi
+
+    testImplementation ext.test.androidxArchCore
+    testImplementation ext.test.coroutines
+    testImplementation ext.test.kotlinTest
+    testImplementation ext.test.flowTest
+    testImplementation ext.test.mockito
 }

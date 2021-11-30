@@ -75,6 +75,7 @@ ext {
 
     test = [
             androidxTestCore   : "androidx.test:runner:1.3.0",
+            androidxArchCore:   "androidx.arch.core:core-testing:2.1.0",
             androidxTestRunner : "androidx.test:runner:1.3.0",
             androidxTestRules  : "androidx.test:rules:1.3.0",
             androidxExt        : "androidx.test.ext:junit:1.1.2",
