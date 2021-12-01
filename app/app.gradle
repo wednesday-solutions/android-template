@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+apply from: "$rootProject.projectDir/android.gradle"
+
+android {
+    defaultConfig {
+        applicationId "com.wednesday.template"
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation project(':presentation')
+//    implementation project(':navigation')
+    implementation project(':presentation-di')
+    implementation project(':navigation-di')
+    implementation project(':interactor-di')
+    implementation project(':domain-di')
+    implementation project(':repo-di')
+    implementation project(':service-di')
+
+    def ext = rootProject.ext
+    implementation ext.kotlin.stdLib
+
+    implementation ext.koin.core
+    implementation ext.koin.android
+
+    implementation ext.android.material
+
+    implementation ext.logging.timber
+}

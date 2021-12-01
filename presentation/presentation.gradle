@@ -1,0 +1,51 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id "org.jetbrains.kotlin.plugin.parcelize"
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+apply from: "$rootProject.projectDir/android.gradle"
+apply from: "$rootProject.projectDir/lint.gradle"
+
+android {
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation project(':presentation-entity')
+    implementation project(':interactor')
+    implementation project(':resources')
+    implementation project(':navigation')
+
+    def ext = rootProject.ext
+    implementation ext.kotlin.stdLib
+
+    implementation ext.koin.core
+    implementation ext.koin.android
+
+    implementation ext.android.material
+
+    implementation ext.logging.timber
+    implementation ext.coroutines.core
+    implementation ext.coroutines.android
+    implementation ext.androidx.appCompat
+    implementation ext.androidx.coreKtx
+    implementation ext.androidx.fragment
+    implementation ext.androidx.constraintLayout
+    implementation ext.androidx.recyclerView
+    implementation ext.androidx.lifecycleLiveDataCore
+    implementation ext.androidx.lifecycleLiveDataKtx
+    implementation ext.androidx.lifecycleViewModel
+    implementation ext.androidx.lifecycleViewModelKtx
+    implementation ext.androidx.navigationFragment
+    implementation ext.androidx.navigationUi
+
+    testImplementation ext.test.androidxArchCore
+    testImplementation ext.test.coroutines
+    testImplementation ext.test.kotlinTest
+    testImplementation ext.test.flowTest
+    testImplementation ext.test.mockito
+}
