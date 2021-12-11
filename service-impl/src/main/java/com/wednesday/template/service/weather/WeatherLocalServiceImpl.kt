@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.RewriteQueriesToDropUnusedColumns
 import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
 
@@ -56,9 +57,12 @@ interface WeatherLocalServiceImpl : WeatherLocalService {
     @Query("Select * from local_weather WHERE cityWoeid=:woeid")
     override suspend fun getLocalWeather(woeid: Int): LocalWeather?
 
+    @RewriteQueriesToDropUnusedColumns
+    @Transaction
     @Query("Select * from favorite_cities INNER JOIN local_weather ON local_weather.cityWoeid=favorite_cities.woeid")
     override fun getFavouriteCitiesWeatherList(): List<LocalCityWithWeather>
 
+    @RewriteQueriesToDropUnusedColumns
     @Query("Select * from favorite_cities INNER JOIN local_weather ON local_weather.cityWoeid=favorite_cities.woeid")
     override fun getFavouriteCitiesWeatherFlow(): Flow<List<LocalCityWithWeather>>
 }

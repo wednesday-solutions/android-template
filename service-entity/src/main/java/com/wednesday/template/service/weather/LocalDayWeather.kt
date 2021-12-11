@@ -1,5 +1,6 @@
 package com.wednesday.template.service.weather
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -19,6 +20,7 @@ import java.util.Date
 data class LocalDayWeather(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
+    @ColumnInfo(index = true)
     val cityWoeid: Int,
     val temp: Int,
     val minTemp: Int,

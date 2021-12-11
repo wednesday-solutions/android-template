@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 val serviceModule = module {
 
     // Retrofit
-    single { getRetrofit() }
+    single { getRetrofit(get()) }
 
     // Room
     single { getRoomDatabase(get()) }
