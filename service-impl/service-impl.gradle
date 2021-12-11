@@ -37,6 +37,7 @@ dependencies {
     implementation ext.retrofit.logging
 
     implementation ext.logging.timber
+    implementation ext.logging.chucker
 
     androidTestImplementation ext.test.androidxTestCore
     androidTestImplementation ext.test.androidxTestRunner
