@@ -8,6 +8,8 @@
     <h1 align="left">Android Template
     </h1>
   </p>
+  An Android template application showcasing: Multi modular clean architecture, reactive patterns, dependency injection, integration with jetpack libraries, testing and CI/CD.
+
   ___
 
 
