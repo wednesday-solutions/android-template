@@ -32,3 +32,11 @@
 
   <span>We’re always looking for people who value their work, so come and join us. <a href="https://www.wednesday.is/hiring">We are hiring!</a></span>
 </div>
+
+<br/>
+<br/>
+
+## Getting Started
+- Open the project in Android Studio and sync dependencies with gradle.
+- Run the app by pressing the run button in android studio or by pressing `control + R`.
+- Go through and setup the scripts in the [scripts](https://github.com/wednesday-solutions/android-template/tree/master/scripts) directory.
