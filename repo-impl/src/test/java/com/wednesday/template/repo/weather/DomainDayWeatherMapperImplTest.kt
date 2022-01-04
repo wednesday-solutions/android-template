@@ -4,7 +4,6 @@ import com.wednesday.template.domain.date.Date
 import com.wednesday.template.repo.date.DateRepo
 import com.wednesday.template.repo.weather.models.dayWeatherMapperFromLocalDayWeather
 import com.wednesday.template.repo.weather.models.localDayWeather
-
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock

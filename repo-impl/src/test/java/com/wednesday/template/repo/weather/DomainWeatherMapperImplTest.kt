@@ -5,7 +5,6 @@ import com.wednesday.template.repo.weather.models.localCityWithWeather
 import com.wednesday.template.repo.weather.models.localDayWeather
 import com.wednesday.template.repo.weather.models.weatherMappedFromLocalCityWithWeather
 import org.junit.Assert.*
-
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock
