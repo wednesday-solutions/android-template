@@ -2,7 +2,7 @@ package com.wednesday.template.repo.weather.models
 
 import com.wednesday.template.service.weather.LocalDayWeather
 import java.time.Instant
-import java.util.*
+import java.util.Date
 
 val localDayWeather = LocalDayWeather(
     id = 1,
