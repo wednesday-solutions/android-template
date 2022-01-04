@@ -30,7 +30,7 @@ interface WeatherLocalService {
         weatherList: List<LocalDayWeather>
     )
 
-    fun getFavouriteCitiesWeatherList(): List<LocalCityWithWeather>
+    suspend fun getFavouriteCitiesWeatherList(): List<LocalCityWithWeather>
 
     fun getFavouriteCitiesWeatherFlow(): Flow<List<LocalCityWithWeather>>
 }
