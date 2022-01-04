@@ -18,7 +18,7 @@ interface WeatherRepository {
 
     suspend fun fetchWeatherForFavouriteCities()
 
-    fun getFavouriteCitiesWeatherList(): List<Weather>
+    suspend fun getFavouriteCitiesWeatherList(): List<Weather>
 
     fun getFavouriteCitiesWeatherFlow(): Flow<List<Weather>>
 }

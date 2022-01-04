@@ -75,7 +75,7 @@ class WeatherRepositoryImpl(
         }.awaitAll()
     }
 
-    override fun getFavouriteCitiesWeatherList(): List<Weather> {
+    override suspend fun getFavouriteCitiesWeatherList(): List<Weather> {
         Timber.tag(TAG).d("getFavouriteCitiesWeatherList() called")
         return weatherLocalService
             .getFavouriteCitiesWeatherList()

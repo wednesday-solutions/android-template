@@ -60,7 +60,7 @@ interface WeatherLocalServiceImpl : WeatherLocalService {
     @RewriteQueriesToDropUnusedColumns
     @Transaction
     @Query("Select * from favorite_cities INNER JOIN local_weather ON local_weather.cityWoeid=favorite_cities.woeid")
-    override fun getFavouriteCitiesWeatherList(): List<LocalCityWithWeather>
+    override suspend fun getFavouriteCitiesWeatherList(): List<LocalCityWithWeather>
 
     @RewriteQueriesToDropUnusedColumns
     @Query("Select * from favorite_cities INNER JOIN local_weather ON local_weather.cityWoeid=favorite_cities.woeid")
