@@ -17,4 +17,10 @@ dependencies {
     implementation ext.coroutines.core
 
     implementation ext.logging.timber
+
+    testImplementation ext.test.junit
+    testImplementation ext.test.kotlinTest
+    testImplementation ext.test.mockito
+    testImplementation ext.test.flowTest
+    testImplementation ext.test.coroutines
 }
