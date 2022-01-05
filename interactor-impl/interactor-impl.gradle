@@ -21,4 +21,15 @@ dependencies {
     implementation ext.androidx.coreKtx
 
     implementation ext.logging.timber
+
+    testImplementation ext.test.junit
+    testImplementation ext.test.kotlinTest
+    testImplementation ext.test.mockito
+    testImplementation ext.test.flowTest
+    testImplementation ext.test.coroutines
+    testImplementation ext.test.androidxArchCore
+    testImplementation ext.test.androidxTestRunner
+    testImplementation ext.test.androidxTestRules
+    testImplementation ext.test.androidxExt
+    testImplementation ext.test.androidxCoreTesting
 }
