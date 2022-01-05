@@ -5,8 +5,6 @@ import com.wednesday.template.domain.base.Result
 import com.wednesday.template.domain.weather.models.city
 import com.wednesday.template.repo.weather.WeatherRepository
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.*
-
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock

@@ -1,6 +1,5 @@
 package com.wednesday.template.domain.weather
 
-
 import com.wednesday.template.domain.TestException
 import com.wednesday.template.domain.base.Result
 import com.wednesday.template.domain.weather.models.city

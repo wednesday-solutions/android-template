@@ -12,7 +12,6 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
 
-
 class FetchFavouriteCitiesWeatherUseCaseImplTest {
 
     private lateinit var weatherRepo: WeatherRepository

@@ -1,6 +1,5 @@
 package com.wednesday.template.domain.weather
 
-
 import app.cash.turbine.test
 import com.wednesday.template.domain.weather.models.weather
 import com.wednesday.template.repo.weather.WeatherRepository
