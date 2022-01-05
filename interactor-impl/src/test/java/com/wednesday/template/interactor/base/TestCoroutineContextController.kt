@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 @ExperimentalCoroutinesApi
 data class TestCoroutineContextController(
     val testCoroutineDispatcher: TestCoroutineDispatcher
-): CoroutineContextController {
+) : CoroutineContextController {
 
     override val dispatcherDefault: CoroutineDispatcher
         get() = testCoroutineDispatcher

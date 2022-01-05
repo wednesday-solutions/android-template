@@ -4,8 +4,8 @@ import app.cash.turbine.test
 import com.wednesday.template.domain.base.Result
 import com.wednesday.template.domain.weather.GetFavouriteCitiesFlowUseCase
 import com.wednesday.template.domain.weather.SearchCitiesUseCase
-import com.wednesday.template.interactor.base.InteractorTest
 import com.wednesday.template.interactor.base.CoroutineContextController
+import com.wednesday.template.interactor.base.InteractorTest
 import com.wednesday.template.interactor.base.TestException
 import com.wednesday.template.interactor.weather.search.models.city
 import com.wednesday.template.interactor.weather.search.models.uiCity
@@ -24,7 +24,6 @@ import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
 import kotlin.test.assertEquals
 import kotlin.time.ExperimentalTime
-
 
 @ExperimentalTime
 @ExperimentalCoroutinesApi
