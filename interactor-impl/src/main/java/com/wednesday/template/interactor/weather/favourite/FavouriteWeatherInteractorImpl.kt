@@ -7,6 +7,7 @@ import com.wednesday.template.domain.weather.RemoveCityFavouriteUseCase
 import com.wednesday.template.domain.weather.SetCityFavouriteUseCase
 import com.wednesday.template.interactor.base.BaseInteractor
 import com.wednesday.template.interactor.base.CoroutineContextController
+import com.wednesday.template.interactor.base.mapToUIResult
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.interactor.weather.UICityMapper
 import com.wednesday.template.presentation.base.UIList
@@ -44,19 +45,23 @@ class FavouriteWeatherInteractorImpl(
             removeCityFavouriteUseCase(city).let(::mapResult)
         }
 
-    override fun getFavouriteWeatherUIList(): Flow<UIList> {
+    override fun getFavouriteWeatherUIList(): Flow<UIResult<UIList>> {
         Timber.tag(TAG).d("getFavouriteCitiesFlow")
         return getFavouriteCitiesWeatherFlowUseCase(Unit)
             .distinctUntilChanged()
-            .map(weatherListMapper::map)
+            .mapToUIResult(success = {
+                weatherListMapper.map(this.data)
+            })
             .flowOn(coroutineContextController.dispatcherDefault)
             .onEach { Timber.tag(TAG).d("getFavouriteWeatherUIList: emit = $it") }
     }
 
-    override fun getFavouriteCitiesFlow(): Flow<List<UICity>> {
+    override fun getFavouriteCitiesFlow(): Flow<UIResult<List<UICity>>> {
         Timber.tag(TAG).d("getFavouriteCitiesFlow() called")
         return getFavouriteCitiesFlowUseCase(Unit)
-            .map(uiCityMapper::mapFavouriteCity)
+            .mapToUIResult(success = {
+                this.data.map(uiCityMapper::mapFavouriteCity)
+            })
             .flowOn(coroutineContextController.dispatcherDefault)
             .onEach { Timber.tag(TAG).d("getFavouriteCitiesFlow: emit = $it") }
     }

@@ -7,6 +7,7 @@ import com.wednesday.template.domain.weather.SearchCitiesUseCase
 import com.wednesday.template.interactor.base.CoroutineContextController
 import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.base.UIResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.catch
@@ -24,16 +25,35 @@ class SearchCityInteractorImpl(
 
     private val searchResultStateFlow = MutableSharedFlow<List<City>>()
 
-    override val searchResultsFlow: Flow<UIList> = favouriteCitiesFlowUseCase(Unit)
-        .combine(searchResultStateFlow) { favoriteCites, searchResults ->
-            citySearchResultMapper.map(favoriteCites, searchResults)
+    override val searchResultsFlow: Flow<UIResult<UIList>> = favouriteCitiesFlowUseCase(Unit)
+        .combine(searchResultStateFlow) { favouriteCities, searchResults ->
+
+            return@combine when {
+                searchResults.isEmpty() -> {
+                    UIResult.Error(Exception("The search list was empty"))
+                }
+                favouriteCities is Result.Success -> {
+                    UIResult.Success(
+                        citySearchResultMapper.map(
+                            favouriteCities.data,
+                            searchResults
+                        )
+                    )
+                }
+                favouriteCities is Result.Error -> {
+                    UIResult.Error(favouriteCities.exception)
+                }
+                else -> {
+                    error("Something went wrong")
+                }
+            }
         }
         .onEach {
             Timber.tag(TAG).d("searchResultsFlow: emit = $it")
         }
         .flowOn(coroutineContextController.dispatcherDefault)
-        .catch {
-            emit(UIList())
+        .catch { e ->
+            emit(UIResult.Error(e as Exception))
         }
 
     override suspend fun search(term: String): Unit = coroutineContextController.switchToDefault {

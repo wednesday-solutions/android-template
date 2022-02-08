@@ -5,8 +5,10 @@ import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.navigation.search.SearchNavigator
 import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.base.UIResult
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
+import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
 import kotlinx.coroutines.FlowPreview
@@ -41,8 +43,24 @@ class SearchViewModel(
     override fun onCreate(fromRecreate: Boolean) {
 
         searchCityInteractor.searchResultsFlow.onEach {
-            setState {
-                copy(showLoading = false, searchList = it)
+            when (it) {
+                is UIResult.Success -> {
+                    setState {
+                        copy(showLoading = false, searchList = it.data)
+                    }
+                }
+                is UIResult.Error -> {
+                    setState {
+                        copy(showLoading = false)
+                    }
+                    setEffect(
+                        ShowSnackbarEffect(
+                            message = UIText {
+                                block(it.exception.message ?: "Something went wrong, Please try again")
+                            }
+                        )
+                    )
+                }
             }
         }.launchIn(viewModelScope)
 
@@ -74,7 +92,7 @@ class SearchViewModel(
             is SearchScreenIntent.ToggleFavourite -> {
                 viewModelScope.launch {
                     if (intent.city.isFavourite) {
-                        favouriteWeatherInteractor.removeCityFavourite(intent.city)
+                        val result = favouriteWeatherInteractor.removeCityFavourite(intent.city)
                     } else {
                         favouriteWeatherInteractor.setCityFavourite(intent.city)
                     }
