@@ -93,7 +93,7 @@ jobs:
       - name: Upload apk to App Center
         uses: wzieba/AppCenter-Github-Action@v1
         with:
-          appName: ${{env.ORG_NAME/env.APP_NAME}}
+          appName: ${{env.ORG_NAME}}/${{env.APP_NAME}}
           token: ${{secrets.APPCENTER_USER_API_KEY}}
           group: ${{env.GROUP_NAME}}
           file: ${{env.APP_LOCATION}}
