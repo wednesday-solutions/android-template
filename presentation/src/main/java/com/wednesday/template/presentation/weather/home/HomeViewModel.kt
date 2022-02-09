@@ -48,7 +48,7 @@ class HomeViewModel(
                     setEffect(
                         ShowSnackbarEffect(
                             UIText {
-                                block(it.exception.message ?: it.exception.localizedMessage ?: "Something went wrong")
+                                block(R.string.something_went_wrong)
                             }
                         )
                     )

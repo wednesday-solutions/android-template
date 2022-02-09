@@ -23,6 +23,7 @@ import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.time.ExperimentalTime
 
@@ -82,9 +83,9 @@ class SearchCityInteractorImplTest : InteractorTest() {
                 interactor.search(searchTerm)
 
                 val result = awaitItem()
-
                 // Then
                 assertTrue(result is UIResult.Success)
+                assertEquals(actual = result.data, expected =  uiList)
                 verify(searchCitiesUseCase, times(1)).invoke(same(searchTerm))
                 verify(citySearchResultsMapper, times(1)).map(same(cityList), same(cityList))
                 verify(favouriteCitiesFlowUseCase, times(1)).invoke(Unit)

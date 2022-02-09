@@ -18,7 +18,7 @@ import timber.log.Timber
 
 class SearchCityInteractorImpl(
     private val searchCitiesUseCase: SearchCitiesUseCase,
-    private val favouriteCitiesFlowUseCase: GetFavouriteCitiesFlowUseCase,
+    favouriteCitiesFlowUseCase: GetFavouriteCitiesFlowUseCase,
     private val citySearchResultMapper: UICitySearchResultsMapper,
     private val coroutineContextController: CoroutineContextController
 ) : SearchCityInteractor {
@@ -27,8 +27,7 @@ class SearchCityInteractorImpl(
 
     override val searchResultsFlow: Flow<UIResult<UIList>> = favouriteCitiesFlowUseCase(Unit)
         .combine(searchResultStateFlow) { favouriteCities, searchResults ->
-
-            return@combine when {
+           when {
                 searchResults.isEmpty() -> {
                     UIResult.Error(Exception("The search list was empty"))
                 }

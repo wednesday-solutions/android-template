@@ -51,6 +51,7 @@ class HomeFragment : MainFragment<
     override fun onEffect(effect: Effect) {
         when (effect) {
             is ShowSnackbarEffect -> snackbarComponent.setData(effect)
+            else -> unhandledEffect(effect)
         }
     }
 }

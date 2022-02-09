@@ -58,6 +58,7 @@ class SearchFragment : MainFragment<FragmentSearchBinding,
         when (effect) {
             is HideKeyboardEffect -> hideKeyboardComponent.setData(effect)
             is ShowSnackbarEffect -> snackbarComponent.setData(effect)
+            else -> unhandledEffect(effect)
         }
     }
 
