@@ -39,7 +39,6 @@ class SearchViewModel(
         )
     }
 
-
     override fun onCreate(fromRecreate: Boolean) {
 
         searchCityInteractor.searchResultsFlow.onEach {

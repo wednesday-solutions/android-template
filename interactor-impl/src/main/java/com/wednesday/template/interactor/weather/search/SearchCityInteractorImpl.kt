@@ -27,7 +27,7 @@ class SearchCityInteractorImpl(
 
     override val searchResultsFlow: Flow<UIResult<UIList>> = favouriteCitiesFlowUseCase(Unit)
         .combine(searchResultStateFlow) { favouriteCities, searchResults ->
-           when {
+            when {
                 searchResults.isEmpty() -> {
                     UIResult.Error(Exception("The search list was empty"))
                 }
