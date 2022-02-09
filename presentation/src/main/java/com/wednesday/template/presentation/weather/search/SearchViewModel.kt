@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.navigation.search.SearchNavigator
+import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIResult
 import com.wednesday.template.presentation.base.UIText
@@ -55,7 +56,7 @@ class SearchViewModel(
                     setEffect(
                         ShowSnackbarEffect(
                             message = UIText {
-                                block(it.exception.message ?: "Something went wrong, Please try again")
+                                block(R.string.something_went_wrong)
                             }
                         )
                     )
