@@ -38,4 +38,6 @@ dependencies {
     implementation ext.android.material
 
     implementation ext.logging.timber
+
+    implementation ext.androidx.splashScreen
 }
