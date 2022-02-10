@@ -11,9 +11,9 @@ interface FavouriteWeatherInteractor {
 
     suspend fun removeCityFavourite(uiCity: UICity): UIResult<Unit>
 
-    fun getFavouriteWeatherUIList(): Flow<UIList>
+    fun getFavouriteWeatherUIList(): Flow<UIResult<UIList>>
 
-    fun getFavouriteCitiesFlow(): Flow<List<UICity>>
+    fun getFavouriteCitiesFlow(): Flow<UIResult<List<UICity>>>
 
     suspend fun fetchFavouriteCitiesWeather(): UIResult<Unit>
 }

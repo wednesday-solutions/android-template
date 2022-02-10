@@ -10,6 +10,7 @@ import com.wednesday.template.interactor.base.TestException
 import com.wednesday.template.interactor.weather.search.models.city
 import com.wednesday.template.interactor.weather.search.models.uiCity
 import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.base.UIResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
@@ -23,6 +24,7 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
@@ -71,7 +73,7 @@ class SearchCityInteractorImplTest : InteractorTest() {
             val uiList = UIList(uiCity)
             val cityList = listOf(city)
             whenever(searchCitiesUseCase(searchTerm)).thenReturn(Result.Success(cityList))
-            whenever(favouriteCitiesFlowUseCase(Unit)).thenReturn(flowOf(cityList))
+            whenever(favouriteCitiesFlowUseCase(Unit)).thenReturn(flowOf(Result.Success(cityList)))
             whenever(citySearchResultsMapper.map(any(), any())).thenReturn(uiList)
 
             createInteractor()
@@ -81,9 +83,9 @@ class SearchCityInteractorImplTest : InteractorTest() {
                 interactor.search(searchTerm)
 
                 val result = awaitItem()
-
                 // Then
-                assertEquals(expected = uiList, actual = result)
+                assertTrue(result is UIResult.Success)
+                assertEquals(actual = result.data, expected = uiList)
                 verify(searchCitiesUseCase, times(1)).invoke(same(searchTerm))
                 verify(citySearchResultsMapper, times(1)).map(same(cityList), same(cityList))
                 verify(favouriteCitiesFlowUseCase, times(1)).invoke(Unit)
@@ -101,7 +103,7 @@ class SearchCityInteractorImplTest : InteractorTest() {
             val cityList = listOf(city)
             val testException = TestException()
             whenever(searchCitiesUseCase(searchTerm)).thenReturn(Result.Error(testException))
-            whenever(favouriteCitiesFlowUseCase(Unit)).thenReturn(flowOf(cityList))
+            whenever(favouriteCitiesFlowUseCase(Unit)).thenReturn(flowOf(Result.Success(cityList)))
             whenever(citySearchResultsMapper.map(any(), any())).thenReturn(uiList)
 
             createInteractor()
@@ -113,9 +115,8 @@ class SearchCityInteractorImplTest : InteractorTest() {
                 val result = awaitItem()
 
                 // Then
-                assertEquals(expected = uiList, actual = result)
+                assertTrue(result is UIResult.Error)
                 verify(searchCitiesUseCase, times(1)).invoke(same(searchTerm))
-                verify(citySearchResultsMapper, times(1)).map(same(cityList), same(listOf()))
                 verify(favouriteCitiesFlowUseCase, times(1)).invoke(Unit)
                 verifyNoMoreInteractions()
                 cancelAndConsumeRemainingEvents()
@@ -131,7 +132,7 @@ class SearchCityInteractorImplTest : InteractorTest() {
             val cityList = listOf(city)
             val testException = TestException()
             whenever(searchCitiesUseCase(searchTerm)).thenReturn(Result.Success(cityList))
-            whenever(favouriteCitiesFlowUseCase(Unit)).thenReturn(flowOf(cityList))
+            whenever(favouriteCitiesFlowUseCase(Unit)).thenReturn(flowOf(Result.Success(cityList)))
             whenever(citySearchResultsMapper.map(any(), any())).thenThrow(testException)
 
             createInteractor()
@@ -143,7 +144,7 @@ class SearchCityInteractorImplTest : InteractorTest() {
                 val result = awaitItem()
 
                 // Then
-                assertEquals(expected = uiList, actual = result)
+                assertTrue(result is UIResult.Error)
                 verify(searchCitiesUseCase, times(1)).invoke(same(searchTerm))
                 verify(citySearchResultsMapper, times(1)).map(same(cityList), same(cityList))
                 verify(favouriteCitiesFlowUseCase, times(1)).invoke(Unit)

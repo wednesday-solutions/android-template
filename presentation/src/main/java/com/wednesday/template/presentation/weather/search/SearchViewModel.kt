@@ -4,9 +4,12 @@ import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.navigation.search.SearchNavigator
+import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.base.UIResult
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
+import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
 import kotlinx.coroutines.FlowPreview
@@ -16,7 +19,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-
+@FlowPreview
 class SearchViewModel(
     private val searchCityInteractor: SearchCityInteractor,
     private val favouriteWeatherInteractor: FavouriteWeatherInteractor,
@@ -37,12 +40,27 @@ class SearchViewModel(
         )
     }
 
-    @FlowPreview
     override fun onCreate(fromRecreate: Boolean) {
 
         searchCityInteractor.searchResultsFlow.onEach {
-            setState {
-                copy(showLoading = false, searchList = it)
+            when (it) {
+                is UIResult.Success -> {
+                    setState {
+                        copy(showLoading = false, searchList = it.data)
+                    }
+                }
+                is UIResult.Error -> {
+                    setState {
+                        copy(showLoading = false)
+                    }
+                    setEffect(
+                        ShowSnackbarEffect(
+                            message = UIText {
+                                block(R.string.something_went_wrong)
+                            }
+                        )
+                    )
+                }
             }
         }.launchIn(viewModelScope)
 

@@ -5,6 +5,7 @@ import com.wednesday.template.navigation.home.HomeNavigator
 import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.BaseViewModelTest
 import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.base.UIResult
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.weather.home.models.city
@@ -105,7 +106,7 @@ class HomeViewModelTest : BaseViewModelTest() {
     fun `Given favourite city flow emits value, When new favourite city added, Then favourite city weather is fetched`(): Unit =
         runBlocking {
             // Given
-            val favCityList = listOf(city)
+            val favCityList = UIResult.Success(listOf(city))
             whenever(interactor.getFavouriteCitiesFlow())
                 .thenReturn(flowOf(favCityList, favCityList))
             whenever(interactor.getFavouriteWeatherUIList())
@@ -122,7 +123,7 @@ class HomeViewModelTest : BaseViewModelTest() {
     fun `Given weather ui list emits, When flow is collected, Then state is updated with the UI list`(): Unit =
         runBlocking {
             // Given
-            val uiList = UIList(city)
+            val uiList = UIResult.Success(UIList(city))
             whenever(interactor.getFavouriteCitiesFlow())
                 .thenReturn(flowOf())
             whenever(interactor.getFavouriteWeatherUIList())
@@ -138,7 +139,7 @@ class HomeViewModelTest : BaseViewModelTest() {
             observer.inOrder {
                 verify().onChanged(null)
                 verify().onChanged(initialState)
-                verify().onChanged(initialState.copy(items = uiList))
+                verify().onChanged(initialState.copy(items = uiList.data))
                 verifyNoMoreInteractions()
             }
         }

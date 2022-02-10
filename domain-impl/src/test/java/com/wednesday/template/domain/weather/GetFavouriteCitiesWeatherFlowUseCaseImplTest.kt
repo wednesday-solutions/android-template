@@ -1,6 +1,7 @@
 package com.wednesday.template.domain.weather
 
 import app.cash.turbine.test
+import com.wednesday.template.domain.base.Result
 import com.wednesday.template.domain.weather.models.weather
 import com.wednesday.template.repo.weather.WeatherRepository
 import kotlinx.coroutines.flow.flowOf
@@ -13,6 +14,7 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
@@ -41,7 +43,8 @@ class GetFavouriteCitiesWeatherFlowUseCaseImplTest {
                 val result = awaitItem()
 
                 // Then
-                assertEquals(expected = weatherList, actual = result)
+                assertTrue(result is Result.Success)
+                assertEquals(expected = weatherList, actual = result.data)
                 cancelAndIgnoreRemainingEvents()
             }
             verify(weatherRepository, times(1)).getFavouriteCitiesWeatherFlow()
