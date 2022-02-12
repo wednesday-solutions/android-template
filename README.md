@@ -83,50 +83,53 @@ Apart from these, the layer that have entitiy modules depend on entity module of
 
 ![Module-Dependencies (1)](https://user-images.githubusercontent.com/58199625/153711997-dbfa45fa-e535-4a9b-af93-cb4bfb9801f3.png)
 
-### Other Directories
-Apart from the main layers, the template has
-- [`lib/foundation`](lib/foundation): Extentions on primitive data types, loggers, global type alias etc.
-- [`lib/flavors`](lib/flavors): Flavor i.e. Environment reledated classes.
-- [`lib/entrypoints`](lib/entrypoints): Target files for flutter to run for each flavor.
-- [`lib/app.dart`](lib/app.dart): App initialization code.
+## Gradle setup
+- All the dependencies are listed in [`dependencies.gradle`](dependencies.gradle).
+- Android related setup like build types and flavors is in [`android.gradle`](android.gradle) which is imported in each module.
+- Linting setup is done in [`lint.gradle`](lint.gradle) which is imported in each module.
+- The `build.gradle` files for each module are renamed to `module-name.gradle` so that it is easy to locate them. For example, the gradle file for `service` module is called `service.gradle`.
 
 ## Understanding the Presentation Layer
 The presentation layer houses all the visual components and state management logic.
 
-The [`base`](lib/presentation/base) directory has all the resuable and common elements used as building blocks for the UI like common widgets, app theme data, exceptions, base view models etc.
+The [`base`](presentation/src/main/java/com/wednesday/template/presentation/base) directory has all the resuable and common elements used as building blocks for the UI like common components, base classes, extensions, etc.
 
 ### View Model
-State Management is done using the [`riverpod`](https://riverpod.dev/) along with [`state_notifier`](https://pub.dev/packages/state_notifier). The class that manages state is called the `View Model`. 
+Each `View Model` is a sub class of the `BaseViewModel`. The [`BaseViewModel`](presentation/src/main/java/com/wednesday/template/presentation/base/viewmodel/BaseViewModel.kt). View Models also have the [`SavedStateHandle`](https://developer.android.com/topic/libraries/architecture/viewmodel-savedstate) injected into them. 
 
-Each `View Model` is a sub class of the `BaseViewModel`. The [`BaseViewModel`](lib/presentation/base/view_model_provider/base_view_model.dart) is a `StateNotifier` of [`ScreenState`](#screen-state). Along with the ScreenState it also exposes a stream of [`Effect`](#effect). 
+View Model exposes a LiveData of [`ScreenState`](#screen-state) from the SavedStateHandle. Along with the ScreenState it also exposes a LiveData of [`Effect`](#effect). 
 
 Implementations of the BaseViewModel can also choose to handle [`Intents`](#intent).
 
 ### Screen State
-[`ScreenState`](lib/presentation/entity/screen/screen_state.dart) encapsulates all the state required by a [`Page`](#page). State is any data that represents the current situtation of a Page.
+[`ScreenState`](presentation-entity/src/main/java/com/wednesday/template/presentation/screen/ScreenState.kt) encapsulates all the state required by a Fragment. State is any data that represents the current situtation of a Page.
 
-For example, the [`HomeScreenState`](lib/presentation/destinations/weather/home/home_screen_state.dart) holds the state required by the [`HomePage`](lib/presentation/destinations/weather/home/home_page.dart).
+For example, the [`HomeScreenState`](presentation/src/main/java/com/wednesday/template/presentation/weather/home/HomeScreenState.kt) holds the state required by the [`HomeFragment`](presentation/src/main/java/com/wednesday/template/presentation/weather/home/HomeFragment.kt).
 
 ### Effect
-[`Effects`](lib/presentation/entity/effect/effect.dart) are events that take place on a page that are not part of the state of the screen. These usually deal with UI elements that are not part of the widget tree.
+[`Effects`](presentation/src/main/java/com/wednesday/template/presentation/base/effect/Effect.kt) are events that take place on a fragment that are not part of the state of the screen. These usually deal with UI elements that are not part of the xml layout.
 
 Showing a snackbar or hiding the keyboard are examples of an effect.
 
 
 ### Intent
-Intent is any action takes place on page. It may or may not be user initiated. 
+Intent is any action takes place on fragment. It may or may not be user initiated.
 
-[`SearchScreenIntent`](lib/presentation/destinations/weather/search/search_screen_intent.dart) has the actions that can happen on the [`SearchPage`](lib/presentation/destinations/weather/search/search_page.dart).
+[`SearchScreenIntent`](presentation/src/main/java/com/wednesday/template/presentation/weather/search/SearchScreenIntent.kt) has the actions that can happen on the [`SearchFragment`](presentation/src/main/java/com/wednesday/template/presentation/weather/search/SearchFragment.kt).
 
-### Page
-A page is a widget that the navigator can navigate to. It should return the [`BasePage`](lib/presentation/base/page/base_page.dart) widget. 
+### Components
+Components are reusable parts of UI. Components can be used in any fragment using the `by composable` delegate provided by the `BaseFragment`.
 
-The `BasePage` creates the structure for the page, initialises the [`ViewModel`](#view-model) and provides the view model in the widget tree so that all the children have access to it. It also listens to the effects from the view model and notifies the page about it.
+Components can be anything from a simple component to hide and show the loading indicator to a complex component like `ListComponent` that can manage normal and nested recycler view effciently.
 
-Each page accepts the [`Screen`](#screen) object as input.
+### Fragment 
+Each Fragment must extend the `BaseFragment`. 
+The `BaseFragment` provides the [`ViewModel`](#view-model) with the navigator and the [`Screen`](#screen). It listens to the screen state and effect live data from the view model and notifies the fragment about it. It also binds and unbinds all the components in the appropriate lifecycle callbacks.
+
+Each Fragment may receive the [`Screen`](#screen) as aguments when navigating.
 
 ### Screen
-A [`Screen`](lib/presentation/entity/screen/screen.dart) is a class that represents a `Page` in the context of navigation. It holds the `path` used by the navigator to navigate to a `Page` and also holds any arguments required to navigate to that `Page`.
+A [`Screen`](presentation-entity/src/main/java/com/wednesday/template/presentation/screen/Screen.kt) is a class that represents a `Fragment` in the context of navigation. It holds the `path or id` used by the navigator to navigate to a `Fragment` and also holds any arguments required to navigate to that `Fragment`.
 
 ## Flavors
 The template comes with built-in support for 3 flavors. Each flavor uses a diffrent `main.dart` file.
@@ -147,12 +150,48 @@ Read the [scripts documentation](scripts/README.md) to learn about all the scrip
  
 ## Content
 The Flutter Template contains:
-- A [`Flutter`](https://flutter.dev/) application.
+- An [`Android 12`](https://www.android.com/intl/en_in/) application.
 - Built-in support for 3 [`flavors`](https://docs.flutter.dev/deployment/flavors) - `dev`, `qa` and `prod`.
 - A [`reactive base architectire`](#architecture) for your application.
-- [`Riverpod`](https://riverpod.dev/) along with [`state_notifier`](https://pub.dev/packages/state_notifier) for state management.
-- [`Drift`](https://drift.simonbinder.eu/) as local database for storage.
-- [`Dio`](https://github.com/flutterchina/dio) for making API calls.
-- [`Freezed`](https://pub.dev/packages/freezed) for data class functionality.
-- [`Get It`](https://pub.dev/packages/get_it) for dependency injection.
-- [`Flutter Lints`](https://pub.dev/packages/flutter_lints) for linting.
+- [`Room`](https://developer.android.com/training/data-storage/room) as local persistent database.
+- [`Retrofit`](https://square.github.io/retrofit/) for api calls.
+- [`Kotlinx serialization`](https://github.com/Kotlin/kotlinx.serialization) for json conversion.
+- [`Koin`](https://insert-koin.io/) for dependency injection.
+- [`Timber`](https://github.com/JakeWharton/timber) for logging.
+- [`Chucker`](https://github.com/ChuckerTeam/chucker) for on device api call logging.
+- [`Ktlint`](https://ktlint.github.io/) for linting the codebase.
+
+## Continuous Integration and Deployment
+The Flutter template comes with built in support for CI/CD using Github Actions.
+
+### CI
+The [`CI`](.github/workflows/ci.yml) workflow performs the following checks on every pull request:
+- Lints the code with `flutter analyze`.
+- Runs tests using `flutter test`.
+- Build the android app.
+- Build the ios app.
+
+### CD
+The [`CD`](.github/workflows/cd.yml) workflow performs the following actions:
+- Bump the build number by 1.
+- Build a signed release apk.
+- Upload apk to app center.
+- Upload apk as artifact to release tag.
+- Build a signed iOS app.
+- Upload ipa to testflight.
+- Upload ipa as artifact to release tag.
+- Commit the updated version to git.
+
+### Android CD setup
+For the android CD workflow to run, we need to perform the following setup steps:
+- Follow these instructions to [generate an upload keystore](https://developer.android.com/studio/publish/app-signing#generate-key). Note down the `store password`, `key alias` and `key password`. You will need these in later steps.
+- Use `openssl` to convert the `jks` file to `Base64`.
+```shell
+openssl base64 < flutter_template_keystore.jks | tr -d '\n' | tee flutter_template_keystore_encoded.txt
+```
+- Store the `base64` output on [`Github Secrets`](https://docs.github.com/en/actions/security-guides/encrypted-secrets) with the key name `KEYSTORE`.
+- Save the `store password` in github secrets with key name `RELEASE_STORE_PASSWORD`.
+- Save the `key alias` in github secrets with key name `RELEASE_KEY_ALIAS`.
+- Save the `key password` in github secrets with key name `RELEASE_KEY_PASSWORD`.
+- [Create a distribution on app center](https://docs.microsoft.com/en-us/appcenter/distribution/) and get the upload key. You can get it from from appcenter.ms/settings.
+- Save the app center upload key on github secrets with key name `APP_CENTER_TOKEN`.
