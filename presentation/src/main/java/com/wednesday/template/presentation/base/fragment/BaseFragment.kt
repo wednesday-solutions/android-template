@@ -26,7 +26,7 @@ abstract class BaseFragment<
     SCREEN : Screen,
     SCREEN_STATE : ScreenState,
     NAV : Navigator,
-    VM : BaseViewModel<SCREEN, SCREEN_STATE, NAV>
+    VM : BaseViewModel<SCREEN, SCREEN_STATE>
     > : Fragment() {
 
     abstract val viewModel: VM
@@ -57,7 +57,6 @@ abstract class BaseFragment<
         super.onCreate(savedInstanceState)
         args = arguments?.get("key_args") as SCREEN
         viewModel.args = args
-        viewModel.onCreate(savedInstanceState, navigator)
     }
 
     override fun onResume() {

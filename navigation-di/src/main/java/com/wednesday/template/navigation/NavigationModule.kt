@@ -10,24 +10,9 @@ import org.koin.dsl.module
 
 val navigationModule = module {
 
-    factory<BaseNavigator> { (fragment: Fragment) -> BaseNavigatorImpl(fragment) }
+    factory<BaseNavigator> { BaseNavigatorImpl(get()) }
 
-    factory<SearchNavigator> { (fragment: Fragment) ->
-        SearchNavigatorImpl(
-            get {
-                parametersOf(
-                    fragment
-                )
-            }
-        )
-    }
-    factory<HomeNavigator> { (fragment: Fragment) ->
-        HomeNavigatorImpl(
-            get {
-                parametersOf(
-                    fragment
-                )
-            }
-        )
-    }
+    factory<SearchNavigator> { SearchNavigatorImpl(get()) }
+
+    factory<HomeNavigator> { HomeNavigatorImpl(get()) }
 }

@@ -2,20 +2,23 @@ package com.wednesday.template.navigation
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.wednesday.template.presentation.screen.Screen
 
-class BaseNavigatorImpl(private val fragment: Fragment) : BaseNavigator {
+class BaseNavigatorImpl(private val navController: NavHostController) : BaseNavigator {
 
     override fun navigateTo(screen: Screen) {
-        screen.navigate()
+        navController.navigate(route = screen.route)
     }
 
     override fun back() {
-        fragment.findNavController().apply {
-            if (!popBackStack() && !navigateUp()) {
-                fragment.activity?.onBackPressed()
+        navController.apply {
+            // todo Improve back implementation
+            if (!navigateUp()) {
+                popBackStack()
             }
         }
     }
@@ -27,6 +30,6 @@ class BaseNavigatorImpl(private val fragment: Fragment) : BaseNavigator {
                 exit = androidx.navigation.ui.R.anim.nav_default_exit_anim
             }
         }
-        fragment.findNavController().navigate(id, bundleOf("key_args" to this), navOptions)
+//        fragment.findNavController().navigate(id, bundleOf("key_args" to this), navOptions)
     }
 }

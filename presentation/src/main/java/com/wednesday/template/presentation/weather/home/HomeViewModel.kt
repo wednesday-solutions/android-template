@@ -1,5 +1,6 @@
 package com.wednesday.template.presentation.weather.home
 
+import androidx.compose.runtime.compositionLocalOf
 import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.navigation.home.HomeNavigator
@@ -11,13 +12,18 @@ import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
-import com.wednesday.template.presentation.weather.search.SearchScreen
+import com.wednesday.template.presentation.screen.HomeScreen
+import com.wednesday.template.presentation.screen.SearchScreen
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import org.koin.core.context.GlobalContext
+
+val LocalHomeViewModel = compositionLocalOf<HomeViewModel> { error("HomeViewModel not provided") }
 
 class HomeViewModel(
     private val favouriteWeatherInteractor: FavouriteWeatherInteractor,
-) : BaseViewModel<HomeScreen, HomeScreenState, HomeNavigator>(),
+    private val homeNavigator: HomeNavigator,
+) : BaseViewModel<HomeScreen, HomeScreenState>(),
     IntentHandler<HomeScreenIntent> {
 
     override fun getDefaultScreenState(): HomeScreenState {
@@ -60,7 +66,7 @@ class HomeViewModel(
     override fun onIntent(intent: HomeScreenIntent) {
         when (intent) {
             is HomeScreenIntent.Search -> {
-                navigator.navigateTo(SearchScreen)
+                homeNavigator.navigateToSearch(SearchScreen)
             }
         }
     }

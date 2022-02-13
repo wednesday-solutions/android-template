@@ -11,6 +11,19 @@ apply from: "$rootProject.projectDir/lint.gradle"
 android {
     buildFeatures {
         viewBinding true
+        compose true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.1.0'
     }
 }
 
@@ -25,6 +38,7 @@ dependencies {
 
     implementation ext.koin.core
     implementation ext.koin.android
+    implementation ext.koin.compose
 
     implementation ext.android.material
 
@@ -42,6 +56,17 @@ dependencies {
     implementation ext.androidx.lifecycleViewModelKtx
     implementation ext.androidx.navigationFragment
     implementation ext.androidx.navigationUi
+
+    implementation ext.compose.activity
+    implementation ext.compose.ui
+    implementation ext.compose.uiTooling
+    implementation ext.compose.foundation
+    implementation ext.compose.material
+    implementation ext.compose.materialIcons
+    implementation ext.compose.materialIconsExtended
+    implementation ext.compose.liveData
+    implementation ext.compose.viewModel
+    implementation ext.compose.navigation
 
     testImplementation ext.test.androidxArchCore
     testImplementation ext.test.coroutines

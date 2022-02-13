@@ -13,16 +13,17 @@ import com.wednesday.template.presentation.base.fragment.MainFragment
 import com.wednesday.template.presentation.base.list.ListComponent
 import com.wednesday.template.presentation.base.snackbar.SnackbarComponent
 import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
+import com.wednesday.template.presentation.screen.SearchScreen
 import com.wednesday.template.presentation.weather.search.list.UICityListRenderer
 import com.wednesday.template.resources.databinding.FragmentSearchBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class SearchFragment : MainFragment<FragmentSearchBinding,
-    SearchScreen,
-    SearchScreenState,
-    SearchNavigator,
-    SearchViewModel>() {
+        SearchScreen,
+        SearchScreenState,
+        SearchNavigator,
+        SearchViewModel>() {
 
     override val toolbarComponent: ToolbarComponent = ToolbarComponent(this, onBackClicked = {
         viewModel.onIntent(SearchScreenIntent.Back)

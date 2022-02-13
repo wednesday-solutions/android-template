@@ -20,7 +20,7 @@ abstract class MainFragment<
     SCREEN : Screen,
     SCREEN_STATE : MainScreenState,
     NAV : Navigator,
-    VM : BaseViewModel<SCREEN, SCREEN_STATE, NAV>
+    VM : BaseViewModel<SCREEN, SCREEN_STATE>
     > : BaseFragment<BINDING, SCREEN, SCREEN_STATE, NAV, VM>() {
 
     abstract val toolbarComponent: ToolbarComponent

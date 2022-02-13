@@ -15,20 +15,15 @@ import com.wednesday.template.presentation.screen.ScreenState
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState, NAV : Navigator> :
+abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState> :
     ViewModel(), KoinComponent, StateOwner {
 
     abstract fun getDefaultScreenState(): STATE
 
     override val savedStateHandle by inject<SavedStateHandle>()
 
-    private lateinit var _navigator: NAV
-
-    val navigator: NAV
-        get() = _navigator
-
-    private val _screenState by statefulLiveData<STATE?> { null }
-    val screenState: LiveData<STATE?> = _screenState
+    private val _screenState by statefulLiveData { getDefaultScreenState() }
+    val screenState: LiveData<STATE> = _screenState
 
     private val _effectState = MutableLiveData<Effect?>(null)
     val effectState: LiveData<Effect?> = _effectState
@@ -46,11 +41,10 @@ abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState, NAV : Navigat
 
     open fun onDestroyView() = Unit
 
-    fun onCreate(bundle: Bundle?, navigator: NAV) {
+    fun onCreate(bundle: Bundle?) {
         val isFreshCreate = bundle == null
         val isFromRecreate = recreateFlag == null
         recreateFlag = Unit
-        _navigator = navigator
         if (isFromRecreate) {
             _screenState.value = getDefaultScreenState()
         }

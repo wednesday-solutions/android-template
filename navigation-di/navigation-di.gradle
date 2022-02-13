@@ -17,5 +17,6 @@ dependencies {
 
     implementation ext.androidx.appCompat
 
-    implementation ext.cicerone.core
+    implementation ext.compose.navigation
+
 }
