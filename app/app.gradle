@@ -39,8 +39,8 @@ android {
                 def flavour = variant.flavorName
                 def builtType = variant.buildType.name
                 def versionName = variant.versionName
-                def versionCode 3= variant.versionCode
-                outputFileName = "app-${flavour}-${builtType}-${versionName}(${versionCode}).apk"
+                def vCode = variant.versionCode
+                outputFileName = "app-${flavour}-${builtType}-${versionName}(${vCode}).apk"
             }
         }
     }
