@@ -7,7 +7,7 @@ apply from: "$rootProject.projectDir/android.gradle"
 android {
     defaultConfig {
         applicationId "com.wednesday.template"
-        versionCode 2
+        versionCode 3
         versionName "1.0"
     }
     flavorDimensions "version"
@@ -39,7 +39,7 @@ android {
                 def flavour = variant.flavorName
                 def builtType = variant.buildType.name
                 def versionName = variant.versionName
-                def versionCode = variant.versionCode
+                def versionCode 3 variant.versionCode
                 outputFileName = "app-${flavour}-${builtType}-${versionName}(${versionCode}).apk"
             }
         }
