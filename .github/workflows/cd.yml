@@ -1,0 +1,61 @@
+name: CD
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build and Deploy the apk
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.SHOUNAK_GITHUB_TOKEN  }}
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Build the Release APK
+        run: |
+          bash scripts/actions/build_file_according_to_flavour.sh
+      - uses: r0adkll/sign-android-release@v1
+        name: Sign app APK
+        id: sign_app
+        with:
+          releaseDirectory: ${{ env.RELEASE_OUTPUT_FILE }}
+          signingKeyBase64: ${{ secrets.KEYSTORE }}
+          alias: ${{ secrets.KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "30.0.3"
+      - name: Generate the new Tag from Version Code
+        id: new_tag
+        run: |
+          bash scripts/actions/generate_new_version_code.sh
+      - name: Generate release with the tag
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.NEW_TAG }}
+          body: New Release Created
+          artifacts: ${{steps.sign_app.outputs.signedReleaseFile}}
+          artifactErrorsFailBuild: true
+      - name: Commit new version code changes
+        run: |
+          bash scripts/actions/commit_and_update.sh
+      - name: Upload apk to App Center
+        uses: wzieba/AppCenter-Github-Action@v1
+        with:
+          appName: ${{secrets.ORG_NAME}}/${{secrets.APP_NAME}}
+          token: ${{secrets.APPCENTER_USER_API_KEY}}
+          group: ${{secrets.GROUP_NAME}}
+          file: ${{steps.sign_app.outputs.signedReleaseFile}}
+          notifyTesters: true
+          debug: false
