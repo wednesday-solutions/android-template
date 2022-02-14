@@ -1,4 +1,4 @@
-currentVersionCode=$(awk '/versionCode/ {print $2}' $GITHUB_WORKSPACE/app/app.gradle)
+currentVersionCode=$(awk '/versionCode/ {print $2}' $GITHUB_WORKSPACE/app/app.gradle | head -1)
 
 # Making changes to files permanent using sed
 let "currentVersionCode=currentVersionCode+1"
