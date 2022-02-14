@@ -1,5 +1,5 @@
 
-currentVersionCode=$(awk '/versionCode/ {print $2}' $GITHUB_WORKSPACE/app/app.gradle) # Regex filter to grab 2 from "versionCode 2"
+currentVersionCode=$(awk '/versionCode/ {print $2}' $GITHUB_WORKSPACE/app/app.gradle | head -1 ) # Regex filter to grab 2 from "versionCode 2"
 
 #Regex filter to grab 2.0 from "versionName '2.0'"
 # versionNameSuffix can also match,therefore pulling only the first result
