@@ -7,7 +7,7 @@ apply from: "$rootProject.projectDir/android.gradle"
 android {
     defaultConfig {
         applicationId "com.wednesday.template"
-        versionCode 1
+        versionCode 3
         versionName "1.0"
     }
     flavorDimensions "version"
