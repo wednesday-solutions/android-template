@@ -8,6 +8,8 @@ jobs:
     name: Build and Deploy the apk
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.SHOUNAK_GITHUB_TOKEN  }}
       - uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
@@ -36,7 +38,7 @@ jobs:
           BUILD_TOOLS_VERSION: "30.0.3"
       - name: Generate the new Tag from Version Code
         id: new_tag
-        run:  |
+        run: |
           bash scripts/actions/generate_new_version_code.sh
       - name: Generate release with the tag
         uses: ncipollo/release-action@v1
@@ -48,3 +50,12 @@ jobs:
       - name: Commit new version code changes
         run: |
           bash scripts/actions/commit_and_update.sh
+      - name: Upload apk to App Center
+        uses: wzieba/AppCenter-Github-Action@v1
+        with:
+          appName: ${{secrets.ORG_NAME}}/${{secrets.APP_NAME}}
+          token: ${{secrets.APPCENTER_USER_API_KEY}}
+          group: ${{secrets.GROUP_NAME}}
+          file: ${{steps.sign_app.outputs.signedReleaseFile}}
+          notifyTesters: true
+          debug: false
