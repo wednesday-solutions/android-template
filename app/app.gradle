@@ -34,6 +34,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def flavour = variant.flavorName
+                def builtType = variant.buildType.name
+                def versionName = variant.versionName
+                def versionCode = variant.versionCode
+                outputFileName = "app-${flavour}-${builtType}-${versionName}(${versionCode}).apk"
+            }
+        }
     }
 }
 
