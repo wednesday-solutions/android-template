@@ -40,7 +40,7 @@ android {
                 def builtType = variant.buildType.name
                 def versionName = variant.versionName
                 def vCode = variant.versionCode
-                outputFileName = "app-${flavour}-${builtType}-${versionName}(${vCode}).apk"
+                outputFileName = "app-${flavour}-${builtType}-${versionName}(${vCode}).apk".replace("-${flavour}","")
             }
         }
     }
