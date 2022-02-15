@@ -1,4 +1,4 @@
-<img align="left" src="https://github.com/wednesday-solutions/android-template/blob/master/android_template_github.svg" width="480" height="540" />
+<img align="left" src="android_template_github.svg" width="480" height="540" />
 
 <div>
   <a href="https://www.wednesday.is?utm_source=gthb&utm_medium=repo&utm_campaign=serverless" align="left" style="margin-left: 0;">
@@ -139,7 +139,7 @@ The template comes with built-in support for 3 flavors
 
 > Note: Flavour specific configurations can be made in the [app.gradle](app/app.gradle) file under the `buildTypes` block
 
-Read the [scripts documentation](scripts/README.md) to learn about all the scrips used in the project.
+
  
 ## Content
 The Android Template contains:
