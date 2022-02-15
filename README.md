@@ -173,7 +173,7 @@ The [`CD`](.github/workflows/cd.yml) workflow performs the following actions:
 - Upload apk as artifact to release tag.
 - Commit the updated version to git.
 
-| Note: It is recommended to keep your keystore and its essentials like: alias, password safe and encrypted, inside your [Github Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
+> `Note`: It is recommended to keep your keystore and its essentials like: alias, password safe and encrypted, inside your [Github Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
 
 ### Android CD setup
 For the android CD workflow to run, we need to perform the following setup steps:
@@ -192,4 +192,4 @@ openssl base64 < android_template_keystore.jks | tr -d '\n' | tee android_templa
 - Save the organisation name as `ORG_NAME` inside github secrets. Example: `Wednesday Solutions`
 - Save the app name as `APP_NAME` inside github secrets. Example: `Android Template`
 
-| Caution: Respect the of the value inside secrets or else AppCenter APIs might have problems looking for your app
+> `Caution`: Respect the of the value inside secrets or else AppCenter APIs might have problems looking for your app

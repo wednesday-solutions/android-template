@@ -20,15 +20,15 @@ If the lint check fails, a correction attempt is made using the `./gradlew ktLin
 #### Actions(`/scripts/actions/`)
 This contains all the scripts that are used at the various steps inside the [Github Actions CI/CD Pipeline](.github/workflows/)
 
-- ```build_file_according_to_flavour.sh```
+- ```build_file_according_to_flavour.sh```:
 This builds the `prod` flavour by default on the `master/main` branch and the `qa` flavour by default
 
-- `commit_and_update.sh`
+- `commit_and_update.sh`:
 This commits all changes made by the various scripts back into version control.
 
-| Note the usage of [skip ci] in the commit message which prevents re-triggering the pipeline here. For more info read [here](https://docs.github.com/en/actions/managing-workflow-runs/skipping-workflow-runs)
+> `Note:` the usage of [skip ci] in the commit message which prevents re-triggering the pipeline here. For more info read [here](https://docs.github.com/en/actions/managing-workflow-runs/skipping-workflow-runs)
 
-- `generate_new_version_code.sh`
+- `generate_new_version_code.sh`:
 This creates a tag with the current version code and then updates it by one for the future releases
 
 
