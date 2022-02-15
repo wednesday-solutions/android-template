@@ -75,13 +75,20 @@ The layers `presentation`, `domain` and `services` each have an `entity` module 
 
 #### Inter-module Dependencies
 There is a pattern in which all these modules depend on each other.
-- The `implementation` modules depend on the `interface` modules of the same layer and the layer directly below it. [`repo-impl`](repo-impl) depends on [`repo`](repo) and [`service`](service).
-- The `interface` modules may depend on the `interface` modules of the layer below. [`repo`](repo) depends on [`service`](service).
-- The `di` modules depend on the `interface` and `implementation` modules of the same layer. And may also depend on the `interface` module of the layer below. [`repo-di`](repo-di) depends on [`repo`](repo), [`repo-impl`](repo-impl) and [`service`](service).
+
+The `interface` module in a layer is just the name of the layer.
+ > Example: `repo-interface` is just `repo`
+The `implementation` module in a layer is just the name of the layer, suffixed by `-impl`.
+ > Example: `repo-implementation` is just `repo-impl`
+
+- The `implementation` modules depend on the `interface` modules of the same layer and the layer directly below it.
+> Example: [`repo-impl`](repo-impl) depends on [`repo`](repo) and [`service`](service).
+- The `interface` modules may depend on the `interface` modules of the layer below.
+> Example: [`repo`](repo) depends on [`service`](service).
+- The `di` modules depend on the `interface` and `implementation` modules of the same layer. And may also depend on the `interface` module of the layer below.
+> Example: [`repo-di`](repo-di) depends on [`repo`](repo), [`repo-impl`](repo-impl) and [`service`](service).
 
 Apart from these, the layer that have entity modules depend on entity module of the same layer. The layers that don't have entity modules depend on the entity modules of the layer above and below.
-
-![Module-Dependencies (1)](https://user-images.githubusercontent.com/58199625/153711997-dbfa45fa-e535-4a9b-af93-cb4bfb9801f3.png)
 
 ## Gradle setup
 - All the dependencies are listed in [`dependencies.gradle`](dependencies.gradle).
