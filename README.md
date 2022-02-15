@@ -137,7 +137,7 @@ The template comes with built-in support for 3 flavors
 - QA - This flavour would be used when the app is under review by the QA Team or the Project Manager
 - Prod - This flavour would be used when the app is ready to be deployed to a store or shipped to the user
 
-| Note: Flavour specific configurations can be made in the [app.gradle](app/app.gradle) file under the `buildTypes` block
+> Note: Flavour specific configurations can be made in the [app.gradle](app/app.gradle) file under the `buildTypes` block
 
 Read the [scripts documentation](scripts/README.md) to learn about all the scrips used in the project.
  
