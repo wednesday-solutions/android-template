@@ -76,9 +76,10 @@ The layers `presentation`, `domain` and `services` each have an `entity` module 
 #### Inter-module Dependencies
 There is a pattern in which all these modules depend on each other.
 
-The `interface` module in a layer is just the name of the layer.
+- The `interface` module in a layer is just the name of the layer.
  > Example: `repo-interface` is just `repo`
-The `implementation` module in a layer is just the name of the layer, suffixed by `-impl`.
+
+- The `implementation` module in a layer is just the name of the layer, suffixed by `-impl`.
  > Example: `repo-implementation` is just `repo-impl`
 
 - The `implementation` modules depend on the `interface` modules of the same layer and the layer directly below it.
