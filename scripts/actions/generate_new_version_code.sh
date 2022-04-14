@@ -1,9 +1,9 @@
 
-currentVersionCode=$(awk '/versionCode/ {print $2}' $GITHUB_WORKSPACE/app/app.gradle | head -1 ) # Regex filter to grab 2 from "versionCode 2"
+currentVersionCode=$(awk '/versionCode/ {print $2}' $GITHUB_WORKSPACE/app/app.gradle.kts | head -1 ) # Regex filter to grab 2 from "versionCode 2"
 
 #Regex filter to grab 2.0 from "versionName '2.0'"
 # versionNameSuffix can also match,therefore pulling only the first result
-currentVersionName=$(awk '/versionName/ {print $2}' $GITHUB_WORKSPACE/app/app.gradle | head -1 | sed 's/\"//g')
+currentVersionName=$(awk '/versionName/ {print $2}' $GITHUB_WORKSPACE/app/app.gradle.kts | head -1 | sed 's/\"//g')
 status=$?
 
 if [ "$status" = 0 ]; then
