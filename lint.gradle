@@ -2,10 +2,9 @@ configurations {
     ktlint
 }
 
-apply from:"$rootProject.projectDir/dependencies.gradle"
 
 dependencies {
-    ktlint "com.pinterest:ktlint:$ktlintVersion"
+    ktlint "com.pinterest:ktlint:${Versions.ktlint}"
 }
 
 task ktlint(type: JavaExec, group: "verification") {

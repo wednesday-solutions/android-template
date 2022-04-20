@@ -92,10 +92,10 @@ There is a pattern in which all these modules depend on each other.
 Apart from these, the layer that have entity modules depend on entity module of the same layer. The layers that don't have entity modules depend on the entity modules of the layer above and below.
 
 ## Gradle setup
-- All the dependencies are listed in [`dependencies.gradle`](dependencies.gradle).
+- All the dependencies are listed in the `buildSrc` module in the [`Dependencies.kt`](buildSrc/src/main/java/Dependencies.kt) file..
 - Android related setup like build types and flavors is in [`android.gradle`](android.gradle) which is imported in each module.
 - Linting setup is done in [`lint.gradle`](lint.gradle) which is imported in each module.
-- The `build.gradle` files for each module are renamed to `module-name.gradle` so that it is easy to locate them. For example, the gradle file for `service` module is called `service.gradle`.
+- The `build.gradle.kts` files for each module are renamed to `module-name.gradle.kts` so that it is easy to locate them. For example, the gradle file for `service` module is called `service.gradle.kts`.
 
 ## Understanding the Presentation Layer
 The presentation layer houses all the visual components and state management logic.
