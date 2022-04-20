@@ -17,17 +17,17 @@ android {
     flavorDimensions("version")
     productFlavors {
         create("qa") {
-            setDimension("version")
+            dimension("version")
             applicationIdSuffix = ".qa"
             versionNameSuffix = "-qa"
         }
         create("prod") {
-            setDimension("version")
+            dimension("version")
             applicationIdSuffix = ".prod"
             versionNameSuffix = "-prod"
         }
         create("dev") {
-            setDimension("version")
+            dimension("version")
             applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
         }
