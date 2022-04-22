@@ -5,7 +5,6 @@ currentVersionCode=$(awk '/versionCode = / {print $3}' $GITHUB_WORKSPACE/app/app
 # versionNameSuffix can also match,therefore pulling only the first result
 currentVersionName=$(awk '/versionName = / {print $3}' $GITHUB_WORKSPACE/app/app.gradle.kts | head -1 | sed 's/\"//g')
 
-echo "$currentVersionName"
 status=$?
 
 if [ "$status" = 0 ]; then
@@ -26,7 +25,6 @@ echo "NEW_TAG=$new_tag" >> $GITHUB_ENV # Setting this for use later
 echo "Updating CurrentVersionCode by 1 and changing file versionCode"
 
 let "currentVersionCode=currentVersionCode+1" # Bumping versionCode By one
-sed -i 's/versionCode [0-9A-Za-z]*/versionCode '$currentVersionCode'/' $GITHUB_WORKSPACE/app/app.gradle.kts
-
+sed -i '' "s/\(versionCode[[:space:]]*=[[:space:]]*\)[0-9]*/\\1${currentVersionCode}/" app/app.gradle.kts
 
 

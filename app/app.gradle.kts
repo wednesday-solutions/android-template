@@ -11,7 +11,7 @@ apply {
 android {
     defaultConfig {
         applicationId = "com.wednesday.template"
-        versionCode 6= 5
+        versionCode = 6
         versionName = "1.0"
     }
     flavorDimensions("version")
