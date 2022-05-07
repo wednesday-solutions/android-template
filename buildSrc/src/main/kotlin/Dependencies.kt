@@ -1,31 +1,17 @@
-object Versions {
-    const val kotlin = "1.6.21"
-    const val kotlinxSerialization = "1.3.2"
-    const val ktlint = "0.45.2"
-    const val coroutines = "1.6.1"
-    const val koin = "3.2.0-beta-1"
-    const val fragment = "1.3.5"
-    const val lifecycle = "2.4.1"
-    const val lifecycleViewModelCompose = "2.4.1"
-    const val core = "1.7.0"
-    const val jUnit = "4.12"
-    const val androidxTest = "1.4.0"
-    const val retrofit = "2.9.0"
-    const val nav = "2.4.2"
-    const val room = "2.4.2"
-    const val splash = "1.0.0-beta02"
-    const val material = "1.6.0"
-    const val appCompat = "1.4.1"
-    const val constraintLayout = "2.0.4"
-    const val recyclerView = "1.2.1"
-    const val recyclerViewSelection = "1.2.0-alpha01"
-    const val retrofitKotlinxSerializationConverter = "0.8.0"
-    const val retrofitLoggingInterceptor = "4.9.3"
-    const val timber = "5.0.1"
-    const val chucker = "3.5.2"
-}
-
 object Dependencies {
+
+    // Compose
+    const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
+    const val composeMaterial = "androidx.compose.material:material:${Versions.compose}"
+    const val composeMaterialIconCore = "androidx.compose.material:material-icons-core:${Versions.compose}"
+    const val composeMaterialIconExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
+    const val composeFoundation = "androidx.compose.foundation:foundation:${Versions.compose}"
+    const val composeRuntime = "androidx.compose.runtime:runtime:${Versions.compose}"
+    const val composeLiveData = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
+    const val composeAnimation = "androidx.compose.animation:animation:${Versions.compose}"
+    const val composeUiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
+    const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycleViewModelCompose}"
+    const val composeUiTest = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
 
     // Room
     const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
@@ -48,6 +34,8 @@ object Dependencies {
     const val koinAndroid = "io.insert-koin:koin-android:${Versions.koin}"
     const val koinWorkManager = "io.insert-koin:koin-androidx-workmanager:${Versions.koin}"
     const val koinTest = "io.insert-koin:koin-test:${Versions.koin}"
+    const val koinNavigation = "io.insert-koin:koin-androidx-navigation:${Versions.koin}"
+    const val koinCompose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
 
     // Material
     const val material = "com.google.android.material:material:${Versions.material}"

@@ -2,9 +2,18 @@ package com.wednesday.template.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.annotation.IdRes
 import androidx.annotation.NavigationRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentActivity
@@ -25,7 +34,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         displayFragment()
-        setContentView(binding.root)
+
+        setContent {
+            Scaffold(modifier = Modifier.padding(16.dp)) {
+                Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+                    Text("Hello from Compose!")
+                }
+            }
+        }
     }
 
     @SuppressLint("ResourceType")
@@ -49,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         startDestId: Int,
         startDestinationArgs: Bundle? = null
     ) {
-        startDestination = startDestId
+        setStartDestination(startDestId)
         if (startDestinationArgs != null) {
             navController.setGraph(this, startDestinationArgs)
         } else {

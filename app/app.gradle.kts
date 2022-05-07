@@ -14,7 +14,6 @@ android {
     compileSdk = 31
     buildToolsVersion = "30.0.3"
 
-
     defaultConfig {
         minSdk = 24
         targetSdk = 31
