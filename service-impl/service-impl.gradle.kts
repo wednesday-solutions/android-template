@@ -9,14 +9,14 @@ apply {
     from("${rootProject.projectDir}/lint.gradle")
 }
 
-android {
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-}
+//android {
+//    compileOptions {
+//        isCoreLibraryDesugaringEnabled = true
+//        sourceCompatibility = JavaVersion.VERSION_1_8
+//        targetCompatibility = JavaVersion.VERSION_1_8
+//    }
+//
+//}
 
 dependencies {
 
