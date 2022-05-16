@@ -9,14 +9,8 @@ import com.wednesday.template.presentation.base.UIResult
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.weather.home.models.city
-import com.wednesday.template.presentation.weather.search.SearchScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
