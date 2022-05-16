@@ -12,11 +12,11 @@ dependencies {
     implementation(project(":service"))
     implementation(project(":service-impl"))
 
-    implementation(Dependencies.koinCore)
-    implementation(Dependencies.koinAndroid)
+    implementation(Dependencies.Koin.core)
+    implementation(Dependencies.Koin.android)
 
-    implementation(Dependencies.roomRuntime)
-    implementation(Dependencies.roomKtx)
+    implementation(Dependencies.Room.runtime)
+    implementation(Dependencies.Room.ktx)
 
-    implementation(Dependencies.retrofitCore)
+    implementation(Dependencies.Retrofit.core)
 }

@@ -17,11 +17,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     composeOptions {
@@ -35,46 +32,46 @@ dependencies {
     implementation(project(":resources"))
     implementation(project(":navigation"))
 
-    implementation(Dependencies.kotlinStdLib)
+    implementation(Dependencies.Kotlin.stdLib)
 
-    implementation(Dependencies.koinCore)
-    implementation(Dependencies.koinAndroid)
-    implementation(Dependencies.koinNavigation)
-    implementation(Dependencies.koinCompose)
+    implementation(Dependencies.Koin.core)
+    implementation(Dependencies.Koin.android)
+    implementation(Dependencies.Koin.navigation)
+    implementation(Dependencies.Koin.compose)
 
-    implementation(Dependencies.material)
+    implementation(Dependencies.Material.material)
 
-    implementation(Dependencies.activityCompose)
-    implementation(Dependencies.composeMaterial)
-    implementation(Dependencies.composeAnimation)
-    implementation(Dependencies.composeUiTooling)
-    implementation(Dependencies.viewModelCompose)
-    implementation(Dependencies.composeMaterialIconCore)
-    implementation(Dependencies.composeMaterialIconExtended)
-    implementation(Dependencies.composeFoundation)
-    implementation(Dependencies.composeLiveData)
+    implementation(Dependencies.Compose.activity)
+    implementation(Dependencies.Compose.material)
+    implementation(Dependencies.Compose.animation)
+    implementation(Dependencies.Compose.uiTooling)
+    implementation(Dependencies.Compose.viewModel)
+    implementation(Dependencies.Compose.materialIconCore)
+    implementation(Dependencies.Compose.materialIconExtended)
+    implementation(Dependencies.Compose.foundation)
+    implementation(Dependencies.Compose.liveData)
 
-    implementation(Dependencies.loggingTimber)
-    implementation(Dependencies.coroutinesCore)
-    implementation(Dependencies.coroutinesAndroid)
-    implementation(Dependencies.androidAppCompat)
-    implementation(Dependencies.androidCoreKtx)
-    implementation(Dependencies.androidFragment)
-    implementation(Dependencies.androidConstraintLayout)
-    implementation(Dependencies.androidRecyclerView)
-    implementation(Dependencies.androidLifecycleLiveDataCore)
-    implementation(Dependencies.androidLifecycleLiveDataKtx)
-    implementation(Dependencies.androidLifecycleViewModel)
-    implementation(Dependencies.androidLifecycleViewModelKtx)
-    implementation(Dependencies.androidNavigationFragment)
-    implementation(Dependencies.androidNavigationUi)
-    implementation(Dependencies.androidSplashScreen)
+    implementation(Dependencies.Logging.timber)
+    implementation(Dependencies.Coroutines.core)
+    implementation(Dependencies.Coroutines.android)
+    implementation(Dependencies.Android.appCompat)
+    implementation(Dependencies.Android.coreKtx)
+    implementation(Dependencies.Android.fragment)
+    implementation(Dependencies.Android.constraintLayout)
+    implementation(Dependencies.Android.recyclerView)
+    implementation(Dependencies.Android.lifecycleLiveDataCore)
+    implementation(Dependencies.Android.lifecycleLiveDataKtx)
+    implementation(Dependencies.Android.lifecycleViewModel)
+    implementation(Dependencies.Android.lifecycleViewModelKtx)
+    implementation(Dependencies.Android.navigationFragment)
+    implementation(Dependencies.Android.navigationUi)
+    implementation(Dependencies.Android.splashScreen)
 
-    testImplementation(Dependencies.testAndroidxArchCore)
-    testImplementation(Dependencies.testCoroutines)
-    testImplementation(Dependencies.testKotlinTest)
-    testImplementation(Dependencies.testFlowTest)
-    testImplementation(Dependencies.testMockito)
+    testImplementation(Dependencies.Test.androidxArchCore)
+    testImplementation(Dependencies.Test.coroutines)
+    testImplementation(Dependencies.Test.kotlinTest)
+    testImplementation(Dependencies.Test.flowTest)
+    testImplementation(Dependencies.Test.mockito)
 
-    androidTestImplementation(Dependencies.composeUiTest)
+    androidTestImplementation(Dependencies.Compose.uiTest)
 }

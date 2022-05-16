@@ -12,14 +12,14 @@ dependencies {
     implementation(project(":presentation-entity"))
     implementation(project(":navigation"))
 
-    implementation(Dependencies.kotlinStdLib)
+    implementation(Dependencies.Kotlin.stdLib)
 
-    implementation(Dependencies.androidAppCompat)
-    implementation(Dependencies.androidNavigationUi)
-    implementation(Dependencies.androidNavigationFragment)
+    implementation(Dependencies.Android.appCompat)
+    implementation(Dependencies.Android.navigationUi)
+    implementation(Dependencies.Android.navigationFragment)
 
-    testImplementation(Dependencies.testAndroidxTestCore)
-    testImplementation(Dependencies.testAndroidxExt)
-    testImplementation(Dependencies.testKotlinTest)
-    testImplementation(Dependencies.testMockito)
+    testImplementation(Dependencies.Test.androidxTestCore)
+    testImplementation(Dependencies.Test.androidxExt)
+    testImplementation(Dependencies.Test.kotlinTest)
+    testImplementation(Dependencies.Test.mockito)
 }

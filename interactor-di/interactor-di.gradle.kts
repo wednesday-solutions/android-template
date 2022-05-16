@@ -13,5 +13,5 @@ dependencies {
     implementation(project(":interactor-impl"))
     implementation(project(":domain"))
 
-    implementation(Dependencies.koinCore)
+    implementation(Dependencies.Koin.core)
 }

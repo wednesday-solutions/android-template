@@ -12,10 +12,10 @@ dependencies {
     implementation(project(":presentation-entity"))
     implementation(project(":resources"))
 
-    implementation(Dependencies.kotlinStdLib)
+    implementation(Dependencies.Kotlin.stdLib)
 
-    implementation(Dependencies.androidAppCompat)
+    implementation(Dependencies.Android.appCompat)
 
-    implementation(Dependencies.androidNavigationUi)
-    implementation(Dependencies.androidNavigationFragment)
+    implementation(Dependencies.Android.navigationUi)
+    implementation(Dependencies.Android.navigationFragment)
 }

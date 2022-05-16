@@ -15,14 +15,14 @@ dependencies {
     implementation (project(":service"))
     implementation (project(":service-impl"))
 
-    implementation(Dependencies.kotlinStdLib)
-    implementation(Dependencies.coroutinesCore)
+    implementation(Dependencies.Kotlin.stdLib)
+    implementation(Dependencies.Coroutines.core)
 
-    implementation(Dependencies.loggingTimber)
+    implementation(Dependencies.Logging.timber)
 
-    testImplementation(Dependencies.testJunit)
-    testImplementation(Dependencies.testKotlinTest)
-    testImplementation(Dependencies.testMockito)
-    testImplementation(Dependencies.testFlowTest)
-    testImplementation(Dependencies.testCoroutines)
+    testImplementation(Dependencies.Test.junit)
+    testImplementation(Dependencies.Test.kotlinTest)
+    testImplementation(Dependencies.Test.mockito)
+    testImplementation(Dependencies.Test.flowTest)
+    testImplementation(Dependencies.Test.coroutines)
 }

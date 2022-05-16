@@ -79,14 +79,14 @@ dependencies {
     implementation(project(":repo-di"))
     implementation(project(":service-di"))
 
-    implementation(Dependencies.kotlinStdLib)
+    implementation(Dependencies.Kotlin.stdLib)
 
-    implementation(Dependencies.koinCore)
-    implementation(Dependencies.koinAndroid)
+    implementation(Dependencies.Koin.core)
+    implementation(Dependencies.Koin.android)
 
-    implementation(Dependencies.material)
+    implementation(Dependencies.Material.material)
 
-    implementation(Dependencies.loggingTimber)
+    implementation(Dependencies.Logging.timber)
 
-    implementation(Dependencies.androidSplashScreen)
+    implementation(Dependencies.Android.splashScreen)
 }

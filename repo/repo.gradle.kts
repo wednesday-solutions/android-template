@@ -14,8 +14,8 @@ dependencies {
     implementation(project(":service"))
 
 
-    implementation(Dependencies.kotlinStdLib)
-    implementation(Dependencies.coroutinesCore)
+    implementation(Dependencies.Kotlin.stdLib)
+    implementation(Dependencies.Coroutines.core)
 
-    implementation(Dependencies.loggingTimber)
+    implementation(Dependencies.Logging.timber)
 }

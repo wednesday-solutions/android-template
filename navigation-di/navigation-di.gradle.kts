@@ -12,10 +12,10 @@ dependencies {
     implementation(project(":navigation"))
     implementation(project(":navigation-impl"))
 
-    implementation(Dependencies.kotlinStdLib)
+    implementation(Dependencies.Kotlin.stdLib)
 
-    implementation(Dependencies.koinCore)
+    implementation(Dependencies.Koin.core)
 
-    implementation(Dependencies.androidAppCompat)
+    implementation(Dependencies.Android.appCompat)
 
 }
