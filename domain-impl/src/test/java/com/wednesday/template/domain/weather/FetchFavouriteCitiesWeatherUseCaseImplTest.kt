@@ -3,7 +3,8 @@ package com.wednesday.template.domain.weather
 import com.wednesday.template.domain.TestException
 import com.wednesday.template.domain.base.Result
 import com.wednesday.template.repo.weather.WeatherRepository
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -12,6 +13,7 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class FetchFavouriteCitiesWeatherUseCaseImplTest {
 
     private lateinit var weatherRepo: WeatherRepository
@@ -24,7 +26,7 @@ class FetchFavouriteCitiesWeatherUseCaseImplTest {
     }
 
     @Test
-    fun `Given fetch is successful, When invoke is called, Then Success is returned`() = runBlocking {
+    fun `Given fetch is successful, When invoke is called, Then Success is returned`() = runTest {
         // Given
 
         // When
@@ -37,7 +39,7 @@ class FetchFavouriteCitiesWeatherUseCaseImplTest {
     }
 
     @Test
-    fun `Given fetch is not successful, When invoke is called, Then Error is returned`() = runBlocking {
+    fun `Given fetch is not successful, When invoke is called, Then Error is returned`() = runTest {
         // Given
         val testException = TestException()
         whenever(weatherRepo.fetchWeatherForFavouriteCities()).thenThrow(testException)

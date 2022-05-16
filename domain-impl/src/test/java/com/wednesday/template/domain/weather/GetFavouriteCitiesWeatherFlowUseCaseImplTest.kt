@@ -4,8 +4,9 @@ import app.cash.turbine.test
 import com.wednesday.template.domain.base.Result
 import com.wednesday.template.domain.weather.models.weather
 import com.wednesday.template.repo.weather.WeatherRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -17,6 +18,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @ExperimentalTime
 class GetFavouriteCitiesWeatherFlowUseCaseImplTest {
 
@@ -32,7 +34,7 @@ class GetFavouriteCitiesWeatherFlowUseCaseImplTest {
 
     @Test
     fun `Given flow from repo, When invoke is called, Then flow of weather list is returned`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val weatherList = listOf(weather)
             whenever(weatherRepository.getFavouriteCitiesWeatherFlow())

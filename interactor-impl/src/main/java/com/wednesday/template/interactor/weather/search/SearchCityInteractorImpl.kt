@@ -9,7 +9,7 @@ import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIResult
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
@@ -23,7 +23,7 @@ class SearchCityInteractorImpl(
     private val coroutineContextController: CoroutineContextController
 ) : SearchCityInteractor {
 
-    private val searchResultStateFlow = MutableSharedFlow<List<City>>()
+    private val searchResultStateFlow = MutableStateFlow<List<City>>(listOf())
 
     override val searchResultsFlow: Flow<UIResult<UIList>> = favouriteCitiesFlowUseCase(Unit)
         .combine(searchResultStateFlow) { favouriteCities, searchResults ->

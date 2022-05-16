@@ -109,7 +109,7 @@ object Dependencies {
         const val junit = "junit:junit:4.13.2"
         const val coroutines =
             "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
-        const val flowTest = "app.cash.turbine:turbine:0.6.0"
+        const val flowTest = "app.cash.turbine:turbine:${Versions.turbine}"
         const val kotlinTest = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
         const val mockito = "org.mockito.kotlin:mockito-kotlin:3.2.0"
     }
