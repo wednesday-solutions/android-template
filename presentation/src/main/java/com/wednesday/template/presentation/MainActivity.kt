@@ -27,14 +27,11 @@ import timber.log.Timber
 class MainActivity : AppCompatActivity() {
     val viewModel: HomeViewModel by viewModel()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         // Handle the splash screen transition.
         installSplashScreen()
 
         super.onCreate(savedInstanceState)
-
-
 
         viewModel.onCreate(null)
         setContent {
@@ -71,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     @Composable
     fun TextObs(showLoading: Boolean?) {
         Timber.e(" ------ Text updating")
-        Text("Hello from Compose ${showLoading}!")
+        Text("Hello from Compose $showLoading!")
     }
 
     @Composable
@@ -96,4 +93,3 @@ class MainActivity : AppCompatActivity() {
         Text("State is $state")
     }
 }
-

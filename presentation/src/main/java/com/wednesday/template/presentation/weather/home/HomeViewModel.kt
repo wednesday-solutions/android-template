@@ -72,9 +72,15 @@ class HomeViewModel(
                 setState { copy(showLoading = !showLoading) }
             }
             HomeScreenIntent.Loading2 -> setState { copy(toolbar = toolbar.copy(hasBackButton = !toolbar.hasBackButton)) }
-            HomeScreenIntent.Loading3 -> setState { copy(toolbar = toolbar.copy(title = UIText {
-                block("${System.currentTimeMillis()}")
-            })) }
+            HomeScreenIntent.Loading3 -> setState {
+                copy(
+                    toolbar = toolbar.copy(
+                        title = UIText {
+                            block("${System.currentTimeMillis()}")
+                        }
+                    )
+                )
+            }
         }
     }
 }
