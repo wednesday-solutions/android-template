@@ -25,6 +25,11 @@ echo "NEW_TAG=$new_tag" >> $GITHUB_ENV # Setting this for use later
 echo "Updating CurrentVersionCode by 1 and changing file versionCode"
 
 let "currentVersionCode=currentVersionCode+1" # Bumping versionCode By one
+
+# For Mac OS un comment the below line .
+#sed -i '' "s/\(versionCode[[:space:]]*=[[:space:]]*\)[0-9]*/\\1${currentVersionCode}/" $GITHUB_WORKSPACE/app/app.gradle.kts
+
+# For the linux.
 sed -i "s/\(versionCode[[:space:]]*=[[:space:]]*\)[0-9]*/\\1${currentVersionCode}/" $GITHUB_WORKSPACE/app/app.gradle.kts
 
 
