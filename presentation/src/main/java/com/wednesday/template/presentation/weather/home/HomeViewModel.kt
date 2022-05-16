@@ -1,6 +1,5 @@
 package com.wednesday.template.presentation.weather.home
 
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.navigation.home.HomeNavigator
@@ -13,10 +12,7 @@ import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
 import com.wednesday.template.presentation.weather.search.SearchScreen
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
 class HomeViewModel(
@@ -24,7 +20,7 @@ class HomeViewModel(
 ) : BaseViewModel<HomeScreen, HomeScreenState, HomeNavigator>(),
     IntentHandler<HomeScreenIntent> {
 
-    val subState = screenState.asFlow().map { it?.toolbar }.flowOn(Dispatchers.IO)
+//    val subState = screenState.asFlow().map { it?.toolbar }.flowOn(Dispatchers.IO)
 
     override fun getDefaultScreenState(): HomeScreenState {
         return HomeScreenState(
@@ -40,7 +36,6 @@ class HomeViewModel(
 
     override fun onCreate(fromRecreate: Boolean) {
         if (fromRecreate) return
-
         favouriteWeatherInteractor.getFavouriteCitiesFlow().onEach {
             favouriteWeatherInteractor.fetchFavouriteCitiesWeather()
         }.launchIn(viewModelScope)

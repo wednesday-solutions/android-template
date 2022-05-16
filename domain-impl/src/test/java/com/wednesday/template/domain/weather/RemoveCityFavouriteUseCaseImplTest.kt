@@ -4,7 +4,8 @@ import com.wednesday.template.domain.TestException
 import com.wednesday.template.domain.base.Result
 import com.wednesday.template.domain.weather.models.city
 import com.wednesday.template.repo.weather.WeatherRepository
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -15,6 +16,7 @@ import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
 import kotlin.test.assertTrue
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class RemoveCityFavouriteUseCaseImplTest {
 
     private lateinit var weatherRepository: WeatherRepository
@@ -28,7 +30,7 @@ class RemoveCityFavouriteUseCaseImplTest {
 
     @Test
     fun `Given city removed as fav by repo, When invoke called, Then Success is returned`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val city = city
             whenever(weatherRepository.removeCityAsFavourite(city)).thenReturn(Unit)
@@ -44,7 +46,7 @@ class RemoveCityFavouriteUseCaseImplTest {
 
     @Test
     fun `Given repo throws exception, When invoke called, Then Error is returned`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val city = city
             val testException = TestException()

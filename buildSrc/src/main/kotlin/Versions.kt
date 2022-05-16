@@ -27,4 +27,5 @@ object Versions {
     const val retrofitLoggingInterceptor = "4.9.3"
     const val timber = "5.0.1"
     const val chucker = "3.5.2"
+    const val turbine = "0.8.0"
 }
