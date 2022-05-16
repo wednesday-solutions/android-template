@@ -8,9 +8,9 @@ import kotlin.reflect.KProperty
 class StatefulLiveData<T>(
     private val savedStateHandle: SavedStateHandle,
     private val defaultValueProvider: (() -> T)? = null
-) : ReadOnlyProperty<Any, MutableLiveData<T>> {
+) : ReadOnlyProperty<Any, MutableLiveData<T?>> {
 
-    override fun getValue(thisRef: Any, property: KProperty<*>): MutableLiveData<T> {
+    override fun getValue(thisRef: Any, property: KProperty<*>): MutableLiveData<T?> {
         return savedStateHandle.getLiveData(property.name, defaultValueProvider?.invoke())
     }
 }

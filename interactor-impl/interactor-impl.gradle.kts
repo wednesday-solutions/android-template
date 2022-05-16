@@ -15,22 +15,22 @@ dependencies {
     implementation(project(":domain-entity"))
     implementation(project(":resources"))
 
-    implementation(Dependencies.kotlinStdLib)
+    implementation(Dependencies.Kotlin.stdLib)
 
-    implementation(Dependencies.coroutinesCore)
+    implementation(Dependencies.Coroutines.core)
 
-    implementation(Dependencies.androidCoreKtx)
+    implementation(Dependencies.Android.coreKtx)
 
-    implementation(Dependencies.loggingTimber)
+    implementation(Dependencies.Logging.timber)
 
-    testImplementation(Dependencies.testJunit)
-    testImplementation(Dependencies.testKotlinTest)
-    testImplementation(Dependencies.testMockito)
-    testImplementation(Dependencies.testFlowTest)
-    testImplementation(Dependencies.testCoroutines)
-    testImplementation(Dependencies.testAndroidxArchCore)
-    testImplementation(Dependencies.testAndroidxTestRunner)
-    testImplementation(Dependencies.testAndroidxTestRules)
-    testImplementation(Dependencies.testAndroidxExt)
-    testImplementation(Dependencies.testAndroidxCoreTesting)
+    testImplementation(Dependencies.Test.junit)
+    testImplementation(Dependencies.Test.kotlinTest)
+    testImplementation(Dependencies.Test.mockito)
+    testImplementation(Dependencies.Test.flowTest)
+    testImplementation(Dependencies.Test.coroutines)
+    testImplementation(Dependencies.Test.androidxArchCore)
+    testImplementation(Dependencies.Test.androidxTestRunner)
+    testImplementation(Dependencies.Test.androidxTestRules)
+    testImplementation(Dependencies.Test.androidxExt)
+    testImplementation(Dependencies.Test.androidxCoreTesting)
 }

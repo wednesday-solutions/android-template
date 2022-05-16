@@ -10,9 +10,9 @@ apply {
 
 dependencies {
 
-    implementation(Dependencies.androidCoreKtx)
-    implementation(Dependencies.androidAppCompat)
-    implementation(Dependencies.material)
+    implementation(Dependencies.Android.coreKtx)
+    implementation(Dependencies.Android.appCompat)
+    implementation(Dependencies.Material.material)
 
-    testImplementation(Dependencies.testJunit)
+    testImplementation(Dependencies.Test.junit)
 }
