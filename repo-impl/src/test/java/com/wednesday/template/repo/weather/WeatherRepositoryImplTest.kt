@@ -14,8 +14,9 @@ import com.wednesday.template.repo.weather.models.remoteWeather
 import com.wednesday.template.repo.weather.models.weatherMappedFromLocalCityWithWeather
 import com.wednesday.template.service.weather.WeatherLocalService
 import com.wednesday.template.service.weather.WeatherRemoteService
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -27,6 +28,7 @@ import org.mockito.kotlin.whenever
 import kotlin.test.assertEquals
 import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @ExperimentalTime
 class WeatherRepositoryImplTest {
 
@@ -78,7 +80,7 @@ class WeatherRepositoryImplTest {
 
     @Test
     fun `Given a search string, When searchCities is called, Then list of cities is returned`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val searchTerm = "Pune"
             val remoteCities = listOf(remoteCity)
@@ -99,7 +101,7 @@ class WeatherRepositoryImplTest {
 
     @Test
     fun `Given getFavouriteCitiesFlow is called, Then it returns flow of cities`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val localCities = listOf(localCity)
             val cities = listOf(cityMappedFromLocalCity)
@@ -126,7 +128,7 @@ class WeatherRepositoryImplTest {
 
     @Test
     fun `Given getFavouriteCitiesList is called, Then it returns list of cities`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val localCities = listOf(localCity)
             val cities = listOf(cityMappedFromLocalCity)
@@ -144,7 +146,7 @@ class WeatherRepositoryImplTest {
         }
 
     @Test
-    fun `Given setCityAsFavourite called, Then it marks the city favourite`(): Unit = runBlocking {
+    fun `Given setCityAsFavourite called, Then it marks the city favourite`(): Unit = runTest {
         // Given
         val city = cityMappedFromLocalCity
         val localCity = localCity
@@ -160,7 +162,7 @@ class WeatherRepositoryImplTest {
 
     @Test
     fun `Given removeCityAsFavourite called, Then it marks the city favourite`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val city = cityMappedFromLocalCity
             val localCity = localCity
@@ -176,7 +178,7 @@ class WeatherRepositoryImplTest {
 
     @Test
     fun `Given fetchWeatherForFavouriteCities, When day weather is empty, Then weather data is refreshed`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val todayDate = Date(1, 1, 1970)
             val woeid = localCity.woeid
@@ -215,7 +217,7 @@ class WeatherRepositoryImplTest {
 
     @Test
     fun `Given fetchWeatherForFavouriteCities, When weather list is stale, Then weather data is refreshed`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val todayDate = Date(1, 1, 9999)
             val woeid = localCity.woeid
@@ -256,7 +258,7 @@ class WeatherRepositoryImplTest {
 
     @Test
     fun `Given fetchWeatherForFavouriteCities, When weather list is not stale and day weather is not empty, Then weather data is not refreshed`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val todayDate = Date(1, 1, 1970)
             val woeid = localCity.woeid
@@ -280,7 +282,7 @@ class WeatherRepositoryImplTest {
 
     @Test
     fun `Given fetchWeatherForFavouriteCities, When favourite cities is empty, Then nothing happens`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val todayDate = Date(1, 1, 1970)
             whenever(weatherLocalService.getFavoriteCities()).thenReturn(listOf())
@@ -295,7 +297,7 @@ class WeatherRepositoryImplTest {
         }
 
     @Test
-    fun `Given getFavouriteCitiesWeatherList called, Then it returns list of weather`(): Unit = runBlocking {
+    fun `Given getFavouriteCitiesWeatherList called, Then it returns list of weather`(): Unit = runTest {
         // Given
         val localCitiesWithWeatherList = listOf(localCityWithWeather)
         val weatherList = listOf(weatherMappedFromLocalCityWithWeather)
@@ -313,7 +315,7 @@ class WeatherRepositoryImplTest {
     }
 
     @Test
-    fun `Given getFavouriteCitiesWeatherFlow called, Then it returns flow of weather list`(): Unit = runBlocking {
+    fun `Given getFavouriteCitiesWeatherFlow called, Then it returns flow of weather list`(): Unit = runTest {
         // Given
         val localCitiesWithWeatherList = listOf(localCityWithWeather)
         val weatherList = listOf(weatherMappedFromLocalCityWithWeather)

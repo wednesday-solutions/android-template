@@ -13,6 +13,6 @@ dependencies {
     implementation(project(":interactor"))
     implementation(project(":navigation"))
 
-    implementation(Dependencies.koinCore)
-    implementation(Dependencies.koinAndroid)
+    implementation(Dependencies.Koin.core)
+    implementation(Dependencies.Koin.android)
 }

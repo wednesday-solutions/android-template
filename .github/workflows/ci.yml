@@ -33,7 +33,7 @@ jobs:
       - name: Ktlint
         run: ./gradlew ktlint
       - name: Lint
-        run: ./gradlew lintRelease
+        run: ./gradlew lintDevRelease
 
   unit-tests:
     name: Unit Tests
@@ -53,7 +53,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Unit tests
-        run: ./gradlew testDebugUnitTest
+        run: ./gradlew testDevDebugUnitTest
       - name: Build the apk
         run: ./gradlew assembleDevDebug
 

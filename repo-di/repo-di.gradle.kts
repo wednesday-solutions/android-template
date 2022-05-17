@@ -13,5 +13,5 @@ dependencies {
     implementation(project(":repo-impl"))
     implementation(project(":service"))
 
-    implementation(Dependencies.koinCore)
+    implementation(Dependencies.Koin.core)
 }
