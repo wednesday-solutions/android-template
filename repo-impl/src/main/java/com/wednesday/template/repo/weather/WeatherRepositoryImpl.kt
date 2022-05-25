@@ -5,9 +5,10 @@ import com.wednesday.template.domain.weather.Weather
 import com.wednesday.template.repo.date.DateRepo
 import com.wednesday.template.service.weather.OpenWeatherLocalService
 import com.wednesday.template.service.weather.OpenWeatherRemoteService
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
@@ -18,7 +19,6 @@ class WeatherRepositoryImpl(
     private val domainCityMapper: DomainCityMapper,
     private val localCityMapper: LocalCityMapper,
     private val localWeatherMapper: LocalWeatherMapper,
-    private val localDayWeatherMapper: LocalDayWeatherMapper,
     private val domainWeatherMapper: DomainWeatherMapper,
     private val dateRepo: DateRepo
 ) : WeatherRepository {
@@ -54,41 +54,40 @@ class WeatherRepositoryImpl(
 
     override suspend fun fetchWeatherForFavouriteCities(): Unit = coroutineScope {
         Timber.tag(TAG).d("fetchWeatherForFavouriteCities() called")
-//        val todayDate = dateRepo.todayDate()
-//        weatherLocalService.getFavoriteCities().map {
-//            async {
-//                val dayWeatherList = weatherLocalService.getLocalDayWeather(woeid = it.woeid)
-//                val isWeatherListStale =
-//                    dayWeatherList.find { dateRepo.mapDate(it.date) == todayDate } == null
-//
-//                if (dayWeatherList.isEmpty() || isWeatherListStale) {
-//                    val remoteWeather = weatherRemoteService.weatherForCity(it.woeid)
-//
-//                    weatherLocalService.deleteCurrentAndAddNewWeatherData(
-//                        woeid = it.woeid,
-//                        weather = localWeatherMapper.map(remoteWeather, it.woeid),
-//                        weatherList = localDayWeatherMapper.map(remoteWeather, it.woeid)
-//                    )
-//                }
-//            }
-//        }.awaitAll()
+        val nowMillis = dateRepo.nowDateTimeAsLong()
+        val twoHours = 2 * 60 * 60 * 1000
+        weatherLocalService.getFavoriteCities().map {
+            async {
+                val localCurrentWeather =
+                    weatherLocalService.getLocalCurrentWeather(lat = it.lat, lon = it.lon)
+                val isWeatherDataStale =
+                    localCurrentWeather != null && (nowMillis - localCurrentWeather.updatedAt.time) > twoHours
+
+                if (localCurrentWeather == null || isWeatherDataStale) {
+                    val remoteCurrentWeather =
+                        weatherRemoteService.currentWeather(lat = it.lat, lon = it.lon)
+
+                    weatherLocalService.upsertLocalCurrentWeather(
+                        weather = localWeatherMapper.map(remoteCurrentWeather)
+                    )
+                }
+            }
+        }.awaitAll()
     }
 
     override suspend fun getFavouriteCitiesWeatherList(): List<Weather> {
         Timber.tag(TAG).d("getFavouriteCitiesWeatherList() called")
-//        return weatherLocalService
-//            .getFavouriteCitiesWeatherList()
-//            .let(domainWeatherMapper::map)
-        return listOf()
+        return weatherLocalService
+            .getFavouriteCitiesWeatherList()
+            .let(domainWeatherMapper::map)
     }
 
     override fun getFavouriteCitiesWeatherFlow(): Flow<List<Weather>> {
         Timber.tag(TAG).d("getFavouriteCitiesWeatherFlow() called")
-//        return weatherLocalService
-//            .getFavouriteCitiesWeatherFlow()
-//            .map { domainWeatherMapper.map(it) }
-//            .onEach { Timber.tag(TAG).d("getFavouriteCitiesWeatherFlow: emit = $it") }
-        return flowOf()
+        return weatherLocalService
+            .getFavouriteCitiesWeatherFlow()
+            .map { domainWeatherMapper.map(it) }
+            .onEach { Timber.tag(TAG).d("getFavouriteCitiesWeatherFlow: emit = $it") }
     }
 
     companion object {

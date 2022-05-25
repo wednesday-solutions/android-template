@@ -1,7 +1,6 @@
 package com.wednesday.template.repo.weather.models
 
 import com.wednesday.template.domain.date.Date
-import com.wednesday.template.domain.weather.DayWeather
 
 val dayWeatherMapperFromLocalDayWeather = DayWeather(
     minTemp = localDayWeather.minTemp,

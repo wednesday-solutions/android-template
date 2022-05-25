@@ -28,6 +28,8 @@ interface DateRepo {
 
     fun convertToLong(dateTime: DateTime): Long
 
+    fun nowDateTimeAsLong(): Long
+
     fun convertToDate(timeInMillis: Long): Date
 
     fun convertToDateTime(timeInMillis: Long): DateTime

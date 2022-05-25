@@ -9,8 +9,6 @@ import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.interactor.weather.UICityMapper
 import com.wednesday.template.interactor.weather.UICityMapperImpl
 import com.wednesday.template.interactor.weather.favourite.FavouriteWeatherInteractorImpl
-import com.wednesday.template.interactor.weather.favourite.UIDayWeatherMapper
-import com.wednesday.template.interactor.weather.favourite.UIDayWeatherMapperImpl
 import com.wednesday.template.interactor.weather.favourite.UIWeatherListMapper
 import com.wednesday.template.interactor.weather.favourite.UIWeatherListMapperImpl
 import com.wednesday.template.interactor.weather.search.SearchCityInteractorImpl
@@ -31,9 +29,7 @@ val interactorModule = module {
 
     single<UICitySearchResultsMapper> { UICitySearchResultsMapperImpl(get()) }
 
-    single<UIDayWeatherMapper> { UIDayWeatherMapperImpl(get()) }
-
-    single<UIWeatherListMapper> { UIWeatherListMapperImpl(get(), get()) }
+    single<UIWeatherListMapper> { UIWeatherListMapperImpl() }
 
     factory<FavouriteWeatherInteractor> { FavouriteWeatherInteractorImpl(get(), get(), get(), get(), get(), get(), get(), get()) }
 

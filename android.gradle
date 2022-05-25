@@ -8,11 +8,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
     flavorDimensions "version"
     productFlavors {
         qa {
@@ -26,8 +21,15 @@ android {
         }
     }
 
+    Properties props = new Properties()
+    props.load(new FileInputStream(new File('local.properties')))
+
     buildTypes {
-        release {}
-        debug {}
+        release {
+            buildConfigField 'String', 'OPEN_WEATHER_API_KEY', props['OPEN_WEATHER_API_KEY']
+        }
+        debug {
+            buildConfigField 'String', 'OPEN_WEATHER_API_KEY', props['DEBUG_OPEN_WEATHER_API_KEY']
+        }
     }
 }

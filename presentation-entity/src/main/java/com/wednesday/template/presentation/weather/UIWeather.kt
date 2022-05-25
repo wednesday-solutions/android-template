@@ -6,9 +6,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UIWeather(
-    val cityId: Int,
+    val lat: Double,
+    val lon: Double,
     val title: UIText,
+    val description: UIText,
     val currentTemp: UIText,
     val minMaxTemp: UIText,
-    val dayWeatherList: List<UIListItemBase>
-) : UIListItemBase(id = "UICity $cityId")
+    val feelsLike: UIText,
+    val iconUrl: String
+) : UIListItemBase(id = "UICity $lat $lon")

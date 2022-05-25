@@ -1,7 +1,8 @@
 package com.wednesday.template.service
 
-import com.wednesday.template.service.base.getOpenWeatherRetrofit
+import com.wednesday.template.service.base.retrofit.getOpenWeatherRetrofit
 import com.wednesday.template.service.base.getRoomDatabase
+import com.wednesday.template.service.base.retrofit.interceptors.OpenWeatherApiKeyInterceptor
 import com.wednesday.template.service.openWeather.OpenWeatherLocalServiceImpl
 import com.wednesday.template.service.room.AndroidTemplateDatabase
 import com.wednesday.template.service.weather.OpenWeatherLocalService
@@ -12,16 +13,17 @@ import retrofit2.Retrofit
 val serviceModule = module {
 
     // Retrofit
-    single { getOpenWeatherRetrofit(get()) }
+    factory { OpenWeatherApiKeyInterceptor() }
+
+    single { getOpenWeatherRetrofit(get(), get<OpenWeatherApiKeyInterceptor>()) }
 
     // Room
     single { getRoomDatabase(get()) }
 
-    // Weather
-    single { getWeatherRemoteService(get()) }
-    single<OpenWeatherLocalService> { getWeatherLocalService(get()) }
-
     // OpenWeather
+    single { getWeatherRemoteService(get()) }
+
+    single<OpenWeatherLocalService> { getWeatherLocalService(get()) }
 }
 
 fun getWeatherLocalService(database: AndroidTemplateDatabase): OpenWeatherLocalServiceImpl {

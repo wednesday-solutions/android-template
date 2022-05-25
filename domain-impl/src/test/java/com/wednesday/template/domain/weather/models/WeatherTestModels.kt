@@ -1,7 +1,6 @@
 package com.wednesday.template.domain.weather.models
 
 import com.wednesday.template.domain.date.Date
-import com.wednesday.template.domain.weather.DayWeather
 import com.wednesday.template.domain.weather.Weather
 
 val weather = Weather(

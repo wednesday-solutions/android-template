@@ -1,4 +1,4 @@
-package com.wednesday.template.service.base
+package com.wednesday.template.service.base.retrofit
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
@@ -41,7 +41,7 @@ fun getOpenWeatherRetrofit(context: Context, vararg interceptors: Interceptor): 
         build()
     }
 
-    val apiBaseUrl = "http://api.openweathermap.org/"
+    val apiBaseUrl = "https://api.openweathermap.org/"
     val contentType = "application/json".toMediaType()
     val json = Json {
         ignoreUnknownKeys = true
