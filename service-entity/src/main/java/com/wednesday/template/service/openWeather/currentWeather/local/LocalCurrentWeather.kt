@@ -1,6 +1,5 @@
 package com.wednesday.template.service.openWeather.currentWeather.local
 
-
 import androidx.annotation.Keep
 import androidx.room.Embedded
 import androidx.room.Entity

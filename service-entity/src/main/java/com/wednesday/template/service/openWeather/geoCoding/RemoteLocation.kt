@@ -1,6 +1,5 @@
 package com.wednesday.template.service.openWeather.geoCoding
 
-
 import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,7 +1,7 @@
 package com.wednesday.template.service
 
-import com.wednesday.template.service.base.retrofit.getOpenWeatherRetrofit
 import com.wednesday.template.service.base.getRoomDatabase
+import com.wednesday.template.service.base.retrofit.getOpenWeatherRetrofit
 import com.wednesday.template.service.base.retrofit.interceptors.OpenWeatherApiKeyInterceptor
 import com.wednesday.template.service.openWeather.OpenWeatherLocalServiceImpl
 import com.wednesday.template.service.room.AndroidTemplateDatabase
