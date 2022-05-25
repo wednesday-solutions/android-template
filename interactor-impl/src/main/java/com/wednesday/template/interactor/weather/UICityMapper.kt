@@ -22,9 +22,9 @@ class UICityMapperImpl : UICityMapper {
         return UICity(
             cityId = from1.id,
             title = from1.title,
-            locationType = from1.locationType,
+            locationType = from1.country,
             displayTitle = UIText { block(from1.title) },
-            displayLocationType = UIText { block(from1.locationType) },
+            displayLocationType = UIText { block(from1.country) },
             latitude = from1.latitude,
             isFavourite = from2
         )
@@ -35,7 +35,7 @@ class UICityMapperImpl : UICityMapper {
         return City(
             id = from.cityId,
             title = from.title,
-            locationType = from.locationType,
+            country = from.locationType,
             latitude = from.latitude
         )
     }
@@ -45,9 +45,9 @@ class UICityMapperImpl : UICityMapper {
         return UICity(
             cityId = from.id,
             title = from.title,
-            locationType = from.locationType,
+            locationType = from.country,
             displayTitle = UIText { block(from.title) },
-            displayLocationType = UIText { block(from.locationType) },
+            displayLocationType = UIText { block(from.country) },
             latitude = from.latitude,
             isFavourite = true
         )

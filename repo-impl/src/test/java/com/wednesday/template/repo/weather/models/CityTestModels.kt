@@ -5,13 +5,13 @@ import com.wednesday.template.domain.weather.City
 val cityMappedFromLocalCity = City(
     id = localCity.woeid,
     title = localCity.title,
-    locationType = localCity.locationType,
+    country = localCity.locationType,
     latitude = localCity.latitude
 )
 
 val cityMappedFromRemoteCity = City(
     id = remoteCity.woeid,
     title = remoteCity.title,
-    locationType = remoteCity.locationType,
+    country = remoteCity.locationType,
     latitude = remoteCity.latitude
 )

@@ -13,7 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 
 @OptIn(ExperimentalSerializationApi::class)
-fun getRetrofit(context: Context, vararg interceptors: Interceptor): Retrofit {
+fun getOpenWeatherRetrofit(context: Context, vararg interceptors: Interceptor): Retrofit {
     val httpLoggingInterceptor = HttpLoggingInterceptor()
 
     httpLoggingInterceptor.level = when (BuildConfig.DEBUG) {
@@ -41,7 +41,7 @@ fun getRetrofit(context: Context, vararg interceptors: Interceptor): Retrofit {
         build()
     }
 
-    val apiBaseUrl = "https://www.metaweather.com/"
+    val apiBaseUrl = "http://api.openweathermap.org/"
     val contentType = "application/json".toMediaType()
     val json = Json {
         ignoreUnknownKeys = true
