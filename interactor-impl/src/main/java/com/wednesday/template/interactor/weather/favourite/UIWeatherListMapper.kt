@@ -24,11 +24,13 @@ class UIWeatherListMapperImpl : UIWeatherListMapper {
                     lon = it.lon,
                     title = UIText { block(it.title) },
                     description = UIText {
-                        block(it.description.replaceFirstChar { char ->
-                            if (char.isLowerCase()) char.titlecase(
-                                Locale.getDefault()
-                            ) else char.toString()
-                        })
+                        block(
+                            it.description.replaceFirstChar { char ->
+                                if (char.isLowerCase()) char.titlecase(
+                                    Locale.getDefault()
+                                ) else char.toString()
+                            }
+                        )
                     },
                     currentTemp = UIText { block("${it.temp} °C") },
                     minMaxTemp = UIText { block("With a high of ${it.maxTemp} °C and low of ${it.minTemp} °C") },

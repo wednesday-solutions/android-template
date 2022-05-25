@@ -20,7 +20,7 @@ class UIWeatherViewHolder(private val binding: ItemWeatherBinding) :
         }
 
         compareAndSet({ iconUrl }) {
-            weatherIcon.load(it){
+            weatherIcon.load(it) {
                 crossfade(true)
                 transformations(CircleCropTransformation())
             }
@@ -42,6 +42,4 @@ class UIWeatherViewHolder(private val binding: ItemWeatherBinding) :
             description.setUIText(it)
         }
     }
-
-
 }
