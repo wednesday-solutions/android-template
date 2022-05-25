@@ -1,5 +1,7 @@
 package com.wednesday.template.presentation.weather.home.list
 
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.wednesday.template.presentation.base.extensions.setUIText
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder
@@ -15,6 +17,13 @@ class UIWeatherViewHolder(private val binding: ItemWeatherBinding) :
     override fun onBindInternal() = binding.run {
         compareAndSet({ title }) {
             cityName.setUIText(it)
+        }
+
+        compareAndSet({ iconUrl }) {
+            weatherIcon.load(it){
+                crossfade(true)
+                transformations(CircleCropTransformation())
+            }
         }
 
         compareAndSet({ currentTemp }) {

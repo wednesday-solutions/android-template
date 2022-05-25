@@ -10,12 +10,8 @@ import kotlinx.serialization.Serializable
 data class RemoteCurrentWeatherSys(
     @SerialName("country")
     val country: String,
-    @SerialName("id")
-    val id: Int,
     @SerialName("sunrise")
     val sunrise: Int,
     @SerialName("sunset")
     val sunset: Int,
-    @SerialName("type")
-    val type: Int
 )

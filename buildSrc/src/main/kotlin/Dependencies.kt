@@ -98,6 +98,10 @@ object Dependencies {
         const val chucker = "com.github.chuckerteam.chucker:library:${Versions.chucker}"
     }
 
+    object Image {
+        const val coil = "io.coil-kt:coil:${Versions.coil}"
+    }
+
     object Test {
         const val androidxTestCore = "androidx.test:runner:1.3.0"
         const val androidxArchCore = "androidx.arch.core:core-testing:2.1.0"

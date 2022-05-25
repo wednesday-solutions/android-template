@@ -20,8 +20,6 @@ class HomeViewModel(
 ) : BaseViewModel<HomeScreen, HomeScreenState, HomeNavigator>(),
     IntentHandler<HomeScreenIntent> {
 
-//    val subState = screenState.asFlow().map { it?.toolbar }.flowOn(Dispatchers.IO)
-
     override fun getDefaultScreenState(): HomeScreenState {
         return HomeScreenState(
             toolbar = UIToolbar(
@@ -62,19 +60,6 @@ class HomeViewModel(
         when (intent) {
             is HomeScreenIntent.Search -> {
                 navigator.navigateTo(SearchScreen)
-            }
-            HomeScreenIntent.Loading -> {
-                setState { copy(showLoading = !showLoading) }
-            }
-            HomeScreenIntent.Loading2 -> setState { copy(toolbar = toolbar.copy(hasBackButton = !toolbar.hasBackButton)) }
-            HomeScreenIntent.Loading3 -> setState {
-                copy(
-                    toolbar = toolbar.copy(
-                        title = UIText {
-                            block("${System.currentTimeMillis()}")
-                        }
-                    )
-                )
             }
         }
     }

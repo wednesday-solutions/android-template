@@ -50,6 +50,7 @@ class WeatherRepositoryImpl(
     override suspend fun removeCityAsFavourite(city: City) {
         Timber.tag(TAG).d("removeCityAsFavourite: city = $city")
         weatherLocalService.deleteFavoriteCity(localCityMapper.map(city))
+        weatherLocalService.deleteLocalCurrentWeather(city.lat, city.lon)
     }
 
     override suspend fun fetchWeatherForFavouriteCities(): Unit = coroutineScope {
@@ -64,11 +65,12 @@ class WeatherRepositoryImpl(
                     localCurrentWeather != null && (nowMillis - localCurrentWeather.updatedAt.time) > twoHours
 
                 if (localCurrentWeather == null || isWeatherDataStale) {
+                    val searchQuery = it.name + if (it.state != null) ", ${it.state}" else ""
                     val remoteCurrentWeather =
-                        weatherRemoteService.currentWeather(lat = it.lat, lon = it.lon)
+                        weatherRemoteService.currentWeather(cityAndState = searchQuery)
 
                     weatherLocalService.upsertLocalCurrentWeather(
-                        weather = localWeatherMapper.map(remoteCurrentWeather)
+                        weather = localWeatherMapper.map(remoteCurrentWeather, it.lat, it.lon)
                     )
                 }
             }

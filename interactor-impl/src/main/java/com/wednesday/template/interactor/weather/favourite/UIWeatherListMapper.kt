@@ -8,6 +8,7 @@ import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.weather.UISearchCitiesPlaceholder
 import com.wednesday.template.presentation.weather.UIWeather
 import timber.log.Timber
+import java.util.*
 
 interface UIWeatherListMapper : Mapper<List<Weather>, UIList>
 
@@ -22,12 +23,18 @@ class UIWeatherListMapperImpl : UIWeatherListMapper {
                     lat = it.lat,
                     lon = it.lon,
                     title = UIText { block(it.title) },
-                    description = UIText { block(it.description) },
+                    description = UIText {
+                        block(it.description.replaceFirstChar { char ->
+                            if (char.isLowerCase()) char.titlecase(
+                                Locale.getDefault()
+                            ) else char.toString()
+                        })
+                    },
                     currentTemp = UIText { block("${it.temp} °C") },
-                    minMaxTemp = UIText { block("Temperature Range: ${it.minTemp} - ${it.maxTemp} °C") },
+                    minMaxTemp = UIText { block("With a high of ${it.maxTemp} °C and low of ${it.minTemp} °C") },
                     feelsLike = UIText {
                         block(R.string.feels_like)
-                        block("${it.feelsLike} °C")
+                        block(" ${it.feelsLike} °C")
                     },
                     iconUrl = it.iconUrl
                 )

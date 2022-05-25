@@ -46,10 +46,11 @@ abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState, NAV : Navigat
 
     open fun onDestroyView() = Unit
 
-    fun onCreate(bundle: Bundle?) {
+    fun onCreate(bundle: Bundle?, navigator: NAV) {
         val isFreshCreate = bundle == null
         val isFromRecreate = recreateFlag == null
         recreateFlag = Unit
+        _navigator = navigator
         if (isFromRecreate) {
             _screenState.value = getDefaultScreenState()
         }

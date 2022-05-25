@@ -45,6 +45,7 @@ fun getOpenWeatherRetrofit(context: Context, vararg interceptors: Interceptor): 
     val contentType = "application/json".toMediaType()
     val json = Json {
         ignoreUnknownKeys = true
+        explicitNulls = false
     }
 
     return Retrofit.Builder()

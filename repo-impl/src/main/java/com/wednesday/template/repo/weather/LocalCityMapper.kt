@@ -11,12 +11,12 @@ class LocalCityMapperImpl : LocalCityMapper {
 
     override fun map(from: City): LocalLocation {
         Timber.tag(TAG).d("map: from = $from")
-        val (lat, lon) = from.latitude.split(" ")
         return LocalLocation(
             country = from.country,
             name = from.title,
-            lat = lat.toDouble(),
-            lon = lon.toDouble(),
+            lat = from.lat,
+            lon = from.lon,
+            state = from.state,
         )
     }
 

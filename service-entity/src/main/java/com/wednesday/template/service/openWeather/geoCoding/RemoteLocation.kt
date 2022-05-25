@@ -16,4 +16,6 @@ data class RemoteLocation(
     val lon: Double,
     @SerialName("name")
     val name: String,
+    @SerialName("state")
+    val state: String?
 )

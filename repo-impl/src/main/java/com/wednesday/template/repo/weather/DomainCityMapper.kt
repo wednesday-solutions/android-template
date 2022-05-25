@@ -19,7 +19,9 @@ class DomainCityMapperImpl : DomainCityMapper {
             id = (from.lat + from.lon).toInt(),
             title = from.name,
             country = from.country,
-            latitude = "${from.lat} ${from.lon}"
+            lat = from.lat,
+            lon = from.lon,
+            state = from.state
         )
     }
 
@@ -29,7 +31,9 @@ class DomainCityMapperImpl : DomainCityMapper {
             id = (from.lat + from.lon).toInt(),
             title = from.name,
             country = from.country,
-            latitude = "${from.lat} ${from.lon}"
+            lat = from.lat,
+            lon = from.lon,
+            state = from.state
         )
     }
 

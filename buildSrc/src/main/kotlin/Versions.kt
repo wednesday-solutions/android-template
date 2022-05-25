@@ -28,4 +28,5 @@ object Versions {
     const val timber = "5.0.1"
     const val chucker = "3.5.2"
     const val turbine = "0.8.0"
+    const val coil = "2.1.0"
 }

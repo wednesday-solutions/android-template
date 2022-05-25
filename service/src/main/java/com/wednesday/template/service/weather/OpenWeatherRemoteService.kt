@@ -13,9 +13,8 @@ interface OpenWeatherRemoteService {
         @Query("limit") limit: Int = 5
     ): List<RemoteLocation>
 
-    @GET("data/2.5/weather")
+    @GET("data/2.5/weather?units=metric")
     suspend fun currentWeather(
-        @Query("lat") lat: Double,
-        @Query("lon") lon: Double
+        @Query("q") cityAndState: String,
     ): RemoteCurrentWeather
 }

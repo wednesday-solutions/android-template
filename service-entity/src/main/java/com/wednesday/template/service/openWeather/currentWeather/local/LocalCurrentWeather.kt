@@ -4,10 +4,11 @@ package com.wednesday.template.service.openWeather.currentWeather.local
 import androidx.annotation.Keep
 import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.*
 
 @Keep
-@Entity(tableName = "current_weather", primaryKeys = ["coord_lat", "coord_lon"])
+@Entity(tableName = "current_weather")
 data class LocalCurrentWeather(
     val base: String,
     @Embedded(prefix = "clouds_")
@@ -16,6 +17,7 @@ data class LocalCurrentWeather(
     @Embedded(prefix = "coord_")
     val coord: LocalCurrentWeatherCoord,
     val dt: Int,
+    @PrimaryKey
     val id: Int,
     @Embedded(prefix = "main_")
     val main: LocalCurrentWeatherMain,

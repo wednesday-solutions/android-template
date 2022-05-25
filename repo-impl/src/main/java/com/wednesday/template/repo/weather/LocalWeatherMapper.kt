@@ -1,7 +1,7 @@
 package com.wednesday.template.repo.weather
 
 import com.wednesday.template.repo.date.DateRepo
-import com.wednesday.template.repo.util.Mapper
+import com.wednesday.template.repo.util.Mapper3
 import com.wednesday.template.service.openWeather.currentWeather.local.LocalCurrentWeather
 import com.wednesday.template.service.openWeather.currentWeather.local.LocalCurrentWeatherClouds
 import com.wednesday.template.service.openWeather.currentWeather.local.LocalCurrentWeatherCoord
@@ -12,40 +12,38 @@ import com.wednesday.template.service.openWeather.currentWeather.local.LocalCurr
 import com.wednesday.template.service.openWeather.currentWeather.remote.RemoteCurrentWeather
 import timber.log.Timber
 
-interface LocalWeatherMapper : Mapper<RemoteCurrentWeather, LocalCurrentWeather>
+interface LocalWeatherMapper : Mapper3<RemoteCurrentWeather, Double, Double, LocalCurrentWeather>
 
 class LocalWeatherMapperImpl(private val dateRepo: DateRepo) : LocalWeatherMapper {
 
-    override fun map(from: RemoteCurrentWeather): LocalCurrentWeather {
-        Timber.tag(TAG).d("map() called with: from = $from")
+    override fun map(from1: RemoteCurrentWeather, from2: Double, from3: Double): LocalCurrentWeather {
+        Timber.tag(TAG).d("map() called with: from1 = $from1, from2 = $from2, from3 = $from3")
 
         val clouds = LocalCurrentWeatherClouds(
-            all = from.clouds.all
+            all = from1.clouds.all
         )
 
         val coord = LocalCurrentWeatherCoord(
-            lat = from.coord.lat,
-            lon = from.coord.lon
+            lat = from2,
+            lon = from3
         )
 
         val main = LocalCurrentWeatherMain(
-            feelsLike = from.main.feelsLike,
-            humidity = from.main.humidity,
-            pressure = from.main.pressure,
-            temp = from.main.temp,
-            tempMax = from.main.tempMax,
-            tempMin = from.main.tempMin
+            feelsLike = from1.main.feelsLike,
+            humidity = from1.main.humidity,
+            pressure = from1.main.pressure,
+            temp = from1.main.temp,
+            tempMax = from1.main.tempMax,
+            tempMin = from1.main.tempMin
         )
 
         val sys = LocalCurrentWeatherSys(
-            country = from.sys.country,
-            id = from.sys.id,
-            sunrise = from.sys.sunrise,
-            sunset = from.sys.sunset,
-            type = from.sys.type
+            country = from1.sys.country,
+            sunrise = from1.sys.sunrise,
+            sunset = from1.sys.sunset,
         )
 
-        val remoteWeather = from.weather.firstOrNull()
+        val remoteWeather = from1.weather.firstOrNull()
         val weather = LocalCurrentWeatherWeather(
             description = remoteWeather?.description ?: "",
             icon = remoteWeather?.icon ?: "01d",
@@ -54,18 +52,18 @@ class LocalWeatherMapperImpl(private val dateRepo: DateRepo) : LocalWeatherMappe
         )
 
         val wind = LocalCurrentWeatherWind(
-            deg = from.wind.deg,
-            speed = from.wind.speed
+            deg = from1.wind.deg,
+            speed = from1.wind.speed
         )
 
         return LocalCurrentWeather(
-            base = from.base,
-            cod = from.cod,
-            dt = from.dt,
-            id = from.id,
-            name = from.name,
-            timezone = from.timezone,
-            visibility = from.visibility,
+            base = from1.base,
+            cod = from1.cod,
+            dt = from1.dt,
+            id = from1.id,
+            name = from1.name,
+            timezone = from1.timezone,
+            visibility = from1.visibility,
             updatedAt = dateRepo.mapDateTime(dateRepo.nowDateTime()),
             clouds = clouds,
             coord = coord,

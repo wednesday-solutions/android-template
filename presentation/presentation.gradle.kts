@@ -51,6 +51,8 @@ dependencies {
     implementation(Dependencies.Compose.foundation)
     implementation(Dependencies.Compose.liveData)
 
+    implementation(Dependencies.Image.coil)
+
     implementation(Dependencies.Logging.timber)
     implementation(Dependencies.Coroutines.core)
     implementation(Dependencies.Coroutines.android)
