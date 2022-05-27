@@ -27,7 +27,7 @@ jobs:
       - name: Setup local.properties
         env:
             PROPS: ${{ secrets.LOCAL_PROPERTIES }}
-            PROPS_PATH: ${{ runner.temp }}
+            PROPS_PATH: ${{ runner.temp }}/local.properties
         run: echo -n "$PROPS" | base64 --decode --output $PROPS_PATH
       - name: Build the Release APK
         run: |
