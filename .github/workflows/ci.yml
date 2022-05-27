@@ -34,7 +34,7 @@ jobs:
         env:
           PROPS: ${{ secrets.LOCAL_PROPERTIES }}
           PROPS_PATH: ${{ runner.temp }}/local.properties
-        run: echo -n "$PROPS" | base64 --decode --output $PROPS_PATH
+        run: echo -n "$PROPS" | base64 --decode > $PROPS_PATH
       - name: Ktlint
         run: ./gradlew ktlint
       - name: Lint
