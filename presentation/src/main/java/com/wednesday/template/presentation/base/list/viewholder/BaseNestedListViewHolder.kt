@@ -4,6 +4,7 @@ import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.UIListItemBase
 import com.wednesday.template.presentation.base.list.ListAdapter
 import com.wednesday.template.presentation.base.list.renderer.ListItemRenderer
@@ -16,7 +17,7 @@ abstract class BaseNestedListViewHolder<T : UIListItemBase>(
     protected val renderers: MutableList<Pair<KClass<*>, ListItemRenderer<UIListItemBase>>> = mutableListOf()
 
     private val nestedRecyclerView: RecyclerView
-        get() = itemView.findViewById(/* R.id.nestedRecyclerView : uncomment after creating id */ 1)
+        get() = itemView.findViewById(/* R.id.nestedRecyclerView : uncomment after creating id */ R.id.recyclerView)
 
     abstract fun getNestedListItems(item: T): List<UIListItemBase>
 

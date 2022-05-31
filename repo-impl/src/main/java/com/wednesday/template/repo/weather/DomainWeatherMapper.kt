@@ -21,7 +21,7 @@ class DomainWeatherMapperImpl : DomainWeatherMapper {
             maxTemp = from.main.tempMax,
             temp = from.main.temp,
             feelsLike = from.main.feelsLike,
-            iconUrl = "https://openweathermap.org/img/wn/${from.weather.icon}@2x.png"
+            iconUrl = "https://openweathermap.org/img/wn/${from.weather.icon}@4x.png"
         )
     }
 
