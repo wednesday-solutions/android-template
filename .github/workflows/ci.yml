@@ -30,6 +30,10 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+      - name: Setup local.properties
+        env:
+          PROPS: ${{ secrets.LOCAL_PROPERTIES }}
+        run: echo -n "$PROPS" | base64 --decode > local.properties
       - name: Ktlint
         run: ./gradlew ktlint
       - name: Lint
