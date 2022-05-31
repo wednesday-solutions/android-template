@@ -13,5 +13,6 @@ dependencies {
 
     implementation(Dependencies.Kotlin.stdLib)
     implementation(Dependencies.Coroutines.core)
+
     implementation(Dependencies.Logging.timber)
 }
