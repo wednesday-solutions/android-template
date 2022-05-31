@@ -1,18 +1,15 @@
 package com.wednesday.template.domain.weather.models
 
-import com.wednesday.template.domain.date.Date
 import com.wednesday.template.domain.weather.Weather
 
 val weather = Weather(
-    title = "title 1",
-    woeid = 1,
-    dayWeatherList = listOf(
-        DayWeather(
-            minTemp = 22,
-            maxTemp = 32,
-            temp = 30,
-            date = Date(1, 1, 1970),
-            isToday = false
-        )
-    )
+    title = "Pune, IN",
+    description = "description 1",
+    lat = 10.10,
+    lon = 30.55,
+    minTemp = 22.03,
+    maxTemp = 31.39,
+    temp = 26.82,
+    feelsLike = 28.0,
+    iconUrl = "https://openweathermap.org/img/wn/01d@4x.png"
 )

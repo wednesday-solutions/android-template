@@ -1,42 +1,13 @@
 package com.wednesday.template.repo.weather
 
-<<<<<<< HEAD
-
- import app.cash.turbine.test
- import com.wednesday.template.repo.date.DateRepo
- import com.wednesday.template.repo.weather.models.cityMappedFromLocalCity
- import com.wednesday.template.repo.weather.models.cityMappedFromRemoteCity
- import com.wednesday.template.repo.weather.models.localCity
- import com.wednesday.template.repo.weather.models.remoteCity
- import com.wednesday.template.service.weather.OpenWeatherLocalService
- import com.wednesday.template.service.weather.OpenWeatherRemoteService
- import kotlinx.coroutines.flow.flowOf
- import kotlinx.coroutines.runBlocking
- import org.junit.Before
- import org.junit.Test
- import org.mockito.kotlin.mock
- import org.mockito.kotlin.same
- import org.mockito.kotlin.times
- import org.mockito.kotlin.verify
- import org.mockito.kotlin.verifyNoMoreInteractions
- import org.mockito.kotlin.whenever
- import kotlin.test.assertEquals
- import kotlin.time.ExperimentalTime
-=======
 import app.cash.turbine.test
-import com.wednesday.template.domain.date.Date
 import com.wednesday.template.repo.date.DateRepo
 import com.wednesday.template.repo.weather.models.cityMappedFromLocalCity
 import com.wednesday.template.repo.weather.models.cityMappedFromRemoteCity
 import com.wednesday.template.repo.weather.models.localCity
-import com.wednesday.template.repo.weather.models.localCityWithWeather
-import com.wednesday.template.repo.weather.models.localDayWeather
-import com.wednesday.template.repo.weather.models.localWeather
 import com.wednesday.template.repo.weather.models.remoteCity
-import com.wednesday.template.repo.weather.models.remoteWeather
-import com.wednesday.template.repo.weather.models.weatherMappedFromLocalCityWithWeather
-import com.wednesday.template.service.weather.WeatherLocalService
-import com.wednesday.template.service.weather.WeatherRemoteService
+import com.wednesday.template.service.weather.OpenWeatherLocalService
+import com.wednesday.template.service.weather.OpenWeatherRemoteService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -46,11 +17,9 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.same
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
-import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
 import kotlin.test.assertEquals
 import kotlin.time.ExperimentalTime
->>>>>>> compose
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExperimentalTime
@@ -87,7 +56,7 @@ import kotlin.time.ExperimentalTime
     }
 
     private fun verifyNoMoreInteractions() {
-        verifyNoMoreInteractions(
+        org.mockito.kotlin.verifyNoMoreInteractions(
             weatherRemoteService,
             weatherLocalService,
             domainCityMapper,

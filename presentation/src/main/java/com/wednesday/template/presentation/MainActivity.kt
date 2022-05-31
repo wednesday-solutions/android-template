@@ -1,15 +1,19 @@
 package com.wednesday.template.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.activity.compose.setContent
+import androidx.annotation.IdRes
+import androidx.annotation.NavigationRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.wednesday.template.presentation.weather.home.HomeViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.fragment.app.FragmentActivity
+import androidx.navigation.NavController
+import androidx.navigation.NavGraph
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import com.wednesday.template.presentation.weather.home.HomeScreen
+import com.wednesday.template.resources.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
