@@ -55,7 +55,7 @@ abstract class BaseFragment<
         super.onCreate(savedInstanceState)
         args = arguments?.get("key_args") as SCREEN
         viewModel.args = args
-        viewModel.onCreate(savedInstanceState)
+        viewModel.onCreate(savedInstanceState, navigator)
     }
 
     override fun onResume() {

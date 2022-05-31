@@ -20,8 +20,6 @@ class HomeViewModel(
 ) : BaseViewModel<HomeScreen, HomeScreenState, HomeNavigator>(),
     IntentHandler<HomeScreenIntent> {
 
-//    val subState = screenState.asFlow().map { it?.toolbar }.flowOn(Dispatchers.IO)
-
     override fun getDefaultScreenState(): HomeScreenState {
         return HomeScreenState(
             toolbar = UIToolbar(

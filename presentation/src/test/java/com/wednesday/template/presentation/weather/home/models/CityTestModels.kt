@@ -10,5 +10,6 @@ val city = UICity(
     locationType = "location 1",
     displayLocationType = UIText { block("location 1") },
     latitude = "latitude 1",
-    isFavourite = true
+    isFavourite = true,
+    state = "state 1"
 )

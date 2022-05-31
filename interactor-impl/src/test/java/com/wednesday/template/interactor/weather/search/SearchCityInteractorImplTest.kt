@@ -121,7 +121,8 @@ class SearchCityInteractorImplTest : InteractorTest() {
                     val result = awaitItem()
 
                     // Then
-                    assertTrue(result is UIResult.Error)
+                    assertTrue(result is UIResult.Success)
+                    assertTrue(result.data.items.isEmpty())
                     verify(searchCitiesUseCase, times(1)).invoke(same(searchTerm))
                     verify(favouriteCitiesFlowUseCase, times(1)).invoke(Unit)
                     verifyNoMoreInteractions()

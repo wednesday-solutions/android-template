@@ -2,13 +2,14 @@ package com.wednesday.template.presentation.weather.home
 
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.navigation.home.HomeNavigator
-import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.BaseViewModelTest
 import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIResult
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.weather.home.models.city
+import com.wednesday.template.presentation.weather.search.SearchScreen
+import com.wednesday.template.resources.R
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -87,21 +88,21 @@ class HomeViewModelTest : BaseViewModelTest() {
             verify(interactor, times(1)).getFavouriteCitiesFlow()
         }
 
-//    @Test
-//    fun `Given _, When search intent received, Then app navigates to search screen`() {
-//        // Given
-//        whenever(interactor.getFavouriteCitiesFlow())
-//            .thenReturn(flowOf())
-//        whenever(interactor.getFavouriteWeatherUIList())
-//            .thenReturn(flowOf())
-//        viewModel.onCreate(null, navigator)
-//
-//        // When
-//        viewModel.onIntent(HomeScreenIntent.Search)
-//
-//        // Then
-//        verify(navigator, times(1)).navigateTo(SearchScreen)
-//    }
+    @Test
+    fun `Given _, When search intent received, Then app navigates to search screen`() {
+        // Given
+        whenever(interactor.getFavouriteCitiesFlow())
+            .thenReturn(flowOf())
+        whenever(interactor.getFavouriteWeatherUIList())
+            .thenReturn(flowOf())
+        viewModel.onCreate(null, navigator)
+
+        // When
+        viewModel.onIntent(HomeScreenIntent.Search)
+
+        // Then
+        verify(navigator, times(1)).navigateTo(SearchScreen)
+    }
 
     @Test
     fun `Given favourite city flow emits value, When new favourite city added, Then favourite city weather is fetched`(): Unit =
@@ -134,7 +135,7 @@ class HomeViewModelTest : BaseViewModelTest() {
             // When
             val observer = mockObserver<HomeScreenState>()
             viewModel.screenState.observeForever(observer)
-            viewModel.onCreate(null)
+            viewModel.onCreate(null, navigator)
 
             // Then
             val initialState = getInitialState()

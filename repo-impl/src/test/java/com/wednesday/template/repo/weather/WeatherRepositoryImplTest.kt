@@ -149,6 +149,7 @@ class WeatherRepositoryImplTest {
         verify(localCityMapper, times(1)).map(same(city))
     }
 
+// TODO: Update tests
 //    @Test
 //    fun `Given removeCityAsFavourite called, Then it marks the city favourite`(): Unit =
 //        runTest {
