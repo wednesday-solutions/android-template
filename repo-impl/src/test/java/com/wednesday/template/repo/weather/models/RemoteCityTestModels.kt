@@ -1,10 +1,11 @@
 package com.wednesday.template.repo.weather.models
 
-import com.wednesday.template.service.weather.RemoteCity
+import com.wednesday.template.service.openWeather.geoCoding.RemoteLocation
 
-val remoteCity = RemoteCity(
-    woeid = 1,
-    title = "title 1",
-    locationType = "location 1",
-    latitude = "lat 1"
+val remoteCity = RemoteLocation(
+    country = "country 1",
+    lat = 10.10,
+    lon = 30.55,
+    name = "name 1",
+    state = "state 1"
 )

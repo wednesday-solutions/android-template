@@ -1,180 +1,170 @@
 package com.wednesday.template.repo.weather
 
-//
-// import app.cash.turbine.test
-// import com.wednesday.template.domain.date.Date
-// import com.wednesday.template.repo.date.DateRepo
-// import com.wednesday.template.repo.weather.models.cityMappedFromLocalCity
-// import com.wednesday.template.repo.weather.models.cityMappedFromRemoteCity
-// import com.wednesday.template.repo.weather.models.localCity
-// import com.wednesday.template.repo.weather.models.localCityWithWeather
-// import com.wednesday.template.repo.weather.models.localDayWeather
-// import com.wednesday.template.repo.weather.models.localWeather
-// import com.wednesday.template.repo.weather.models.remoteCity
-// import com.wednesday.template.repo.weather.models.remoteWeather
-// import com.wednesday.template.repo.weather.models.weatherMappedFromLocalCityWithWeather
-// import com.wednesday.template.service.weather.WeatherLocalService
-// import com.wednesday.template.service.weather.WeatherRemoteService
-// import kotlinx.coroutines.flow.flowOf
-// import kotlinx.coroutines.runBlocking
-// import org.junit.Before
-// import org.junit.Test
-// import org.mockito.kotlin.mock
-// import org.mockito.kotlin.same
-// import org.mockito.kotlin.times
-// import org.mockito.kotlin.verify
-// import org.mockito.kotlin.verifyNoMoreInteractions
-// import org.mockito.kotlin.whenever
-// import kotlin.test.assertEquals
-// import kotlin.time.ExperimentalTime
-//
-// @ExperimentalTime
-// class WeatherRepositoryImplTest {
-//
-//    private lateinit var weatherRemoteService: WeatherRemoteService
-//    private lateinit var weatherLocalService: WeatherLocalService
-//    private lateinit var domainCityMapper: DomainCityMapper
-//    private lateinit var localCityMapper: LocalCityMapper
-//    private lateinit var localWeatherMapper: LocalWeatherMapper
-//    private lateinit var localDayWeatherMapper: LocalDayWeatherMapper
-//    private lateinit var domainWeatherMapper: DomainWeatherMapper
-//    private lateinit var dateRepo: DateRepo
-//    private lateinit var weatherRepository: WeatherRepositoryImpl
-//
-//    @Before
-//    fun setUp() {
-//        weatherRemoteService = mock()
-//        weatherLocalService = mock()
-//        domainCityMapper = mock()
-//        localCityMapper = mock()
-//        localWeatherMapper = mock()
-//        localDayWeatherMapper = mock()
-//        domainWeatherMapper = mock()
-//        dateRepo = mock()
-//
-//        weatherRepository = WeatherRepositoryImpl(
-//            weatherRemoteService,
-//            weatherLocalService,
-//            domainCityMapper,
-//            localCityMapper,
-//            localWeatherMapper,
-//            localDayWeatherMapper,
-//            domainWeatherMapper,
-//            dateRepo
-//        )
-//    }
-//
-//    private fun verifyNoMoreInteractions() {
-//        verifyNoMoreInteractions(
-//            weatherRemoteService,
-//            weatherLocalService,
-//            domainCityMapper,
-//            localCityMapper,
-//            localWeatherMapper,
-//            localDayWeatherMapper,
-//            domainWeatherMapper,
-//            dateRepo
-//        )
-//    }
-//
-//    @Test
-//    fun `Given a search string, When searchCities is called, Then list of cities is returned`(): Unit =
-//        runBlocking {
-//            // Given
-//            val searchTerm = "Pune"
-//            val remoteCities = listOf(remoteCity)
-//            whenever(weatherRemoteService.searchCities(searchTerm))
-//                .thenReturn(remoteCities)
-//            whenever(domainCityMapper.mapRemoteCity(same(remoteCities)))
-//                .thenReturn(listOf(cityMappedFromRemoteCity))
-//
-//            // When
-//            val result = weatherRepository.searchCities(searchTerm)
-//
-//            // Then
-//            assertEquals(expected = listOf(cityMappedFromRemoteCity), actual = result)
-//            verify(weatherRemoteService, times(1)).searchCities(same(searchTerm))
-//            verify(domainCityMapper, times(1)).mapRemoteCity(same(remoteCities))
-//            verifyNoMoreInteractions()
-//        }
-//
-//    @Test
-//    fun `Given getFavouriteCitiesFlow is called, Then it returns flow of cities`(): Unit =
-//        runBlocking {
-//            // Given
-//            val localCities = listOf(localCity)
-//            val cities = listOf(cityMappedFromLocalCity)
-//            whenever(weatherLocalService.getFavoriteCitiesFlow()).thenReturn(
-//                flowOf(
-//                    localCities,
-//                    localCities
-//                )
-//            )
-//            whenever(domainCityMapper.map(localCities)).thenReturn(cities)
-//
-//            // When
-//            weatherRepository.getFavouriteCitiesFlow().test {
-//                val result1 = awaitItem()
-//
-//                // Then
-//                assertEquals(expected = cities, actual = result1)
-//                cancelAndIgnoreRemainingEvents()
-//            }
-//            verify(weatherLocalService, times(1)).getFavoriteCitiesFlow()
-//            verify(domainCityMapper, times(2)).map(localCities)
-//            verifyNoMoreInteractions()
-//        }
-//
-//    @Test
-//    fun `Given getFavouriteCitiesList is called, Then it returns list of cities`(): Unit =
-//        runBlocking {
-//            // Given
-//            val localCities = listOf(localCity)
-//            val cities = listOf(cityMappedFromLocalCity)
-//            whenever(weatherLocalService.getFavoriteCities()).thenReturn(localCities)
-//            whenever(domainCityMapper.map(localCities)).thenReturn(cities)
-//
-//            // When
-//            val result = weatherRepository.getFavouriteCitiesList()
-//
-//            // Then
-//            assertEquals(expected = cities, actual = result)
-//            verify(weatherLocalService, times(1)).getFavoriteCities()
-//            verify(domainCityMapper, times(1)).map(localCities)
-//            verifyNoMoreInteractions()
-//        }
-//
-//    @Test
-//    fun `Given setCityAsFavourite called, Then it marks the city favourite`(): Unit = runBlocking {
-//        // Given
-//        val city = cityMappedFromLocalCity
-//        val localCity = localCity
-//        whenever(localCityMapper.map(city)).thenReturn(localCity)
-//
-//        // When
-//        weatherRepository.setCityAsFavourite(city)
-//
-//        // Then
-//        verify(weatherLocalService, times(1)).markCityAsFavorite(same(localCity))
-//        verify(localCityMapper, times(1)).map(same(city))
-//    }
-//
-//    @Test
-//    fun `Given removeCityAsFavourite called, Then it marks the city favourite`(): Unit =
-//        runBlocking {
-//            // Given
-//            val city = cityMappedFromLocalCity
-//            val localCity = localCity
-//            whenever(localCityMapper.map(city)).thenReturn(localCity)
-//
-//            // When
-//            weatherRepository.removeCityAsFavourite(city)
-//
-//            // Then
-//            verify(weatherLocalService, times(1)).deleteFavoriteCity(same(localCity))
-//            verify(localCityMapper, times(1)).map(same(city))
-//        }
-//
+
+ import app.cash.turbine.test
+ import com.wednesday.template.repo.date.DateRepo
+ import com.wednesday.template.repo.weather.models.cityMappedFromLocalCity
+ import com.wednesday.template.repo.weather.models.cityMappedFromRemoteCity
+ import com.wednesday.template.repo.weather.models.localCity
+ import com.wednesday.template.repo.weather.models.remoteCity
+ import com.wednesday.template.service.weather.OpenWeatherLocalService
+ import com.wednesday.template.service.weather.OpenWeatherRemoteService
+ import kotlinx.coroutines.flow.flowOf
+ import kotlinx.coroutines.runBlocking
+ import org.junit.Before
+ import org.junit.Test
+ import org.mockito.kotlin.mock
+ import org.mockito.kotlin.same
+ import org.mockito.kotlin.times
+ import org.mockito.kotlin.verify
+ import org.mockito.kotlin.verifyNoMoreInteractions
+ import org.mockito.kotlin.whenever
+ import kotlin.test.assertEquals
+ import kotlin.time.ExperimentalTime
+
+@ExperimentalTime
+ class WeatherRepositoryImplTest {
+
+    private lateinit var weatherRemoteService: OpenWeatherRemoteService
+    private lateinit var weatherLocalService: OpenWeatherLocalService
+    private lateinit var domainCityMapper: DomainCityMapper
+    private lateinit var localCityMapper: LocalCityMapper
+    private lateinit var localWeatherMapper: LocalWeatherMapper
+    private lateinit var domainWeatherMapper: DomainWeatherMapper
+    private lateinit var dateRepo: DateRepo
+    private lateinit var weatherRepository: WeatherRepositoryImpl
+
+    @Before
+    fun setUp() {
+        weatherRemoteService = mock()
+        weatherLocalService = mock()
+        domainCityMapper = mock()
+        localCityMapper = mock()
+        localWeatherMapper = mock()
+        domainWeatherMapper = mock()
+        dateRepo = mock()
+
+        weatherRepository = WeatherRepositoryImpl(
+            weatherRemoteService,
+            weatherLocalService,
+            domainCityMapper,
+            localCityMapper,
+            localWeatherMapper,
+            domainWeatherMapper,
+            dateRepo
+        )
+    }
+
+    private fun verifyNoMoreInteractions() {
+        verifyNoMoreInteractions(
+            weatherRemoteService,
+            weatherLocalService,
+            domainCityMapper,
+            localCityMapper,
+            localWeatherMapper,
+            domainWeatherMapper,
+            dateRepo
+        )
+    }
+
+    @Test
+    fun `Given a search string, When searchCities is called, Then list of cities is returned`(): Unit =
+        runBlocking {
+            // Given
+            val searchTerm = "Pune"
+            val remoteCities = listOf(remoteCity)
+            whenever(weatherRemoteService.geocodingSearch(searchTerm))
+                .thenReturn(remoteCities)
+            whenever(domainCityMapper.mapRemoteCity(same(remoteCities)))
+                .thenReturn(listOf(cityMappedFromRemoteCity))
+
+            // When
+            val result = weatherRepository.searchCities(searchTerm)
+
+            // Then
+            assertEquals(expected = listOf(cityMappedFromRemoteCity), actual = result)
+            verify(weatherRemoteService, times(1)).geocodingSearch(searchTerm)
+            verify(domainCityMapper, times(1)).mapRemoteCity(same(remoteCities))
+            verifyNoMoreInteractions()
+        }
+
+    @Test
+    fun `Given getFavouriteCitiesFlow is called, Then it returns flow of cities`(): Unit =
+        runBlocking {
+            // Given
+            val localCities = listOf(localCity)
+            val cities = listOf(cityMappedFromLocalCity)
+            whenever(weatherLocalService.getFavoriteCitiesFlow()).thenReturn(
+                flowOf(
+                    localCities,
+                    localCities
+                )
+            )
+            whenever(domainCityMapper.map(localCities)).thenReturn(cities)
+
+            // When
+            weatherRepository.getFavouriteCitiesFlow().test {
+                val result1 = awaitItem()
+
+                // Then
+                assertEquals(expected = cities, actual = result1)
+                cancelAndIgnoreRemainingEvents()
+            }
+            verify(weatherLocalService, times(1)).getFavoriteCitiesFlow()
+            verify(domainCityMapper, times(2)).map(localCities)
+            verifyNoMoreInteractions()
+        }
+
+    @Test
+    fun `Given getFavouriteCitiesList is called, Then it returns list of cities`(): Unit =
+        runBlocking {
+            // Given
+            val localCities = listOf(localCity)
+            val cities = listOf(cityMappedFromLocalCity)
+            whenever(weatherLocalService.getFavoriteCities()).thenReturn(localCities)
+            whenever(domainCityMapper.map(localCities)).thenReturn(cities)
+
+            // When
+            val result = weatherRepository.getFavouriteCitiesList()
+
+            // Then
+            assertEquals(expected = cities, actual = result)
+            verify(weatherLocalService, times(1)).getFavoriteCities()
+            verify(domainCityMapper, times(1)).map(localCities)
+            verifyNoMoreInteractions()
+        }
+
+    @Test
+    fun `Given setCityAsFavourite called, Then it marks the city favourite`(): Unit = runBlocking {
+        // Given
+        val city = cityMappedFromLocalCity
+        val localCity = localCity
+        whenever(localCityMapper.map(city)).thenReturn(localCity)
+
+        // When
+        weatherRepository.setCityAsFavourite(city)
+
+        // Then
+        verify(weatherLocalService, times(1)).markCityAsFavorite(same(localCity))
+        verify(localCityMapper, times(1)).map(same(city))
+    }
+
+    @Test
+    fun `Given removeCityAsFavourite called, Then it marks the city favourite`(): Unit =
+        runBlocking {
+            // Given
+            val city = cityMappedFromLocalCity
+            val localCity = localCity
+            whenever(localCityMapper.map(city)).thenReturn(localCity)
+
+            // When
+            weatherRepository.removeCityAsFavourite(city)
+
+            // Then
+            verify(weatherLocalService, times(1)).deleteFavoriteCity(same(localCity))
+            verify(localCityMapper, times(1)).map(same(city))
+        }
+
 //    @Test
 //    fun `Given fetchWeatherForFavouriteCities, When day weather is empty, Then weather data is refreshed`(): Unit =
 //        runBlocking {
@@ -333,4 +323,4 @@ package com.wednesday.template.repo.weather
 //        verify(domainWeatherMapper, times(1)).map(localCitiesWithWeatherList)
 //        verifyNoMoreInteractions()
 //    }
-// }
+ }
