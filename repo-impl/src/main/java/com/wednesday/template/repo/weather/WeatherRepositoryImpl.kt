@@ -3,8 +3,8 @@ package com.wednesday.template.repo.weather
 import com.wednesday.template.domain.weather.City
 import com.wednesday.template.domain.weather.Weather
 import com.wednesday.template.repo.date.DateRepo
-import com.wednesday.template.service.weather.WeatherLocalService
-import com.wednesday.template.service.weather.WeatherRemoteService
+import com.wednesday.template.service.weather.OpenWeatherLocalService
+import com.wednesday.template.service.weather.OpenWeatherRemoteService
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -14,19 +14,18 @@ import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
 
 class WeatherRepositoryImpl(
-    private val weatherRemoteService: WeatherRemoteService,
-    private val weatherLocalService: WeatherLocalService,
+    private val weatherRemoteService: OpenWeatherRemoteService,
+    private val weatherLocalService: OpenWeatherLocalService,
     private val domainCityMapper: DomainCityMapper,
     private val localCityMapper: LocalCityMapper,
     private val localWeatherMapper: LocalWeatherMapper,
-    private val localDayWeatherMapper: LocalDayWeatherMapper,
     private val domainWeatherMapper: DomainWeatherMapper,
     private val dateRepo: DateRepo
 ) : WeatherRepository {
 
     override suspend fun searchCities(searchTerm: String): List<City> {
         Timber.tag(TAG).d("searchCities: searchTerm = $searchTerm")
-        return weatherRemoteService.searchCities(searchTerm)
+        return weatherRemoteService.geocodingSearch(searchTerm)
             .let { domainCityMapper.mapRemoteCity(it) }
     }
 
@@ -51,24 +50,27 @@ class WeatherRepositoryImpl(
     override suspend fun removeCityAsFavourite(city: City) {
         Timber.tag(TAG).d("removeCityAsFavourite: city = $city")
         weatherLocalService.deleteFavoriteCity(localCityMapper.map(city))
+        weatherLocalService.deleteLocalCurrentWeather(city.lat, city.lon)
     }
 
     override suspend fun fetchWeatherForFavouriteCities(): Unit = coroutineScope {
         Timber.tag(TAG).d("fetchWeatherForFavouriteCities() called")
-        val todayDate = dateRepo.todayDate()
+        val nowMillis = dateRepo.nowDateTimeAsLong()
+        val twoHours = 2 * 60 * 60 * 1000
         weatherLocalService.getFavoriteCities().map {
             async {
-                val dayWeatherList = weatherLocalService.getLocalDayWeather(woeid = it.woeid)
-                val isWeatherListStale =
-                    dayWeatherList.find { dateRepo.mapDate(it.date) == todayDate } == null
+                val localCurrentWeather =
+                    weatherLocalService.getLocalCurrentWeather(lat = it.lat, lon = it.lon)
+                val isWeatherDataStale =
+                    localCurrentWeather != null && (nowMillis - localCurrentWeather.updatedAt.time) > twoHours
 
-                if (dayWeatherList.isEmpty() || isWeatherListStale) {
-                    val remoteWeather = weatherRemoteService.weatherForCity(it.woeid)
+                if (localCurrentWeather == null || isWeatherDataStale) {
+                    val searchQuery = it.name + if (it.state != null) ", ${it.state}" else ""
+                    val remoteCurrentWeather =
+                        weatherRemoteService.currentWeather(cityAndState = searchQuery)
 
-                    weatherLocalService.deleteCurrentAndAddNewWeatherData(
-                        woeid = it.woeid,
-                        weather = localWeatherMapper.map(remoteWeather, it.woeid),
-                        weatherList = localDayWeatherMapper.map(remoteWeather, it.woeid)
+                    weatherLocalService.upsertLocalCurrentWeather(
+                        weather = localWeatherMapper.map(remoteCurrentWeather, it.lat, it.lon)
                     )
                 }
             }

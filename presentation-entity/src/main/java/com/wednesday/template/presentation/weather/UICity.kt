@@ -8,6 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class UICity(
     val cityId: Int,
     val title: String,
+    val state: String?,
     val displayTitle: UIText,
     val locationType: String,
     val displayLocationType: UIText,

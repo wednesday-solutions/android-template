@@ -2,32 +2,41 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
+    kotlin("android")
 }
 
 apply {
-    from("${rootProject.projectDir}/android.gradle")
+    from("${rootProject.projectDir}/lint.gradle")
 }
 
 android {
+
+    compileSdk = 31
+    buildToolsVersion = "30.0.3"
+
     defaultConfig {
+        minSdk = 24
+        targetSdk = 31
         applicationId = "com.wednesday.template"
         versionCode = 7
         versionName = "1.0"
+        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     }
-    flavorDimensions("version")
+
+    flavorDimensions += "version"
     productFlavors {
         create("qa") {
-            dimension("version")
+            dimension = "version"
             applicationIdSuffix = ".qa"
             versionNameSuffix = "-qa"
         }
         create("prod") {
-            dimension("version")
+            dimension = "version"
             applicationIdSuffix = ".prod"
             versionNameSuffix = "-prod"
         }
         create("dev") {
-            dimension("version")
+            dimension = "version"
             applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
         }
@@ -35,7 +44,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            minifyEnabled(false)
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "${project.rootDir}/tools/proguard-rules.pro"
@@ -46,16 +55,16 @@ android {
             variant.outputs
                 .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
                 .forEach { output ->
-                val flavour = variant.flavorName
-                val builtType = variant.buildType.name
-                val versionName = variant.versionName
-                val vCode = variant.versionCode
-                output.outputFileName =
-                    "app-${flavour}-${builtType}-${versionName}(${vCode}).apk".replace(
-                        "-${flavour}",
-                        ""
-                    )
-            }
+                    val flavour = variant.flavorName
+                    val builtType = variant.buildType.name
+                    val versionName = variant.versionName
+                    val vCode = variant.versionCode
+                    output.outputFileName =
+                        "app-${flavour}-${builtType}-${versionName}(${vCode}).apk".replace(
+                            "-${flavour}",
+                            ""
+                        )
+                }
         }
     }
 }
@@ -70,14 +79,14 @@ dependencies {
     implementation(project(":repo-di"))
     implementation(project(":service-di"))
 
-    implementation(Dependencies.kotlinStdLib)
+    implementation(Dependencies.Kotlin.stdLib)
 
-    implementation(Dependencies.koinCore)
-    implementation(Dependencies.koinAndroid)
+    implementation(Dependencies.Koin.core)
+    implementation(Dependencies.Koin.android)
 
-    implementation(Dependencies.material)
+    implementation(Dependencies.Material.material)
 
-    implementation(Dependencies.loggingTimber)
+    implementation(Dependencies.Logging.timber)
 
-    implementation(Dependencies.androidSplashScreen)
+    implementation(Dependencies.Android.splashScreen)
 }

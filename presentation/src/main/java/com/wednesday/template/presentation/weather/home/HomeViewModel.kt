@@ -34,7 +34,6 @@ class HomeViewModel(
 
     override fun onCreate(fromRecreate: Boolean) {
         if (fromRecreate) return
-
         favouriteWeatherInteractor.getFavouriteCitiesFlow().onEach {
             favouriteWeatherInteractor.fetchFavouriteCitiesWeather()
         }.launchIn(viewModelScope)
@@ -61,6 +60,19 @@ class HomeViewModel(
         when (intent) {
             is HomeScreenIntent.Search -> {
                 navigator.navigateTo(SearchScreen)
+            }
+            HomeScreenIntent.Loading -> {
+                setState { copy(showLoading = !showLoading) }
+            }
+            HomeScreenIntent.Loading2 -> setState { copy(toolbar = toolbar.copy(hasBackButton = !toolbar.hasBackButton)) }
+            HomeScreenIntent.Loading3 -> setState {
+                copy(
+                    toolbar = toolbar.copy(
+                        title = UIText {
+                            block("${System.currentTimeMillis()}")
+                        }
+                    )
+                )
             }
         }
     }

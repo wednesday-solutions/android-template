@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         startDestId: Int,
         startDestinationArgs: Bundle? = null
     ) {
-        startDestination = startDestId
+        setStartDestination(startDestId)
         if (startDestinationArgs != null) {
             navController.setGraph(this, startDestinationArgs)
         } else {

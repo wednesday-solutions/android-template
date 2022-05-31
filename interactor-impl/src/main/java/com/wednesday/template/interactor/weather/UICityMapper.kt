@@ -22,21 +22,25 @@ class UICityMapperImpl : UICityMapper {
         return UICity(
             cityId = from1.id,
             title = from1.title,
-            locationType = from1.locationType,
+            locationType = from1.country,
             displayTitle = UIText { block(from1.title) },
-            displayLocationType = UIText { block(from1.locationType) },
-            latitude = from1.latitude,
-            isFavourite = from2
+            displayLocationType = UIText { block(from1.country) },
+            latitude = "${from1.lat} ${from1.lon}",
+            isFavourite = from2,
+            state = from1.state
         )
     }
 
     override fun mapUICity(from: UICity): City {
         Timber.tag(TAG).d("mapUICity: from = $from")
+        val (lat, lon) = from.latitude.split(" ")
         return City(
             id = from.cityId,
             title = from.title,
-            locationType = from.locationType,
-            latitude = from.latitude
+            country = from.locationType,
+            lat = lat.toDouble(),
+            lon = lon.toDouble(),
+            state = from.state
         )
     }
 
@@ -45,11 +49,12 @@ class UICityMapperImpl : UICityMapper {
         return UICity(
             cityId = from.id,
             title = from.title,
-            locationType = from.locationType,
+            locationType = from.country,
             displayTitle = UIText { block(from.title) },
-            displayLocationType = UIText { block(from.locationType) },
-            latitude = from.latitude,
-            isFavourite = true
+            displayLocationType = UIText { block(from.country) },
+            latitude = "${from.lat} ${from.lon}",
+            isFavourite = true,
+            state = from.state
         )
     }
 

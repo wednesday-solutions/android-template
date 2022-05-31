@@ -21,8 +21,9 @@ class UICityListViewHolder(private val binding: CityItemListBinding) :
 
     override fun onBindInternal() = binding.run {
 
-        compareAndSet({ title }) {
-            cityTextViewListItem.text = it
+        compareAndSet({ title to state }) {
+            val title = it.first + if (it.second != null) ", ${it.second}" else ""
+            cityTextViewListItem.text = title
         }
 
         compareAndSet({ latitude }) {

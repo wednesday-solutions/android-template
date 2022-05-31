@@ -7,16 +7,19 @@ import com.wednesday.template.presentation.weather.UICity
 val city = City(
     id = 1,
     title = "title 1",
-    locationType = "location 1",
-    latitude = "lat 1"
+    country = "location 1",
+    lat = 10.10,
+    lon = 30.55,
+    state = "state 1"
 )
 
 val uiCity = UICity(
     cityId = city.id,
     title = city.title,
     displayTitle = UIText { block(city.title) },
-    locationType = city.locationType,
-    displayLocationType = UIText { block(city.locationType) },
-    latitude = city.latitude,
-    isFavourite = false
+    locationType = city.country,
+    displayLocationType = UIText { block(city.country) },
+    latitude = "${city.lat} ${city.lon}",
+    isFavourite = false,
+    state = city.state
 )

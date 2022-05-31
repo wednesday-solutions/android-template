@@ -12,9 +12,9 @@ apply {
 
 dependencies {
 
-    implementation(Dependencies.kotlinStdLib)
-    implementation(Dependencies.kotlinSerialization)
-    kapt(Dependencies.roomCompiler)
-    implementation(Dependencies.roomRuntime)
-    implementation(Dependencies.roomKtx)
+    implementation(Dependencies.Kotlin.stdLib)
+    implementation(Dependencies.Kotlin.serialization)
+    kapt(Dependencies.Room.compiler)
+    implementation(Dependencies.Room.runtime)
+    implementation(Dependencies.Room.ktx)
 }

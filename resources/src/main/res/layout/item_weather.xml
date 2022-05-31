@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="8dp"
-    android:background="?colorSurface"
     android:layout_marginVertical="4dp"
+    android:background="?colorSurface"
     android:elevation="5dp"
     app:cardCornerRadius="5dp">
 
@@ -18,10 +18,10 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/cityName"
             style="@style/TextAppearance.MaterialComponents.Headline4"
-            android:textColor="?android:textColorPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@+id/cityTemp"
+            android:textColor="?android:textColorPrimary"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -29,23 +29,65 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/cityTemp"
-            style="@style/TextAppearance.MaterialComponents.Headline4"
-            android:textColor="?android:textColorPrimary"
+            style="@style/TextAppearance.MaterialComponents.Headline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/cityName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/cityName"
+            android:layout_marginVertical="@dimen/default_margin"
+            android:textColor="?android:textColorPrimary"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cityName"
             tools:text="Temp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/nestedRecyclerView"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/weatherIcon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/cityTemp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/cityName" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/feelsLike"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="4dp"
+            android:layout_marginTop="@dimen/default_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cityName" />
+            app:layout_constraintTop_toBottomOf="@+id/description"
+            tools:text="Feels Like: 43" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/minMaxTemp"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/feelsLike"
+            tools:text="Temp Range: 22 - 36" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/description"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cityTemp"
+            tools:text="Description" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

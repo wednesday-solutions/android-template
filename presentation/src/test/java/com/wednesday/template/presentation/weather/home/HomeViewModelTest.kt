@@ -2,7 +2,6 @@ package com.wednesday.template.presentation.weather.home
 
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.navigation.home.HomeNavigator
-import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.BaseViewModelTest
 import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIResult
@@ -10,9 +9,11 @@ import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.weather.home.models.city
 import com.wednesday.template.presentation.weather.search.SearchScreen
+import com.wednesday.template.resources.R
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.mockito.kotlin.inOrder
 import org.mockito.kotlin.mock
@@ -53,7 +54,7 @@ class HomeViewModelTest : BaseViewModelTest() {
 
     @Test
     fun `Given fromRecreate = true, When onCreate, Then interactor was not called`() =
-        runBlocking {
+        runTest {
             // Given
             whenever(interactor.getFavouriteCitiesFlow())
                 .thenReturn(flowOf())
@@ -70,7 +71,7 @@ class HomeViewModelTest : BaseViewModelTest() {
 
     @Test
     fun `Given fromRecreate = false, When onCreate, Then FavouriteCitiesFlow and FavouriteWeatherUIList were called`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val fromRecreate = false
             whenever(interactor.getFavouriteCitiesFlow())
@@ -82,6 +83,7 @@ class HomeViewModelTest : BaseViewModelTest() {
             viewModel.onCreate(fromRecreate = fromRecreate)
 
             // Then
+            advanceUntilIdle()
             verify(interactor, times(1)).getFavouriteWeatherUIList()
             verify(interactor, times(1)).getFavouriteCitiesFlow()
         }
@@ -104,7 +106,7 @@ class HomeViewModelTest : BaseViewModelTest() {
 
     @Test
     fun `Given favourite city flow emits value, When new favourite city added, Then favourite city weather is fetched`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val favCityList = UIResult.Success(listOf(city))
             whenever(interactor.getFavouriteCitiesFlow())
@@ -116,12 +118,13 @@ class HomeViewModelTest : BaseViewModelTest() {
             viewModel.onCreate(false)
 
             // Then
+            advanceUntilIdle()
             verify(interactor, times(2)).fetchFavouriteCitiesWeather()
         }
 
     @Test
     fun `Given weather ui list emits, When flow is collected, Then state is updated with the UI list`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val uiList = UIResult.Success(UIList(city))
             whenever(interactor.getFavouriteCitiesFlow())
@@ -136,12 +139,14 @@ class HomeViewModelTest : BaseViewModelTest() {
 
             // Then
             val initialState = getInitialState()
+            advanceUntilIdle()
             observer.inOrder {
                 verify().onChanged(null)
                 verify().onChanged(initialState)
                 verify().onChanged(initialState.copy(items = uiList.data))
                 verifyNoMoreInteractions()
             }
+            verify(interactor, times(1)).getFavouriteWeatherUIList()
         }
 
     private fun getInitialState() = HomeScreenState(

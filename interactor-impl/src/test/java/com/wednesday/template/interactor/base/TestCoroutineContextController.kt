@@ -3,12 +3,12 @@ package com.wednesday.template.interactor.base
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.withContext
 
 @ExperimentalCoroutinesApi
 data class TestCoroutineContextController(
-    val testCoroutineDispatcher: TestCoroutineDispatcher
+    val testCoroutineDispatcher: TestDispatcher
 ) : CoroutineContextController {
 
     override val dispatcherDefault: CoroutineDispatcher

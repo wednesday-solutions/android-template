@@ -12,6 +12,6 @@ dependencies {
     implementation(project(":domain-entity"))
     implementation(project(":presentation-entity"))
 
-    implementation(Dependencies.kotlinStdLib)
-    implementation(Dependencies.coroutinesCore)
+    implementation(Dependencies.Kotlin.stdLib)
+    implementation(Dependencies.Coroutines.core)
 }

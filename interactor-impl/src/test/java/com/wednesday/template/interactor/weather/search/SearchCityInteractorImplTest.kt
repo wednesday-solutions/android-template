@@ -13,7 +13,7 @@ import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.any
@@ -42,7 +42,7 @@ class SearchCityInteractorImplTest : InteractorTest() {
         searchCitiesUseCase = mock()
         favouriteCitiesFlowUseCase = mock()
         citySearchResultsMapper = mock()
-        coroutineContextController = coroutineScopeRule.coroutineContextController
+        coroutineContextController = coroutineDispatcherRule.coroutineContextController
     }
 
     private fun verifyNoMoreInteractions() {
@@ -67,7 +67,7 @@ class SearchCityInteractorImplTest : InteractorTest() {
 
     @Test
     fun `Given no error occurs, When search called, Then search result flow emits UIList of results`(): Unit =
-        coroutineScopeRule.runBlockingTest {
+        runTest {
             // Given
             val searchTerm = "Pune"
             val uiList = UIList(uiCity)
@@ -76,27 +76,32 @@ class SearchCityInteractorImplTest : InteractorTest() {
             whenever(favouriteCitiesFlowUseCase(Unit)).thenReturn(flowOf(Result.Success(cityList)))
             whenever(citySearchResultsMapper.map(any(), any())).thenReturn(uiList)
 
-            createInteractor()
+            launchInTestScope {
+                println("Creating")
+                createInteractor()
+                println("Created")
 
-            // When
-            interactor.searchResultsFlow.test {
-                interactor.search(searchTerm)
+                // When
+                interactor.searchResultsFlow.test {
+                    interactor.search(searchTerm)
 
-                val result = awaitItem()
-                // Then
-                assertTrue(result is UIResult.Success)
-                assertEquals(actual = result.data, expected = uiList)
-                verify(searchCitiesUseCase, times(1)).invoke(same(searchTerm))
-                verify(citySearchResultsMapper, times(1)).map(same(cityList), same(cityList))
-                verify(favouriteCitiesFlowUseCase, times(1)).invoke(Unit)
-                verifyNoMoreInteractions()
-                cancelAndConsumeRemainingEvents()
+                    val result = awaitItem()
+
+                    // Then
+                    assertTrue(result is UIResult.Success)
+                    assertEquals(actual = result.data, expected = uiList)
+                    verify(searchCitiesUseCase, times(1)).invoke(same(searchTerm))
+                    verify(citySearchResultsMapper, times(1)).map(same(cityList), same(cityList))
+                    verify(favouriteCitiesFlowUseCase, times(1)).invoke(Unit)
+                    verifyNoMoreInteractions()
+                    cancelAndConsumeRemainingEvents()
+                }
             }
         }
 
     @Test
     fun `Given search use case returns error, When search called, Then search result flow emits empty list`(): Unit =
-        coroutineScopeRule.runBlockingTest {
+        runTest {
             // Given
             val searchTerm = "Pune"
             val uiList = UIList()
@@ -106,50 +111,54 @@ class SearchCityInteractorImplTest : InteractorTest() {
             whenever(favouriteCitiesFlowUseCase(Unit)).thenReturn(flowOf(Result.Success(cityList)))
             whenever(citySearchResultsMapper.map(any(), any())).thenReturn(uiList)
 
-            createInteractor()
+            launchInTestScope {
+                createInteractor()
 
-            // When
-            interactor.searchResultsFlow.test {
-                interactor.search(searchTerm)
+                // When
+                interactor.searchResultsFlow.test {
+                    interactor.search(searchTerm)
 
-                val result = awaitItem()
+                    val result = awaitItem()
 
-                // Then
-                assertTrue(result is UIResult.Error)
-                verify(searchCitiesUseCase, times(1)).invoke(same(searchTerm))
-                verify(favouriteCitiesFlowUseCase, times(1)).invoke(Unit)
-                verifyNoMoreInteractions()
-                cancelAndConsumeRemainingEvents()
+                    // Then
+                    assertTrue(result is UIResult.Success)
+                    assertTrue(result.data.items.isEmpty())
+                    verify(searchCitiesUseCase, times(1)).invoke(same(searchTerm))
+                    verify(favouriteCitiesFlowUseCase, times(1)).invoke(Unit)
+                    verifyNoMoreInteractions()
+                    cancelAndConsumeRemainingEvents()
+                }
             }
         }
 
     @Test
     fun `Given mapper throws error, When search called, Then search result flow emits empty list`(): Unit =
-        coroutineScopeRule.runBlockingTest {
+        runTest {
             // Given
             val searchTerm = "Pune"
-            val uiList = UIList()
             val cityList = listOf(city)
             val testException = TestException()
             whenever(searchCitiesUseCase(searchTerm)).thenReturn(Result.Success(cityList))
             whenever(favouriteCitiesFlowUseCase(Unit)).thenReturn(flowOf(Result.Success(cityList)))
             whenever(citySearchResultsMapper.map(any(), any())).thenThrow(testException)
 
-            createInteractor()
+            launchInTestScope {
+                createInteractor()
 
-            // When
-            interactor.searchResultsFlow.test {
-                interactor.search(searchTerm)
+                // When
+                interactor.searchResultsFlow.test {
+                    interactor.search(searchTerm)
 
-                val result = awaitItem()
+                    val result = awaitItem()
 
-                // Then
-                assertTrue(result is UIResult.Error)
-                verify(searchCitiesUseCase, times(1)).invoke(same(searchTerm))
-                verify(citySearchResultsMapper, times(1)).map(same(cityList), same(cityList))
-                verify(favouriteCitiesFlowUseCase, times(1)).invoke(Unit)
-                verifyNoMoreInteractions()
-                cancelAndConsumeRemainingEvents()
+                    // Then
+                    assertTrue(result is UIResult.Error)
+                    verify(searchCitiesUseCase, times(1)).invoke(same(searchTerm))
+                    verify(citySearchResultsMapper, times(1)).map(same(cityList), same(cityList))
+                    verify(favouriteCitiesFlowUseCase, times(1)).invoke(Unit)
+                    verifyNoMoreInteractions()
+                    cancelAndConsumeRemainingEvents()
+                }
             }
         }
 }

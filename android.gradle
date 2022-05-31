@@ -8,17 +8,28 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    compileOptions {
-//        coreLibraryDesugaringEnabled true
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
+    flavorDimensions "version"
+    productFlavors {
+        qa {
+            dimension "version"
+        }
+        prod {
+            dimension "version"
+        }
+        dev {
+            dimension "version"
+        }
     }
 
+    Properties props = new Properties()
+    props.load(new FileInputStream(new File('local.properties')))
+
     buildTypes {
-        release {}
-        debug {}
+        release {
+            buildConfigField 'String', 'OPEN_WEATHER_API_KEY', props['OPEN_WEATHER_API_KEY']
+        }
+        debug {
+            buildConfigField 'String', 'OPEN_WEATHER_API_KEY', props['DEBUG_OPEN_WEATHER_API_KEY']
+        }
     }
 }

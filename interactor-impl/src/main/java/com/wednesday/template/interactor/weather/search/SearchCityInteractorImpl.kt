@@ -8,12 +8,13 @@ import com.wednesday.template.interactor.base.CoroutineContextController
 import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIResult
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.receiveAsFlow
 import timber.log.Timber
 
 class SearchCityInteractorImpl(
@@ -23,13 +24,13 @@ class SearchCityInteractorImpl(
     private val coroutineContextController: CoroutineContextController
 ) : SearchCityInteractor {
 
-    private val searchResultStateFlow = MutableSharedFlow<List<City>>()
+    private val searchResultStateFlow = Channel<List<City>>()
 
     override val searchResultsFlow: Flow<UIResult<UIList>> = favouriteCitiesFlowUseCase(Unit)
-        .combine(searchResultStateFlow) { favouriteCities, searchResults ->
+        .combine(searchResultStateFlow.receiveAsFlow()) { favouriteCities, searchResults ->
             when {
                 searchResults.isEmpty() -> {
-                    UIResult.Error(Exception("The search list was empty"))
+                    UIResult.Success(UIList())
                 }
                 favouriteCities is Result.Success -> {
                     UIResult.Success(
@@ -40,6 +41,7 @@ class SearchCityInteractorImpl(
                     )
                 }
                 favouriteCities is Result.Error -> {
+                    Timber.e(favouriteCities.exception)
                     UIResult.Error(favouriteCities.exception)
                 }
                 else -> {
@@ -64,7 +66,7 @@ class SearchCityInteractorImpl(
             }
             is Result.Success -> citiesResult.data
         }
-        searchResultStateFlow.emit(list)
+        searchResultStateFlow.send(list)
     }
 
     companion object {

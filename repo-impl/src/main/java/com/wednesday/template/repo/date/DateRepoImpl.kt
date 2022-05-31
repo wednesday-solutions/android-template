@@ -54,6 +54,8 @@ class DateRepoImpl : DateRepo {
 
     override fun convertToLong(dateTime: DateTime) = mapDateTime(dateTime).time
 
+    override fun nowDateTimeAsLong() = mapDateTime(nowDateTime()).time
+
     override fun convertToDate(timeInMillis: Long): Date {
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = timeInMillis

@@ -11,8 +11,8 @@ apply {
 
 dependencies {
 
-    implementation(Dependencies.kotlinStdLib)
-    implementation(Dependencies.androidCoreKtx)
+    implementation(Dependencies.Kotlin.stdLib)
+    implementation(Dependencies.Android.coreKtx)
 
-    implementation(Dependencies.androidAppCompat)
+    implementation(Dependencies.Android.appCompat)
 }

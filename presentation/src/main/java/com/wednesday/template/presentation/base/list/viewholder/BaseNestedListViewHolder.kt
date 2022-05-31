@@ -17,7 +17,7 @@ abstract class BaseNestedListViewHolder<T : UIListItemBase>(
     protected val renderers: MutableList<Pair<KClass<*>, ListItemRenderer<UIListItemBase>>> = mutableListOf()
 
     private val nestedRecyclerView: RecyclerView
-        get() = itemView.findViewById(R.id.nestedRecyclerView)
+        get() = itemView.findViewById(/* R.id.nestedRecyclerView : uncomment after creating id */ R.id.recyclerView)
 
     abstract fun getNestedListItems(item: T): List<UIListItemBase>
 

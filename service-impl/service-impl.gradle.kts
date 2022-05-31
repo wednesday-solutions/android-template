@@ -10,12 +10,13 @@ apply {
 }
 
 android {
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+    defaultConfig {
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
     }
-
 }
 
 dependencies {
@@ -23,28 +24,28 @@ dependencies {
     implementation(project(":service-entity"))
     implementation(project(":service"))
 
-    implementation(Dependencies.kotlinStdLib)
-    implementation(Dependencies.kotlinSerialization)
+    implementation(Dependencies.Kotlin.stdLib)
+    implementation(Dependencies.Kotlin.serialization)
 
-    implementation(Dependencies.coroutinesCore)
+    implementation(Dependencies.Coroutines.core)
 
-    implementation(Dependencies.roomRuntime)
-    implementation(Dependencies.roomKtx)
-    kapt(Dependencies.roomCompiler)
+    implementation(Dependencies.Room.runtime)
+    implementation(Dependencies.Room.ktx)
+    kapt(Dependencies.Room.compiler)
 
-    implementation(Dependencies.retrofitCore)
-    implementation(Dependencies.retrofitSerialization)
-    implementation(Dependencies.retrofitLogging)
+    implementation(Dependencies.Retrofit.core)
+    implementation(Dependencies.Retrofit.serialization)
+    implementation(Dependencies.Retrofit.logging)
 
-    implementation(Dependencies.loggingTimber)
-    implementation(Dependencies.loggingChucker)
+    implementation(Dependencies.Logging.timber)
+    implementation(Dependencies.Logging.chucker)
 
-    androidTestImplementation(Dependencies.testAndroidxTestCore)
-    androidTestImplementation(Dependencies.testAndroidxTestRunner)
-    androidTestImplementation(Dependencies.testAndroidxTestRules)
-    androidTestImplementation(Dependencies.testAndroidxExt)
-    androidTestImplementation(Dependencies.testKotlinTest)
-    androidTestImplementation(Dependencies.testFlowTest)
+    androidTestImplementation(Dependencies.Test.androidxTestCore)
+    androidTestImplementation(Dependencies.Test.androidxTestRunner)
+    androidTestImplementation(Dependencies.Test.androidxTestRules)
+    androidTestImplementation(Dependencies.Test.androidxExt)
+    androidTestImplementation(Dependencies.Test.kotlinTest)
+    androidTestImplementation(Dependencies.Test.flowTest)
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 }

@@ -2,7 +2,7 @@ package com.wednesday.template.presentation.base
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
@@ -13,7 +13,7 @@ class MainDispatcherTestRule : TestWatcher() {
 
     override fun starting(description: Description?) {
         super.starting(description)
-        Dispatchers.setMain(TestCoroutineDispatcher())
+        Dispatchers.setMain(StandardTestDispatcher())
     }
 
     override fun finished(description: Description?) {

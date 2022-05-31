@@ -4,7 +4,8 @@ import com.wednesday.template.domain.TestException
 import com.wednesday.template.domain.base.Result
 import com.wednesday.template.domain.weather.models.city
 import com.wednesday.template.repo.weather.WeatherRepository
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -15,6 +16,7 @@ import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
 import kotlin.test.assertTrue
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class SearchCitiesUseCaseImplTest {
 
     private lateinit var weatherRepository: WeatherRepository
@@ -28,7 +30,7 @@ class SearchCitiesUseCaseImplTest {
 
     @Test
     fun `Given city searched by repo, When invoke called, Then Success is returned`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val searchTerm = "city"
             val cityList = listOf(city)
@@ -45,7 +47,7 @@ class SearchCitiesUseCaseImplTest {
 
     @Test
     fun `Given repo throws exception, When invoke called, Then Error is returned`(): Unit =
-        runBlocking {
+        runTest {
             // Given
             val searchTerm = "city"
             val testException = TestException()

@@ -14,9 +14,7 @@ import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
 import com.wednesday.template.presentation.screen.Screen
 import com.wednesday.template.presentation.screen.ScreenState
-import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 typealias BindingProvider<B> = (LayoutInflater, ViewGroup?, Boolean) -> B

@@ -11,6 +11,8 @@ apply {
 dependencies {
     implementation(project(":domain-entity"))
 
-    implementation(Dependencies.kotlinStdLib)
-    implementation(Dependencies.coroutinesCore)
+    implementation(Dependencies.Kotlin.stdLib)
+    implementation(Dependencies.Coroutines.core)
+
+    implementation(Dependencies.Logging.timber)
 }

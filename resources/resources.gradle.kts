@@ -11,19 +11,20 @@ apply {
 android {
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 }
 
 dependencies {
 
-    implementation(Dependencies.androidAppCompat)
-    implementation(Dependencies.androidCoreKtx)
-    implementation(Dependencies.material)
+    implementation(Dependencies.Android.appCompat)
+    implementation(Dependencies.Android.coreKtx)
+    implementation(Dependencies.Material.material)
 
-    implementation(Dependencies.androidConstraintLayout)
-    implementation(Dependencies.androidRecyclerView)
+    implementation(Dependencies.Android.constraintLayout)
+    implementation(Dependencies.Android.recyclerView)
 
-    implementation(Dependencies.androidNavigationFragment)
-    implementation(Dependencies.androidNavigationUi)
+    implementation(Dependencies.Android.navigationFragment)
+    implementation(Dependencies.Android.navigationUi)
 
 }
