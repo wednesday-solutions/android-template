@@ -2,7 +2,7 @@ package com.wednesday.template.repo.weather.models
 
 import com.wednesday.template.domain.weather.Weather
 
-val weather =  Weather(
+val weather = Weather(
     title = "${localWeather.name}, ${localWeather.sys.country}",
     description = localWeather.weather.description,
     lat = localWeather.coord.lat,

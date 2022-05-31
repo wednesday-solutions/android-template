@@ -23,7 +23,7 @@ import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExperimentalTime
- class WeatherRepositoryImplTest {
+class WeatherRepositoryImplTest {
 
     private lateinit var weatherRemoteService: OpenWeatherRemoteService
     private lateinit var weatherLocalService: OpenWeatherLocalService
