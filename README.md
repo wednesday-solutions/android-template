@@ -45,7 +45,7 @@
 Sensitive information such as the api keys is managed via `local.properties` file. This file in not checked into version control to keep the sensitive information safe. If you want to run the project locally you need to add your own api keys.
 Look at the [`local.skeleton.properties`](local.skeleton.properties) file for all the keys you need to include in your `local.properties` file.
 
-You can get the Open Weather API key from [here](https://openweathermap.org/appid).
+You can get the Open Weather API key from [openweathermap.org](https://openweathermap.org/appid).
 
 ## Architecture
 The architecture of the template facilitates separation of concerns and avoids tight coupling between it's various layers. The goal is to have the ability to make changes to individual layers without affecting the entire app. This architecture is an adaptation of concepts from [`The Clean Architecture`](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html).
