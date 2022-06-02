@@ -1,11 +1,15 @@
 package com.wednesday.template.repo.weather
 
 import app.cash.turbine.test
+import com.wednesday.template.domain.date.JavaDate
 import com.wednesday.template.repo.date.DateRepo
 import com.wednesday.template.repo.weather.models.cityMappedFromLocalCity
 import com.wednesday.template.repo.weather.models.cityMappedFromRemoteCity
 import com.wednesday.template.repo.weather.models.localCity
+import com.wednesday.template.repo.weather.models.localWeather
 import com.wednesday.template.repo.weather.models.remoteCity
+import com.wednesday.template.repo.weather.models.remoteWeather
+import com.wednesday.template.repo.weather.models.weather
 import com.wednesday.template.service.weather.OpenWeatherLocalService
 import com.wednesday.template.service.weather.OpenWeatherRemoteService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -13,11 +17,14 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.same
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import java.time.Instant
 import kotlin.test.assertEquals
 import kotlin.time.ExperimentalTime
 
@@ -149,179 +156,136 @@ class WeatherRepositoryImplTest {
         verify(localCityMapper, times(1)).map(same(city))
     }
 
-// TODO: Update tests
-//    @Test
-//    fun `Given removeCityAsFavourite called, Then it marks the city favourite`(): Unit =
-//        runTest {
-//            // Given
-//            val city = cityMappedFromLocalCity
-//            val localCity = localCity
-//            whenever(localCityMapper.map(city)).thenReturn(localCity)
-//
-//            // When
-//            weatherRepository.removeCityAsFavourite(city)
-//
-//            // Then
-//            verify(weatherLocalService, times(1)).deleteFavoriteCity(same(localCity))
-//            verify(localCityMapper, times(1)).map(same(city))
-//        }
-//
-//    @Test
-//    fun `Given fetchWeatherForFavouriteCities, When weather list is stale, Then weather data is refreshed`(): Unit =
-//        runTest {
-//            // Given
-//            val todayDate = Date(1, 1, 9999)
-//            val woeid = localCity.woeid
-//            val localWeather = localWeather
-//            val localCities = listOf(localCity)
-//            val localDayWeatherList = listOf(localDayWeather)
-//            whenever(weatherLocalService.getFavoriteCities()).thenReturn(localCities)
-//            whenever(dateRepo.todayDate()).thenReturn(todayDate)
-//            whenever(dateRepo.mapDate(localDayWeather.date)).thenReturn(Date(1, 1, 1970))
-//            whenever(weatherLocalService.getLocalDayWeather(woeid)).thenReturn(localDayWeatherList)
-//            whenever(weatherRemoteService.weatherForCity(woeid)).thenReturn(remoteWeather)
-//            whenever(localWeatherMapper.map(remoteWeather, woeid)).thenReturn(localWeather)
-//            whenever(
-//                localDayWeatherMapper.map(
-//                    remoteWeather,
-//                    woeid
-//                )
-//            ).thenReturn(localDayWeatherList)
-//
-//            // When
-//            weatherRepository.fetchWeatherForFavouriteCities()
-//
-//            // Then
-//            verify(dateRepo, times(1)).todayDate()
-//            verify(dateRepo, times(1)).mapDate(localDayWeather.date)
-//            verify(weatherLocalService, times(1)).getFavoriteCities()
-//            verify(weatherLocalService, times(1)).getLocalDayWeather(woeid)
-//            verify(weatherRemoteService, times(1)).weatherForCity(woeid)
-//            verify(localWeatherMapper, times(1)).map(remoteWeather, woeid)
-//            verify(localDayWeatherMapper, times(1)).map(remoteWeather, woeid)
-//            verify(weatherLocalService, times(1)).deleteCurrentAndAddNewWeatherData(
-//                woeid,
-//                localWeather,
-//                localDayWeatherList
-//            )
-//            verifyNoMoreInteractions()
-//        }
-//
-//    @Test
-//    fun `Given fetchWeatherForFavouriteCities, When day weather is empty, Then weather data is refreshed`(): Unit =
-//        runTest {
-//            // Given
-//            val todayDate = Date(1, 1, 1970)
-//            val woeid = localCity.woeid
-//            val localWeather = localWeather
-//            val localCities = listOf(localCity)
-//            val localDayWeatherList = listOf(localDayWeather)
-//            whenever(weatherLocalService.getFavoriteCities()).thenReturn(localCities)
-//            whenever(dateRepo.todayDate()).thenReturn(todayDate)
-//            whenever(weatherLocalService.getLocalDayWeather(woeid)).thenReturn(listOf())
-//            whenever(weatherRemoteService.weatherForCity(woeid)).thenReturn(remoteWeather)
-//            whenever(localWeatherMapper.map(remoteWeather, woeid)).thenReturn(localWeather)
-//            whenever(
-//                localDayWeatherMapper.map(
-//                    remoteWeather,
-//                    woeid
-//                )
-//            ).thenReturn(localDayWeatherList)
-//
-//            // When
-//            weatherRepository.fetchWeatherForFavouriteCities()
-//
-//            // Then
-//            verify(dateRepo, times(1)).todayDate()
-//            verify(weatherLocalService, times(1)).getFavoriteCities()
-//            verify(weatherLocalService, times(1)).getLocalDayWeather(woeid)
-//            verify(weatherRemoteService, times(1)).weatherForCity(woeid)
-//            verify(localWeatherMapper, times(1)).map(remoteWeather, woeid)
-//            verify(localDayWeatherMapper, times(1)).map(remoteWeather, woeid)
-//            verify(weatherLocalService, times(1)).deleteCurrentAndAddNewWeatherData(
-//                woeid,
-//                localWeather,
-//                localDayWeatherList
-//            )
-//            verifyNoMoreInteractions()
-//        }
-//
-//    @Test
-//    fun `Given fetchWeatherForFavouriteCities, When weather list is not stale and day weather is not empty, Then weather data is not refreshed`(): Unit =
-//        runTest {
-//            // Given
-//            val todayDate = Date(1, 1, 1970)
-//            val woeid = localCity.woeid
-//            val localCities = listOf(localCity)
-//            val localDayWeatherList = listOf(localDayWeather)
-//            whenever(weatherLocalService.getFavoriteCities()).thenReturn(localCities)
-//            whenever(dateRepo.todayDate()).thenReturn(todayDate)
-//            whenever(dateRepo.mapDate(localDayWeather.date)).thenReturn(todayDate)
-//            whenever(weatherLocalService.getLocalDayWeather(woeid)).thenReturn(localDayWeatherList)
-//
-//            // When
-//            weatherRepository.fetchWeatherForFavouriteCities()
-//
-//            // Then
-//            verify(dateRepo, times(1)).todayDate()
-//            verify(dateRepo, times(1)).mapDate(localDayWeather.date)
-//            verify(weatherLocalService, times(1)).getFavoriteCities()
-//            verify(weatherLocalService, times(1)).getLocalDayWeather(woeid)
-//            verifyNoMoreInteractions()
-//        }
-//
-//    @Test
-//    fun `Given fetchWeatherForFavouriteCities, When favourite cities is empty, Then nothing happens`(): Unit =
-//        runTest {
-//            // Given
-//            val todayDate = Date(1, 1, 1970)
-//            whenever(weatherLocalService.getFavoriteCities()).thenReturn(listOf())
-//            whenever(dateRepo.todayDate()).thenReturn(todayDate)
-//            // When
-//            weatherRepository.fetchWeatherForFavouriteCities()
-//
-//            // Then
-//            verify(dateRepo, times(1)).todayDate()
-//            verify(weatherLocalService, times(1)).getFavoriteCities()
-//            verifyNoMoreInteractions()
-//        }
-//
-//    @Test
-//    fun `Given getFavouriteCitiesWeatherList called, Then it returns list of weather`(): Unit = runTest {
-//        // Given
-//        val localCitiesWithWeatherList = listOf(localCityWithWeather)
-//        val weatherList = listOf(weatherMappedFromLocalCityWithWeather)
-//        whenever(weatherLocalService.getFavouriteCitiesWeatherList()).thenReturn(localCitiesWithWeatherList)
-//        whenever(domainWeatherMapper.map(localCitiesWithWeatherList)).thenReturn(weatherList)
-//
-//        // When
-//        val result = weatherRepository.getFavouriteCitiesWeatherList()
-//
-//        // Then
-//        assertEquals(expected = weatherList, actual = result)
-//        verify(weatherLocalService, times(1)).getFavouriteCitiesWeatherList()
-//        verify(domainWeatherMapper, times(1)).map(localCitiesWithWeatherList)
-//        verifyNoMoreInteractions()
-//    }
-//
-//    @Test
-//    fun `Given getFavouriteCitiesWeatherFlow called, Then it returns flow of weather list`(): Unit = runTest {
-//        // Given
-//        val localCitiesWithWeatherList = listOf(localCityWithWeather)
-//        val weatherList = listOf(weatherMappedFromLocalCityWithWeather)
-//        whenever(weatherLocalService.getFavouriteCitiesWeatherFlow()).thenReturn(flowOf(localCitiesWithWeatherList))
-//        whenever(domainWeatherMapper.map(localCitiesWithWeatherList)).thenReturn(weatherList)
-//
-//        // When
-//        weatherRepository.getFavouriteCitiesWeatherFlow().test {
-//            val result = awaitItem()
-//            assertEquals(expected = weatherList, actual = result)
-//            cancelAndIgnoreRemainingEvents()
-//        }
-//
-//        // Then
-//        verify(weatherLocalService, times(1)).getFavouriteCitiesWeatherFlow()
-//        verify(domainWeatherMapper, times(1)).map(localCitiesWithWeatherList)
-//        verifyNoMoreInteractions()
-//    }
+    @Test
+    fun `Given removeCityAsFavourite called, Then it marks the city favourite`(): Unit =
+        runTest {
+            // Given
+            val city = cityMappedFromLocalCity
+            val localCity = localCity
+            whenever(localCityMapper.map(city)).thenReturn(localCity)
+
+            // When
+            weatherRepository.removeCityAsFavourite(city)
+
+            // Then
+            verify(weatherLocalService, times(1)).deleteFavoriteCity(same(localCity))
+            verify(localCityMapper, times(1)).map(same(city))
+        }
+
+    @Test
+    fun `Given fetchWeatherForFavouriteCities, When weather list is stale, Then weather data is refreshed`(): Unit =
+        runTest {
+            // Given
+            val nowDateTimeAsLong = JavaDate.from(Instant.ofEpochSecond(3 * 60 * 60)).time
+            val localWeather = localWeather
+            val localCities = listOf(localCity)
+            whenever(dateRepo.nowDateTimeAsLong()).thenReturn(nowDateTimeAsLong)
+            whenever(weatherLocalService.getFavoriteCities()).thenReturn(localCities)
+            whenever(weatherLocalService.getLocalCurrentWeather(any(), any())).thenReturn(
+                localWeather
+            )
+            whenever(weatherRemoteService.currentWeather(any())).thenReturn(remoteWeather)
+            whenever(localWeatherMapper.map(same(remoteWeather), any(), any())).thenReturn(
+                localWeather
+            )
+            whenever(weatherLocalService.upsertLocalCurrentWeather(localWeather)).thenReturn(Unit)
+
+            // When
+            weatherRepository.fetchWeatherForFavouriteCities()
+
+            // Then
+            verify(dateRepo, times(1)).nowDateTimeAsLong()
+            verify(weatherLocalService, times(1)).getFavoriteCities()
+            verify(weatherLocalService, times(1)).getLocalCurrentWeather(any(), any())
+            verify(weatherRemoteService, times(1)).currentWeather(any())
+            verify(localWeatherMapper, times(1)).map(same(remoteWeather), any(), any())
+            verify(weatherLocalService, times(1)).upsertLocalCurrentWeather(localWeather)
+            verifyNoMoreInteractions()
+        }
+
+    @Test
+    fun `Given fetchWeatherForFavouriteCities, When weather list is not stale, Then weather data is not refreshed`(): Unit =
+        runTest {
+            // Given
+            val nowDateTimeAsLong = JavaDate.from(Instant.EPOCH).time
+            val localWeather = localWeather
+            val localCities = listOf(localCity)
+            whenever(dateRepo.nowDateTimeAsLong()).thenReturn(nowDateTimeAsLong)
+            whenever(weatherLocalService.getFavoriteCities()).thenReturn(localCities)
+            whenever(weatherLocalService.getLocalCurrentWeather(any(), any())).thenReturn(
+                localWeather
+            )
+            whenever(weatherRemoteService.currentWeather(any())).thenReturn(remoteWeather)
+            whenever(localWeatherMapper.map(same(remoteWeather), any(), any())).thenReturn(
+                localWeather
+            )
+            whenever(weatherLocalService.upsertLocalCurrentWeather(localWeather)).thenReturn(Unit)
+
+            // When
+            weatherRepository.fetchWeatherForFavouriteCities()
+
+            // Then
+            verify(dateRepo, times(1)).nowDateTimeAsLong()
+            verify(weatherLocalService, times(1)).getFavoriteCities()
+            verify(weatherLocalService, times(1)).getLocalCurrentWeather(any(), any())
+            verify(weatherRemoteService, never()).currentWeather(any())
+            verify(localWeatherMapper, never()).map(same(remoteWeather), any(), any())
+            verify(weatherLocalService, never()).upsertLocalCurrentWeather(localWeather)
+            verifyNoMoreInteractions()
+        }
+
+    @Test
+    fun `Given fetchWeatherForFavouriteCities, When favourite cities is empty, Then nothing happens`(): Unit =
+        runTest {
+            // Given
+            val todayDate = JavaDate.from(Instant.EPOCH).time
+            whenever(weatherLocalService.getFavoriteCities()).thenReturn(listOf())
+            whenever(dateRepo.nowDateTimeAsLong()).thenReturn(todayDate)
+            // When
+            weatherRepository.fetchWeatherForFavouriteCities()
+
+            // Then
+            verify(dateRepo, times(1)).nowDateTimeAsLong()
+            verify(weatherLocalService, times(1)).getFavoriteCities()
+            verifyNoMoreInteractions()
+        }
+
+    @Test
+    fun `Given getFavouriteCitiesWeatherList called, Then it returns list of weather`(): Unit = runTest {
+        // Given
+        val localCitiesWithWeatherList = listOf(localWeather)
+        val weatherList = listOf(weather)
+        whenever(weatherLocalService.getFavouriteCitiesWeatherList()).thenReturn(localCitiesWithWeatherList)
+        whenever(domainWeatherMapper.map(localCitiesWithWeatherList)).thenReturn(weatherList)
+
+        // When
+        val result = weatherRepository.getFavouriteCitiesWeatherList()
+
+        // Then
+        assertEquals(expected = weatherList, actual = result)
+        verify(weatherLocalService, times(1)).getFavouriteCitiesWeatherList()
+        verify(domainWeatherMapper, times(1)).map(localCitiesWithWeatherList)
+        verifyNoMoreInteractions()
+    }
+
+    @Test
+    fun `Given getFavouriteCitiesWeatherFlow called, Then it returns flow of weather list`(): Unit = runTest {
+        // Given
+        val localCitiesWithWeatherList = listOf(localWeather)
+        val weatherList = listOf(weather)
+        whenever(weatherLocalService.getFavouriteCitiesWeatherFlow()).thenReturn(flowOf(localCitiesWithWeatherList))
+        whenever(domainWeatherMapper.map(localCitiesWithWeatherList)).thenReturn(weatherList)
+
+        // When
+        weatherRepository.getFavouriteCitiesWeatherFlow().test {
+            val result = awaitItem()
+            assertEquals(expected = weatherList, actual = result)
+            cancelAndIgnoreRemainingEvents()
+        }
+
+        // Then
+        verify(weatherLocalService, times(1)).getFavouriteCitiesWeatherFlow()
+        verify(domainWeatherMapper, times(1)).map(localCitiesWithWeatherList)
+        verifyNoMoreInteractions()
+    }
 }
