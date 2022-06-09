@@ -1,4 +1,5 @@
 object Versions {
+    const val composeMaterial3 = "1.0.0-alpha13"
     const val androidGradlePlugin = "7.2.0"
     const val googleServices = "4.3.10"
     const val compose = "1.1.1"
