@@ -42,7 +42,8 @@ dependencies {
     implementation(Dependencies.Material.material)
 
     implementation(Dependencies.Compose.activity)
-    implementation(Dependencies.Compose.material)
+    implementation(Dependencies.Compose.material3)
+    implementation(Dependencies.Compose.ui)
     implementation(Dependencies.Compose.animation)
     implementation(Dependencies.Compose.uiTooling)
     implementation(Dependencies.Compose.viewModel)

@@ -3,6 +3,8 @@ object Dependencies {
     object Compose {
         const val activity = "androidx.activity:activity-compose:${Versions.activityCompose}"
         const val material = "androidx.compose.material:material:${Versions.compose}"
+        const val ui = "androidx.compose.ui:ui:${Versions.compose}"
+        const val material3 = "androidx.compose.material3:material3:${Versions.composeMaterial3}"
         const val materialIconCore =
             "androidx.compose.material:material-icons-core:${Versions.compose}"
         const val materialIconExtended =

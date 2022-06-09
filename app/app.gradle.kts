@@ -11,12 +11,12 @@ apply {
 
 android {
 
-    compileSdk = 31
+    compileSdk = 32
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
         minSdk = 24
-        targetSdk = 31
+        targetSdk = 32
         applicationId = "com.wednesday.template"
         versionCode = 9
         versionName = "1.0"
