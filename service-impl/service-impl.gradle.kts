@@ -40,12 +40,12 @@ dependencies {
     implementation(Dependencies.Logging.timber)
     implementation(Dependencies.Logging.chucker)
 
-    androidTestImplementation(Dependencies.Test.androidxTestCore)
-    androidTestImplementation(Dependencies.Test.androidxTestRunner)
-    androidTestImplementation(Dependencies.Test.androidxTestRules)
-    androidTestImplementation(Dependencies.Test.androidxExt)
-    androidTestImplementation(Dependencies.Test.kotlinTest)
-    androidTestImplementation(Dependencies.Test.flowTest)
+    testImplementation(Dependencies.Test.androidxTestCore)
+    testImplementation(Dependencies.Test.androidxTestRunner)
+    testImplementation(Dependencies.Test.androidxTestRules)
+    testImplementation(Dependencies.Test.androidxExt)
+    testImplementation(Dependencies.Test.kotlinTest)
+    testImplementation(Dependencies.Test.flowTest)
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 }

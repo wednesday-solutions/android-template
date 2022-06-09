@@ -75,13 +75,18 @@ fun AppTheme(
 ) {
 
     // Dynamic color is available on Android 12+
-    val dynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-    val colorScheme = when {
-        dynamicColor && useDarkTheme -> dynamicDarkColorScheme(LocalContext.current)
-        dynamicColor && !useDarkTheme -> dynamicLightColorScheme(LocalContext.current)
+    var colorScheme = when {
         useDarkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        colorScheme = when {
+            useDarkTheme -> dynamicDarkColorScheme(LocalContext.current)
+            else -> dynamicLightColorScheme(LocalContext.current)
+        }
+    }
+
 
     MaterialTheme(
         colorScheme = colorScheme,
