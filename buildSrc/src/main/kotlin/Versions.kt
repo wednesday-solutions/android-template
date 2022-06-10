@@ -30,4 +30,5 @@ object Versions {
     const val chucker = "3.5.2"
     const val turbine = "0.8.0"
     const val coil = "2.1.0"
+    const val downloadableFonts = "1.2.0-beta01"
 }

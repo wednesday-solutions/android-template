@@ -17,6 +17,7 @@ object Dependencies {
         const val viewModel =
             "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycleViewModelCompose}"
         const val uiTest = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
+        const val fonts = "androidx.compose.ui:ui-text-google-fonts:${Versions.downloadableFonts}"
     }
 
     object Room {

@@ -51,6 +51,7 @@ dependencies {
     implementation(Dependencies.Compose.materialIconExtended)
     implementation(Dependencies.Compose.foundation)
     implementation(Dependencies.Compose.liveData)
+    implementation(Dependencies.Compose.fonts)
 
     implementation(Dependencies.Image.coil)
 
