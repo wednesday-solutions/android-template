@@ -11,14 +11,6 @@ import androidx.compose.ui.unit.sp
 import com.wednesday.template.presentation.R
 
 
-//@OptIn(ExperimentalTextApi::class)
-//val MontserratFontFamily = getMontserratFontFamily(
-//    name = "Roboto", weights = listOf<FontWeight>(
-//        FontWeight.Normal,
-//        FontWeight.Medium,
-//    )
-//)
-
 @OptIn(ExperimentalTextApi::class)
 val provider = GoogleFont.Provider(
     providerAuthority = "com.google.android.gms.fonts",
@@ -147,25 +139,3 @@ val AppTypography = Typography(
 
     )
 
-//Use Roboto as the fallback on stock Android, in case we fail to load the custom font,
-//Default could also use the system specific font on custom skins like MIUI, Oxygen OS etc
-
-//@OptIn(ExperimentalTextApi::class)
-//private fun getMontserratFontFamily(
-//    name: String,
-//    provider: GoogleFont.Provider = provider,
-//    weights: List<FontWeight>
-//): FontFamily {
-//    return FontFamily(
-//        fonts = weights.map {
-//            Font(googleFont = GoogleFont(name), fontProvider = provider, weight = it)
-//        }
-//    )
-//}
-
-//@OptIn(ExperimentalTextApi::class)
-//val googleFontProvider = GoogleFont.Provider(
-//    providerAuthority = "com.google.android.gms.fonts",
-//    providerPackage = "com.google.android.gms",
-//    certificates = R.array.com_google_android_gms_fonts_certs
-//)
