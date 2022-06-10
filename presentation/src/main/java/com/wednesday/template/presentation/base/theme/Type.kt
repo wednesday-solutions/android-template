@@ -10,7 +10,6 @@ import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.unit.sp
 import com.wednesday.template.presentation.R
 
-
 @OptIn(ExperimentalTextApi::class)
 val provider = GoogleFont.Provider(
     providerAuthority = "com.google.android.gms.fonts",
@@ -28,7 +27,6 @@ val MontserratFontFamily = FontFamily(
     Font(googleFont = MontserratFont, fontProvider = provider, weight = FontWeight.Medium),
     Font(googleFont = MontserratFont, fontProvider = provider, weight = FontWeight.SemiBold),
 )
-
 
 val AppTypography = Typography(
     displayLarge = TextStyle(
@@ -137,5 +135,4 @@ val AppTypography = Typography(
         letterSpacing = 0.5.sp,
     ),
 
-    )
-
+)
