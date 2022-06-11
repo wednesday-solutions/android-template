@@ -7,7 +7,6 @@ import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.CallSuper
 import androidx.viewbinding.ViewBinding
-import com.wednesday.template.navigation.Navigator
 import com.wednesday.template.presentation.base.component.StatefulComponent
 import com.wednesday.template.presentation.base.loading.LoadingComponent
 import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
@@ -19,9 +18,8 @@ abstract class MainFragment<
     BINDING : ViewBinding,
     SCREEN : Screen,
     SCREEN_STATE : MainScreenState,
-    NAV : Navigator,
-    VM : BaseViewModel<SCREEN, SCREEN_STATE, NAV>
-    > : BaseFragment<BINDING, SCREEN, SCREEN_STATE, NAV, VM>() {
+    VM : BaseViewModel<SCREEN, SCREEN_STATE>
+    > : BaseFragment<BINDING, SCREEN, SCREEN_STATE, VM>() {
 
     abstract val toolbarComponent: ToolbarComponent
 

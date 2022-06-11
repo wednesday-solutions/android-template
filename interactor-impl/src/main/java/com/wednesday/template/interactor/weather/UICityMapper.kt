@@ -2,7 +2,7 @@ package com.wednesday.template.interactor.weather
 
 import com.wednesday.template.domain.weather.City
 import com.wednesday.template.interactor.base.Mapper2
-import com.wednesday.template.presentation.base.UIText
+import com.wednesday.template.presentation.base.text.UIText
 import com.wednesday.template.presentation.weather.UICity
 import timber.log.Timber
 

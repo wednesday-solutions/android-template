@@ -1,6 +1,5 @@
 package com.wednesday.template.presentation.base.fragment
 
-import android.content.ComponentCallbacks
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,14 +7,11 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.wednesday.template.navigation.Navigator
 import com.wednesday.template.presentation.base.component.Component
 import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
 import com.wednesday.template.presentation.screen.Screen
 import com.wednesday.template.presentation.screen.ScreenState
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
 
 typealias BindingProvider<B> = (LayoutInflater, ViewGroup?, Boolean) -> B
 
@@ -23,13 +19,10 @@ abstract class BaseFragment<
     BINDING : ViewBinding,
     SCREEN : Screen,
     SCREEN_STATE : ScreenState,
-    NAV : Navigator,
-    VM : BaseViewModel<SCREEN, SCREEN_STATE, NAV>
+    VM : BaseViewModel<SCREEN, SCREEN_STATE>
     > : Fragment() {
 
     abstract val viewModel: VM
-
-    abstract val navigator: NAV
 
     protected lateinit var args: SCREEN
 
@@ -55,7 +48,7 @@ abstract class BaseFragment<
         super.onCreate(savedInstanceState)
         args = arguments?.get("key_args") as SCREEN
         viewModel.args = args
-        viewModel.onCreate(savedInstanceState, navigator)
+        viewModel.onCreate(savedInstanceState)
     }
 
     override fun onResume() {
@@ -82,10 +75,10 @@ abstract class BaseFragment<
             it ?: return@observe
             onState(it)
         }
-        viewModel.effectState.observe(viewLifecycleOwner) {
-            it ?: return@observe
-            onEffect(it)
-        }
+//        viewModel.effectState.observe(viewLifecycleOwner) {
+//            it ?: return@observe
+//            onEffect(it)
+//        }
         viewModel.screenResultState.observe(viewLifecycleOwner) {
             it ?: return@observe
             setFragmentResult(it)
@@ -129,9 +122,5 @@ abstract class BaseFragment<
             "Effect of type $effect is not handled by ${this.javaClass.name}." +
                 " If you want to handle this intent then add support in when clause"
         )
-    }
-
-    protected inline fun <reified NAV : Navigator> ComponentCallbacks.navigator(): Lazy<NAV> {
-        return inject { parametersOf(this) }
     }
 }

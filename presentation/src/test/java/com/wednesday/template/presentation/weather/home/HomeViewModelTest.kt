@@ -3,10 +3,10 @@ package com.wednesday.template.presentation.weather.home
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.navigation.home.HomeNavigator
 import com.wednesday.template.presentation.base.BaseViewModelTest
-import com.wednesday.template.presentation.base.UIList
-import com.wednesday.template.presentation.base.UIResult
-import com.wednesday.template.presentation.base.UIText
-import com.wednesday.template.presentation.base.UIToolbar
+import com.wednesday.template.presentation.base.list.UIList
+import com.wednesday.template.presentation.base.result.UIResult
+import com.wednesday.template.presentation.base.text.UIText
+import com.wednesday.template.presentation.base.toolbar.UIToolbar
 import com.wednesday.template.presentation.weather.home.models.city
 import com.wednesday.template.presentation.weather.search.SearchScreen
 import com.wednesday.template.resources.R

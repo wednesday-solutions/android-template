@@ -15,4 +15,7 @@ dependencies {
     implementation(Dependencies.Android.coreKtx)
 
     implementation(Dependencies.Android.appCompat)
+
+    implementation(Dependencies.Compose.material3)
+    implementation(Dependencies.Compose.material)
 }

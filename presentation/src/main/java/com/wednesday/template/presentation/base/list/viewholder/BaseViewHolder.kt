@@ -2,7 +2,7 @@ package com.wednesday.template.presentation.base.list.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.wednesday.template.presentation.base.UIListItemBase
+import com.wednesday.template.presentation.base.list.UIListItemBase
 import com.wednesday.template.presentation.base.intent.Intent
 import kotlinx.coroutines.channels.Channel
 

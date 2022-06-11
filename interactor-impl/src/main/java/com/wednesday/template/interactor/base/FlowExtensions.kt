@@ -1,7 +1,7 @@
 package com.wednesday.template.interactor.base
 
 import com.wednesday.template.domain.base.Result
-import com.wednesday.template.presentation.base.UIResult
+import com.wednesday.template.presentation.base.result.UIResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

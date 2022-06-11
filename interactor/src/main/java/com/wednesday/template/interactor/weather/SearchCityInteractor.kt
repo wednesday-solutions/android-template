@@ -1,7 +1,7 @@
 package com.wednesday.template.interactor.weather
 
-import com.wednesday.template.presentation.base.UIList
-import com.wednesday.template.presentation.base.UIResult
+import com.wednesday.template.presentation.base.list.UIList
+import com.wednesday.template.presentation.base.result.UIResult
 import kotlinx.coroutines.flow.Flow
 
 interface SearchCityInteractor {

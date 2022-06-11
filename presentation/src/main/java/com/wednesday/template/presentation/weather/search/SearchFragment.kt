@@ -21,7 +21,6 @@ import timber.log.Timber
 class SearchFragment : MainFragment<FragmentSearchBinding,
     SearchScreen,
     SearchScreenState,
-    SearchNavigator,
     SearchViewModel>() {
 
     override val toolbarComponent: ToolbarComponent = ToolbarComponent(this, onBackClicked = {
@@ -30,7 +29,6 @@ class SearchFragment : MainFragment<FragmentSearchBinding,
 
     override val viewModel: SearchViewModel by viewModel()
 
-    override val navigator: SearchNavigator by navigator()
 
     override val bindingProvider: BindingProvider<FragmentSearchBinding> =
         FragmentSearchBinding::inflate

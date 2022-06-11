@@ -1,4 +1,4 @@
-package com.wednesday.template.presentation.base
+package com.wednesday.template.presentation.base.text
 
 import androidx.annotation.StringRes
 import kotlinx.parcelize.Parcelize

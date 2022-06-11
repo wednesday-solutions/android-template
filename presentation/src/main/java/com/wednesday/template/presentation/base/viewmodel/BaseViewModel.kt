@@ -5,33 +5,29 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.wednesday.template.navigation.Navigator
+import androidx.lifecycle.asFlow
 import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.state.StateOwner
 import com.wednesday.template.presentation.base.state.statefulLiveData
 import com.wednesday.template.presentation.screen.Screen
 import com.wednesday.template.presentation.screen.ScreenState
+import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState, NAV : Navigator> :
+abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState> :
     ViewModel(), KoinComponent, StateOwner {
 
     abstract fun getDefaultScreenState(): STATE
 
     override val savedStateHandle by inject<SavedStateHandle>()
 
-    private lateinit var _navigator: NAV
-
-    val navigator: NAV
-        get() = _navigator
-
     private val _screenState by statefulLiveData<STATE?> { null }
     val screenState: LiveData<STATE?> = _screenState
 
     private val _effectState = MutableLiveData<Effect?>(null)
-    val effectState: LiveData<Effect?> = _effectState
+    val effectState: Flow<Effect?> = _effectState.asFlow()
 
     private val _screenResultState = MutableLiveData<Bundle?>(null)
     val screenResultState: LiveData<Bundle?> = _screenResultState
@@ -46,11 +42,10 @@ abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState, NAV : Navigat
 
     open fun onDestroyView() = Unit
 
-    fun onCreate(bundle: Bundle?, navigator: NAV) {
+    fun onCreate(bundle: Bundle?) {
         val isFreshCreate = bundle == null
         val isFromRecreate = recreateFlag == null
         recreateFlag = Unit
-        _navigator = navigator
         if (isFromRecreate) {
             _screenState.value = getDefaultScreenState()
         }
@@ -80,7 +75,7 @@ abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState, NAV : Navigat
     protected fun unhandledIntent(intent: Intent) {
         throw IllegalStateException(
             "Intent of type $intent is not handled by ${this.javaClass.name}." +
-                " If you want to handle this intent then add support in when clause"
+                    " If you want to handle this intent then add support in when clause"
         )
     }
 

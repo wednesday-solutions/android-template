@@ -1,7 +1,8 @@
 package com.wednesday.template.presentation.base.effect
 
-import android.view.View
-import com.wednesday.template.presentation.base.UIText
+import androidx.compose.ui.graphics.vector.ImageVector
+import com.wednesday.template.presentation.base.dialog.DialogHostState
+import com.wednesday.template.presentation.base.text.UIText
 import com.wednesday.template.presentation.datetime.UIDate
 
 interface Effect
@@ -16,7 +17,19 @@ data class ShowDatePickerEffect(
 data class ShowSnackbarEffect(
     val message: UIText,
     val action: UIText? = null,
-    val onActionClick: (View) -> Unit = {}
+    val onActionClick: () -> Unit = {},
+    val onDismiss: () -> Unit = {}
+) : Effect
+
+data class ShowAlertDialogEffect(
+    val icon: ImageVector? = null,
+    val iconContentDescription: String? = null,
+    val title: UIText,
+    val text: UIText,
+    val confirmButtonText: UIText,
+    val onConfirmButtonClicked: (DialogHostState) -> Unit = {},
+    val dismissButtonText: UIText? = null,
+    val onDismissButtonClicked: (DialogHostState) -> Unit = {},
 ) : Effect
 
 object HideKeyboardEffect : Effect
