@@ -2,7 +2,6 @@ package com.wednesday.template.presentation.weather.search
 
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
-import com.wednesday.template.navigation.search.SearchNavigator
 import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.common.HideKeyboardComponent
 import com.wednesday.template.presentation.base.effect.Effect
@@ -28,7 +27,6 @@ class SearchFragment : MainFragment<FragmentSearchBinding,
     })
 
     override val viewModel: SearchViewModel by viewModel()
-
 
     override val bindingProvider: BindingProvider<FragmentSearchBinding> =
         FragmentSearchBinding::inflate

@@ -15,7 +15,8 @@ fun DialogHost(
     val dialogData = hostState.currentDialogData
 
     dialogData?.apply {
-        AlertDialog(onDismissRequest = onDismiss,
+        AlertDialog(
+            onDismissRequest = onDismiss,
             title = {
                 Text(text = title.asString())
             },

@@ -96,7 +96,6 @@ class SearchViewModel(
                 }
             }
             SearchScreenIntent.Back -> {
-
             }
         }
     }

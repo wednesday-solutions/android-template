@@ -114,7 +114,6 @@ class MainActivity : AppCompatActivity() {
     )
 }
 
-
 data class DialogData(
     val title: String
 )
