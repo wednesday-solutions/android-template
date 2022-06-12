@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 /**
  * Use the [EffectHandler] to opt into handling effects.
  *
- * Creates a [LaunchedEffect] to collect the [effectFlow] and call [onEffect] on every non-null effect emit.
+ * Creates a [LaunchedEffect] to collect the [effectFlow] and calls [onEffect] on every non-null effect emitted.
  *
  * @param effectFlow Flow of effects.
  *
