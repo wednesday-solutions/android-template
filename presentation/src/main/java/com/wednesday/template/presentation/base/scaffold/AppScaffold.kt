@@ -11,21 +11,20 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.wednesday.template.presentation.base.compositionLocals.LocalDialogHostState
+import com.wednesday.template.presentation.base.compositionLocals.LocalSnackbarHostState
 import com.wednesday.template.presentation.base.dialog.DialogHost
 import com.wednesday.template.presentation.base.dialog.DialogHostState
-import com.wednesday.template.presentation.base.effect.Effect
-import com.wednesday.template.presentation.base.effect.EffectHandler
-import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppScaffold(
     modifier: Modifier = Modifier,
-    effectState: Flow<Effect?>,
     topBar: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
     snackbarHost: (@Composable (SnackbarHostState) -> Unit)? = null,
@@ -37,46 +36,44 @@ fun AppScaffold(
     content: @Composable () -> Unit
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
+    val dialogHostState = remember { DialogHostState() }
 
-    Scaffold(
-        modifier = modifier,
-        topBar = topBar,
-        bottomBar = bottomBar,
-        snackbarHost = {
-            if (snackbarHost != null) {
-                snackbarHost(snackbarHostState)
-            } else {
-                SnackbarHost(hostState = snackbarHostState)
-            }
-        },
-        floatingActionButton = floatingActionButton,
-        floatingActionButtonPosition = floatingActionButtonPosition,
-        containerColor = containerColor,
-        contentColor = contentColor,
+    CompositionLocalProvider(
+        LocalDialogHostState provides dialogHostState,
+        LocalSnackbarHostState provides snackbarHostState,
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it),
-            contentAlignment = Alignment.Center
+        Scaffold(
+            modifier = modifier,
+            topBar = topBar,
+            bottomBar = bottomBar,
+            snackbarHost = {
+                if (snackbarHost != null) {
+                    snackbarHost(snackbarHostState)
+                } else {
+                    SnackbarHost(hostState = snackbarHostState)
+                }
+            },
+            floatingActionButton = floatingActionButton,
+            floatingActionButtonPosition = floatingActionButtonPosition,
+            containerColor = containerColor,
+            contentColor = contentColor,
         ) {
-            val dialogHostState = remember { DialogHostState() }
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(it),
+                contentAlignment = Alignment.Center
+            ) {
 
-            // Composable to listen to effect state
-            EffectHandler(
-                effectFlow = effectState,
-                dialogHostState = dialogHostState,
-                snackbarHostState = snackbarHostState
-            )
+                // Host Composable to display dialogs
+                if (dialogHost != null) {
+                    dialogHost(dialogHostState)
+                } else {
+                    DialogHost(hostState = dialogHostState)
+                }
 
-            // Host Composable to display dialogs
-            if (dialogHost != null) {
-                dialogHost(dialogHostState)
-            } else {
-                DialogHost(hostState = dialogHostState)
+                content()
             }
-
-            content()
         }
     }
 }

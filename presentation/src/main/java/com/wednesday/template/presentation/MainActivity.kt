@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentActivity
@@ -18,6 +19,13 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.wednesday.template.presentation.base.compositionLocals.LocalDialogHostState
+import com.wednesday.template.presentation.base.compositionLocals.LocalSnackbarHostState
+import com.wednesday.template.presentation.base.effect.EffectHandler
+import com.wednesday.template.presentation.base.effect.ShowAlertDialogEffect
+import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
+import com.wednesday.template.presentation.base.effect.unhandledEffect
+import com.wednesday.template.presentation.base.extensions.showSnackbar
 import com.wednesday.template.presentation.base.scaffold.AppScaffold
 import com.wednesday.template.presentation.base.theme.AppTheme
 import com.wednesday.template.presentation.weather.home.HomeScreen
@@ -29,7 +37,7 @@ import org.koin.androidx.compose.viewModel
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    @OptIn(ExperimentalMaterial3Api::class)
+    @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         // Handle the splash screen transition.
         installSplashScreen()
@@ -43,9 +51,17 @@ class MainActivity : AppCompatActivity() {
             val viewModel by viewModel<HomeViewModel>()
 
             AppTheme {
-                AppScaffold(
-                    effectState = viewModel.effectState
-                ) {
+                AppScaffold {
+                    val snackbarHostState = LocalSnackbarHostState.current
+                    val dialogHostState = LocalDialogHostState.current
+                    EffectHandler(effectFlow = viewModel.effectState) {
+                        when (it) {
+                            is ShowSnackbarEffect -> snackbarHostState.showSnackbar(it)
+                            is ShowAlertDialogEffect -> dialogHostState.showDialog(it)
+                            else -> unhandledEffect()
+                        }
+                    }
+
                     Box {
                         Column {
                             Text(text = "Welcome to Compose!")
