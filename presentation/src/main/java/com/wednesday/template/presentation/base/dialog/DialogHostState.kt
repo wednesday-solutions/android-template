@@ -3,7 +3,6 @@ package com.wednesday.template.presentation.base.dialog
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.staticCompositionLocalOf
 import com.wednesday.template.presentation.base.effect.ShowAlertDialogEffect
 import kotlinx.coroutines.sync.Mutex
 
@@ -25,8 +24,4 @@ class DialogHostState {
             currentDialogData = null
         }
     }
-}
-
-val LocalDialogHostState = staticCompositionLocalOf<DialogHostState> {
-    error("Composition Local LocalDialogHostState not present")
 }
