@@ -25,7 +25,7 @@ class SnackbarComponent(
             Snackbar.LENGTH_SHORT
         ).apply {
             if (data.action != null) {
-                setAction(data.action.asString(), data.onActionClick)
+//                setAction(data.action.asString(), data.onActionClick)
             }
         }.show()
     }

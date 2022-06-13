@@ -1,4 +1,4 @@
-package com.wednesday.template.presentation.base
+package com.wednesday.template.presentation.base.text
 
 import android.os.Parcelable
 import androidx.annotation.StringRes

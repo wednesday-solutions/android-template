@@ -1,6 +1,5 @@
 package com.wednesday.template.presentation.weather.home
 
-import com.wednesday.template.navigation.home.HomeNavigator
 import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.fragment.BindingProvider
@@ -18,7 +17,6 @@ class HomeFragment : MainFragment<
     FragmentStartBinding,
     HomeScreen,
     HomeScreenState,
-    HomeNavigator,
     HomeViewModel>() {
 
     override val toolbarComponent: ToolbarComponent = ToolbarComponent(this) {
@@ -26,8 +24,6 @@ class HomeFragment : MainFragment<
     }
 
     override val viewModel: HomeViewModel by viewModel()
-
-    override val navigator: HomeNavigator by navigator()
 
     override val bindingProvider: BindingProvider<FragmentStartBinding> =
         FragmentStartBinding::inflate

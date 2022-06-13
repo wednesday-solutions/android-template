@@ -1,7 +1,7 @@
 package com.wednesday.template.interactor.weather.search.models
 
 import com.wednesday.template.domain.weather.City
-import com.wednesday.template.presentation.base.UIText
+import com.wednesday.template.presentation.base.text.UIText
 import com.wednesday.template.presentation.weather.UICity
 
 val city = City(

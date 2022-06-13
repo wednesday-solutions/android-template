@@ -3,7 +3,7 @@ package com.wednesday.template.interactor.weather.search
 import com.wednesday.template.domain.weather.City
 import com.wednesday.template.interactor.base.Mapper2
 import com.wednesday.template.interactor.weather.UICityMapper
-import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.base.list.UIList
 import timber.log.Timber
 
 interface UICitySearchResultsMapper : Mapper2<List<City>, List<City>, UIList>

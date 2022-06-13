@@ -9,8 +9,8 @@ import com.wednesday.template.interactor.base.InteractorTest
 import com.wednesday.template.interactor.base.TestException
 import com.wednesday.template.interactor.weather.search.models.city
 import com.wednesday.template.interactor.weather.search.models.uiCity
-import com.wednesday.template.presentation.base.UIList
-import com.wednesday.template.presentation.base.UIResult
+import com.wednesday.template.presentation.base.list.UIList
+import com.wednesday.template.presentation.base.result.UIResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest

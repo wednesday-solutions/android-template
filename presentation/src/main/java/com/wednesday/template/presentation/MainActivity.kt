@@ -7,16 +7,11 @@ import androidx.annotation.IdRes
 import androidx.annotation.NavigationRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Text
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentActivity
@@ -24,14 +19,25 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.wednesday.template.presentation.base.compositionLocals.LocalDialogHostState
+import com.wednesday.template.presentation.base.compositionLocals.LocalSnackbarHostState
+import com.wednesday.template.presentation.base.effect.EffectHandler
+import com.wednesday.template.presentation.base.effect.ShowAlertDialogEffect
+import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
+import com.wednesday.template.presentation.base.effect.unhandledEffect
+import com.wednesday.template.presentation.base.extensions.showSnackbar
+import com.wednesday.template.presentation.base.scaffold.AppScaffold
 import com.wednesday.template.presentation.base.theme.AppTheme
 import com.wednesday.template.presentation.weather.home.HomeScreen
+import com.wednesday.template.presentation.weather.home.HomeScreenIntent
+import com.wednesday.template.presentation.weather.home.HomeViewModel
 import com.wednesday.template.resources.databinding.ActivityMainBinding
+import org.koin.androidx.compose.viewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    @OptIn(ExperimentalMaterial3Api::class)
+    @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         // Handle the splash screen transition.
         installSplashScreen()
@@ -42,17 +48,34 @@ class MainActivity : AppCompatActivity() {
 //        setContentView(binding.root)
 
         setContent {
+            val viewModel by viewModel<HomeViewModel>()
+
             AppTheme {
-                Scaffold(
-                    topBar = { SmallTopAppBar(title = { Text("Compose Template") }, modifier = Modifier.shadow(elevation = 10.dp)) },
-                ) {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(it)
-                    ) {
-                        Text(text = "Welcome to Compose!")
+                AppScaffold {
+                    val snackbarHostState = LocalSnackbarHostState.current
+                    val dialogHostState = LocalDialogHostState.current
+                    EffectHandler(effectFlow = viewModel.effectState) {
+                        when (it) {
+                            is ShowSnackbarEffect -> snackbarHostState.showSnackbar(it)
+                            is ShowAlertDialogEffect -> dialogHostState.showDialog(it)
+                            else -> unhandledEffect()
+                        }
+                    }
+
+                    Box {
+                        Column {
+                            Text(text = "Welcome to Compose!")
+                            Button(onClick = {
+                                viewModel.onIntent(HomeScreenIntent.Loading)
+                            }) {
+                                Text(text = "Show Dialog")
+                            }
+                            Button(onClick = {
+                                viewModel.onIntent(HomeScreenIntent.Search)
+                            }) {
+                                Text(text = "Show Snackbar")
+                            }
+                        }
                     }
                 }
             }
@@ -106,3 +129,7 @@ class MainActivity : AppCompatActivity() {
         val controller: NavController
     )
 }
+
+data class DialogData(
+    val title: String
+)

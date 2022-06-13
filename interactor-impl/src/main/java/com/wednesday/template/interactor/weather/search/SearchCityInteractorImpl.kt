@@ -6,8 +6,8 @@ import com.wednesday.template.domain.weather.GetFavouriteCitiesFlowUseCase
 import com.wednesday.template.domain.weather.SearchCitiesUseCase
 import com.wednesday.template.interactor.base.CoroutineContextController
 import com.wednesday.template.interactor.weather.SearchCityInteractor
-import com.wednesday.template.presentation.base.UIList
-import com.wednesday.template.presentation.base.UIResult
+import com.wednesday.template.presentation.base.list.UIList
+import com.wednesday.template.presentation.base.result.UIResult
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
