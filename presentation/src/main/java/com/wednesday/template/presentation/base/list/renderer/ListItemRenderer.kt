@@ -11,7 +11,7 @@ import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder
 
 typealias Inflater<T> = (inflater: LayoutInflater, viewGroup: ViewGroup, attachToParent: Boolean) -> T
 
-abstract class ListItemRenderer<T : UIListItemBase, I: Intent> : ItemRenderer<T, I> {
+abstract class ListItemRenderer<T : UIListItemBase, I : Intent> : ItemRenderer<T, I> {
 
     @Composable
     open fun render(modifier: Modifier, item: T, onIntent: (I) -> Unit) {}

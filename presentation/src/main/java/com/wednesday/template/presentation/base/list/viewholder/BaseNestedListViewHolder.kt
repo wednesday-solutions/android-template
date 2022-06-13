@@ -1,8 +1,8 @@
 package com.wednesday.template.presentation.base.list.viewholder
 
-//abstract class BaseNestedListViewHolder<T : UIListItemBase>(
+// abstract class BaseNestedListViewHolder<T : UIListItemBase>(
 //    viewBinding: ViewBinding
-//) : BaseViewHolder<T>(viewBinding) {
+// ) : BaseViewHolder<T>(viewBinding) {
 //
 //    protected val renderers: MutableList<Pair<KClass<*>, ListItemRenderer<UIListItemBase>>> = mutableListOf()
 //
@@ -33,4 +33,4 @@ package com.wednesday.template.presentation.base.list.viewholder
 //            notifyDataSetChanged()
 //        }
 //    }
-//}
+// }

@@ -26,12 +26,14 @@ class UICityListRenderer : ListItemRenderer<UICity, HomeScreenIntent>() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun render(modifier: Modifier, item: UICity, onIntent: (HomeScreenIntent) -> Unit) {
-        Card(modifier = modifier
-            .clickable {
-                onIntent(HomeScreenIntent.Loading)
-            }
-            .fillMaxWidth()
-            .padding(32.dp)) {
+        Card(
+            modifier = modifier
+                .clickable {
+                    onIntent(HomeScreenIntent.Loading)
+                }
+                .fillMaxWidth()
+                .padding(32.dp)
+        ) {
             Text(text = item.title)
         }
     }
