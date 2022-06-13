@@ -25,7 +25,7 @@ internal open class BaseListComponent<T, I : Intent>(
     private val recyclerViewId: Int = R.id.recyclerView,
 ) : StatefulComponent<UIList>() where T : ViewModel, T : IntentHandler<I> {
 
-    protected val renderers = mutableListOf<Pair<KClass<*>, ListItemRenderer<UIListItemBase>>>()
+    protected val renderers = mutableListOf<Pair<KClass<*>, ListItemRenderer<UIListItemBase, I>>>()
 
     private val intentChannel = Channel<I>(Channel.CONFLATED)
 

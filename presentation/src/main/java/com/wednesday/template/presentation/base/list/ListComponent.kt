@@ -20,7 +20,7 @@ internal class ListComponent<T, I : Intent>(
     }
 
     @Suppress("UNCHECKED_CAST")
-    internal inline fun <reified T : UIListItemBase> addRenderer(renderer: ListItemRenderer<T>) {
-        renderers.add(T::class to (renderer as ListItemRenderer<UIListItemBase>))
+    internal inline fun <reified T : UIListItemBase> addRenderer(renderer: ListItemRenderer<T, I>) {
+        renderers.add(T::class to (renderer as ListItemRenderer<UIListItemBase, I>))
     }
 }

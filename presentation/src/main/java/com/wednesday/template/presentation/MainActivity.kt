@@ -7,10 +7,7 @@ import androidx.annotation.IdRes
 import androidx.annotation.NavigationRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -25,12 +22,15 @@ import com.wednesday.template.presentation.base.effect.EffectHandler
 import com.wednesday.template.presentation.base.effect.ShowAlertDialogEffect
 import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.effect.unhandledEffect
+import com.wednesday.template.presentation.base.extensions.asUIText
 import com.wednesday.template.presentation.base.extensions.showSnackbar
+import com.wednesday.template.presentation.base.list.UILazyColumn
 import com.wednesday.template.presentation.base.scaffold.AppScaffold
 import com.wednesday.template.presentation.base.theme.AppTheme
+import com.wednesday.template.presentation.weather.UICity
 import com.wednesday.template.presentation.weather.home.HomeScreen
-import com.wednesday.template.presentation.weather.home.HomeScreenIntent
 import com.wednesday.template.presentation.weather.home.HomeViewModel
+import com.wednesday.template.presentation.weather.search.list.UICityListRenderer
 import com.wednesday.template.resources.databinding.ActivityMainBinding
 import org.koin.androidx.compose.viewModel
 
@@ -63,19 +63,44 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     Box {
-                        Column {
-                            Text(text = "Welcome to Compose!")
-                            Button(onClick = {
-                                viewModel.onIntent(HomeScreenIntent.Loading)
-                            }) {
-                                Text(text = "Show Dialog")
-                            }
-                            Button(onClick = {
-                                viewModel.onIntent(HomeScreenIntent.Search)
-                            }) {
-                                Text(text = "Show Snackbar")
-                            }
-                        }
+                        UILazyColumn(
+                            renderers = mapOf(
+                                UICity::class to UICityListRenderer()
+                            ),
+                            items = listOf(
+                                UICity(
+                                    cityId = 1,
+                                    title = "Moscow",
+                                    state = "Moscow",
+                                    displayTitle = "Moscow".asUIText(),
+                                    locationType = "Moscow",
+                                    displayLocationType = "Moscow".asUIText(),
+                                    latitude = "55",
+                                    isFavourite = true
+                                ),
+                                UICity(
+                                    cityId = 2,
+                                    title = "Moscow",
+                                    state = "Moscow",
+                                    displayTitle = "Moscow".asUIText(),
+                                    locationType = "Moscow",
+                                    displayLocationType = "Moscow".asUIText(),
+                                    latitude = "55",
+                                    isFavourite = true
+                                ),
+                                UICity(
+                                    cityId = 3,
+                                    title = "Moscow",
+                                    state = "Moscow",
+                                    displayTitle = "Moscow".asUIText(),
+                                    locationType = "Moscow",
+                                    displayLocationType = "Moscow".asUIText(),
+                                    latitude = "55",
+                                    isFavourite = true
+                                ),
+                            ),
+                            onIntent = viewModel::onIntent
+                        )
                     }
                 }
             }

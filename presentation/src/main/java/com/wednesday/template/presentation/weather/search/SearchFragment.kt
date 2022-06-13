@@ -12,7 +12,6 @@ import com.wednesday.template.presentation.base.fragment.MainFragment
 import com.wednesday.template.presentation.base.list.ListComponent
 import com.wednesday.template.presentation.base.snackbar.SnackbarComponent
 import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
-import com.wednesday.template.presentation.weather.search.list.UICityListRenderer
 import com.wednesday.template.resources.databinding.FragmentSearchBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -33,7 +32,7 @@ class SearchFragment : MainFragment<FragmentSearchBinding,
 
     private val listComponent by component {
         ListComponent(listViewModel = viewModel, recyclerViewId = R.id.searchRecyclerView) {
-            addRenderer(UICityListRenderer())
+//            addRenderer(UICityListRenderer())
         }
     }
     private val snackbarComponent by component {

@@ -4,15 +4,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.renderer.ListItemRenderer
-import com.wednesday.template.presentation.base.list.viewholder.BaseNestedListViewHolder
 import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder
 import kotlinx.coroutines.channels.Channel
-import java.lang.Exception
 import kotlin.reflect.KClass
 
 class ListAdapter(
     private val intentChannel: Channel<Intent>,
-    private val renderers: List<Pair<KClass<*>, ListItemRenderer<UIListItemBase>>>
+    private val renderers: List<Pair<KClass<*>, ListItemRenderer<UIListItemBase, *>>>
 ) : RecyclerView.Adapter<BaseViewHolder<UIListItemBase>>(), BaseAdapter {
 
     private var nestedViewHolderPool: RecyclerView.RecycledViewPool? = null
@@ -40,12 +38,12 @@ class ListAdapter(
         return renderers[viewType].second.getViewHolder(parent).also {
             it.intentChannel = intentChannel
             it.onSetupIntents(intentChannel)
-            if (it is BaseNestedListViewHolder) {
-                if (nestedViewHolderPool == null) {
-                    nestedViewHolderPool = RecyclerView.RecycledViewPool()
-                }
-                nestedViewHolderPool?.let { viewPool -> it.setNestedViewHolderPool(viewPool) }
-            }
+//            if (it is BaseNestedListViewHolder) {
+//                if (nestedViewHolderPool == null) {
+//                    nestedViewHolderPool = RecyclerView.RecycledViewPool()
+//                }
+//                nestedViewHolderPool?.let { viewPool -> it.setNestedViewHolderPool(viewPool) }
+//            }
         }
     }
 
