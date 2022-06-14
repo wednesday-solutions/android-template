@@ -15,5 +15,5 @@ else
   commitMessage=$(cat $1)
   git add .
   git commit -m "$commitMessage" --no-verify
-  exit 1
+  exit 0
 fi
