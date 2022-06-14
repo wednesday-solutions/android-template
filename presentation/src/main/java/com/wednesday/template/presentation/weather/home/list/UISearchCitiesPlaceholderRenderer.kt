@@ -16,5 +16,4 @@ class UISearchCitiesPlaceholderRenderer : ListItemRenderer<UISearchCitiesPlaceho
     ) {
         TODO("Not yet implemented")
     }
-
 }
