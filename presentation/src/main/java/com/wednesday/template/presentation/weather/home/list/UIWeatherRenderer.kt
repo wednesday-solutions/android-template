@@ -9,6 +9,7 @@ import com.wednesday.template.presentation.weather.home.HomeScreenIntent
 class UIWeatherRenderer : ListItemRenderer<UIWeather, HomeScreenIntent> {
     @Composable
     override fun render(modifier: Modifier, item: UIWeather, onIntent: (HomeScreenIntent) -> Unit) {
+
         TODO("Not yet implemented")
     }
 }
