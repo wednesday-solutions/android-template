@@ -35,7 +35,7 @@ fun <T : Intent, L : UIListItemBase, R : ListItemRenderer<L, T>> UILazyColumn(
         ) { _, item ->
             val type = item::class
             val renderer = renderers[type]
-                ?: throw IllegalArgumentException(
+                ?: error(
                     "No renderer found for type $type." +
                         " Please add it to the renderers map."
                 )

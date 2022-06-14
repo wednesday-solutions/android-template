@@ -1,16 +1,14 @@
 package com.wednesday.template.presentation.weather.home.list
 
-import android.view.ViewGroup
-import com.wednesday.template.presentation.base.intent.Intent
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.wednesday.template.presentation.base.list.renderer.ListItemRenderer
-import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder
 import com.wednesday.template.presentation.weather.UIWeather
-import com.wednesday.template.resources.databinding.ItemWeatherBinding
+import com.wednesday.template.presentation.weather.home.HomeScreenIntent
 
-class UIWeatherRenderer : ListItemRenderer<UIWeather, Intent>() {
-    override fun getViewHolder(viewGroup: ViewGroup): BaseViewHolder<UIWeather> {
-        return UIWeatherViewHolder(
-            binding = viewGroup bind ItemWeatherBinding::inflate
-        )
+class UIWeatherRenderer : ListItemRenderer<UIWeather, HomeScreenIntent> {
+    @Composable
+    override fun render(modifier: Modifier, item: UIWeather, onIntent: (HomeScreenIntent) -> Unit) {
+        TODO("Not yet implemented")
     }
 }

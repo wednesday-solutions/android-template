@@ -2,14 +2,12 @@ package com.wednesday.template.presentation.weather.search
 
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
-import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.common.HideKeyboardComponent
 import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.effect.HideKeyboardEffect
 import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.fragment.BindingProvider
 import com.wednesday.template.presentation.base.fragment.MainFragment
-import com.wednesday.template.presentation.base.list.ListComponent
 import com.wednesday.template.presentation.base.snackbar.SnackbarComponent
 import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
 import com.wednesday.template.resources.databinding.FragmentSearchBinding
@@ -30,11 +28,6 @@ class SearchFragment : MainFragment<FragmentSearchBinding,
     override val bindingProvider: BindingProvider<FragmentSearchBinding> =
         FragmentSearchBinding::inflate
 
-    private val listComponent by component {
-        ListComponent(listViewModel = viewModel, recyclerViewId = R.id.searchRecyclerView) {
-//            addRenderer(UICityListRenderer())
-        }
-    }
     private val snackbarComponent by component {
         SnackbarComponent(this)
     }
@@ -59,7 +52,6 @@ class SearchFragment : MainFragment<FragmentSearchBinding,
 
     override fun onState(screenState: SearchScreenState) {
         super.onState(screenState)
-        listComponent.setData(screenState.searchList)
     }
 
     private fun addTextListener(binding: FragmentSearchBinding) = with(binding) {
