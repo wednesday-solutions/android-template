@@ -1,4 +1,4 @@
-.PHONY: ktlintFormat ktlint lint lint-all
+.PHONY: ktlintFormat ktlint lint lint-all setup-hooks
 
 # Lint
 
