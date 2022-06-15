@@ -1,16 +1,19 @@
 package com.wednesday.template.presentation.weather.home.list
 
-import android.view.ViewGroup
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.wednesday.template.presentation.base.list.renderer.ListItemRenderer
-import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder
 import com.wednesday.template.presentation.weather.UISearchCitiesPlaceholder
-import com.wednesday.template.resources.databinding.ItemSearchCityPlaceholderBinding
+import com.wednesday.template.presentation.weather.home.HomeScreenIntent
 
-class UISearchCitiesPlaceholderRenderer : ListItemRenderer<UISearchCitiesPlaceholder>() {
+class UISearchCitiesPlaceholderRenderer : ListItemRenderer<UISearchCitiesPlaceholder, HomeScreenIntent> {
 
-    override fun getViewHolder(viewGroup: ViewGroup): BaseViewHolder<UISearchCitiesPlaceholder> {
-        return UISearchCitiesPlaceholderViewHolder(
-            binding = viewGroup bind ItemSearchCityPlaceholderBinding::inflate
-        )
+    @Composable
+    override fun render(
+        modifier: Modifier,
+        item: UISearchCitiesPlaceholder,
+        onIntent: (HomeScreenIntent) -> Unit
+    ) {
+        TODO("Not yet implemented")
     }
 }

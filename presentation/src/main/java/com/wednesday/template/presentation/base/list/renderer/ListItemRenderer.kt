@@ -1,19 +1,12 @@
 package com.wednesday.template.presentation.base.list.renderer
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.viewbinding.ViewBinding
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.UIListItemBase
-import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder
 
-typealias Inflater<T> = (inflater: LayoutInflater, viewGroup: ViewGroup, attachToParent: Boolean) -> T
+interface ListItemRenderer<T : UIListItemBase, I : Intent> : ItemRenderer<T, I> {
 
-abstract class ListItemRenderer<T : UIListItemBase> : ItemRenderer<T> {
-
-    abstract fun getViewHolder(viewGroup: ViewGroup): BaseViewHolder<T>
-
-    protected infix fun <VB : ViewBinding> ViewGroup.bind(inflater: Inflater<VB>): VB {
-        val layoutInflater = LayoutInflater.from(context)
-        return inflater(layoutInflater, this, false)
-    }
+    @Composable
+    fun render(modifier: Modifier, item: T, onIntent: (I) -> Unit)
 }

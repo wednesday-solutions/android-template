@@ -12,5 +12,8 @@ if [ "$status" = 0 ] ; then
 else
   echo "Static analysis failed. Formatting with ktlint."
   ./gradlew ktlintFormat
-  exit 1
+  commitMessage=$(cat $1)
+  git add .
+  git commit -m "$commitMessage" --no-verify
+  exit 0
 fi

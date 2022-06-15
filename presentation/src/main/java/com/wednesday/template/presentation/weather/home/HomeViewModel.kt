@@ -1,11 +1,14 @@
 package com.wednesday.template.presentation.weather.home
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Album
 import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.presentation.R
-import com.wednesday.template.presentation.base.effect.HideKeyboardEffect
+import com.wednesday.template.presentation.base.effect.ShowAlertDialogEffect
 import com.wednesday.template.presentation.base.effect.ShowKeyboardEffect
 import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
+import com.wednesday.template.presentation.base.extensions.asUIText
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.list.UIList
 import com.wednesday.template.presentation.base.result.UIResult
@@ -62,19 +65,19 @@ class HomeViewModel(
                 setEffect(ShowKeyboardEffect)
             }
             HomeScreenIntent.Loading -> {
-                setEffect(HideKeyboardEffect)
+//                setEffect(HideKeyboardEffect)
 
-//                setEffect(
-//                    ShowAlertDialogEffect(
-//                        icon = Icons.Filled.Album,
-//                        title = "Alert title".asUIText(),
-//                        text = "Description text".asUIText(),
-//                        confirmButtonText = "Confirm".asUIText(),
-//                        onConfirmButtonClicked = {
-//                            it.dismissDialog()
-//                        }
-//                    )
-//                )
+                setEffect(
+                    ShowAlertDialogEffect(
+                        icon = Icons.Filled.Album,
+                        title = "Alert title".asUIText(),
+                        text = "Description text".asUIText(),
+                        confirmButtonText = "Confirm".asUIText(),
+                        onConfirmButtonClicked = {
+                            it.dismissDialog()
+                        }
+                    )
+                )
             }
         }
     }
