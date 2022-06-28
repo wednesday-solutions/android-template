@@ -11,7 +11,7 @@ object Versions {
     const val coroutines = "1.6.1"
     const val koin = "3.2.0-beta-1"
     const val fragment = "1.3.5"
-    const val lifecycle = "2.4.1"
+    const val lifecycle = "2.5.0-rc02"
     const val core = "1.7.0"
     const val jUnit = "4.12"
     const val androidxTest = "1.4.0"

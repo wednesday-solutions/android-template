@@ -8,6 +8,7 @@ import androidx.annotation.NavigationRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -22,7 +23,6 @@ import com.wednesday.template.presentation.base.effect.EffectHandler
 import com.wednesday.template.presentation.base.effect.ShowAlertDialogEffect
 import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.effect.unhandledEffect
-import com.wednesday.template.presentation.base.extensions.asUIText
 import com.wednesday.template.presentation.base.extensions.showSnackbar
 import com.wednesday.template.presentation.base.list.UILazyColumn
 import com.wednesday.template.presentation.base.scaffold.AppScaffold
@@ -50,6 +50,8 @@ class MainActivity : AppCompatActivity() {
         setContent {
             val viewModel by viewModel<HomeViewModel>()
 
+            val state = viewModel.screenState.collectAsState()
+
             AppTheme {
                 AppScaffold {
                     val snackbarHostState = LocalSnackbarHostState.current
@@ -62,43 +64,14 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
 
+                    val items = state.value.items.items
+
                     Box {
                         UILazyColumn(
                             renderers = mapOf(
                                 UICity::class to UICityListRenderer()
                             ),
-                            items = listOf(
-                                UICity(
-                                    cityId = 1,
-                                    title = "Moscow",
-                                    state = "Moscow",
-                                    displayTitle = "Moscow".asUIText(),
-                                    locationType = "Moscow",
-                                    displayLocationType = "Moscow".asUIText(),
-                                    latitude = "55",
-                                    isFavourite = true
-                                ),
-                                UICity(
-                                    cityId = 2,
-                                    title = "Moscow",
-                                    state = "Moscow",
-                                    displayTitle = "Moscow".asUIText(),
-                                    locationType = "Moscow",
-                                    displayLocationType = "Moscow".asUIText(),
-                                    latitude = "55",
-                                    isFavourite = true
-                                ),
-                                UICity(
-                                    cityId = 3,
-                                    title = "Moscow",
-                                    state = "Moscow",
-                                    displayTitle = "Moscow".asUIText(),
-                                    locationType = "Moscow",
-                                    displayLocationType = "Moscow".asUIText(),
-                                    latitude = "55",
-                                    isFavourite = true
-                                ),
-                            ),
+                            items = items,
                             onIntent = viewModel::onIntent
                         )
                     }
@@ -154,7 +127,3 @@ class MainActivity : AppCompatActivity() {
         val controller: NavController
     )
 }
-
-data class DialogData(
-    val title: String
-)
