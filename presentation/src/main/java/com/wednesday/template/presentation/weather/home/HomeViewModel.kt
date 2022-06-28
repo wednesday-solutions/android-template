@@ -15,7 +15,6 @@ import com.wednesday.template.presentation.base.result.UIResult
 import com.wednesday.template.presentation.base.text.UIText
 import com.wednesday.template.presentation.base.toolbar.UIToolbar
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
-import com.wednesday.template.presentation.weather.UICity
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -25,36 +24,14 @@ class HomeViewModel(
     IntentHandler<HomeScreenIntent> {
 
     companion object {
-        private val initialState = HomeScreenState(
+        val initialState = HomeScreenState(
             toolbar = UIToolbar(
                 title = UIText { block("Weather") },
                 hasBackButton = false,
                 menuIcon = R.drawable.ic_search,
             ),
             showLoading = false,
-
-            items = UIList(
-                UICity(
-                    cityId = 10,
-                    title = "Title",
-                    state = "State",
-                    displayTitle = UIText { block("Title") },
-                    locationType = "Location",
-                    displayLocationType = "Location".asUIText(),
-                    latitude = "lat",
-                    isFavourite = false
-                ),
-                UICity(
-                    cityId = 11,
-                    title = "Title",
-                    state = "State",
-                    displayTitle = UIText { block("Title") },
-                    locationType = "Location",
-                    displayLocationType = "Location".asUIText(),
-                    latitude = "lat",
-                    isFavourite = false
-                )
-            )
+            items = UIList()
         )
     }
 
