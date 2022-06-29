@@ -14,15 +14,17 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlin.reflect.KClass
 
+@Suppress("UNCHECKED_CAST")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun <T : Intent, L : UIListItemBase, R : ListItemRenderer<L, T>> UILazyColumn(
     modifier: Modifier = Modifier.fillMaxSize(),
     renderers: Map<KClass<*>, R>,
-    items: List<L>,
+    items: List<UIListItemBase>,
     onIntent: (T) -> Unit
 ) {
     val intentChannel = remember { Channel<T>(capacity = Channel.CONFLATED) }
+    val internalRenderers = renderers as Map<KClass<*>, ListItemRenderer<UIListItemBase, T>>
 
     LaunchedEffect(key1 = intentChannel) {
         intentChannel.receiveAsFlow().collect(onIntent)
@@ -34,7 +36,7 @@ fun <T : Intent, L : UIListItemBase, R : ListItemRenderer<L, T>> UILazyColumn(
             key = { _, item -> item.id }
         ) { _, item ->
             val type = item::class
-            val renderer = renderers[type]
+            val renderer = internalRenderers[type]
                 ?: error(
                     "No renderer found for type $type." +
                         " Please add it to the renderers map."

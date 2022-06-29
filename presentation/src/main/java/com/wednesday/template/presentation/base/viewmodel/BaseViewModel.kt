@@ -9,22 +9,24 @@ import androidx.lifecycle.asFlow
 import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.state.StateOwner
-import com.wednesday.template.presentation.base.state.statefulLiveData
 import com.wednesday.template.presentation.screen.Screen
 import com.wednesday.template.presentation.screen.ScreenState
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState> :
+abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState>(private val initialState: STATE) :
     ViewModel(), KoinComponent, StateOwner {
 
-    abstract fun getDefaultScreenState(): STATE
+    final override val savedStateHandle by inject<SavedStateHandle>()
 
-    override val savedStateHandle by inject<SavedStateHandle>()
+    private var _screenState = savedStateHandle.getStateFlow(SCREEN_STATE, initialState)
+    val screenState: StateFlow<STATE> = _screenState
 
-    private val _screenState by statefulLiveData<STATE?> { null }
-    val screenState: LiveData<STATE?> = _screenState
+    private fun StateFlow<STATE?>.set(value: STATE?) {
+        savedStateHandle[SCREEN_STATE] = value
+    }
 
     private val _effectState = MutableLiveData<Effect?>(null)
     val effectState: Flow<Effect?> = _effectState.asFlow()
@@ -47,7 +49,7 @@ abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState> :
         val isFromRecreate = recreateFlag == null
         recreateFlag = Unit
         if (isFromRecreate) {
-            _screenState.value = getDefaultScreenState()
+            _screenState.set(initialState)
         }
         if (isFreshCreate) {
             onCreate(fromRecreate = false)
@@ -57,8 +59,8 @@ abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState> :
     }
 
     protected fun setState(reducer: STATE.() -> STATE) {
-        _screenState.value?.let {
-            _screenState.value = it.reducer()
+        _screenState.value.let {
+            _screenState.set(it.reducer())
         }
     }
 
@@ -80,4 +82,8 @@ abstract class BaseViewModel<SCREEN : Screen, STATE : ScreenState> :
     }
 
     open fun clearState() = Unit
+
+    companion object {
+        private const val SCREEN_STATE = "screen_state"
+    }
 }

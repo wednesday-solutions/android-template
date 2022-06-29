@@ -14,10 +14,10 @@ import kotlinx.coroutines.flow.Flow
 interface OpenWeatherLocalServiceImpl : OpenWeatherLocalService {
 
     @Query("Select * from favorite_locations")
-    override fun getFavoriteCitiesFlow(): Flow<List<LocalLocation>>
+    override fun getFavoriteCitiesFlow(): Flow<List<LocalLocation>> // observing the table for changes
 
     @Query("Select * from favorite_locations")
-    override suspend fun getFavoriteCities(): List<LocalLocation>
+    override suspend fun getFavoriteCities(): List<LocalLocation> // one time fetch
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     override suspend fun markCityAsFavorite(city: LocalLocation)

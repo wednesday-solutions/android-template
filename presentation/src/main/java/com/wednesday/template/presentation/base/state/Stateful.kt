@@ -14,6 +14,6 @@ class Stateful<T>(
     }
 
     override fun setValue(thisRef: Any, property: KProperty<*>, value: T?) {
-        savedStateHandle.set(property.name, value)
+        savedStateHandle[property.name] = value
     }
 }

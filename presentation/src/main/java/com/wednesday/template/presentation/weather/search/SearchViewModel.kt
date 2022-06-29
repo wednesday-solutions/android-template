@@ -17,16 +17,17 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+
 class SearchViewModel(
     private val searchCityInteractor: SearchCityInteractor,
     private val favouriteWeatherInteractor: FavouriteWeatherInteractor,
-) : BaseViewModel<SearchScreen, SearchScreenState>(),
+) : BaseViewModel<SearchScreen, SearchScreenState>(initialState),
     IntentHandler<SearchScreenIntent> {
 
     private val searchCityResponseMutableStateFlow: MutableStateFlow<String> = MutableStateFlow("")
 
-    override fun getDefaultScreenState(): SearchScreenState {
-        return SearchScreenState(
+    companion object {
+        private val initialState = SearchScreenState(
             toolbar = UIToolbar(
                 title = UIText { block("Search") },
                 hasBackButton = true,

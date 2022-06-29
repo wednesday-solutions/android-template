@@ -20,11 +20,11 @@ import kotlinx.coroutines.flow.onEach
 
 class HomeViewModel(
     private val favouriteWeatherInteractor: FavouriteWeatherInteractor,
-) : BaseViewModel<HomeScreen, HomeScreenState>(),
+) : BaseViewModel<HomeScreen, HomeScreenState>(initialState = initialState),
     IntentHandler<HomeScreenIntent> {
 
-    override fun getDefaultScreenState(): HomeScreenState {
-        return HomeScreenState(
+    companion object {
+        val initialState = HomeScreenState(
             toolbar = UIToolbar(
                 title = UIText { block("Weather") },
                 hasBackButton = false,

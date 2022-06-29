@@ -71,10 +71,10 @@ abstract class BaseFragment<
         super.onViewCreated(view, savedInstanceState)
         components.forEach { it.value.bind(view) }
         binding?.let { onViewCreated(it) }
-        viewModel.screenState.observe(viewLifecycleOwner) {
-            it ?: return@observe
-            onState(it)
-        }
+//        viewModel.screenState.observe(viewLifecycleOwner) {
+//            it ?: return@observe
+//            onState(it)
+//        }
 //        viewModel.effectState.observe(viewLifecycleOwner) {
 //            it ?: return@observe
 //            onEffect(it)

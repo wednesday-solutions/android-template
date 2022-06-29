@@ -1,5 +1,6 @@
 package com.wednesday.template.presentation.weather.home
 
+import app.cash.turbine.test
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.navigation.home.HomeNavigator
 import com.wednesday.template.presentation.base.BaseViewModelTest
@@ -14,7 +15,6 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
-import org.mockito.kotlin.inOrder
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
@@ -44,7 +44,7 @@ class HomeViewModelTest : BaseViewModelTest() {
         // Given
 
         // When
-        val screenState = viewModel.getDefaultScreenState()
+        val screenState = HomeViewModel.initialState
 
         // Then
         val expected = getInitialState()
@@ -132,18 +132,13 @@ class HomeViewModelTest : BaseViewModelTest() {
                 .thenReturn(flowOf(uiList))
 
             // When
-            val observer = mockObserver<HomeScreenState>()
-            viewModel.screenState.observeForever(observer)
             viewModel.onCreate(null)
 
-            // Then
             val initialState = getInitialState()
-            advanceUntilIdle()
-            observer.inOrder {
-                verify().onChanged(null)
-                verify().onChanged(initialState)
-                verify().onChanged(initialState.copy(items = uiList.data))
-                verifyNoMoreInteractions()
+            viewModel.screenState.test {
+                assertEquals(initialState, awaitItem())
+                assertEquals(initialState.copy(items = uiList.data), awaitItem())
+                cancelAndIgnoreRemainingEvents()
             }
             verify(interactor, times(1)).getFavouriteWeatherUIList()
         }
