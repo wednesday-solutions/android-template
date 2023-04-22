@@ -11,8 +11,11 @@ buildscript {
         classpath(Dependencies.Kotlin.gradlePlugin)
         classpath(Dependencies.Kotlin.serializationPlugin)
         classpath(Dependencies.Android.navigationSafeArgsPlugin)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
     }
+}
+
+plugins {
+    id(Plugins.KSP) version Versions.kspPlugin apply true
 }
 
 allprojects {
@@ -25,10 +28,5 @@ allprojects {
         kotlinOptions {
             jvmTarget = "11"
         }
-    }
-
-    // TODO: Remove once ExperimentalCoroutinesApi: runTest is stable
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-        kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
     }
 }

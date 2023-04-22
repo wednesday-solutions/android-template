@@ -1,22 +1,11 @@
 plugins {
     id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    id(Plugins.ANDROID)
+    id(Plugins.KSP)
 }
 
-apply {
-    from("${rootProject.projectDir}/android.gradle")
-    from("${rootProject.projectDir}/lint.gradle")
-}
-
-android {
-    defaultConfig {
-        kapt {
-            arguments {
-                arg("room.schemaLocation", "$projectDir/schemas")
-            }
-        }
-    }
+ksp {
+    arg(RoomSchemaArgProvider(File(projectDir, "schemas")))
 }
 
 dependencies {

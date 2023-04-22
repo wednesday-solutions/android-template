@@ -1,42 +1,40 @@
+import plugins.PluginConstants
+
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
     kotlin("android")
-}
-
-apply {
-    from("${rootProject.projectDir}/lint.gradle")
+    id(Plugins.KSP)
+    id(Plugins.ANDROID)
+    id(Plugins.COMPOSE)
 }
 
 android {
 
-    compileSdk = 31
-    buildToolsVersion = "30.0.3"
+//    compileSdk = Versions.SDK.compile
+//    buildToolsVersion = Versions.SDK.buildTools
+//
+//    defaultConfig {
+//        minSdk = Versions.SDK.min
+//        targetSdk = Versions.SDK.target
+//        applicationId = "com.wednesday.template"
+//        versionCode = Versions.SDK.versionCode
+//        versionName = Versions.SDK.versionName
+//        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+//    }
 
-    defaultConfig {
-        minSdk = 24
-        targetSdk = 31
-        applicationId = "com.wednesday.template"
-        versionCode = 10
-        versionName = "1.0"
-        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
-    }
-
-    flavorDimensions += "version"
     productFlavors {
-        create("qa") {
-            dimension = "version"
+        getByName(PluginConstants.QA) {
+            dimension = PluginConstants.FLAVOR
             applicationIdSuffix = ".qa"
             versionNameSuffix = "-qa"
         }
-        create("prod") {
-            dimension = "version"
+        getByName(PluginConstants.PRODUCTION) {
+            dimension = PluginConstants.FLAVOR
             applicationIdSuffix = ".prod"
             versionNameSuffix = "-prod"
         }
-        create("dev") {
-            dimension = "version"
+        getByName(PluginConstants.DEV) {
+            dimension = PluginConstants.FLAVOR
             applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
         }

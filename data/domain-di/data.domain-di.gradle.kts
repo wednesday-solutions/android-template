@@ -1,12 +1,8 @@
 plugins {
     id("com.android.library")
-    id("kotlin-android")
+    id(Plugins.ANDROID)
 }
 
-apply {
-    from("${rootProject.projectDir}/android.gradle")
-    from("${rootProject.projectDir}/lint.gradle")
-}
 
 dependencies {
     implementation(project(":data:domain"))
