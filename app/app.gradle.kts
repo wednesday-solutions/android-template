@@ -70,14 +70,13 @@ android {
 }
 
 dependencies {
-    implementation(project(":presentation"))
+//    implementation(project(":presentation"))
 //    implementation(project(":navigation"))
-    implementation(project(":presentation-di"))
+//    implementation(project(":presentation-di"))
     implementation(project(":navigation-di"))
-    implementation(project(":interactor-di"))
-    implementation(project(":domain-di"))
-    implementation(project(":repo-di"))
-    implementation(project(":service-di"))
+    implementation(project(":data:domain-di"))
+    implementation(project(":data:repo-di"))
+    implementation(project(":data:service-di"))
 
     implementation(Dependencies.Kotlin.stdLib)
 

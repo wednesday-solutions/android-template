@@ -11,6 +11,7 @@ buildscript {
         classpath(Dependencies.Kotlin.gradlePlugin)
         classpath(Dependencies.Kotlin.serializationPlugin)
         classpath(Dependencies.Android.navigationSafeArgsPlugin)
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
     }
 }
 

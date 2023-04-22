@@ -9,7 +9,7 @@ apply {
 }
 
 dependencies {
-    implementation(project(":presentation-entity"))
+    implementation(project(":ui:presentation-entity"))
     implementation(project(":resources"))
 
     implementation(Dependencies.Kotlin.stdLib)
