@@ -16,6 +16,7 @@ object Dependencies {
             "io.github.raamcosta.compose-destinations:animations-core:${Versions.composeDestinations}"
         const val composeDestinationsKsp =
             "io.github.raamcosta.compose-destinations:ksp:${Versions.composeDestinations}"
+        const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.lifecycleRuntimeCompose}"
     }
 
     object Room {

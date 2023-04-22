@@ -21,7 +21,6 @@ include(":ui:interactor-di")
 include(":ui:interactor-impl")
 include(":ui:presentation-entity")
 include(":ui:core")
-include(":ui:core-ui")
 include(":ui:design-system")
 include(":ui:feature:search")
 

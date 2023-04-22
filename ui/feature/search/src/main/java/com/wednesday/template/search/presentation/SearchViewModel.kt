@@ -8,10 +8,8 @@ import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIResult
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
-import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.weather.search.SearchScreenIntent
-import com.wednesday.template.search.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
@@ -21,7 +19,7 @@ import kotlinx.coroutines.launch
 class SearchViewModel(
     private val searchCityInteractor: SearchCityInteractor,
     private val favouriteWeatherInteractor: FavouriteWeatherInteractor,
-) : BaseViewModel<SearchScreenState>(),
+) : BaseViewModel<SearchScreenState, SearchScreenEffect>(),
     IntentHandler<SearchScreenIntent> {
 
     private val searchCityResponseMutableStateFlow: MutableStateFlow<String> = MutableStateFlow("")
@@ -51,13 +49,13 @@ class SearchViewModel(
                     setState {
                         copy(showLoading = false)
                     }
-                    setEffect(
-                        ShowSnackbarEffect(
-                            message = UIText {
-                                block(R.string.something_went_wrong)
-                            }
-                        )
-                    )
+//                    setEffect(
+//                        ShowSnackbarEffect(
+//                            message = UIText {
+//                                block(R.string.something_went_wrong)
+//                            }
+//                        )
+//                    )
                 }
             }
         }.launchIn(viewModelScope)

@@ -17,7 +17,6 @@ object Modules {
     const val interactorDI = ":ui:interactor-di"
     const val interactorImpl = ":ui:interactor-impl"
     const val presentationEntity = ":ui:presentation-entity"
-    const val coreUi = ":ui:core-ui"
     const val designSystem = ":ui:design-system"
     const val search = ":ui:feature:search"
 

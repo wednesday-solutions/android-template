@@ -28,8 +28,6 @@ class MainActivity : AppCompatActivity() {
                     rootDefaultAnimations = getNavGraphAnimations()
                 )
 
-                HomeScreenDestination
-
                 DestinationsNavHost(navGraph = mainNavGraph, engine = engine)
             }
         }

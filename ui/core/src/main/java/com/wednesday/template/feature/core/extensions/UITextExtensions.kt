@@ -10,7 +10,7 @@ import org.koin.core.component.KoinComponent
 
 internal object KoinComponentWrapper : KoinComponent
 
-internal fun UIText.asString(): String {
+fun UIText.asString(): String {
     val lazyContext = lazy {
         KoinComponentWrapper.getKoin().get<Context>()
     }

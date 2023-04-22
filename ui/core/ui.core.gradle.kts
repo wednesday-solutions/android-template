@@ -13,6 +13,8 @@ dependencies {
     implementation(project(Modules.presentationEntity))
     implementation(project(Modules.domainEntity))
     implementation(project(Modules.Core.data))
+    implementation(project(Modules.resources))
+    implementation(project(Modules.designSystem))
 
     implementation(Dependencies.Koin.core)
 

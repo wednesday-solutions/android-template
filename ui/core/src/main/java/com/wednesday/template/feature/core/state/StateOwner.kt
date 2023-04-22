@@ -1,4 +1,4 @@
-package com.wednesday.template.presentation.base.state
+package com.wednesday.template.feature.core.state
 
 import androidx.lifecycle.SavedStateHandle
 

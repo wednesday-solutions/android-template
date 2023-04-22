@@ -21,5 +21,5 @@ internal fun View.setVisible(visible: Boolean) {
 }
 
 internal fun TextView.setUIText(uiText: UIText) {
-    text = uiText.asString()
+    text = uiText.toString()
 }

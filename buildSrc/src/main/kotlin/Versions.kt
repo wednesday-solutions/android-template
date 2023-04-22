@@ -6,6 +6,7 @@ object Versions {
     const val composeBOM = "2023.04.01"
     const val activityCompose = "1.7.0"
     const val lifecycleViewModelCompose = "2.6.1"
+    const val lifecycleRuntimeCompose = "2.6.1"
     const val composeDestinations = "1.9.41-beta"
     const val kotlin = "1.8.20"
     const val kotlinxSerialization = "1.5.0"

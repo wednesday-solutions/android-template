@@ -53,6 +53,7 @@ open class ComposePlugin : Plugin<Project> {
                 implementation(uiTest)
                 implementation(uiToolingPreview)
                 implementation(composeDestinations)
+                implementation(lifecycleRuntime)
                 ksp(composeDestinationsKsp)
             }
 

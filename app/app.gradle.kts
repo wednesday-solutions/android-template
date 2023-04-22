@@ -86,7 +86,6 @@ dependencies {
     implementation(project(Modules.interactorDI))
     implementation(project(Modules.interactorImpl))
     implementation(project(Modules.presentationEntity))
-    implementation(project(Modules.coreUi))
     implementation(project(Modules.designSystem))
     implementation(project(Modules.search))
 

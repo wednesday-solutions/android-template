@@ -1,4 +1,4 @@
-package com.wednesday.template.presentation.base.state
+package com.wednesday.template.feature.core.state
 
 import androidx.lifecycle.SavedStateHandle
 import kotlin.properties.ReadWriteProperty
@@ -14,6 +14,6 @@ class Stateful<T>(
     }
 
     override fun setValue(thisRef: Any, property: KProperty<*>, value: T?) {
-        savedStateHandle.set(property.name, value)
+        savedStateHandle[property.name] = value
     }
 }
