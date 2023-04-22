@@ -3,21 +3,19 @@ package com.wednesday.template
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
+import com.ramcosta.composedestinations.DestinationsNavHost
+import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.wednesday.template.design_system.theme.AppTheme
+import com.wednesday.template.home.presentation.destinations.HomeScreenDestination
+import com.wednesday.template.navigation.animations.getNavGraphAnimations
+import com.wednesday.template.navigation.graph.mainNavGraph
 
 class MainActivity : AppCompatActivity() {
 
+    @OptIn(ExperimentalMaterialNavigationApi::class, ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         // Handle the splash screen transition.
         installSplashScreen()
@@ -26,21 +24,13 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             AppTheme {
-                Scaffold(
-                    topBar = {
-                        TopAppBar(title = {
-                            Text("Title")
-                        })
-                    }
-                ) { paddingValues ->
-                    Column(Modifier.padding(paddingValues)) {
-                        Card(Modifier.size(200.dp)) {
-                            Button(onClick = {}) {
-                                Text("Button")
-                            }
-                        }
-                    }
-                }
+                val engine = rememberAnimatedNavHostEngine(
+                    rootDefaultAnimations = getNavGraphAnimations()
+                )
+
+                HomeScreenDestination
+
+                DestinationsNavHost(navGraph = mainNavGraph, engine = engine)
             }
         }
     }

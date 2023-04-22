@@ -9,6 +9,11 @@ android {
     namespace = "com.wednesday.template.search"
 }
 
+ksp {
+    arg("compose-destinations.mode", "destinations")
+    arg("compose-destinations.moduleName", "search")
+}
+
 dependencies {
     implementation(project(Modules.presentationEntity))
     implementation(project(Modules.Core.ui))

@@ -9,14 +9,17 @@ android {
     namespace = "com.wednesday.template.home"
 }
 
+ksp {
+    arg("compose-destinations.mode", "destinations")
+    arg("compose-destinations.moduleName", "home")
+}
+
 dependencies {
 
     implementation(project(Modules.presentationEntity))
     implementation(project(Modules.Core.ui))
     implementation(project(Modules.interactor))
-//    implementation(project(Modules.domain))
     implementation(project(Modules.Core.data))
-//    implementation(project(Modules.domainEntity))
     implementation(project(Modules.resources))
 
     implementation(Dependencies.Logging.timber)
@@ -28,11 +31,4 @@ dependencies {
         implementation(coreKtx)
         implementation(lifecycleViewModelKtx)
     }
-
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    
 }

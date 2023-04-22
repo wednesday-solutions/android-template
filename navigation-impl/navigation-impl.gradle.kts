@@ -1,11 +1,14 @@
 plugins {
     id("com.android.library")
     id(Plugins.ANDROID)
+    id(Plugins.COMPOSE)
 }
 
 dependencies {
     implementation(project(Modules.presentationEntity))
     implementation(project(Modules.navigation))
+    implementation(project(Modules.home))
+    implementation(project(Modules.search))
 
     implementation(Dependencies.Kotlin.stdLib)
 
