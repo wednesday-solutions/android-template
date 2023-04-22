@@ -4,9 +4,9 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":ui:interactor"))
-    implementation(project(":ui:interactor-impl"))
-    implementation(project(":data:domain"))
+    implementation(project(Modules.interactor))
+    implementation(project(Modules.interactorImpl))
+    implementation(project(Modules.domain))
 
     implementation(Dependencies.Koin.core)
 }

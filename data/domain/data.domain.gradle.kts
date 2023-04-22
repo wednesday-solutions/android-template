@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":data:domain-entity"))
+    implementation(project(Modules.domainEntity))
 
     implementation(Dependencies.Kotlin.stdLib)
     implementation(Dependencies.Coroutines.core)

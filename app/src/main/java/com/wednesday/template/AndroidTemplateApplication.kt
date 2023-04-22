@@ -2,6 +2,7 @@ package com.wednesday.template
 
 import android.app.Application
 import com.wednesday.template.domain.domainModule
+import com.wednesday.template.interactor.interactorModule
 import com.wednesday.template.navigation.navigationModule
 import com.wednesday.template.repo.repoModule
 import com.wednesday.template.service.serviceModule

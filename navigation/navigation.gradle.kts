@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":ui:presentation-entity"))
-    implementation(project(":resources"))
+    implementation(project(Modules.presentationEntity))
+    implementation(project(Modules.resources))
 
     implementation(Dependencies.Kotlin.stdLib)
 

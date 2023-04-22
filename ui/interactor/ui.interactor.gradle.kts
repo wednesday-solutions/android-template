@@ -4,10 +4,10 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":data:domain-entity"))
-    implementation(project(":data:domain"))
-    implementation(project(":data:core"))
-    implementation(project(":ui:presentation-entity"))
+    implementation(project(Modules.domainEntity))
+    implementation(project(Modules.domain))
+    implementation(project(Modules.Core.data))
+    implementation(project(Modules.presentationEntity))
 
     implementation(Dependencies.Kotlin.stdLib)
     implementation(Dependencies.Coroutines.core)

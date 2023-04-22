@@ -10,13 +10,13 @@ android {
 }
 
 dependencies {
-    implementation(project(":ui:presentation-entity"))
-    implementation(project(":ui:core"))
-    implementation(project(":ui:interactor"))
-    implementation(project(":data:domain"))
-    implementation(project(":data:core"))
-    implementation(project(":data:domain-entity"))
-    implementation(project(":resources"))
+    implementation(project(Modules.presentationEntity))
+    implementation(project(Modules.Core.ui))
+    implementation(project(Modules.interactor))
+//    implementation(project(Modules.domain))
+    implementation(project(Modules.Core.data))
+//    implementation(project(Modules.domainEntity))
+    implementation(project(Modules.resources))
 
     implementation(Dependencies.Logging.timber)
     implementation(Dependencies.Koin.core)

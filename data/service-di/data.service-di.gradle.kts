@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":data:service"))
-    implementation(project(":data:service-impl"))
+    implementation(project(Modules.service))
+    implementation(project(Modules.serviceImpl))
 
     implementation(Dependencies.Koin.core)
     implementation(Dependencies.Koin.android)

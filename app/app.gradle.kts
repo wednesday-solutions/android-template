@@ -68,13 +68,36 @@ android {
 }
 
 dependencies {
-//    implementation(project(":presentation"))
-//    implementation(project(":navigation"))
-//    implementation(project(":presentation-di"))
-    implementation(project(":navigation-di"))
-    implementation(project(":data:domain-di"))
-    implementation(project(":data:repo-di"))
-    implementation(project(":data:service-di"))
+    implementation(project(Modules.service))
+    implementation(project(Modules.serviceImpl))
+    implementation(project(Modules.serviceDI))
+    implementation(project(Modules.serviceEntity))
+    implementation(project(Modules.repo))
+    implementation(project(Modules.repoImpl))
+    implementation(project(Modules.repoDI))
+    implementation(project(Modules.domain))
+    implementation(project(Modules.domainImpl))
+    implementation(project(Modules.domainDI))
+    implementation(project(Modules.domainEntity))
+
+
+    implementation(project(Modules.home))
+    implementation(project(Modules.interactor))
+    implementation(project(Modules.interactorDI))
+    implementation(project(Modules.interactorImpl))
+    implementation(project(Modules.presentationEntity))
+    implementation(project(Modules.coreUi))
+    implementation(project(Modules.designSystem))
+    implementation(project(Modules.search))
+
+    implementation(project(Modules.navigation))
+    implementation(project(Modules.navigationDi))
+    implementation(project(Modules.navigationImpl))
+
+    implementation(project(Modules.resources))
+
+    implementation(project(Modules.Core.ui))
+    implementation(project(Modules.Core.data))
 
     implementation(Dependencies.Kotlin.stdLib)
 

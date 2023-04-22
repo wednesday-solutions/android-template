@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":navigation"))
-    implementation(project(":navigation-impl"))
+    implementation(project(Modules.navigation))
+    implementation(project(Modules.navigationImpl))
 
     implementation(Dependencies.Kotlin.stdLib)
 

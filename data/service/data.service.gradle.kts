@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":data:service-entity"))
+    implementation(project(Modules.serviceEntity))
 
     implementation(Dependencies.Kotlin.stdLib)
 

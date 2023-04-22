@@ -5,9 +5,9 @@ plugins {
 
 
 dependencies {
-    implementation(project(":data:domain"))
-    implementation(project(":data:repo"))
-    implementation(project(":data:domain-impl"))
+    implementation(project(Modules.domain))
+    implementation(project(Modules.repo))
+    implementation(project(Modules.domainImpl))
 
     implementation(Dependencies.Koin.core)
 }

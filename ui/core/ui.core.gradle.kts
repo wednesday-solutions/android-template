@@ -10,9 +10,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":ui:presentation-entity"))
-    implementation(project(":data:domain-entity"))
-    implementation(project(":data:core"))
+    implementation(project(Modules.presentationEntity))
+    implementation(project(Modules.domainEntity))
+    implementation(project(Modules.Core.data))
 
     implementation(Dependencies.Koin.core)
 

@@ -4,9 +4,9 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":data:repo"))
-    implementation(project(":data:repo-impl"))
-    implementation(project(":data:service"))
+    implementation(project(Modules.repo))
+    implementation(project(Modules.repoImpl))
+    implementation(project(Modules.service))
 
     implementation(Dependencies.Koin.core)
 }

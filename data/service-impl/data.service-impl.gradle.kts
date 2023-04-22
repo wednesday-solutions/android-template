@@ -10,8 +10,8 @@ ksp {
 
 dependencies {
 
-    implementation(project(":data:service-entity"))
-    implementation(project(":data:service"))
+    implementation(project(Modules.serviceEntity))
+    implementation(project(Modules.service))
 
     implementation(Dependencies.Kotlin.stdLib)
     implementation(Dependencies.Kotlin.serialization)
