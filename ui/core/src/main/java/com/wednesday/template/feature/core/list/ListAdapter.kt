@@ -6,7 +6,6 @@ import com.wednesday.template.presentation.base.UIListItemBase
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.list.renderer.ListItemRenderer
 import com.wednesday.template.presentation.base.list.viewholder.BaseNestedListViewHolder
-import com.wednesday.template.presentation.base.list.viewholder.BaseViewHolder
 import kotlinx.coroutines.channels.Channel
 import java.lang.Exception
 import kotlin.reflect.KClass

@@ -1,7 +1,7 @@
-package com.wednesday.template.presentation.base.list
+package com.wednesday.template.feature.core.list
 
 import androidx.lifecycle.ViewModel
-import com.wednesday.template.presentation.R
+import com.wednesday.template.feature.core.R
 import com.wednesday.template.presentation.base.UIListItemBase
 import com.wednesday.template.presentation.base.intent.Intent
 import com.wednesday.template.presentation.base.intent.IntentHandler
@@ -9,7 +9,7 @@ import com.wednesday.template.presentation.base.list.renderer.ListItemRenderer
 
 internal class ListComponent<T, I : Intent>(
     listViewModel: T,
-    recyclerViewId: Int = R.id.recyclerView,
+    recyclerViewId: Int = 1,
     callback: ListComponent<T, I>.() -> Unit,
 ) : BaseListComponent<T, I>(
     listViewModel,

@@ -21,6 +21,7 @@ import com.wednesday.template.service.room.migration.autoMigrationSpec.Version1t
         ),
         AutoMigration(from = 2, to = 3)
     ],
+    exportSchema = true
 )
 @TypeConverters(DateConverter::class)
 abstract class AndroidTemplateDatabase : RoomDatabase() {

@@ -3,7 +3,7 @@ package com.wednesday.template.presentation.base.loading
 import android.view.View
 import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.component.StatefulComponent
-import com.wednesday.template.presentation.base.extensions.setVisible
+import com.wednesday.template.feature.core.extensions.setVisible
 
 class LoadingComponent : StatefulComponent<Boolean>() {
 

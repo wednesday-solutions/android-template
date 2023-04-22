@@ -6,7 +6,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.component.Component
 import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
-import com.wednesday.template.presentation.base.extensions.asString
+import com.wednesday.template.feature.core.extensions.asString
 
 class SnackbarComponent(
     private val fragment: Fragment

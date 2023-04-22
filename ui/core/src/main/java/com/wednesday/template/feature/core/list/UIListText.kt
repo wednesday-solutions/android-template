@@ -1,4 +1,4 @@
-package com.wednesday.template.presentation.base.list
+package com.wednesday.template.feature.core.list
 
 import com.wednesday.template.presentation.base.UIListItemBase
 import kotlinx.parcelize.Parcelize

@@ -1,4 +1,4 @@
-package com.wednesday.template.presentation.weather.search
+package com.wednesday.template.search.presentation
 
 import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIToolbar

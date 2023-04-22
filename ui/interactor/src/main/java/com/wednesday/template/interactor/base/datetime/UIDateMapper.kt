@@ -1,8 +1,8 @@
 package com.wednesday.template.interactor.base.datetime
 
+import com.wednesday.template.data.core.Mapper
 import com.wednesday.template.domain.base.datetime.ConvertDateToLongUseCase
 import com.wednesday.template.domain.date.Date
-import com.wednesday.template.data.core.Mapper
 import com.wednesday.template.presentation.datetime.UIDate
 import timber.log.Timber
 

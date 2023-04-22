@@ -1,7 +1,5 @@
 package com.wednesday.template.interactor
 
-import com.wednesday.template.interactor.base.CoroutineContextController
-import com.wednesday.template.interactor.base.CoroutineContextControllerImpl
 import com.wednesday.template.interactor.base.datetime.UIDateMapper
 import com.wednesday.template.interactor.base.datetime.UIDateMapperImpl
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
@@ -20,9 +18,6 @@ val interactorModule = module {
 
     // Date Time
     single<UIDateMapper> { UIDateMapperImpl(get()) }
-
-    // Coroutine
-    single<CoroutineContextController> { CoroutineContextControllerImpl() }
 
     // Weather
     single<UICityMapper> { UICityMapperImpl() }

@@ -3,6 +3,7 @@ package plugins
 import com.android.build.gradle.BaseExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.dependencies
 import java.io.File
 import java.io.FileInputStream
 import java.util.Properties
@@ -33,29 +34,33 @@ open class AndroidPlugin : Plugin<Project> {
                 testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             }
 
-            val props = Properties()
-            props.load(FileInputStream(File("local.properties")))
+//            val props = Properties()
+//            props.load(FileInputStream(File("local.properties")))
 
             productFlavors {
                 getByName(PluginConstants.PRODUCTION) {
-                    buildConfigField(
-                        "int", "OPEN_WEATHER_API_KEY",
-                        props["OPEN_WEATHER_API_KEY"] as String
-                    )
+//                    buildConfigField(
+//                        "String", "OPEN_WEATHER_API_KEY",
+//                        props["OPEN_WEATHER_API_KEY"] as String
+//                    )
                 }
                 getByName(PluginConstants.QA) {
-                    buildConfigField(
-                        "int", "OPEN_WEATHER_API_KEY",
-                        props["OPEN_WEATHER_API_KEY"] as String
-                    )
+//                    buildConfigField(
+//                        "String", "OPEN_WEATHER_API_KEY",
+//                        props["OPEN_WEATHER_API_KEY"] as String
+//                    )
                 }
                 getByName(PluginConstants.DEV) {
-                    buildConfigField(
-                        "int", "OPEN_WEATHER_API_KEY",
-                        props["OPEN_WEATHER_API_KEY"] as String
-                    )
+//                    buildConfigField(
+//                        "String", "OPEN_WEATHER_API_KEY",
+//                        props["OPEN_WEATHER_API_KEY"] as String
+//                    )
                 }
             }
+        }
+
+        project.dependencies {
+            implementation(Dependencies.Logging.timber)
         }
     }
 

@@ -42,15 +42,17 @@ object Dependencies {
 
     object Koin {
         const val core = "io.insert-koin:koin-core:${Versions.koin}"
+        const val coreCoroutines = "io.insert-koin:koin-core-coroutines:${Versions.koin}"
         const val android = "io.insert-koin:koin-android:${Versions.koin}"
         const val workManager = "io.insert-koin:koin-androidx-workmanager:${Versions.koin}"
         const val test = "io.insert-koin:koin-test:${Versions.koin}"
         const val navigation = "io.insert-koin:koin-androidx-navigation:${Versions.koin}"
         const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
+        const val composeNavigation = "io.insert-koin:koin-androidx-compose-navigation:${Versions.koin}"
     }
 
     object Material {
-        const val material = "com.google.android.material:material:${Versions.material}"
+        const val material = "androidx.compose.material3:material3:${Versions.material}"
     }
 
     object Google {

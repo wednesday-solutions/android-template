@@ -1,4 +1,4 @@
-package com.wednesday.template.presentation.base.extensions
+package com.wednesday.template.feature.core.extensions
 
 import android.view.View
 import android.widget.TextView

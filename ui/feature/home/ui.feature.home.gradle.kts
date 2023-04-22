@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id(Plugins.ANDROID)
     id(Plugins.COMPOSE)
+    id(Plugins.PARCELIZE)
 }
 
 android {

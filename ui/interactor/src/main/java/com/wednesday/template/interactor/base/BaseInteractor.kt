@@ -1,7 +1,7 @@
-package com.wednesday.template.feature.core
+package com.wednesday.template.interactor.base
 
-import com.wednesday.template.domain.base.Result
 import com.wednesday.template.data.core.Mapper
+import com.wednesday.template.domain.base.Result
 import com.wednesday.template.presentation.base.UIResult
 
 

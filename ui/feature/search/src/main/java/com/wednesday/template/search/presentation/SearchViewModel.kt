@@ -11,7 +11,6 @@ import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.weather.search.SearchScreenIntent
-import com.wednesday.template.presentation.weather.search.SearchScreenState
 import com.wednesday.template.search.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce

@@ -10,7 +10,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.base.component.StatefulComponent
-import com.wednesday.template.presentation.base.extensions.asString
+import com.wednesday.template.feature.core.extensions.asString
 
 class ToolbarComponent(
     private val fragment: Fragment,
