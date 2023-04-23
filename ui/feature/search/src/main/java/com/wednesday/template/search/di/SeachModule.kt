@@ -8,7 +8,7 @@ val searchModule = module {
     viewModel {
         SearchViewModel(
             searchCityInteractor = get(),
-            favouriteWeatherInteractor = get()
+            favouriteWeatherInteractor = get(),
         )
     }
 }

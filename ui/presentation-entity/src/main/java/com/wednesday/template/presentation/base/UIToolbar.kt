@@ -10,5 +10,5 @@ data class UIToolbar(
     val hasBackButton: Boolean,
     @DrawableRes
     val menuIcon: Int?,
-    val menuButtonEnabled: Boolean = true
+    val menuButtonEnabled: Boolean = true,
 ) : Parcelable

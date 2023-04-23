@@ -11,5 +11,5 @@ val weather = Weather(
     maxTemp = localWeather.main.tempMax,
     temp = localWeather.main.temp,
     feelsLike = localWeather.main.feelsLike,
-    iconUrl = "https://openweathermap.org/img/wn/${localWeather.weather.icon}@4x.png"
+    iconUrl = "https://openweathermap.org/img/wn/${localWeather.weather.icon}@4x.png",
 )

@@ -11,5 +11,5 @@ val weather = Weather(
     maxTemp = 31.39,
     temp = 26.82,
     feelsLike = 28.0,
-    iconUrl = "https://openweathermap.org/img/wn/01d@4x.png"
+    iconUrl = "https://openweathermap.org/img/wn/01d@4x.png",
 )

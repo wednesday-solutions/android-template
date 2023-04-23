@@ -7,7 +7,7 @@ import com.wednesday.template.home.presentation.destinations.HomeScreenDestinati
 import com.wednesday.template.home.presentation.homeDestinations
 import com.wednesday.template.search.presentation.searchDestinations
 
-val mainNavGraph = object: NavGraphSpec {
+val mainNavGraph = object : NavGraphSpec {
     override val destinationsByRoute: Map<String, DestinationSpec<*>> = buildList {
         addAll(homeDestinations)
         addAll(searchDestinations)
@@ -16,5 +16,4 @@ val mainNavGraph = object: NavGraphSpec {
     override val route: String = "app"
 
     override val startRoute: Route = HomeScreenDestination
-
 }

@@ -10,5 +10,5 @@ data class SearchScreenState(
     override val toolbar: UIToolbar,
     override val showLoading: Boolean,
     val searchText: String = "",
-    val searchList: UIList = UIList()
+    val searchList: UIList = UIList(),
 ) : MainScreenState

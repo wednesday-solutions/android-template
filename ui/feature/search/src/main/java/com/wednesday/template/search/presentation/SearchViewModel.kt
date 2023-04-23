@@ -33,10 +33,10 @@ class SearchViewModel(
             toolbar = UIToolbar(
                 title = UIText { block("Search") },
                 hasBackButton = true,
-                menuIcon = null
+                menuIcon = null,
             ),
             showLoading = false,
-            searchList = UIList()
+            searchList = UIList(),
         )
     }
 
@@ -55,10 +55,12 @@ class SearchViewModel(
                     }
                     setEffect(
                         SearchScreenEffect.ShowSnackbarEffect(
-                            SnackbarEffectData(UIText {
-                                block(R.string.something_went_wrong)
-                            })
-                        )
+                            SnackbarEffectData(
+                                UIText {
+                                    block(R.string.something_went_wrong)
+                                },
+                            ),
+                        ),
                     )
                 }
             }

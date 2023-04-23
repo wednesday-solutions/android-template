@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
 
 class GetFavouriteCitiesFlowUseCaseImpl(
-    private val weatherRepository: WeatherRepository
+    private val weatherRepository: WeatherRepository,
 ) : GetFavouriteCitiesFlowUseCase {
 
     override fun invokeInternal(param: Unit): Flow<List<City>> {

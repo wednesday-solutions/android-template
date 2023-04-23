@@ -10,5 +10,5 @@ data class RemoteCurrentWeatherWind(
     @SerialName("deg")
     val deg: Int,
     @SerialName("speed")
-    val speed: Double
+    val speed: Double,
 )

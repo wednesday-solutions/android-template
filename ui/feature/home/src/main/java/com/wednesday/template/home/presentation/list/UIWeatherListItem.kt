@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.wednesday.template.design_system.composables.card.UICard
-import com.wednesday.template.design_system.composables.text.UITextType
-import com.wednesday.template.design_system.composables.text.UITextView
+import com.wednesday.template.designSystem.composables.card.UICard
+import com.wednesday.template.designSystem.composables.text.UITextType
+import com.wednesday.template.designSystem.composables.text.UITextView
 import com.wednesday.template.feature.core.extensions.asString
 import com.wednesday.template.home.R
 import com.wednesday.template.presentation.weather.UIWeather
@@ -28,21 +28,21 @@ fun UIWeatherListItem(
         Column(
             Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(16.dp),
         ) {
             Row(
                 modifier = Modifier,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Column(Modifier.weight(3f)) {
                     UITextView(
                         text = item.title.asString(),
-                        textType = UITextType.Large.Regular
+                        textType = UITextType.Large.Regular,
                     )
                     Spacer(Modifier.height(8.dp))
                     UITextView(
                         text = item.currentTemp.asString(),
-                        textType = UITextType.Large.Bold
+                        textType = UITextType.Large.Bold,
                     )
                 }
                 AsyncImage(

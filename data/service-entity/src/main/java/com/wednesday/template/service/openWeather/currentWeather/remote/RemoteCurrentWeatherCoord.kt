@@ -10,5 +10,5 @@ data class RemoteCurrentWeatherCoord(
     @SerialName("lat")
     val lat: Double,
     @SerialName("lon")
-    val lon: Double
+    val lon: Double,
 )

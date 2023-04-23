@@ -21,7 +21,7 @@ class DomainCityMapperImpl : DomainCityMapper {
             country = from.country,
             lat = from.lat,
             lon = from.lon,
-            state = from.state
+            state = from.state,
         )
     }
 
@@ -33,7 +33,7 @@ class DomainCityMapperImpl : DomainCityMapper {
             country = from.country,
             lat = from.lat,
             lon = from.lon,
-            state = from.state
+            state = from.state,
         )
     }
 

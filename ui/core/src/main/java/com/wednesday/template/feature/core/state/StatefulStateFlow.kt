@@ -6,8 +6,8 @@ import kotlin.reflect.KProperty
 
 class StatefulStateFlow<T>(
     private val savedStateHandle: SavedStateHandle,
-    private val defaultValueProvider: (() -> T)
-): DistinctReadWriteProperty<StateFlow<T>, T> {
+    private val defaultValueProvider: (() -> T),
+) : DistinctReadWriteProperty<StateFlow<T>, T> {
     override fun getValue(thisRef: Any, property: KProperty<*>): StateFlow<T> {
         return savedStateHandle.getStateFlow(property.name, defaultValueProvider.invoke())
     }
@@ -17,7 +17,7 @@ class StatefulStateFlow<T>(
     }
 }
 
-interface DistinctReadWriteProperty<G,S> {
+interface DistinctReadWriteProperty<G, S> {
     operator fun getValue(thisRef: Any, property: KProperty<*>): G
 
     operator fun set(thisRef: Any, property: KProperty<*>, value: S)

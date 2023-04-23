@@ -7,5 +7,5 @@ data class LocalCurrentWeatherWeather(
     val description: String,
     val icon: String,
     val id: Int,
-    val main: String
+    val main: String,
 )

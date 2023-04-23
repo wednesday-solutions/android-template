@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
-import com.wednesday.template.design_system.composables.list.ListLoader
+import com.wednesday.template.designSystem.composables.list.ListLoader
 import com.wednesday.template.feature.core.composables.list.UILazyColumn
 import com.wednesday.template.feature.core.composables.screen.Screen
 import com.wednesday.template.feature.core.extensions.showSnackbar
@@ -25,21 +25,24 @@ fun SearchScreen(
     searchNavigator: SearchNavigator,
 ) {
     Screen(
-        viewModel = viewModel, onEffect = {
+        viewModel = viewModel,
+        onEffect = {
             when (it) {
                 SearchScreenEffect.NavigateBack -> searchNavigator.navigateBack()
                 is SearchScreenEffect.ShowSnackbarEffect -> snackbarHostState.showSnackbar(it.snackbarEffectData)
             }
-        }, onToolbarBackPressed = searchNavigator::navigateBack
+        },
+        onToolbarBackPressed = searchNavigator::navigateBack,
     ) {
-        Column(modifier = Modifier
-            .padding(it)
-            .padding(horizontal = 16.dp)) {
-
+        Column(
+            modifier = Modifier
+                .padding(it)
+                .padding(horizontal = 16.dp),
+        ) {
             TextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = searchText,
-                onValueChange = viewModel::search
+                onValueChange = viewModel::search,
             )
 
             Spacer(Modifier.height(16.dp))
@@ -52,7 +55,7 @@ fun SearchScreen(
                         is UICity -> UICityListItem(
                             modifier,
                             item,
-                            onFavouriteClick = viewModel::onFavouriteClick
+                            onFavouriteClick = viewModel::onFavouriteClick,
                         )
                     }
                 }

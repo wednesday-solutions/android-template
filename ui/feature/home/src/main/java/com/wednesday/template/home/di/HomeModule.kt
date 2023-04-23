@@ -7,7 +7,7 @@ import org.koin.dsl.module
 val homeModule = module {
     viewModel {
         HomeViewModel(
-            favouriteWeatherInteractor = get()
+            favouriteWeatherInteractor = get(),
         )
     }
 }

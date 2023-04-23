@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-abstract class BaseViewModel<STATE : ScreenState, EFFECT: Effect> :
+abstract class BaseViewModel<STATE : ScreenState, EFFECT : Effect> :
     ViewModel(), KoinComponent, StateOwner {
 
     private companion object {
@@ -58,7 +58,7 @@ abstract class BaseViewModel<STATE : ScreenState, EFFECT: Effect> :
     protected fun unhandledIntent(intent: Intent) {
         throw IllegalStateException(
             "Intent of type $intent is not handled by ${this.javaClass.name}." +
-                    " If you want to handle this intent then add support in when clause"
+                " If you want to handle this intent then add support in when clause",
         )
     }
 }

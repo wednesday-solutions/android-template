@@ -47,7 +47,7 @@ class SearchCityInteractorImplTest : InteractorTest() {
         verifyNoMoreInteractions(
             searchCitiesUseCase,
             citySearchResultsMapper,
-            favouriteCitiesFlowUseCase
+            favouriteCitiesFlowUseCase,
         )
     }
 
@@ -59,7 +59,7 @@ class SearchCityInteractorImplTest : InteractorTest() {
             searchCitiesUseCase,
             favouriteCitiesFlowUseCase,
             citySearchResultsMapper,
-            coroutineContextController
+            coroutineContextController,
         )
     }
 

@@ -4,5 +4,5 @@ import androidx.annotation.Keep
 
 @Keep
 data class LocalCurrentWeatherClouds(
-    val all: Int
+    val all: Int,
 )

@@ -4,7 +4,6 @@ import com.wednesday.template.data.core.Mapper
 import com.wednesday.template.domain.base.Result
 import com.wednesday.template.presentation.base.UIResult
 
-
 abstract class BaseInteractor {
 
     fun <T> mapResult(

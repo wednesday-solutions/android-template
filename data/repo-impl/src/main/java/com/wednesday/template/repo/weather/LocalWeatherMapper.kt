@@ -20,12 +20,12 @@ class LocalWeatherMapperImpl(private val dateRepo: DateRepo) : LocalWeatherMappe
         Timber.tag(TAG).d("map() called with: from1 = $from1, from2 = $from2, from3 = $from3")
 
         val clouds = LocalCurrentWeatherClouds(
-            all = from1.clouds.all
+            all = from1.clouds.all,
         )
 
         val coord = LocalCurrentWeatherCoord(
             lat = from2,
-            lon = from3
+            lon = from3,
         )
 
         val main = LocalCurrentWeatherMain(
@@ -34,7 +34,7 @@ class LocalWeatherMapperImpl(private val dateRepo: DateRepo) : LocalWeatherMappe
             pressure = from1.main.pressure,
             temp = from1.main.temp,
             tempMax = from1.main.tempMax,
-            tempMin = from1.main.tempMin
+            tempMin = from1.main.tempMin,
         )
 
         val sys = LocalCurrentWeatherSys(
@@ -48,12 +48,12 @@ class LocalWeatherMapperImpl(private val dateRepo: DateRepo) : LocalWeatherMappe
             description = remoteWeather?.description ?: "",
             icon = remoteWeather?.icon ?: "01d",
             id = remoteWeather?.id ?: UInt.MIN_VALUE.toInt(),
-            main = remoteWeather?.main ?: ""
+            main = remoteWeather?.main ?: "",
         )
 
         val wind = LocalCurrentWeatherWind(
             deg = from1.wind.deg,
-            speed = from1.wind.speed
+            speed = from1.wind.speed,
         )
 
         return LocalCurrentWeather(
@@ -70,7 +70,7 @@ class LocalWeatherMapperImpl(private val dateRepo: DateRepo) : LocalWeatherMappe
             main = main,
             sys = sys,
             weather = weather,
-            wind = wind
+            wind = wind,
         )
     }
 

@@ -6,5 +6,5 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UIDayWeatherHeading(
-    val text: UIText
+    val text: UIText,
 ) : UIListItemBase("UIDayWeatherHeading")

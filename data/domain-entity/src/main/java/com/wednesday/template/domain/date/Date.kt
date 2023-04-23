@@ -3,7 +3,7 @@ package com.wednesday.template.domain.date
 data class Date(
     val dayOfMonth: Int, // from 1 to 31
     val month: Int, // from 0 to 11
-    val year: Int
+    val year: Int,
 ) {
 
     companion object {

@@ -41,7 +41,7 @@ fun HomeScreen(
             IconButton(onClick = viewModel::navigateToSearch) {
                 Icon(Icons.Default.Search, contentDescription = stringResource(id = R.string.acc_search))
             }
-        }
+        },
     ) {
         Timber.e("$this")
         UILazyColumn(
@@ -55,7 +55,7 @@ fun HomeScreen(
                 is UISearchCitiesPlaceholder -> SearchCities(
                     modifier = modifier,
                     item = item,
-                    onSearchClick = viewModel::navigateToSearch
+                    onSearchClick = viewModel::navigateToSearch,
                 )
             }
         }

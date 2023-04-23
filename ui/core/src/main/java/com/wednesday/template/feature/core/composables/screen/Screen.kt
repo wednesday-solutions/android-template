@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.wednesday.template.data.core.UnitCallback
-import com.wednesday.template.design_system.composables.page.UIPage
+import com.wednesday.template.designSystem.composables.page.UIPage
 import com.wednesday.template.feature.core.R
 import com.wednesday.template.feature.core.effect.Effect
 import com.wednesday.template.feature.core.extensions.asString
@@ -20,11 +20,11 @@ import com.wednesday.template.feature.core.viewmodel.BaseViewModel
 import com.wednesday.template.presentation.screen.MainScreenState
 
 data class ScreenInteractionStates(
-    val snackbarHostState: SnackbarHostState
+    val snackbarHostState: SnackbarHostState,
 )
 
 @Composable
-fun <STATE : MainScreenState, EFFECT: Effect, VM : BaseViewModel<STATE, EFFECT>> Screen(
+fun <STATE : MainScreenState, EFFECT : Effect, VM : BaseViewModel<STATE, EFFECT>> Screen(
     viewModel: VM,
     onEffect: suspend ScreenInteractionStates.(EFFECT) -> Unit,
     onToolbarBackPressed: UnitCallback,
@@ -41,7 +41,7 @@ fun <STATE : MainScreenState, EFFECT: Effect, VM : BaseViewModel<STATE, EFFECT>>
         hasBackButton = state.toolbar.hasBackButton,
         onBackPress = onToolbarBackPressed,
         backButtonContentDescription = stringResource(id = R.string.acc_navigate_back),
-        toolbarActions = toolbarActions
+        toolbarActions = toolbarActions,
     ) { paddingValues ->
 
         val lifecycleOwner = LocalLifecycleOwner.current
@@ -53,7 +53,7 @@ fun <STATE : MainScreenState, EFFECT: Effect, VM : BaseViewModel<STATE, EFFECT>>
         LaunchedEffect(viewModel) {
             lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 val screenInteractionStates = ScreenInteractionStates(
-                    snackbarHostState = snackbarHostState
+                    snackbarHostState = snackbarHostState,
                 )
                 viewModel.effectState.collect {
                     screenInteractionStates.onEffect(it)

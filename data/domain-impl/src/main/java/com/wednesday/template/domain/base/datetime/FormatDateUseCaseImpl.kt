@@ -5,7 +5,7 @@ import com.wednesday.template.repo.date.DateRepo
 import timber.log.Timber
 
 class FormatDateUseCaseImpl(
-    private val dateRepo: DateRepo
+    private val dateRepo: DateRepo,
 ) : FormatDateUseCase {
 
     override fun invoke(param: Pair<Date, String>): String {

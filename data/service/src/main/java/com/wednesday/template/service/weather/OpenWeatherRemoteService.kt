@@ -10,7 +10,7 @@ interface OpenWeatherRemoteService {
     @GET("geo/1.0/direct")
     suspend fun geocodingSearch(
         @Query("q") searchTerm: String,
-        @Query("limit") limit: Int = 5
+        @Query("limit") limit: Int = 5,
     ): List<RemoteLocation>
 
     @GET("data/2.5/weather?units=metric")

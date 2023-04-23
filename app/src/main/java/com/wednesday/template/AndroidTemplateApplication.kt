@@ -30,7 +30,7 @@ class AndroidTemplateApplication : Application() {
                 domainModule,
                 interactorModule,
                 homeModule,
-                searchModule
+                searchModule,
             )
         }
     }

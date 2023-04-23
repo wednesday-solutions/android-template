@@ -13,5 +13,5 @@ data class UIWeather(
     val currentTemp: UIText,
     val minMaxTemp: UIText,
     val feelsLike: UIText,
-    val iconUrl: String
+    val iconUrl: String,
 ) : UIListItemBase(id = "UICity $lat $lon")

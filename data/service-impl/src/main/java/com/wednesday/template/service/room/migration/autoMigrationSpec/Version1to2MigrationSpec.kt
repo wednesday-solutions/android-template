@@ -5,10 +5,10 @@ import androidx.room.migration.AutoMigrationSpec
 
 @DeleteColumn(
     tableName = "current_weather",
-    columnName = "sys_type"
+    columnName = "sys_type",
 )
 @DeleteColumn(
     tableName = "current_weather",
-    columnName = "sys_id"
+    columnName = "sys_id",
 )
 class Version1to2MigrationSpec : AutoMigrationSpec

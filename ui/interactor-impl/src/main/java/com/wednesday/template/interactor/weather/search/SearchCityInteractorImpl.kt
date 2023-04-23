@@ -22,15 +22,16 @@ class SearchCityInteractorImpl(
     private val searchCitiesUseCase: SearchCitiesUseCase,
     favouriteCitiesFlowUseCase: GetFavouriteCitiesFlowUseCase,
     private val citySearchResultMapper: UICitySearchResultsMapper,
-    private val coroutineContextController: CoroutineContextController
+    private val coroutineContextController: CoroutineContextController,
 ) : SearchCityInteractor {
 
     private val searchResultStateFlow = Channel<List<City>>()
 
     override val searchResultsFlow: Flow<UIResult<UIList>> = favouriteCitiesFlowUseCase(Unit)
-        .combine(searchResultStateFlow
-            .receiveAsFlow()
-            .map { it.distinctBy { city -> city.id } }
+        .combine(
+            searchResultStateFlow
+                .receiveAsFlow()
+                .map { it.distinctBy { city -> city.id } },
         ) { favouriteCities, searchResults ->
             when {
                 searchResults.isEmpty() -> {
@@ -40,8 +41,8 @@ class SearchCityInteractorImpl(
                     UIResult.Success(
                         citySearchResultMapper.map(
                             favouriteCities.data,
-                            searchResults
-                        )
+                            searchResults,
+                        ),
                     )
                 }
                 favouriteCities is Result.Error -> {

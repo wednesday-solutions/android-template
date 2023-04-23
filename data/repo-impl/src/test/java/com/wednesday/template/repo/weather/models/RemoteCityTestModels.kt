@@ -7,5 +7,5 @@ val remoteCity = RemoteLocation(
     lat = 10.10,
     lon = 30.55,
     name = "name 1",
-    state = "state 1"
+    state = "state 1",
 )

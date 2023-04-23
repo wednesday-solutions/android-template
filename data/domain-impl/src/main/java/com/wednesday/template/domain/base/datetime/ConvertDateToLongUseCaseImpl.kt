@@ -5,7 +5,7 @@ import com.wednesday.template.repo.date.DateRepo
 import timber.log.Timber
 
 class ConvertDateToLongUseCaseImpl(
-    private val dateRepo: DateRepo
+    private val dateRepo: DateRepo,
 ) : ConvertDateToLongUseCase {
 
     override fun invoke(param: Date): Long {

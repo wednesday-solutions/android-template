@@ -5,6 +5,6 @@ import com.wednesday.template.feature.core.effect.SnackbarEffectData
 
 suspend fun SnackbarHostState.showSnackbar(snackbarEffectData: SnackbarEffectData) {
     showSnackbar(
-        message = snackbarEffectData.message.asString()
+        message = snackbarEffectData.message.asString(),
     )
 }

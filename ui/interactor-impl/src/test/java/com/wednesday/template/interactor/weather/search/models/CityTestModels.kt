@@ -10,7 +10,7 @@ val city = City(
     country = "location 1",
     lat = 10.10,
     lon = 30.55,
-    state = "state 1"
+    state = "state 1",
 )
 
 val uiCity = UICity(
@@ -21,5 +21,5 @@ val uiCity = UICity(
     displayLocationType = UIText { block(city.country) },
     latitude = "${city.lat} ${city.lon}",
     isFavourite = false,
-    state = city.state
+    state = city.state,
 )

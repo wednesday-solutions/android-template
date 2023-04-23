@@ -9,5 +9,5 @@ data class LocalCurrentWeatherMain(
     val pressure: Int,
     val temp: Double,
     val tempMax: Double,
-    val tempMin: Double
+    val tempMin: Double,
 )

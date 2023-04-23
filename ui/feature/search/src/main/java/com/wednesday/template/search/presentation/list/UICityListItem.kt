@@ -10,8 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.wednesday.template.design_system.composables.text.UITextType
-import com.wednesday.template.design_system.composables.text.UITextView
+import com.wednesday.template.designSystem.composables.text.UITextType
+import com.wednesday.template.designSystem.composables.text.UITextView
 import com.wednesday.template.feature.core.extensions.asString
 import com.wednesday.template.presentation.weather.UICity
 import com.wednesday.template.search.R
@@ -23,13 +23,13 @@ fun UICityListItem(modifier: Modifier, item: UICity, onFavouriteClick: (UICity) 
         headlineText = {
             UITextView(
                 text = item.displayTitle.asString(),
-                textType = UITextType.Medium.Bold
+                textType = UITextType.Medium.Bold,
             )
         },
         supportingText = {
             UITextView(
                 text = item.latitude,
-                textType = UITextType.Small.Regular
+                textType = UITextType.Small.Regular,
             )
         },
         trailingContent = {
@@ -42,9 +42,9 @@ fun UICityListItem(modifier: Modifier, item: UICity, onFavouriteClick: (UICity) 
                 }
                 Icon(
                     icon,
-                    contentDescription = stringResource(id = description, item.title)
+                    contentDescription = stringResource(id = description, item.title),
                 )
             }
-        }
+        },
     )
 }

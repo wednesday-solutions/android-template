@@ -13,5 +13,5 @@ data class ConsolidatedWeather(
     val airPressure: Double,
     val humidity: Double,
     val visibility: Double,
-    val predictability: Double
+    val predictability: Double,
 )

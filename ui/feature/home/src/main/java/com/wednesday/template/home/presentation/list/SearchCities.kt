@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.wednesday.template.data.core.UnitCallback
-import com.wednesday.template.design_system.composables.text.UITextType
-import com.wednesday.template.design_system.composables.text.UITextView
+import com.wednesday.template.designSystem.composables.text.UITextType
+import com.wednesday.template.designSystem.composables.text.UITextView
 import com.wednesday.template.feature.core.extensions.asString
 import com.wednesday.template.home.R
 import com.wednesday.template.presentation.weather.UISearchCitiesPlaceholder
@@ -28,19 +28,19 @@ fun SearchCities(
         modifier.then(
             Modifier
                 .padding(16.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
         ),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         UITextView(text = item.text.asString(), textType = UITextType.Medium.Regular)
         Spacer(Modifier.height(16.dp))
         OutlinedButton(
             modifier = Modifier.fillMaxWidth(0.75f),
-            onClick = onSearchClick
+            onClick = onSearchClick,
         ) {
             UITextView(
                 text = stringResource(id = R.string.search),
-                textType = UITextType.Small.Regular
+                textType = UITextType.Small.Regular,
             )
         }
     }

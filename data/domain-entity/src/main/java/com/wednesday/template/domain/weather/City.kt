@@ -6,5 +6,5 @@ data class City(
     val country: String,
     val state: String?,
     val lat: Double,
-    val lon: Double
+    val lon: Double,
 )

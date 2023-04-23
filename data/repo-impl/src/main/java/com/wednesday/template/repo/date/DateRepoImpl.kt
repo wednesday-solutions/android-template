@@ -62,7 +62,7 @@ class DateRepoImpl : DateRepo {
         return Date(
             dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH),
             month = calendar.get(Calendar.MONTH),
-            year = calendar.get(Calendar.YEAR)
+            year = calendar.get(Calendar.YEAR),
         )
     }
 
@@ -76,7 +76,7 @@ class DateRepoImpl : DateRepo {
             hourOfDay = calendar.get(Calendar.HOUR_OF_DAY),
             minute = calendar.get(Calendar.MINUTE),
             second = calendar.get(Calendar.SECOND),
-            millisecond = calendar.get(Calendar.MILLISECOND)
+            millisecond = calendar.get(Calendar.MILLISECOND),
         )
     }
 
@@ -127,7 +127,7 @@ class DateRepoImpl : DateRepo {
         return Date(
             dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH),
             month = calendar.get(Calendar.MONTH),
-            year = calendar.get(Calendar.YEAR)
+            year = calendar.get(Calendar.YEAR),
         )
     }
 
@@ -135,7 +135,7 @@ class DateRepoImpl : DateRepo {
         return Date(
             dayOfMonth = dateTime.dayOfMonth,
             month = dateTime.month,
-            year = dateTime.year
+            year = dateTime.year,
         )
     }
 
@@ -149,7 +149,7 @@ class DateRepoImpl : DateRepo {
             hourOfDay = calendar.get(Calendar.HOUR_OF_DAY),
             minute = calendar.get(Calendar.MINUTE),
             second = calendar.get(Calendar.SECOND),
-            millisecond = calendar.get(Calendar.MILLISECOND)
+            millisecond = calendar.get(Calendar.MILLISECOND),
         )
     }
 
@@ -161,7 +161,7 @@ class DateRepoImpl : DateRepo {
             hourOfDay = time.hourOfDay,
             minute = time.minute,
             second = time.second,
-            millisecond = time.millisecond
+            millisecond = time.millisecond,
         )
     }
 
@@ -171,7 +171,7 @@ class DateRepoImpl : DateRepo {
             hourOfDay = hoursMinutes[0].toInt(),
             minute = hoursMinutes[1].toInt(),
             second = 0,
-            millisecond = 0
+            millisecond = 0,
         )
     }
 
@@ -192,14 +192,14 @@ class DateRepoImpl : DateRepo {
         hourOfDay = hour,
         minute = 0,
         second = 0,
-        millisecond = 0
+        millisecond = 0,
     )
 
     private fun hourMinuteTime(hour: Int, minute: Int) = Time(
         hourOfDay = hour,
         minute = minute,
         second = 0,
-        millisecond = 0
+        millisecond = 0,
     )
 
     override fun mapDate(date: Date): JavaDate = date.run {
@@ -242,7 +242,7 @@ class DateRepoImpl : DateRepo {
             hourOfDay = calendar.get(Calendar.HOUR_OF_DAY),
             minute = calendar.get(Calendar.MINUTE),
             second = calendar.get(Calendar.SECOND),
-            millisecond = calendar.get(Calendar.MILLISECOND)
+            millisecond = calendar.get(Calendar.MILLISECOND),
         )
     }
 

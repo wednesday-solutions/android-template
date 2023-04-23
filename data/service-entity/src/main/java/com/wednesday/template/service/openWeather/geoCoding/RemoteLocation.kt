@@ -16,5 +16,5 @@ data class RemoteLocation(
     @SerialName("name")
     val name: String,
     @SerialName("state")
-    val state: String?
+    val state: String?,
 )

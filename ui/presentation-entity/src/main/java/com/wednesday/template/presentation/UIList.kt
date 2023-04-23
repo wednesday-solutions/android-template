@@ -13,4 +13,3 @@ value class UIList(
 ) : Parcelable {
     constructor(vararg items: UIListItemBase) : this(listOf(*items))
 }
-

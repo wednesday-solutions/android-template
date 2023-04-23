@@ -11,7 +11,7 @@ import org.junit.runner.Description
 
 @ExperimentalCoroutinesApi
 class CoroutineDispatcherRule(
-    private val dispatcher: TestDispatcher = StandardTestDispatcher()
+    private val dispatcher: TestDispatcher = StandardTestDispatcher(),
 ) : TestWatcher() {
 
     val coroutineContextController: CoroutineContextController =

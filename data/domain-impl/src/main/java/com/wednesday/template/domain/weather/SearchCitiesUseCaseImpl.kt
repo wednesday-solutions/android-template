@@ -4,7 +4,7 @@ import com.wednesday.template.repo.weather.WeatherRepository
 import timber.log.Timber
 
 class SearchCitiesUseCaseImpl(
-    private val weatherRepository: WeatherRepository
+    private val weatherRepository: WeatherRepository,
 ) : SearchCitiesUseCase {
 
     override suspend fun invokeInternal(param: String): List<City> {

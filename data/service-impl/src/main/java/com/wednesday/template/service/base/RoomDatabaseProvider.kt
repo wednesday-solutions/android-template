@@ -8,6 +8,6 @@ fun getRoomDatabase(applicationContext: Context): AndroidTemplateDatabase {
     return databaseBuilder(
         applicationContext,
         AndroidTemplateDatabase::class.java,
-        "android_template_room_database"
+        "android_template_room_database",
     ).build()
 }

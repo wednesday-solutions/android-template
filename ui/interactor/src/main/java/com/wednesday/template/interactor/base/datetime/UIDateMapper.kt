@@ -9,7 +9,7 @@ import timber.log.Timber
 interface UIDateMapper : Mapper<Date, UIDate>
 
 class UIDateMapperImpl(
-    private val convertDateToLongUseCase: ConvertDateToLongUseCase
+    private val convertDateToLongUseCase: ConvertDateToLongUseCase,
 ) : UIDateMapper {
 
     override fun map(from: Date): UIDate {
@@ -18,7 +18,7 @@ class UIDateMapperImpl(
             dayOfMonth = from.dayOfMonth,
             month = from.month,
             year = from.year,
-            timeAsLong = convertDateToLongUseCase(from)
+            timeAsLong = convertDateToLongUseCase(from),
         )
     }
 

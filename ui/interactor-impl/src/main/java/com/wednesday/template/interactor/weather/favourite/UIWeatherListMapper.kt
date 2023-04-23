@@ -26,10 +26,12 @@ class UIWeatherListMapperImpl : UIWeatherListMapper {
                     description = UIText {
                         block(
                             it.description.replaceFirstChar { char ->
-                                if (char.isLowerCase()) char.titlecase(
-                                    Locale.getDefault()
-                                ) else char.toString()
-                            }
+                                if (char.isLowerCase()) {
+                                    char.titlecase(
+                                        Locale.getDefault(),
+                                    )
+                                } else char.toString()
+                            },
                         )
                     },
                     currentTemp = UIText { block("${it.temp} °C") },
@@ -38,15 +40,15 @@ class UIWeatherListMapperImpl : UIWeatherListMapper {
                         block(R.string.feels_like)
                         block(" ${it.feelsLike} °C")
                     },
-                    iconUrl = it.iconUrl
+                    iconUrl = it.iconUrl,
                 )
             }
 
         if (weatherList.isEmpty()) {
             return UIList(
                 UISearchCitiesPlaceholder(
-                    text = UIText { block(R.string.search_cities_to_add_to_fav) }
-                )
+                    text = UIText { block(R.string.search_cities_to_add_to_fav) },
+                ),
             )
         }
 

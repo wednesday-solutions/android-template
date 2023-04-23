@@ -32,5 +32,5 @@ data class RemoteCurrentWeather(
     @SerialName("weather")
     val weather: List<RemoteCurrentWeatherWeather>,
     @SerialName("wind")
-    val wind: RemoteCurrentWeatherWind
+    val wind: RemoteCurrentWeatherWind,
 )

@@ -58,7 +58,7 @@ class WeatherRepositoryImplTest {
             localCityMapper,
             localWeatherMapper,
             domainWeatherMapper,
-            dateRepo
+            dateRepo,
         )
     }
 
@@ -70,7 +70,7 @@ class WeatherRepositoryImplTest {
             localCityMapper,
             localWeatherMapper,
             domainWeatherMapper,
-            dateRepo
+            dateRepo,
         )
     }
 
@@ -104,8 +104,8 @@ class WeatherRepositoryImplTest {
             whenever(weatherLocalService.getFavoriteCitiesFlow()).thenReturn(
                 flowOf(
                     localCities,
-                    localCities
-                )
+                    localCities,
+                ),
             )
             whenever(domainCityMapper.map(localCities)).thenReturn(cities)
 
@@ -182,11 +182,11 @@ class WeatherRepositoryImplTest {
             whenever(dateRepo.nowDateTimeAsLong()).thenReturn(nowDateTimeAsLong)
             whenever(weatherLocalService.getFavoriteCities()).thenReturn(localCities)
             whenever(weatherLocalService.getLocalCurrentWeather(any(), any())).thenReturn(
-                localWeather
+                localWeather,
             )
             whenever(weatherRemoteService.currentWeather(any())).thenReturn(remoteWeather)
             whenever(localWeatherMapper.map(same(remoteWeather), any(), any())).thenReturn(
-                localWeather
+                localWeather,
             )
             whenever(weatherLocalService.upsertLocalCurrentWeather(localWeather)).thenReturn(Unit)
 
@@ -213,11 +213,11 @@ class WeatherRepositoryImplTest {
             whenever(dateRepo.nowDateTimeAsLong()).thenReturn(nowDateTimeAsLong)
             whenever(weatherLocalService.getFavoriteCities()).thenReturn(localCities)
             whenever(weatherLocalService.getLocalCurrentWeather(any(), any())).thenReturn(
-                localWeather
+                localWeather,
             )
             whenever(weatherRemoteService.currentWeather(any())).thenReturn(remoteWeather)
             whenever(localWeatherMapper.map(same(remoteWeather), any(), any())).thenReturn(
-                localWeather
+                localWeather,
             )
             whenever(weatherLocalService.upsertLocalCurrentWeather(localWeather)).thenReturn(Unit)
 

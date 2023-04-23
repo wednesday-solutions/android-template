@@ -21,7 +21,7 @@ val remoteWeather = RemoteCurrentWeather(
         pressure = 100,
         temp = 26.03,
         tempMin = 22.33,
-        tempMax = 32.0
+        tempMax = 32.0,
     ),
     name = "name 1",
     sys = RemoteCurrentWeatherSys(country = "country 1", sunrise = 10, sunset = 20),
@@ -32,8 +32,8 @@ val remoteWeather = RemoteCurrentWeather(
             description = "description 1",
             icon = "01d",
             id = 50,
-            main = "main 1"
-        )
+            main = "main 1",
+        ),
     ),
     wind = RemoteCurrentWeatherWind(deg = 23, speed = 45.93),
 )

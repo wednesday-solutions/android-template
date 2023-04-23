@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RemoteCurrentWeatherClouds(
     @SerialName("all")
-    val all: Int
+    val all: Int,
 )

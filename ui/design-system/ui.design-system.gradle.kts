@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.wednesday.template.design_system"
+    namespace = "com.wednesday.template.designSystem"
 }
 
 dependencies {

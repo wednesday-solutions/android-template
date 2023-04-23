@@ -20,7 +20,7 @@ class WeatherRepositoryImpl(
     private val localCityMapper: LocalCityMapper,
     private val localWeatherMapper: LocalWeatherMapper,
     private val domainWeatherMapper: DomainWeatherMapper,
-    private val dateRepo: DateRepo
+    private val dateRepo: DateRepo,
 ) : WeatherRepository {
 
     override suspend fun searchCities(searchTerm: String): List<City> {
@@ -70,7 +70,7 @@ class WeatherRepositoryImpl(
                         weatherRemoteService.currentWeather(cityAndState = searchQuery)
 
                     weatherLocalService.upsertLocalCurrentWeather(
-                        weather = localWeatherMapper.map(remoteCurrentWeather, it.lat, it.lon)
+                        weather = localWeatherMapper.map(remoteCurrentWeather, it.lat, it.lon),
                     )
                 }
             }

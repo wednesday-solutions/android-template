@@ -13,5 +13,5 @@ data class UICity(
     val locationType: String,
     val displayLocationType: UIText,
     val latitude: String,
-    val isFavourite: Boolean
+    val isFavourite: Boolean,
 ) : UIListItemBase(id = "UICity $cityId")

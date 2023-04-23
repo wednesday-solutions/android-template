@@ -12,5 +12,5 @@ data class UIDateTime(
     val minute: Int,
     val second: Int,
     val millisecond: Int,
-    val timeAsLong: Long
+    val timeAsLong: Long,
 ) : Parcelable

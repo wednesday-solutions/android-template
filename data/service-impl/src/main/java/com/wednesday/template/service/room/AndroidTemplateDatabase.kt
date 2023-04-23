@@ -17,11 +17,11 @@ import com.wednesday.template.service.room.migration.autoMigrationSpec.Version1t
         AutoMigration(
             from = 1,
             to = 2,
-            spec = Version1to2MigrationSpec::class
+            spec = Version1to2MigrationSpec::class,
         ),
-        AutoMigration(from = 2, to = 3)
+        AutoMigration(from = 2, to = 3),
     ],
-    exportSchema = true
+    exportSchema = true,
 )
 @TypeConverters(DateConverter::class)
 abstract class AndroidTemplateDatabase : RoomDatabase() {

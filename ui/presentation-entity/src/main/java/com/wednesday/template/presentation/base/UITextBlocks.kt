@@ -14,7 +14,7 @@ data class RawFormatted(
     val text: String,
     val arg1: String? = null,
     val arg2: String? = null,
-    val arg3: String? = null
+    val arg3: String? = null,
 ) : UIText.Block
 
 @Parcelize
@@ -22,5 +22,5 @@ data class ResourceFormatted(
     @StringRes val resId: Int,
     val arg1: String? = null,
     val arg2: String? = null,
-    val arg3: String? = null
+    val arg3: String? = null,
 ) : UIText.Block

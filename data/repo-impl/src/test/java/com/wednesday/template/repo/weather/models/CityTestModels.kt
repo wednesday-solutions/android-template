@@ -8,7 +8,7 @@ val cityMappedFromLocalCity = City(
     country = localCity.country,
     lat = localCity.lat,
     lon = localCity.lon,
-    state = localCity.state
+    state = localCity.state,
 )
 
 val cityMappedFromRemoteCity = City(
@@ -17,5 +17,5 @@ val cityMappedFromRemoteCity = City(
     country = localCity.country,
     lat = localCity.lat,
     lon = localCity.lon,
-    state = localCity.state
+    state = localCity.state,
 )

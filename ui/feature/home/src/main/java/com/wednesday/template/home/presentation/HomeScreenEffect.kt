@@ -8,5 +8,5 @@ sealed interface HomeScreenEffect : Effect {
         val data: SnackbarEffectData,
     ) : HomeScreenEffect
 
-    object NavigateToSearch: HomeScreenEffect
+    object NavigateToSearch : HomeScreenEffect
 }

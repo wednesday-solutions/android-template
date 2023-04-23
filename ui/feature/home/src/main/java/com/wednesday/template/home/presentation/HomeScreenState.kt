@@ -9,5 +9,5 @@ import kotlinx.parcelize.Parcelize
 data class HomeScreenState(
     override val toolbar: UIToolbar,
     override val showLoading: Boolean,
-    val items: UIList
+    val items: UIList,
 ) : MainScreenState

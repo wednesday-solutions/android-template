@@ -27,7 +27,7 @@ class FavouriteWeatherInteractorImpl(
     private val fetchFavouriteCitiesWeatherUseCase: FetchFavouriteCitiesWeatherUseCase,
     private val uiCityMapper: UICityMapper,
     private val weatherListMapper: UIWeatherListMapper,
-    private val coroutineContextController: CoroutineContextController
+    private val coroutineContextController: CoroutineContextController,
 ) : BaseInteractor(), FavouriteWeatherInteractor {
 
     override suspend fun setCityFavourite(uiCity: UICity): UIResult<Unit> =

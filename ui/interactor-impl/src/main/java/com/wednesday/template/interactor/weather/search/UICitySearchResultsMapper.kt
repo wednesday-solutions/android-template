@@ -9,7 +9,7 @@ import timber.log.Timber
 interface UICitySearchResultsMapper : Mapper2<List<City>, List<City>, UIList>
 
 class UICitySearchResultsMapperImpl(
-    private val cityMapper: UICityMapper
+    private val cityMapper: UICityMapper,
 ) : UICitySearchResultsMapper {
 
     override fun map(from1: List<City>, from2: List<City>): UIList {

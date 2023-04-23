@@ -8,5 +8,5 @@ data class UIDate(
     val dayOfMonth: Int, // from 1 to 31
     val month: Int, // from 0 to 11
     val year: Int,
-    val timeAsLong: Long
+    val timeAsLong: Long,
 ) : Parcelable

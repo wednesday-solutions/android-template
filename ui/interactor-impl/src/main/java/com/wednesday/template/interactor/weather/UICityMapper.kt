@@ -27,7 +27,7 @@ class UICityMapperImpl : UICityMapper {
             displayLocationType = UIText { block(from1.country) },
             latitude = "${from1.lat} ${from1.lon}",
             isFavourite = from2,
-            state = from1.state
+            state = from1.state,
         )
     }
 
@@ -40,7 +40,7 @@ class UICityMapperImpl : UICityMapper {
             country = from.locationType,
             lat = lat.toDouble(),
             lon = lon.toDouble(),
-            state = from.state
+            state = from.state,
         )
     }
 
@@ -54,7 +54,7 @@ class UICityMapperImpl : UICityMapper {
             displayLocationType = UIText { block(from.country) },
             latitude = "${from.lat} ${from.lon}",
             isFavourite = true,
-            state = from.state
+            state = from.state,
         )
     }
 

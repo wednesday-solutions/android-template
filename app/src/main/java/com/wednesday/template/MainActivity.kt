@@ -13,7 +13,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
-import com.wednesday.template.design_system.theme.AppTheme
+import com.wednesday.template.designSystem.theme.AppTheme
 import com.wednesday.template.navigation.animations.getNavGraphAnimations
 import com.wednesday.template.navigation.di.navigationDependencies
 import com.wednesday.template.navigation.graph.mainNavGraph
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                             engine = engine,
                             dependenciesContainerBuilder = {
                                 navigationDependencies()
-                            }
+                            },
                         )
                     }
                 }

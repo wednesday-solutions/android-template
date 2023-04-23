@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UIText(
-    private val _blocks: MutableList<Block> = mutableListOf()
+    private val _blocks: MutableList<Block> = mutableListOf(),
 ) : Parcelable {
 
     val blocks: List<Block>
@@ -35,7 +35,7 @@ data class UIText(
         text: String,
         arg1: String? = null,
         arg2: String? = null,
-        arg3: String? = null
+        arg3: String? = null,
     ) {
         concat(RawFormatted(text, arg1, arg2, arg3))
     }
@@ -44,7 +44,7 @@ data class UIText(
         @StringRes resId: Int,
         arg1: String? = null,
         arg2: String? = null,
-        arg3: String? = null
+        arg3: String? = null,
     ) {
         concat(ResourceFormatted(resId, arg1, arg2, arg3))
     }

@@ -22,7 +22,6 @@ fun getOpenWeatherRetrofit(context: Context, vararg interceptors: Interceptor): 
     }
 
     val okHttpClient = OkHttpClient().newBuilder().run {
-
         interceptors.forEach {
             addInterceptor(it)
         }
@@ -32,7 +31,7 @@ fun getOpenWeatherRetrofit(context: Context, vararg interceptors: Interceptor): 
                 ChuckerInterceptor
                     .Builder(context)
                     .alwaysReadResponseBody(true)
-                    .build()
+                    .build(),
             )
         }
 

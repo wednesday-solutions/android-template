@@ -35,7 +35,7 @@ val interactorModule = module {
             fetchFavouriteCitiesWeatherUseCase = get(),
             uiCityMapper = get(),
             weatherListMapper = get(),
-            coroutineContextController = get()
+            coroutineContextController = get(),
         )
     }
 
@@ -44,7 +44,7 @@ val interactorModule = module {
             searchCitiesUseCase = get(),
             favouriteCitiesFlowUseCase = get(),
             citySearchResultMapper = get(),
-            coroutineContextController = get()
+            coroutineContextController = get(),
         )
     }
 }

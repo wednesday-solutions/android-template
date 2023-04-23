@@ -4,7 +4,7 @@ import com.wednesday.template.repo.weather.WeatherRepository
 import timber.log.Timber
 
 class RemoveCityFavouriteUseCaseImpl(
-    private val weatherRepository: WeatherRepository
+    private val weatherRepository: WeatherRepository,
 ) : RemoveCityFavouriteUseCase {
 
     override suspend fun invokeInternal(param: City) {

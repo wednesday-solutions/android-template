@@ -14,5 +14,5 @@ data class RemoteCurrentWeatherWeather(
     @SerialName("id")
     val id: Int,
     @SerialName("main")
-    val main: String
+    val main: String,
 )

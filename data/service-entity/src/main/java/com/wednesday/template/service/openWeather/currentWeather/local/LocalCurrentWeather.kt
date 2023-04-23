@@ -29,5 +29,5 @@ data class LocalCurrentWeather(
     val weather: LocalCurrentWeatherWeather,
     @Embedded(prefix = "wind_")
     val wind: LocalCurrentWeatherWind,
-    val updatedAt: Date
+    val updatedAt: Date,
 )

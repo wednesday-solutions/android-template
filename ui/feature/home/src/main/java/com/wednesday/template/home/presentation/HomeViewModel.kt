@@ -35,9 +35,9 @@ class HomeViewModel(
                             SnackbarEffectData(
                                 message = UIText {
                                     block(R.string.something_went_wrong)
-                                }
-                            )
-                        )
+                                },
+                            ),
+                        ),
                     )
                 }
             }
@@ -52,7 +52,7 @@ class HomeViewModel(
                 menuIcon = R.drawable.ic_search,
             ),
             showLoading = false,
-            items = UIList()
+            items = UIList(),
         )
     }
 

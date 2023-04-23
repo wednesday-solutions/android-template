@@ -18,5 +18,5 @@ data class RemoteCurrentWeatherMain(
     @SerialName("temp_max")
     val tempMax: Double,
     @SerialName("temp_min")
-    val tempMin: Double
+    val tempMin: Double,
 )

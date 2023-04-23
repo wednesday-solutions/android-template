@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.map
 
 fun <T, S> Flow<Result<T>>.mapToUIResult(
     success: Result.Success<T>.() -> S,
-    failure: (Result.Error.() -> UIResult.Error)? = null
+    failure: (Result.Error.() -> UIResult.Error)? = null,
 ): Flow<UIResult<S>> =
     map {
         when (it) {

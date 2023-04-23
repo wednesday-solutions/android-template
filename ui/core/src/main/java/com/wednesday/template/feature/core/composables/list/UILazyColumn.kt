@@ -19,13 +19,12 @@ fun UILazyColumn(
     modifier: Modifier = Modifier,
     state: LazyListState = rememberLazyListState(),
     items: UIList,
-    itemComposable: UILazyColumnItemComposable
+    itemComposable: UILazyColumnItemComposable,
 ) {
-
     LazyColumn(modifier = modifier, state = state) {
         itemsIndexed(
             items = items.items,
-            key = { _, item -> item.id }
+            key = { _, item -> item.id },
         ) { _, item ->
             val type = item::class
 
