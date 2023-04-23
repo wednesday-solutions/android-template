@@ -1,18 +1,19 @@
 package com.wednesday.template.interactor.weather.search
 
+import com.wednesday.template.data.core.CoroutineContextController
 import com.wednesday.template.domain.base.Result
 import com.wednesday.template.domain.weather.City
 import com.wednesday.template.domain.weather.GetFavouriteCitiesFlowUseCase
 import com.wednesday.template.domain.weather.SearchCitiesUseCase
-import com.wednesday.template.interactor.base.CoroutineContextController
 import com.wednesday.template.interactor.weather.SearchCityInteractor
-import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.UIList
 import com.wednesday.template.presentation.base.UIResult
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import timber.log.Timber
@@ -27,7 +28,10 @@ class SearchCityInteractorImpl(
     private val searchResultStateFlow = Channel<List<City>>()
 
     override val searchResultsFlow: Flow<UIResult<UIList>> = favouriteCitiesFlowUseCase(Unit)
-        .combine(searchResultStateFlow.receiveAsFlow()) { favouriteCities, searchResults ->
+        .combine(searchResultStateFlow
+            .receiveAsFlow()
+            .map { it.distinctBy { city -> city.id } }
+        ) { favouriteCities, searchResults ->
             when {
                 searchResults.isEmpty() -> {
                     UIResult.Success(UIList())

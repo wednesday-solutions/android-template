@@ -4,12 +4,10 @@ import app.cash.turbine.test
 import com.wednesday.template.domain.base.Result
 import com.wednesday.template.domain.weather.GetFavouriteCitiesFlowUseCase
 import com.wednesday.template.domain.weather.SearchCitiesUseCase
-import com.wednesday.template.interactor.base.CoroutineContextController
 import com.wednesday.template.interactor.base.InteractorTest
 import com.wednesday.template.interactor.base.TestException
 import com.wednesday.template.interactor.weather.search.models.city
 import com.wednesday.template.interactor.weather.search.models.uiCity
-import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf

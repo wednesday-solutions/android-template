@@ -1,22 +1,21 @@
 package com.wednesday.template.interactor.weather.favourite
 
+import com.wednesday.template.data.core.CoroutineContextController
 import com.wednesday.template.domain.weather.FetchFavouriteCitiesWeatherUseCase
 import com.wednesday.template.domain.weather.GetFavouriteCitiesFlowUseCase
 import com.wednesday.template.domain.weather.GetFavouriteCitiesWeatherFlowUseCase
 import com.wednesday.template.domain.weather.RemoveCityFavouriteUseCase
 import com.wednesday.template.domain.weather.SetCityFavouriteUseCase
 import com.wednesday.template.interactor.base.BaseInteractor
-import com.wednesday.template.interactor.base.CoroutineContextController
 import com.wednesday.template.interactor.base.mapToUIResult
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.interactor.weather.UICityMapper
-import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.UIList
 import com.wednesday.template.presentation.base.UIResult
 import com.wednesday.template.presentation.weather.UICity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
 

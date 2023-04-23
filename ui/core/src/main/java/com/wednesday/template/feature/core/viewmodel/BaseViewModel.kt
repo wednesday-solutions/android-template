@@ -13,8 +13,8 @@ import com.wednesday.template.presentation.screen.ScreenState
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -28,29 +28,18 @@ abstract class BaseViewModel<STATE : ScreenState, EFFECT: Effect> :
 
     final override val savedStateHandle by inject<SavedStateHandle>()
 
-    val screenState: StateFlow<STATE> =
+    private val screenState: StateFlow<STATE> =
         savedStateHandle.getStateFlow(STATE_KEY, this.getDefaultScreenState())
     private fun setScreenState(value: STATE) {
         savedStateHandle[STATE_KEY] = value
     }
 
     private val _effectState = Channel<EFFECT?>(Channel.BUFFERED)
-    val effectState: Flow<EFFECT> = _effectState.consumeAsFlow().filterNotNull()
-
-    private var recreateFlag: Unit? = null
+    val effectState: Flow<EFFECT> = _effectState.receiveAsFlow().filterNotNull()
 
     abstract fun getDefaultScreenState(): STATE
-    protected abstract fun onCreate(fromRecreate: Boolean)
 
-    fun onCreate() {
-        val isFromRecreate = recreateFlag == null
-        recreateFlag = Unit
-        if (isFromRecreate) {
-            setScreenState(getDefaultScreenState())
-        }
-
-        onCreate(fromRecreate = isFromRecreate)
-    }
+    fun onComposed() {}
 
     @Composable
     fun collectAsState(): State<STATE> {

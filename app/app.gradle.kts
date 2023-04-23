@@ -90,8 +90,6 @@ dependencies {
     implementation(project(Modules.search))
 
     implementation(project(Modules.navigation))
-    implementation(project(Modules.navigationDi))
-    implementation(project(Modules.navigationImpl))
 
     implementation(project(Modules.resources))
 

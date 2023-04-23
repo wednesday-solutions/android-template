@@ -20,9 +20,7 @@ object Modules {
     const val designSystem = ":ui:design-system"
     const val search = ":ui:feature:search"
 
-    const val navigation = ":navigation"
-    const val navigationDi = ":navigation-di"
-    const val navigationImpl = ":navigation-impl"
+    const val navigation = ":ui:navigation"
 
     const val resources = ":resources"
 

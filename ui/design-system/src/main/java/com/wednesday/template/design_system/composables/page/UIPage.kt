@@ -5,7 +5,10 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.wednesday.template.design_system.composables.bars.UIToolbar
 
@@ -16,6 +19,7 @@ fun UIPage(
     hasBackButton: Boolean,
     onBackPress: () -> Unit,
     backButtonContentDescription: String? = null,
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
     toolbarActions: @Composable RowScope.() -> Unit = {},
     toolbarModifier: Modifier = Modifier,
     content: @Composable (PaddingValues) -> Unit,
@@ -26,6 +30,7 @@ fun UIPage(
                 .statusBarsPadding()
                 .navigationBarsPadding()
         ),
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             UIToolbar(
                 modifier = toolbarModifier,

@@ -1,21 +1,25 @@
 package com.wednesday.template.search.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.wednesday.template.feature.core.effect.SnackbarEffectData
 import com.wednesday.template.feature.core.viewmodel.BaseViewModel
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.interactor.weather.SearchCityInteractor
-import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.UIList
 import com.wednesday.template.presentation.base.UIResult
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.base.intent.IntentHandler
+import com.wednesday.template.presentation.weather.UICity
 import com.wednesday.template.presentation.weather.search.SearchScreenIntent
+import com.wednesday.template.search.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+
 class SearchViewModel(
     private val searchCityInteractor: SearchCityInteractor,
     private val favouriteWeatherInteractor: FavouriteWeatherInteractor,
@@ -36,8 +40,7 @@ class SearchViewModel(
         )
     }
 
-    override fun onCreate(fromRecreate: Boolean) {
-
+    init {
         searchCityInteractor.searchResultsFlow.onEach {
             when (it) {
                 is UIResult.Success -> {
@@ -45,17 +48,18 @@ class SearchViewModel(
                         copy(showLoading = false, searchList = it.data)
                     }
                 }
+
                 is UIResult.Error -> {
                     setState {
                         copy(showLoading = false)
                     }
-//                    setEffect(
-//                        ShowSnackbarEffect(
-//                            message = UIText {
-//                                block(R.string.something_went_wrong)
-//                            }
-//                        )
-//                    )
+                    setEffect(
+                        SearchScreenEffect.ShowSnackbarEffect(
+                            SnackbarEffectData(UIText {
+                                block(R.string.something_went_wrong)
+                            })
+                        )
+                    )
                 }
             }
         }.launchIn(viewModelScope)
@@ -78,6 +82,17 @@ class SearchViewModel(
             .launchIn(viewModelScope)
     }
 
+    fun onFavouriteClick(uiCity: UICity) {
+        onIntent(SearchScreenIntent.ToggleFavourite(uiCity))
+    }
+
+    fun search(city: String) {
+        setState {
+            copy(searchText = city)
+        }
+        onIntent(SearchScreenIntent.SearchCities(city))
+    }
+
     override fun onIntent(intent: SearchScreenIntent) {
         when (intent) {
             is SearchScreenIntent.SearchCities -> {
@@ -85,6 +100,7 @@ class SearchViewModel(
                     searchCityResponseMutableStateFlow.value = intent.city
                 }
             }
+
             is SearchScreenIntent.ToggleFavourite -> {
                 viewModelScope.launch {
                     if (intent.city.isFavourite) {
@@ -94,8 +110,9 @@ class SearchViewModel(
                     }
                 }
             }
+
             SearchScreenIntent.Back -> {
-//                navigator.back()
+                setEffect(SearchScreenEffect.NavigateBack)
             }
         }
     }

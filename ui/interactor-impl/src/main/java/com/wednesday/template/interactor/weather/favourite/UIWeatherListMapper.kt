@@ -3,7 +3,7 @@ package com.wednesday.template.interactor.weather.favourite
 import com.wednesday.template.data.core.Mapper
 import com.wednesday.template.domain.weather.Weather
 import com.wednesday.template.interactor_impl.R
-import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.UIList
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.weather.UISearchCitiesPlaceholder
 import com.wednesday.template.presentation.weather.UIWeather

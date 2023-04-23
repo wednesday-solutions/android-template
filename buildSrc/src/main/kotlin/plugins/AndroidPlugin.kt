@@ -34,27 +34,27 @@ open class AndroidPlugin : Plugin<Project> {
                 testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             }
 
-//            val props = Properties()
-//            props.load(FileInputStream(File("local.properties")))
+            val props = Properties()
+            props.load(FileInputStream(File("local.properties")))
 
             productFlavors {
                 getByName(PluginConstants.PRODUCTION) {
-//                    buildConfigField(
-//                        "String", "OPEN_WEATHER_API_KEY",
-//                        props["OPEN_WEATHER_API_KEY"] as String
-//                    )
+                    buildConfigField(
+                        "String", "OPEN_WEATHER_API_KEY",
+                        props["OPEN_WEATHER_API_KEY"] as String
+                    )
                 }
                 getByName(PluginConstants.QA) {
-//                    buildConfigField(
-//                        "String", "OPEN_WEATHER_API_KEY",
-//                        props["OPEN_WEATHER_API_KEY"] as String
-//                    )
+                    buildConfigField(
+                        "String", "OPEN_WEATHER_API_KEY",
+                        props["OPEN_WEATHER_API_KEY"] as String
+                    )
                 }
                 getByName(PluginConstants.DEV) {
-//                    buildConfigField(
-//                        "String", "OPEN_WEATHER_API_KEY",
-//                        props["OPEN_WEATHER_API_KEY"] as String
-//                    )
+                    buildConfigField(
+                        "String", "OPEN_WEATHER_API_KEY",
+                        props["OPEN_WEATHER_API_KEY"] as String
+                    )
                 }
             }
         }

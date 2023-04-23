@@ -21,11 +21,13 @@ dependencies {
     implementation(project(Modules.interactor))
     implementation(project(Modules.Core.data))
     implementation(project(Modules.resources))
+    implementation(project(Modules.designSystem))
 
     implementation(Dependencies.Logging.timber)
     implementation(Dependencies.Koin.core)
     implementation(Dependencies.Coroutines.core)
     implementation(Dependencies.Coroutines.android)
+    implementation(Dependencies.Image.coil)
 
     with(Dependencies.Android) {
         implementation(coreKtx)

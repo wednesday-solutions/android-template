@@ -1,10 +1,11 @@
 package com.wednesday.template.home.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.wednesday.template.feature.core.effect.SnackbarEffectData
 import com.wednesday.template.feature.core.viewmodel.BaseViewModel
 import com.wednesday.template.home.R
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
-import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.UIList
 import com.wednesday.template.presentation.base.UIResult
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
@@ -16,6 +17,32 @@ class HomeViewModel(
     private val favouriteWeatherInteractor: FavouriteWeatherInteractor,
 ) : BaseViewModel<HomeScreenState, HomeScreenEffect>(),
     IntentHandler<HomeScreenIntent> {
+
+    init {
+        favouriteWeatherInteractor.getFavouriteCitiesFlow().onEach {
+            favouriteWeatherInteractor.fetchFavouriteCitiesWeather()
+        }.launchIn(viewModelScope)
+
+        favouriteWeatherInteractor.getFavouriteWeatherUIList().onEach {
+            when (it) {
+                is UIResult.Success -> {
+                    setState { copy(showLoading = false, items = it.data) }
+                }
+
+                is UIResult.Error -> {
+                    setEffect(
+                        HomeScreenEffect.ShowSnackbarEffect(
+                            SnackbarEffectData(
+                                message = UIText {
+                                    block(R.string.something_went_wrong)
+                                }
+                            )
+                        )
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
 
     override fun getDefaultScreenState(): HomeScreenState {
         return HomeScreenState(
@@ -29,47 +56,16 @@ class HomeViewModel(
         )
     }
 
-    override fun onCreate(fromRecreate: Boolean) {
-        if (fromRecreate) return
-        favouriteWeatherInteractor.getFavouriteCitiesFlow().onEach {
-            favouriteWeatherInteractor.fetchFavouriteCitiesWeather()
-        }.launchIn(viewModelScope)
-
-        favouriteWeatherInteractor.getFavouriteWeatherUIList().onEach {
-            when (it) {
-                is UIResult.Success -> {
-                    setState { copy(showLoading = false, items = it.data) }
-                }
-                is UIResult.Error -> {
-                    setEffect(
-                        HomeScreenEffect.ShowSnackbarEffect(
-                            UIText {
-                                block(R.string.something_went_wrong)
-                            }
-                        )
-                    )
-                }
-            }
-        }.launchIn(viewModelScope)
-    }
+    fun navigateToSearch() = onIntent(HomeScreenIntent.Search)
 
     override fun onIntent(intent: HomeScreenIntent) {
         when (intent) {
             is HomeScreenIntent.Search -> {
-//                navigator.navigateTo(SearchScreen)
+                setEffect(HomeScreenEffect.NavigateToSearch)
             }
+
             HomeScreenIntent.Loading -> {
                 setState { copy(showLoading = !showLoading) }
-            }
-            HomeScreenIntent.Loading2 -> setState { copy(toolbar = toolbar.copy(hasBackButton = !toolbar.hasBackButton)) }
-            HomeScreenIntent.Loading3 -> setState {
-                copy(
-                    toolbar = toolbar.copy(
-                        title = UIText {
-                            block("${System.currentTimeMillis()}")
-                        }
-                    )
-                )
             }
         }
     }

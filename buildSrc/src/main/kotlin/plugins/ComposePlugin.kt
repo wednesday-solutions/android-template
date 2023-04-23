@@ -57,6 +57,10 @@ open class ComposePlugin : Plugin<Project> {
                 ksp(composeDestinationsKsp)
             }
 
+            with(Dependencies.Kotlin) {
+                implementation(immutableCollection)
+            }
+
             with(Dependencies.Koin) {
                 implementation(compose)
             }

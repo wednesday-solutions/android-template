@@ -2,4 +2,8 @@
 <resources>
 
     <string name="acc_navigate_back">Navigate back</string>
+    <string name="acc_weather_icon">Weather icon</string>
+    <string name="acc_search">Search</string>
+    <string name="acc_unmark_fav">Remove %s from favorites</string>
+    <string name="acc_mark_fav">Add %s to favorites</string>
 </resources>

@@ -1,4 +1,5 @@
 object Versions {
+    const val immutableCollection = "0.3.5"
     const val kspPlugin = "1.8.20-1.0.11"
     const val androidGradlePlugin = "7.4.2"
     const val googleServices = "4.3.15"
@@ -33,7 +34,8 @@ object Versions {
     const val timber = "5.0.1"
     const val chucker = "3.5.2"
     const val turbine = "0.12.3"
-    const val coil = "2.1.0"
+    const val coil = "2.3.0"
+    const val accompanist = "0.30.1"
 
     object SDK {
         const val compile = 33

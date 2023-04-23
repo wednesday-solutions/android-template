@@ -23,10 +23,7 @@ include(":ui:presentation-entity")
 include(":ui:core")
 include(":ui:design-system")
 include(":ui:feature:search")
-
-include(":navigation")
-include(":navigation-di")
-include(":navigation-impl")
+include(":ui:navigation")
 
 include(":resources")
 

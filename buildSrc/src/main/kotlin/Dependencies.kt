@@ -16,7 +16,8 @@ object Dependencies {
             "io.github.raamcosta.compose-destinations:animations-core:${Versions.composeDestinations}"
         const val composeDestinationsKsp =
             "io.github.raamcosta.compose-destinations:ksp:${Versions.composeDestinations}"
-        const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.lifecycleRuntimeCompose}"
+        const val lifecycleRuntime =
+            "androidx.lifecycle:lifecycle-runtime-compose:${Versions.lifecycleRuntimeCompose}"
     }
 
     object Room {
@@ -32,6 +33,8 @@ object Dependencies {
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
         const val serializationPlugin =
             "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
+        const val immutableCollection =
+            "org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.immutableCollection}"
     }
 
     object Coroutines {
@@ -49,7 +52,8 @@ object Dependencies {
         const val test = "io.insert-koin:koin-test:${Versions.koin}"
         const val navigation = "io.insert-koin:koin-androidx-navigation:${Versions.koin}"
         const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
-        const val composeNavigation = "io.insert-koin:koin-androidx-compose-navigation:${Versions.koin}"
+        const val composeNavigation =
+            "io.insert-koin:koin-androidx-compose-navigation:${Versions.koin}"
     }
 
     object Material {
@@ -103,7 +107,12 @@ object Dependencies {
     }
 
     object Image {
-        const val coil = "io.coil-kt:coil:${Versions.coil}"
+        const val coil = "io.coil-kt:coil-compose:${Versions.coil}"
+    }
+
+    object Accompanist {
+        const val placeholder =
+            "com.google.accompanist:accompanist-placeholder-material:${Versions.accompanist}"
     }
 
     object Test {

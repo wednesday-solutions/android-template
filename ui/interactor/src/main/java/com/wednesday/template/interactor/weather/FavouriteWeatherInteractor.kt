@@ -1,6 +1,6 @@
 package com.wednesday.template.interactor.weather
 
-import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.UIList
 import com.wednesday.template.presentation.base.UIResult
 import com.wednesday.template.presentation.weather.UICity
 import kotlinx.coroutines.flow.Flow

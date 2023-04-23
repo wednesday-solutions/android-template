@@ -26,7 +26,25 @@ val interactorModule = module {
 
     single<UIWeatherListMapper> { UIWeatherListMapperImpl() }
 
-    factory<FavouriteWeatherInteractor> { FavouriteWeatherInteractorImpl(get(), get(), get(), get(), get(), get(), get(), get()) }
+    factory<FavouriteWeatherInteractor> {
+        FavouriteWeatherInteractorImpl(
+            setCityFavouriteUseCase = get(),
+            removeCityFavouriteUseCase = get(),
+            getFavouriteCitiesFlowUseCase = get(),
+            getFavouriteCitiesWeatherFlowUseCase = get(),
+            fetchFavouriteCitiesWeatherUseCase = get(),
+            uiCityMapper = get(),
+            weatherListMapper = get(),
+            coroutineContextController = get()
+        )
+    }
 
-    factory<SearchCityInteractor> { SearchCityInteractorImpl(get(), get(), get(), get()) }
+    factory<SearchCityInteractor> {
+        SearchCityInteractorImpl(
+            searchCitiesUseCase = get(),
+            favouriteCitiesFlowUseCase = get(),
+            citySearchResultMapper = get(),
+            coroutineContextController = get()
+        )
+    }
 }

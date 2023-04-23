@@ -12,6 +12,7 @@ dependencies {
     implementation(project(Modules.resources))
 
     implementation(Dependencies.Kotlin.stdLib)
+    implementation(Dependencies.Kotlin.immutableCollection)
 
     implementation(Dependencies.Coroutines.core)
 

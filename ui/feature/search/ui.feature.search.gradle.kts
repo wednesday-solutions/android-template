@@ -17,10 +17,9 @@ ksp {
 dependencies {
     implementation(project(Modules.presentationEntity))
     implementation(project(Modules.Core.ui))
+    implementation(project(Modules.designSystem))
     implementation(project(Modules.interactor))
-//    implementation(project(Modules.domain))
     implementation(project(Modules.Core.data))
-//    implementation(project(Modules.domainEntity))
     implementation(project(Modules.resources))
 
     implementation(Dependencies.Logging.timber)
@@ -32,6 +31,8 @@ dependencies {
         implementation(coreKtx)
         implementation(lifecycleViewModelKtx)
     }
+
+    implementation(Dependencies.Accompanist.placeholder)
 
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

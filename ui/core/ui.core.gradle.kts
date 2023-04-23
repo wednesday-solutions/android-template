@@ -17,6 +17,7 @@ dependencies {
     implementation(project(Modules.designSystem))
 
     implementation(Dependencies.Koin.core)
+    implementation(Dependencies.Compose.composeDestinations)
 
     implementation(Dependencies.Logging.timber)
 
