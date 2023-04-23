@@ -1,5 +1,6 @@
 package com.wednesday.template.interactor.base
 
+import com.wednesday.template.data.core.CoroutineContextController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -17,12 +18,12 @@ class CoroutineDispatcherRule(
     val coroutineContextController: CoroutineContextController =
         TestCoroutineContextController(testCoroutineDispatcher = dispatcher)
 
-    override fun starting(description: Description?) {
+    override fun starting(description: Description) {
         super.starting(description)
         Dispatchers.setMain(dispatcher)
     }
 
-    override fun finished(description: Description?) {
+    override fun finished(description: Description) {
         super.finished(description)
         Dispatchers.resetMain()
     }

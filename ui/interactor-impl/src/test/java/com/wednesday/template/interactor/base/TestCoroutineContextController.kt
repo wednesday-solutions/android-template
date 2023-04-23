@@ -1,5 +1,6 @@
 package com.wednesday.template.interactor.base
 
+import com.wednesday.template.data.core.CoroutineContextController
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
