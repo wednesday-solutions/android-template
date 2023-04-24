@@ -10,9 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
+import com.wednesday.template.data.core.UnitCallback
 import com.wednesday.template.designSystem.composables.list.ListLoader
 import com.wednesday.template.feature.core.composables.list.UILazyColumn
-import com.wednesday.template.feature.core.composables.screen.Screen
+import com.wednesday.template.feature.core.composables.screen.ScreenConnector
+import com.wednesday.template.feature.core.composables.screen.ScreenContainerData
+import com.wednesday.template.feature.core.composables.screen.ScreenContent
 import com.wednesday.template.feature.core.extensions.showSnackbar
 import com.wednesday.template.presentation.weather.UICity
 import com.wednesday.template.search.presentation.list.UICityListItem
@@ -24,7 +27,7 @@ fun SearchScreen(
     viewModel: SearchViewModel = getViewModel(),
     searchNavigator: SearchNavigator,
 ) {
-    Screen(
+    ScreenConnector(
         viewModel = viewModel,
         onEffect = {
             when (it) {
@@ -32,34 +35,14 @@ fun SearchScreen(
                 is SearchScreenEffect.ShowSnackbarEffect -> snackbarHostState.showSnackbar(it.snackbarEffectData)
             }
         },
-        onToolbarBackPressed = searchNavigator::navigateBack,
-    ) {
-        Column(
-            modifier = Modifier
-                .padding(it)
-                .padding(horizontal = 16.dp),
-        ) {
-            TextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = searchText,
-                onValueChange = viewModel::search,
-            )
-
-            Spacer(Modifier.height(16.dp))
-
-            if (showLoading) {
-                ListLoader()
-            } else {
-                UILazyColumn(items = searchList) { modifier, item ->
-                    when (item) {
-                        is UICity -> UICityListItem(
-                            modifier,
-                            item,
-                            onFavouriteClick = viewModel::onFavouriteClick,
-                        )
-                    }
-                }
-            }
-        }
+    ) { state ->
+        SearchScreenContent(
+            onToolbarBackPressed = searchNavigator::navigateBack,
+            onSearchTextChange = viewModel::search,
+            onFavouriteClick = viewModel::onFavouriteClick,
+            state = state
+        )
     }
 }
+
+

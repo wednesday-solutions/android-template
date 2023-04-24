@@ -9,6 +9,6 @@ data class UIToolbar(
     val title: UIText,
     val hasBackButton: Boolean,
     @DrawableRes
-    val menuIcon: Int?,
+    val menuIcon: Int? = null,
     val menuButtonEnabled: Boolean = true,
 ) : Parcelable

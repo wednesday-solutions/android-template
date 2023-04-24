@@ -21,6 +21,8 @@ data class UIText(
 
     companion object {
         operator fun invoke(block: UIText.() -> Unit) = UIText().apply { block() }
+        operator fun invoke(text: String) = UIText().apply { block(text) }
+        operator fun invoke(resId: Int) = UIText().apply { block(resId) }
     }
 
     fun UIText.block(text: String) {
