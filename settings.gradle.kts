@@ -1,28 +1,39 @@
 rootProject.name = "Android Template"
 
 include(":app")
-include(":service")
-include(":service-impl")
-include(":service-di")
-include(":service-entity")
-include(":repo")
-include(":repo-impl")
-include(":repo-di")
-include(":domain")
-include(":domain-impl")
-include(":domain-di")
-include(":domain-entity")
-include(":interactor")
-include(":interactor-di")
-include(":interactor-impl")
-include(":presentation")
-include(":presentation-di")
-include(":presentation-entity")
-include(":navigation")
-include(":navigation-di")
-include(":navigation-impl")
+
+include(":data:service")
+include(":data:service-impl")
+include(":data:service-di")
+include(":data:service-entity")
+include(":data:repo")
+include(":data:repo-impl")
+include(":data:repo-di")
+include(":data:domain")
+include(":data:domain-impl")
+include(":data:domain-di")
+include(":data:domain-entity")
+include(":data:core")
+
+include(":ui:feature:home")
+include(":ui:interactor")
+include(":ui:interactor-di")
+include(":ui:interactor-impl")
+include(":ui:presentation-entity")
+include(":ui:core")
+include(":ui:design-system")
+include(":ui:feature:search")
+include(":ui:navigation")
+
 include(":resources")
 
 for (project in rootProject.children) {
-    project.buildFileName = project.name + ".gradle.kts"
+    project.buildFileName = "${project.name}.gradle.kts"
+    for (subProject in project.children) {
+        subProject.buildFileName = "${project.name}.${subProject.name}.gradle.kts"
+        for (subProject2 in subProject.children) {
+            subProject2.buildFileName = "${project.name}.${subProject.name}.${subProject2.name}.gradle.kts"
+        }
+    }
 }
+

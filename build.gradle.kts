@@ -14,6 +14,10 @@ buildscript {
     }
 }
 
+plugins {
+    id(Plugins.KSP) version Versions.kspPlugin apply true
+}
+
 allprojects {
     repositories {
         google()
@@ -24,10 +28,5 @@ allprojects {
         kotlinOptions {
             jvmTarget = "11"
         }
-    }
-
-    // TODO: Remove once ExperimentalCoroutinesApi: runTest is stable
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-        kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
     }
 }

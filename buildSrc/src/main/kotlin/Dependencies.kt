@@ -1,20 +1,23 @@
 object Dependencies {
 
     object Compose {
+        const val composeBOM = "androidx.compose:compose-bom:${Versions.composeBOM}"
         const val activity = "androidx.activity:activity-compose:${Versions.activityCompose}"
-        const val material = "androidx.compose.material:material:${Versions.compose}"
-        const val materialIconCore =
-            "androidx.compose.material:material-icons-core:${Versions.compose}"
-        const val materialIconExtended =
-            "androidx.compose.material:material-icons-extended:${Versions.compose}"
-        const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
-        const val runtime = "androidx.compose.runtime:runtime:${Versions.compose}"
-        const val liveData = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
-        const val animation = "androidx.compose.animation:animation:${Versions.compose}"
-        const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
+        const val material = "androidx.compose.material3:material3"
+        const val foundation = "androidx.compose.foundation:foundation"
+        const val runtime = "androidx.compose.runtime:runtime"
+        const val animation = "androidx.compose.animation:animation"
+        const val uiTooling = "androidx.compose.ui:ui-tooling"
         const val viewModel =
             "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycleViewModelCompose}"
-        const val uiTest = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
+        const val uiTest = "androidx.compose.ui:ui-test-junit4"
+        const val uiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
+        const val composeDestinations =
+            "io.github.raamcosta.compose-destinations:animations-core:${Versions.composeDestinations}"
+        const val composeDestinationsKsp =
+            "io.github.raamcosta.compose-destinations:ksp:${Versions.composeDestinations}"
+        const val lifecycleRuntime =
+            "androidx.lifecycle:lifecycle-runtime-compose:${Versions.lifecycleRuntimeCompose}"
     }
 
     object Room {
@@ -28,7 +31,10 @@ object Dependencies {
         const val serialization =
             "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinxSerialization}"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-        const val serializationPlugin = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
+        const val serializationPlugin =
+            "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
+        const val immutableCollection =
+            "org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.immutableCollection}"
     }
 
     object Coroutines {
@@ -40,15 +46,18 @@ object Dependencies {
 
     object Koin {
         const val core = "io.insert-koin:koin-core:${Versions.koin}"
+        const val coreCoroutines = "io.insert-koin:koin-core-coroutines:${Versions.koin}"
         const val android = "io.insert-koin:koin-android:${Versions.koin}"
         const val workManager = "io.insert-koin:koin-androidx-workmanager:${Versions.koin}"
         const val test = "io.insert-koin:koin-test:${Versions.koin}"
         const val navigation = "io.insert-koin:koin-androidx-navigation:${Versions.koin}"
         const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
+        const val composeNavigation =
+            "io.insert-koin:koin-androidx-compose-navigation:${Versions.koin}"
     }
 
     object Material {
-        const val material = "com.google.android.material:material:${Versions.material}"
+        const val material = "androidx.compose.material3:material3:${Versions.material}"
     }
 
     object Google {
@@ -74,14 +83,13 @@ object Dependencies {
             "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
         const val lifecycleViewModelKtx =
             "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
-        const val lifecycleViewModel =
-            "androidx.lifecycle:lifecycle-viewmodel:${Versions.lifecycle}"
         const val lifecycleRuntimeKtx =
             "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
         const val navigationFragment =
             "androidx.navigation:navigation-fragment-ktx:${Versions.nav}"
         const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.nav}"
-        const val navigationSafeArgsPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.nav}"
+        const val navigationSafeArgsPlugin =
+            "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.nav}"
         const val splashScreen = "androidx.core:core-splashscreen:${Versions.splash}"
     }
 
@@ -99,7 +107,12 @@ object Dependencies {
     }
 
     object Image {
-        const val coil = "io.coil-kt:coil:${Versions.coil}"
+        const val coil = "io.coil-kt:coil-compose:${Versions.coil}"
+    }
+
+    object Accompanist {
+        const val placeholder =
+            "com.google.accompanist:accompanist-placeholder-material:${Versions.accompanist}"
     }
 
     object Test {

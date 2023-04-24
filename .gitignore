@@ -39,3 +39,6 @@
 .cxx
 /buildSrc/build/
 /buildSrc/.gradle/
+**/build/**
+
+/ui/interactor/build/
