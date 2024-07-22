@@ -1,42 +1,40 @@
+import plugins.PluginConstants
+
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
     kotlin("android")
-}
-
-apply {
-    from("${rootProject.projectDir}/lint.gradle")
+    id(Plugins.KSP)
+    id(Plugins.ANDROID)
+    id(Plugins.COMPOSE)
 }
 
 android {
 
-    compileSdk = 31
-    buildToolsVersion = "30.0.3"
+//    compileSdk = Versions.SDK.compile
+//    buildToolsVersion = Versions.SDK.buildTools
+//
+//    defaultConfig {
+//        minSdk = Versions.SDK.min
+//        targetSdk = Versions.SDK.target
+//        applicationId = "com.wednesday.template"
+//        versionCode = Versions.SDK.versionCode
+//        versionName = Versions.SDK.versionName
+//        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+//    }
 
-    defaultConfig {
-        minSdk = 24
-        targetSdk = 31
-        applicationId = "com.wednesday.template"
-        versionCode = 10
-        versionName = "1.0"
-        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
-    }
-
-    flavorDimensions += "version"
     productFlavors {
-        create("qa") {
-            dimension = "version"
+        getByName(PluginConstants.QA) {
+            dimension = PluginConstants.FLAVOR
             applicationIdSuffix = ".qa"
             versionNameSuffix = "-qa"
         }
-        create("prod") {
-            dimension = "version"
+        getByName(PluginConstants.PRODUCTION) {
+            dimension = PluginConstants.FLAVOR
             applicationIdSuffix = ".prod"
             versionNameSuffix = "-prod"
         }
-        create("dev") {
-            dimension = "version"
+        getByName(PluginConstants.DEV) {
+            dimension = PluginConstants.FLAVOR
             applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
         }
@@ -70,14 +68,33 @@ android {
 }
 
 dependencies {
-    implementation(project(":presentation"))
-//    implementation(project(":navigation"))
-    implementation(project(":presentation-di"))
-    implementation(project(":navigation-di"))
-    implementation(project(":interactor-di"))
-    implementation(project(":domain-di"))
-    implementation(project(":repo-di"))
-    implementation(project(":service-di"))
+    implementation(project(Modules.service))
+    implementation(project(Modules.serviceImpl))
+    implementation(project(Modules.serviceDI))
+    implementation(project(Modules.serviceEntity))
+    implementation(project(Modules.repo))
+    implementation(project(Modules.repoImpl))
+    implementation(project(Modules.repoDI))
+    implementation(project(Modules.domain))
+    implementation(project(Modules.domainImpl))
+    implementation(project(Modules.domainDI))
+    implementation(project(Modules.domainEntity))
+
+
+    implementation(project(Modules.home))
+    implementation(project(Modules.interactor))
+    implementation(project(Modules.interactorDI))
+    implementation(project(Modules.interactorImpl))
+    implementation(project(Modules.presentationEntity))
+    implementation(project(Modules.designSystem))
+    implementation(project(Modules.search))
+
+    implementation(project(Modules.navigation))
+
+    implementation(project(Modules.resources))
+
+    implementation(project(Modules.Core.ui))
+    implementation(project(Modules.Core.data))
 
     implementation(Dependencies.Kotlin.stdLib)
 
